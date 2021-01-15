@@ -1,0 +1,1135 @@
+<HTML>
+<head><title>Game / Global functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic58"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic55"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags36.htm#topic57"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags38.htm#topic59"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Game / Global functions</H2>
+<A HREF="#CallRoomScript">CallRoomScript</A><BR>
+<A HREF="#Debug">Debug</A><BR>
+<A HREF="#DeleteSaveSlot">DeleteSaveSlot</A><BR>
+<A HREF="#DisableInterface">DisableInterface</A><BR>
+<A HREF="#EnableInterface">EnableInterface</A><BR>
+<A HREF="#EndCutscene">EndCutscene</A><BR>
+<A HREF="#GetGameSpeed">GetGameSpeed</A><BR>
+<A HREF="#GetGlobalInt">GetGlobalInt</A><BR>
+<A HREF="#GetGlobalString">GetGlobalString</A><BR>
+<A HREF="#GetGraphicalVariable">GetGraphicalVariable</A><BR>
+<A HREF="#GetLocationName">GetLocationName</A><BR>
+<A HREF="#GetLocationType">GetLocationType</A><BR>
+<A HREF="#GetRawTime">GetRawTime</A><BR>
+<A HREF="#GetSaveSlotDescription">GetSaveSlotDescription</A><BR>
+<A HREF="#GetTime">GetTime</A><BR>
+<A HREF="#GetTranslation">GetTranslation</A><BR>
+<A HREF="#GetTranslationName">GetTranslationName</A><BR>
+<A HREF="#GiveScore">GiveScore</A><BR>
+<A HREF="#IsButtonDown">IsButtonDown</A><BR>
+<A HREF="#IsGamePaused">IsGamePaused</A><BR>
+<A HREF="#IsInterfaceEnabled">IsInterfaceEnabled</A><BR>
+<A HREF="#IsInteractionAvailable">IsInteractionAvailable</A><BR>
+<A HREF="#IsKeyPressed">IsKeyPressed</A><BR>
+<A HREF="#IsTimerExpired">IsTimerExpired</A><BR>
+<A HREF="#IsTranslationAvailable">IsTranslationAvailable</A><BR>
+<A HREF="#PauseGame">PauseGame</A><BR>
+<A HREF="#ProcessClick">ProcessClick</A><BR>
+<A HREF="#QuitGame">QuitGame</A><BR>
+<A HREF="#Random">Random</A><BR>
+<A HREF="#RestartGame">RestartGame</A><BR>
+<A HREF="#RestoreGameDialog">RestoreGameDialog</A><BR>
+<A HREF="#RestoreGameSlot">RestoreGameSlot</A><BR>
+<A HREF="#RunAGSGame">RunAGSGame</A><BR>
+<A HREF="#SaveGameDialog">SaveGameDialog</A><BR>
+<A HREF="#SaveGameSlot">SaveGameSlot</A><BR>
+<A HREF="#SaveScreenShot">SaveScreenShot</A><BR>
+<A HREF="#SetGameOption">SetGameOption</A><BR>
+<A HREF="#SetGameSpeed">SetGameSpeed</A><BR>
+<A HREF="#SetGlobalInt">SetGlobalInt</A><BR>
+<A HREF="#SetGlobalString">SetGlobalString</A><BR>
+<A HREF="#SetMultitaskingMode">SetMultitaskingMode</A><BR>
+<A HREF="#SetNormalFont">SetNormalFont</A><BR>
+<A HREF="#SetRestartPoint">SetRestartPoint</A><BR>
+<A HREF="#SetTimer">SetTimer</A><BR>
+<A HREF="#StartCutscene">StartCutscene</A><BR>
+<A HREF="#UnPauseGame">UnPauseGame</A><BR>
+<A HREF="#Wait">Wait</A><BR>
+<A HREF="#WaitKey">WaitKey</A><BR>
+<A HREF="#WaitMouseKey">WaitMouseKey</A><BR>
+<P>
+
+<HR>
+<A NAME="CallRoomScript"></A>
+<H3>CallRoomScript</H3>
+<PRE>
+CallRoomScript (int value)
+</PRE>
+Calls the <TT>on_call</TT> function in the current room script. This is useful for things
+like the text parser, where you want to check for general game sentences, and then ask
+the current room if the sentence was relevant to it.<P>
+The on_call function will be called in the current room script, with its <TT>value</TT>
+parameter having the value you pass here. This allows it to distinguish between different
+tasks, and saves you having to use a GlobalInt to tell it what to do.<P>
+If the current room has no on_call function, nothing will happen. No error will occur.<P>
+You write the on_call function into the room script ("Edit script" button on Room Settings
+pane), similar to the way you do dialog_request in the global script:
+<PRE>
+function on_call (int value) {
+  if (value == 1) {
+    // Check text input
+    if (Said("get apple"))
+      Display("No, leave the tree alone.");
+  }
+}
+</PRE>
+The function doesn't get called immediately; instead, the engine will run it in due course,
+probably during the next game loop, so you can't use any values set by it immediately.<P>
+Once the on_call function has executed (or not if there isn't one), the
+game.roomscript_finished  variable will be set to 1, so you can check for that in your
+repeatedly_execute script if you need to do something afterwards.<P>
+SeeAlso: <A HREF="ags18.htm#TextParser">The text parser documentation</A><P>
+
+<HR>
+<A NAME="Debug"></A>
+<H3>Debug</H3>
+<PRE>
+Debug (int command, int data)
+</PRE>
+This function provides all the debug services in the system. It performs
+various different tasks, depending on the value of the COMMAND parameter.
+If debug mode is off, then this function does nothing. This allows you to
+leave your script unaltered when you distribute your game, so you just have
+to turn off debug mode in the Room Editor.<P>
+The DATA parameter depends on the command - pass 0 if it is not used.
+All the valid values for the COMMAND parameter are listed below along with
+what they do:
+<PRE>
+0   All inventory - gives the current player character one of every
+    inventory item. This is useful for testing so that you don't have to
+    go and pick up items every time you test part of the game where they
+    are required.
+1   Display interpreter version - the engine will display its version
+    number and build date.
+2   Walkable from here - fills in the parts of the screen where the player
+    can walk from their current location. This is useful if you think the
+    path-finder is not working properly. Yellow areas are where the man
+    can walk. Blue areas are defined as walkable in the Room Editor, but
+    he cannot get to them from his current position. The unaltered parts
+    of the screen are not walkable.
+3   Teleport - displays a dialog box asking for what room you want to go
+    to, and then calls NewRoom to teleport you there. Useful for skipping
+    parts of the game or going to a specific point to test something.
+4   Show FPS - toggles whether the current frames per second is displayed
+    on the screen. Pass DATA as 1 to turn this on, 0 to turn it off.
+</PRE>
+
+
+<HR>
+<A NAME="DeleteSaveSlot"></A>
+<H3>DeleteSaveSlot</H3>
+<PRE>
+DeleteSaveSlot (int slot)
+</PRE>
+Deletes the save game in save slot number SLOT.<P>
+NOTE: if you specify one of the standard slots (1-20), then AGS will rearrange the other
+save games to make sure there is a sequence of slots from 1 upwards. Therefore, you will
+need to refresh any save game lists you have after calling this function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DeleteSaveSlot (130);
+</PRE>
+deletes save game slot 130 (which we should have saved earlier).<P>
+<I>See Also:</I> <A HREF="ags37.htm#RestoreGameSlot">RestoreGameSlot</A>, <A HREF="ags37.htm#SaveGameSlot">SaveGameSlot</A><P>
+
+
+<HR>
+<A NAME="DisableInterface"></A>
+<H3>DisableInterface</H3>
+<PRE>
+DisableInterface ()
+</PRE>
+Disables the player interface. This works the same way as it is disabled
+while an animation is running: the mouse cursor is changed to the Wait
+cursor, and mouse clicks will not be sent through to the "on_mouse_click"
+function. Also, all interface buttons will be disabled.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisableInterface();
+</PRE>
+will disable the user’s interface.<P>
+<I>See Also:</I> <A HREF="ags37.htm#EnableInterface">EnableInterface</A>, <A HREF="ags37.htm#IsInterfaceEnabled">IsInterfaceEnabled</A><P>
+
+<HR>
+<A NAME="EnableInterface"></A>
+<H3>EnableInterface</H3>
+<PRE>
+EnableInterface ()
+</PRE>
+Re-enables the player interface, which was previously disabled with
+the DisableInterface function. Everything which was disabled is returned
+to normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+EnableInterface();
+</PRE>
+will enable the user’s interface.<P>
+<I>See Also:</I> <A HREF="ags37.htm#DisableInterface">DisableInterface</A>, <A HREF="ags37.htm#IsInterfaceEnabled">IsInterfaceEnabled</A><P>
+
+<HR>
+<A NAME="EndCutscene"></A>
+<H3>EndCutscene</H3>
+<PRE>
+EndCutscene()
+</PRE>
+Marks the end of a cutscene. If the player skips the cutscene, the game will
+fast-forward to this point. This function returns 0 if the player watched the cutscene,
+or 1 if they skipped it.<P>
+<I>See Also:</I> <A HREF="ags37.htm#StartCutscene">StartCutscene</A><P>
+
+<HR>
+<A NAME="GetGameSpeed"></A>
+<H3>GetGameSpeed</H3>
+<PRE>
+GetGameSpeed ()
+</PRE>
+Returns the current game speed (number of cycles per second).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGameSpeed() &gt; 40) {
+  SetGameSpeed(40);
+}
+</PRE>
+will always keep the game speed at 40 cycles per second (in case the user has raised it ) <P>
+<I>See Also:</I> <A HREF="ags37.htm#SetGameSpeed">SetGameSpeed</A><P>
+
+<HR>
+<A NAME="GetGlobalInt"></A>
+<H3>GetGlobalInt</H3>
+<PRE>
+GetGlobalInt (int index)
+</PRE>
+Returns the value of global variable INDEX.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(20)==1)
+   { code hre } 
+</PRE>
+will execute the code only if Global Integer 20 is 1.<P>
+<I>See Also:</I> <A HREF="ags37.htm#SetGlobalInt">SetGlobalInt</A>, <A HREF="ags37.htm#GetGlobalString">GetGlobalString</A><P>
+
+
+<HR>
+<A NAME="GetGlobalString"></A>
+<H3>GetGlobalString</H3>
+<PRE>
+GetGlobalString (int index, string buffer)
+</PRE>
+Copies the current Global String INDEX into BUFFER. See SetGlobalString for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetGlobalString (15, buffer);
+</PRE>
+will get the value of global string 15 into buffer.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetGlobalInt">GetGlobalInt</A>, <A HREF="ags37.htm#SetGlobalString">SetGlobalString</A><P>
+
+
+<HR>
+<A NAME="GetGraphicalVariable"></A>
+<H3>GetGraphicalVariable</H3>
+<PRE>
+GetGraphicalVariable (string variable_name);
+</PRE>
+Returns the value of the interaction editor VARIABLE_NAME variable. This allows your
+script to access the values of variables set in the interaction editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGraphicalVariable("climbed rock")==1)
+   { code here }
+</PRE>
+will execute the code only if interaction variable "climbed rock" is 1.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetGlobalInt">GetGlobalInt</A><P>
+
+
+<HR>
+<A NAME="GetLocationName"></A>
+<H3>GetLocationName</H3>
+<PRE>
+GetLocationName (int x, int y, string buffer)
+</PRE>
+Fills in BUFFER with the name of whatever is on the screen at (X,Y). This
+allows you to create the Lucasarts-style status lines reading "Look at xxx"
+as the player moves the cursor over them.<P>
+NOTE: Unlike ProcessClick, this function actually works on what the player can
+see on the screen - therefore, if the co-ordinates are on a GUI, a blank string is returned.<P>
+NOTE: The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetLocationName(mouse.x, mouse.y, buffer);
+</PRE>
+will pass the location’s where the mouse is over name to the string buffer.<P>
+<I>See Also:</I> <A HREF="ags40.htm#GetInvName">GetInvName</A>, <A HREF="ags37.htm#GetLocationType">GetLocationType</A><P>
+
+<HR>
+<A NAME="GetLocationType"></A>
+<H3>GetLocationType</H3>
+<PRE>
+GetLocationType (int x, int y)
+</PRE>
+Returns what type of thing is at location (X,Y); whether it is a character,
+object, hotspot or nothing at all. This may be useful if you want to
+process a mouse click differently depending on what the player clicks on.<P>
+NOTE: The co-ordinates are screen co-ordinates, NOT room co-ordinates. See
+description of GetLocationName for more info.<P>
+The value returned means that the location is:
+<PRE>
+0   nothing, GUI or inventory
+1   a hotspot
+2   a character
+3   an object
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetLocationType(mouse.x,mouse.y)==2)
+    SetCursorMode (MODE_TALK); 
+</PRE>
+will set the cursor mode to talk if the cursor is over a character.<P>
+<I>See Also:</I> <A HREF="ags39.htm#GetHotspotAt">GetHotspotAt</A>, <A HREF="ags37.htm#GetLocationName">GetLocationName</A>, <A HREF="ags43.htm#GetObjectAt">GetObjectAt</A><P>
+
+
+<HR>
+<A NAME="GetRawTime"></A>
+<H3>GetRawTime</H3>
+<PRE>
+GetRawTime ()
+</PRE>
+This function returns the raw system time, as the number of seconds since January 1970.
+While this value is not useful in itself, you can use it to calculate time differences
+by getting the value at the start of the game, for example, and then getting the value
+later on, and the different between the two is how much time has elapsed.<P>
+NOTE: Because this function accesses the real-time clock on the users' system, it is not
+a good idea to use this for long term timing tasks, since if the user saves the game and
+then restores it later, the Time value returned by this function will obviously include
+the difference when they were not playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int start_time = GetRawTime();
+Wait(120);
+Display("After the wait it is now %d seconds later.", GetRawTime() - start_time);
+</PRE>
+should display that 3 seconds have elapsed.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetTime">GetTime</A>, <A HREF="ags37.htm#SetTimer">SetTimer</A><P>
+
+
+<HR>
+<A NAME="GetSaveSlotDescription"></A>
+<H3>GetSaveSlotDescription</H3>
+<PRE>
+GetSaveSlotDescription (int slot, string buffer)
+</PRE>
+Gets the text description of save game slot SLOT into the provided BUFFER.
+If the slot number provided does not exist this function returns 0, if
+successful it returns 1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetSaveSlotDescription(10,buffer);
+</PRE>
+will pass the description of the save game slot 10 to buffer.<P>
+<I>See Also:</I> <A HREF="ags37.htm#RestoreGameSlot">RestoreGameSlot</A>, <A HREF="ags37.htm#SaveGameSlot">SaveGameSlot</A><P>
+
+<HR>
+<A NAME="GetTime"></A>
+<H3>GetTime</H3>
+<PRE>
+GetTime (int whichvalue)
+</PRE>
+This function returns various values, representing the current system time.
+You could use this for timing a loop, or for effects like telling the
+player to go to bed, and so on.<P>
+The WHICHVALUE parameter controls what is returned:
+<PRE>
+1  current hour (0-23)
+2  current minute (0-59)
+3  current second (0-59)
+4  current day (1-31)
+5  current month (1-12)
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if ((GetTime(1)==0) && (GetTime(2)==0) && (GetTime(3)==0))
+    Display ("It’s midnight, time to go to bed");
+</PRE>
+will display a message to go to bed at midnight.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetRawTime">GetRawTime</A><P>
+
+
+<HR>
+<A NAME="GetTranslation"></A>
+<H3>GetTranslation</H3>
+<PRE>
+GetTranslation (string original)
+</PRE>
+Gets the translated equivalent of the supplied string. You do not normally
+need to use this since the game translates most things for you. However,
+if you have used an InputBox or other form of user input, and want to
+compare the user's input to a particular string, it cannot be translated
+automatically. So, you can do this instead.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+InputBox ("Enter the password:", buffer);
+if (StrComp (buffer, GetTranslation ("secret")) == 0) {
+  // it matched the current translation of "secret"
+}
+</PRE>
+If there is no translation for the supplied string, it will be returned
+unchanged, so it is always safe to use this function.<P>
+<I>See Also:</I> <A HREF="ags37.htm#IsTranslationAvailable">IsTranslationAvailable</A><P>
+
+
+<HR>
+<A NAME="GetTranslationName"></A>
+<H3>GetTranslationName</H3>
+<PRE>
+GetTranslationName (string buffer)
+</PRE>
+Places the name of the current translation file into BUFFER. This may be useful
+if you want to use a different graphic somewhere depending on which translation
+is being used.<P>
+BUFFER is filled with the current translation filename (without the ".tra" extension).
+If no translation is in use, it is set to an empty string.<P>
+Returns 1 if a translation is in use, 0 otherwise.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetTranslationName(buffer);
+if (StrCaseComp(buffer, "German") == 0) {
+  Display("You are using the German translation.");
+}
+</PRE>
+<I>See Also:</I> <A HREF="ags37.htm#IsTranslationAvailable">IsTranslationAvailable</A><P>
+
+
+<HR>
+<A NAME="GiveScore"></A>
+<H3>GiveScore</H3>
+<PRE>
+GiveScore (int score)
+</PRE>
+Adds SCORE to the player's score. This is preferable to directly modifying
+the variable since it will play the score sound, update any status lines
+and call the GOT_SCORE on_event function.<P>
+Note that SCORE can be negative, in which case the score sound is NOT played.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GiveScore(5);
+</PRE>
+will give 5 points to the player.<P>
+
+<HR>
+<A NAME="IsButtonDown"></A>
+<H3>IsButtonDown</H3>
+<PRE>
+IsButtonDown ( BUTTON )
+</PRE>
+Tests whether the user has the specified mouse button down. BUTTON is either
+LEFT or RIGHT. Return 1 if the button is currently pressed, 0 if not. This
+could be used to test the length of a mouse click and similar effects.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int timer=0;
+if (IsButtonDown(RIGHT)==1)
+   { if (timer==40) 
+        {Display ("You pressed the right button for 1 sec");
+         timer=0; }       
+     else  timer++; }      
+</PRE>
+will display the message if the player presses the right button for 1 sec.<P>
+<I>See Also:</I> <A HREF="ags37.htm#IsKeyPressed">IsKeyPressed</A><P>
+
+<HR>
+<A NAME="IsGamePaused"></A>
+<H3>IsGamePaused</H3>
+<PRE>
+IsGamePaused ()
+</PRE>
+Returns 1 if the game is currently paused, or 0 otherwise.
+The game is paused when either the icon bar interface has been popped up,
+or a "script-only" interface has been displayed with GUIOn. While
+the game is paused, no animations or other updates take place.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsGamePaudsed() == 1) UnPauseGame();
+</PRE>
+will unpause the game if it’s paused.<P>
+<I>See Also:</I> <A HREF="ags38.htm#GUIOn">GUIOn</A><P>
+
+<HR>
+<A NAME="IsInterfaceEnabled"></A>
+<H3>IsInterfaceEnabled</H3>
+<PRE>
+IsInterfaceEnabled ()
+</PRE>
+Returns 1 if the player interface is currently enabled, 0 if it is disabled.
+The user interface is disabled while the cursor is set to the Wait cursor -
+ie. while the character is performing a blocking Walk, or other blocking
+action.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsInterfaceEnable()==1)
+    DisableInterface();
+</PRE>
+will disable the user interface if it’s enabled.<P>
+<I>See Also:</I> <A HREF="ags37.htm#DisableInterface">DisableInterface</A>, <A HREF="ags37.htm#EnableInterface">EnableInterface</A><P>
+
+
+<HR>
+<A NAME="IsInteractionAvailable"></A>
+<H3>IsInteractionAvailable</H3>
+<PRE>
+IsInteractionAvailable (int x, int y, int mode)
+</PRE>
+Checks whether there is an interaction defined for clicking on the screen at (X,Y)
+in cursor mode MODE.<P>
+This function is very similar to ProcessClick, except that rather than carry out any
+interactions it encounters, it simply returns 1 if something would have happened, or 0 if
+unhandled_event would have been run.<P>
+This is useful for enabling options on a verb-coin style GUI, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsInteractionAvailable(mouse.x,mouse.y,MODE_LOOK) == 0)
+  Display("looking here would not do anything.");
+</PRE>
+<I>See Also:</I> <A HREF="ags37.htm#ProcessClick">ProcessClick</A><P>
+<P>
+
+<HR>
+<A NAME="IsKeyPressed"></A>
+<H3>IsKeyPressed</H3>
+<PRE>
+IsKeyPressed (int keycode)
+</PRE>
+Tests whether the supplied key on the keyboard is currently pressed down
+or not. You could use this to move an object while the player holds an
+arrow key down, for instance.<P>
+KEYCODE is one of the ASCII codes from section 6.6, with some limitations:
+since it tests the raw state of the key, you CANNOT pass the Ctrl+(A-Z)
+or Alt+(A-Z) codes (since they are key combinations). You can, however,
+use some extra codes which are listed at the bottom of the section.<P>
+Returns 1 if the key is currently pressed, 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsKeyPressed(372) == 1)
+  MoveCharacter(EGO,character[EGO].x,character[EGO].y+3);
+</PRE>
+will move the character EGO upwards 3 pixels when the up arrow is pressed.<P>
+<I>See Also:</I> <A HREF="ags37.htm#IsButtonDown">IsButtonDown</A><P>
+
+<HR>
+<A NAME="IsTimerExpired"></A>
+<H3>IsTimerExpired</H3>
+<PRE>
+IsTimerExpired (int timer_id)
+
+</PRE>
+Checks whether the timer TIMER_ID has expired.
+If the timeout set with SetTimer has elapsed, returns 1.
+Otherwise, returns 0.<P>
+Note that this function will only return 1 once - after that, the timer
+is placed into an OFF state where it will always return 0 until restarted.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+If (IsTimerExpired(1)==1)
+    {code here} 
+</PRE>
+will execute the code if the timer 1 expires.<P>
+<I>See Also:</I> <A HREF="ags37.htm#SetTimer">SetTimer</A><P>
+
+<HR>
+<A NAME="IsTranslationAvailable"></A>
+<H3>IsTranslationAvailable</H3>
+<PRE>
+IsTranslationAvailable ()
+</PRE>
+Finds out whether the player is using a game translation or not.<P>
+Returns 1 if a translation is in use, 0 if not.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetTranslation">GetTranslation</A>, <A HREF="ags37.htm#GetTranslationName">GetTranslationName</A><P>
+
+<HR>
+<A NAME="PauseGame"></A>
+<H3>PauseGame</H3>
+<PRE>
+PauseGame ()
+</PRE>
+Stops the engine processing character movement and animation, and other
+game features. This has the same effect on the game as happens when a
+script-only interface is popped up. The processing will not resume until
+you call the UnPauseGame function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsKeyPressed(32)==1) PauseGame();
+</PRE>
+will pause the game if the player presses the space bar<P>
+<I>See Also:</I> <A HREF="ags37.htm#UnPauseGame">UnPauseGame</A><P>
+
+<HR>
+<A NAME="ProcessClick"></A>
+<H3>ProcessClick</H3>
+<PRE>
+ProcessClick (int x, int y, int mode)
+</PRE>
+Simulates clicking the mouse on the location (X,Y) on the screen, in the
+cursor mode MODE. Any conditions attached will be executed. For example,
+<PRE>
+ProcessClick (100, 50, MODE_LOOK);
+</PRE>
+will simulate clicking the mouse on co-ordinates (100,50) in the Look mode.<P>
+<B>NOTE:</B> This function ignores all interfaces and acts as though the point is
+directly visible. In other words, if the co-ordinates you pass happen to
+lie on a button on an interface, what actually happens will be as if the
+user clicked behind the interface onto the actual screen.<P>
+Available cursor modes: MODE_WALK, MODE_LOOK, MODE_USE, MODE_TALK,
+MODE_USEINV, MODE_PICKUP.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ProcessClick(mouse.x,mouse.y,MODE_LOOK);
+</PRE>
+will simulate a click in the LOOK MODE where the cursor is.<P>
+<I>See Also:</I> <A HREF="ags37.htm#IsInteractionAvailable">IsInteractionAvailable</A>,
+<A HREF="ags39.htm#RunHotspotInteraction">RunHotspotInteraction</A><P>
+
+<HR>
+<A NAME="QuitGame"></A>
+<H3>QuitGame</H3>
+<PRE>
+QuitGame(int ask_first)
+</PRE>
+Exits the game and returns to the operating system.<P>
+If ASK_FIRST is zero, it will exit immediately. If ASK_FIRST is not zero,
+it will first display a message box asking the user if they are sure they
+want to quit.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+QuitGame(0);
+</PRE>
+will quit the game without asking the player to confirm.<P>
+
+
+<HR>
+<A NAME="Random"></A>
+<H3>Random</H3>
+<PRE>
+Random (int max)
+</PRE>
+Returns a random number between 0 and MAX. This could be useful to do
+various effects in your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int ran=Random(2);
+if (ran==0) NewRoom(1);
+else if (ran==1) NewRoom(2);
+else NewRoom(3);
+</PRE>
+will change the current room to room 1,2 or 3 depending on a random result.<P>
+
+
+<HR>
+<A NAME="RestartGame"></A>
+<H3>RestartGame</H3>
+<PRE>
+RestartGame ()
+</PRE>
+Restarts the game from the beginning.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsKeyPressed(365) == 1) RestartGame(); 
+</PRE>
+will restart the game if the player presses the F7 key.<P>
+
+<HR>
+<A NAME="RestoreGameDialog"></A>
+<H3>RestoreGameDialog</H3>
+<PRE>
+RestoreGameDialog ()
+</PRE>
+Displays the restore game dialog, where the player can select a previously
+saved game position to restore.<P>
+The dialog is not displayed immediately; instead, it will be displayed when
+the script function finishes executing.<P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsKeyPressed(363)=1 RestoreGameDialog();
+</PRE>
+will bring up the restore game dialog if the player presses the F5 key.<P>
+<I>See Also:</I> <A HREF="ags37.htm#RestoreGameSlot">RestoreGameSlot</A>, <A HREF="ags37.htm#SaveGameDialog">SaveGameDialog</A><P>
+
+<HR>
+<A NAME="RestoreGameSlot"></A>
+<H3>RestoreGameSlot</H3>
+<PRE>
+RestoreGameSlot (int slot)
+</PRE>
+Restores the game position saved into slot number SLOT. You might want to
+use these specific slot functions if for example you only want to allow the
+player to have one save game position rather than the usual 20. If this slot
+number does not exist, an error message is displayed to the player but the
+game continues. To avoid the error, use the GetSaveSlotDescription function
+to see if the position exists before restoring it.<P>
+NOTE: The position will not be restored immediately; instead, it will be
+restored when the script function finishes executing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RestoreGameSlot(30);
+</PRE>
+will restore game slot 30 if this slot number exists.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetSaveSlotDescription">GetSaveSlotDescription</A>, <A HREF="ags37.htm#RestoreGameDialog">RestoreGameDialog</A>, <A HREF="ags37.htm#SaveGameSlot">SaveGameSlot</A><P>
+
+
+<HR>
+<A NAME="RunAGSGame"></A>
+<H3>RunAGSGame</H3>
+<PRE>
+RunAGSGame (string filename, int mode, int data)
+</PRE>
+Quits the current game, and loads up FILENAME instead. FILENAME must be an AGS game EXE
+or AC2GAME.AGS file, and it must be in the current directory.<P>
+MODE specifies various options about how you want to run the game. Currently the supported
+values are:
+<PRE>
+0   Current game is completely exited, new game runs as if it had been launched seperately
+1   GlobalInt values are preserved and are not set to 0 for the new game.
+</PRE>
+DATA allows you to pass an integer through to the next game. The value you pass here
+will be accessible to the loaded game by it reading the  game.previous_game_data  variable.<P>
+The save game slots are shared between the two games, and if you load a save slot that
+was saved in the other game, it will automatically be loaded.<P>
+Bear in mind that because the games must be in the same folder, they will also share
+the music.vox, speech.vox and so forth. This is a limitation of the function.<P>
+<B>NOTE:</B> The game you run will be loaded at the same resolution and colour depth as the
+current game; if you mismatch colour depths some nasty results will occur.<P>
+<B>NOTE:</B> Make sure that the game you want to run has a filename of 8 characters or less,
+or this command will fail in the DOS engine.<P>
+<B>NOTE:</B> The game you want to launch must have been created with the same point-version
+of AGS as the one you are launching it from. (version 2.xy - the X must be the same version
+between the two games).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunAGSGame ("MyGame.exe", 0, 51);
+</PRE>
+will run the MyGame game, passing it the value 51.<P>
+
+
+<HR>
+<A NAME="SaveGameDialog"></A>
+<H3>SaveGameDialog</H3>
+<PRE>
+SaveGameDialog ()
+</PRE>
+Displays the save game dialog, where the player can save their current
+game position. If they select to save, then the game position will be saved.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (keycode == 361) SaveGameDialog();
+</PRE>
+will bring up the save game dialog if the player presses the F3 key.<P>
+<I>See Also:</I> <A HREF="ags37.htm#RestoreGameDialog">RestoreGameDialog</A>, <A HREF="ags37.htm#SaveGameSlot">SaveGameSlot</A><P>
+
+<HR>
+<A NAME="SaveGameSlot"></A>
+<H3>SaveGameSlot</H3>
+<PRE>
+SaveGameSlot (int slot, string description)
+</PRE>
+Saves the current game position to the save game number specified by SLOT,
+using DESCRIPTION as the textual description of the save position.
+Be careful using this function, because you could overwrite one of the
+player's save slots if you aren't careful.
+The SaveGameDialog function uses slots numbered from 1 to 20, so if you
+don't want to interfere with the player's saves, I would recommend saving
+to slot numbers of 100 and above.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SaveGameSlot (30, "save game");
+</PRE>
+will save the current game position to slot 30 with the description "Save game".<P>
+<I>See Also:</I> <A HREF="ags37.htm#DeleteSaveSlot">DeleteSaveSlot</A>, <A HREF="ags37.htm#RestoreGameSlot">RestoreGameSlot</A>, <A HREF="ags37.htm#SaveGameDialog">SaveGameDialog</A><P>
+
+<HR>
+<A NAME="SaveScreenShot"></A>
+<H3>SaveScreenShot</H3>
+<PRE>
+SaveScreenShot (string filename)
+</PRE>
+Takes a screen capture and saves it to disk. The FILENAME must end in
+either ".BMP" or ".PCX", as those are the types of files which can be saved.
+Returns 1 if the shot was successfully saved, or 0 if an invalid file
+extension was provided.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+InputBox("type the filename",input);
+SrtCat (input,".pcx");
+Savescreenshot (input);
+</PRE>
+will prompt the player for a filename and then save the screenshot with the filename the player typed.<P>
+
+
+<HR>
+<A NAME="SetGameOption"></A>
+<H3>SetGameOption</H3>
+<PRE>
+SetGameOption (option, int value)
+</PRE>
+Changes one of the game options, originally set in the AGS Editor Game Settings pane.<P>
+OPTION specifies which option to change, and VALUE is its new value. Valid OPTIONs are
+listed below:<P>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B> Option </B></TD>
+<TD ALIGN=LEFT><B> Values </B>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_WALKONLOOK </TD>
+<TD ALIGN=LEFT> Walk to hotspot in look mode (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_DIALOGOPTIONSGUI </TD>
+<TD ALIGN=LEFT> Dialog options on GUI (0=none, otherwise GUI Number) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_ANTIGLIDE </TD>
+<TD ALIGN=LEFT> Anti-glide mode (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_DIALOGOPTIONSGAP </TD>
+<TD ALIGN=LEFT> Pixel gap between options (0=none, otherwise num pixels) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_WHENGUIDISABLED </TD>
+<TD ALIGN=LEFT> When GUI is disabled, 0=grey out, 1=go black, 2=unchanged, 3=turn off 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_ALWAYSSPEECH </TD>
+<TD ALIGN=LEFT> Always display text as speech (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_PIXELPERFECT </TD>
+<TD ALIGN=LEFT> Pixel-perfect click detection (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_NOWALKMODE </TD>
+<TD ALIGN=LEFT> Don't automatically move character in Walk mode (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_FIXEDINVCURSOR </TD>
+<TD ALIGN=LEFT> Don't use inventory graphics as cursors (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_DONTLOSEINV </TD>
+<TD ALIGN=LEFT> Don't automatically lose inventory items (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_TURNBEFOREWALK </TD>
+<TD ALIGN=LEFT> Characters turn before walking (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_HANDLEINVCLICKS </TD>
+<TD ALIGN=LEFT> Handle inventory clicks in script (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_MOUSEWHEEL </TD>
+<TD ALIGN=LEFT> Enable mouse wheel support (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_DIALOGNUMBERED </TD>
+<TD ALIGN=LEFT> Number dialog options (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_DIALOGUPWARDS </TD>
+<TD ALIGN=LEFT> Dialog options go upwards on GUI (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_CROSSFADEMUSIC </TD>
+<TD ALIGN=LEFT> Crossfade music tracks (0=no, 1=slow, 2=slowish, 3=medium, 4=fast) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_ANTIALIASFONTS </TD>
+<TD ALIGN=LEFT> Anti-alias rendering of TTF fonts (0 or 1) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> OPT_LIPSYNCTEXT </TD>
+<TD ALIGN=LEFT> Whether lip-sync text reading is enabled (0 or 1) 
+</TD>
+</TR>
+</TABLE>
+<P>
+The game settings which are not listed here either have a seperate command to change them
+(such as SetSpeechStyle), or simply cannot be changed at run-time (such as Letterbox Mode).<P>
+This command returns the old value of the setting.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGameOption (OPT_PIXELPERFECT, 0);
+</PRE>
+will disable pixel-perfect click detection.<P>
+<I>See Also:</I> <A HREF="ags49.htm#SetSpeechStyle">SetSpeechStyle</A>, <A HREF="ags38.htm#SetTextWindowGUI">SetTextWindowGUI</A><P>
+
+
+<HR>
+<A NAME="SetGameSpeed"></A>
+<H3>SetGameSpeed</H3>
+<PRE>
+SetGameSpeed (int new_speed)
+</PRE>
+Sets the game speed to NEW_SPEED frames per second, or as near as possible
+to that speed. The default frame rate is 40 fps, but you can speed up or
+slow down the game by using this function. Note that this speed is also the
+rate at which the Repeatedly_Execute functions are triggered.<P>
+The NEW_SPEED must lie between 10 and 1000. If it does not, it will be rounded
+to 10 or 1000. Note that if you set a speed which the player's computer cannot
+handle (for example, a 486 will not be able to manage 80 fps), then it will
+go as fast as possible.<P>
+NOTE: Because the mouse cursor is repainted at the game frame rate, at very
+low speeds, like 10 to 20 fps, the mouse will appear to be jumpy and not
+very responsive.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGameSpeed(80);
+</PRE>
+will set the game speed to 80.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetGameSpeed">GetGameSpeed</A><P>
+
+<HR>
+<A NAME="SetGlobalInt"></A>
+<H3>SetGlobalInt</H3>
+<PRE>
+SetGlobalInt (int index, int value)
+</PRE>
+Sets the global variable INDEX to VALUE. You can then retrieve this value
+from any other script using GetGlobalInt.<P>
+There are 500 available global variables, from index 0 to 499.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGlobalInt(10,1);
+</PRE>
+will set the Global Integer 10 to 1.<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetGlobalInt">GetGlobalInt</A><P>
+
+
+<HR>
+<A NAME="SetGlobalString"></A>
+<H3>SetGlobalString</H3>
+<PRE>
+SetGlobalString (int index, string buffer)
+</PRE>
+Sets the global string INDEX to have BUFFER as its contents. You can then retrieve this
+value from any other script in your game using the GetGlobalString function.<P>
+There are 50 available global strings, with INDEX values from 0 to 49.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGlobalString (15, "Joe");
+</PRE>
+will set global string 15 to contian "Joe".<P>
+<I>See Also:</I> <A HREF="ags37.htm#GetGlobalString">GetGlobalString</A>, <A HREF="ags37.htm#SetGlobalInt">SetGlobalInt</A><P>
+
+
+<HR>
+<A NAME="SetMultitaskingMode"></A>
+<H3>SetMultitaskingMode</H3>
+<PRE>
+SetMultitaskingMode (int mode)
+</PRE>
+Allows you to set what happens when the user switches away from your game.<P>
+If MODE is 0 (the default), then if the user Alt+Tabs out of your game, or clicks
+on another window, the game will pause and not continue until they switch back into
+the game.<P>
+If MODE is 1, then the game will continue to run in the background if the user
+switches away (useful if, for example, you are just making some sort of jukebox
+music player with AGS).<P>
+Note that mode 1 does not work with some graphics cards in full-screen mode, so you
+should only rely on it working when your game is run in windowed mode.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> Yes </B><P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMultitaskingMode (1);
+</PRE>
+will mean that the game continues to run in the background.<P>
+
+
+<HR>
+<A NAME="SetNormalFont"></A>
+<H3>SetNormalFont</H3>
+<PRE>
+SetNormalFont (int font_number)
+</PRE>
+Changes the font used for all in-game text, except speech. FONT_NUMBER must
+be from 0 to the number of fonts you have. By default the only options are 0
+and 1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetNormalFont(4);
+</PRE>
+will change the normal font to the font number 4.<P>
+<I>See Also:</I> <A HREF="ags49.htm#SetSpeechFont">SetSpeechFont</A><P>
+
+<HR>
+<A NAME="SetRestartPoint"></A>
+<H3>SetRestartPoint</H3>
+<PRE>
+SetRestartPoint ()
+</PRE>
+Changes the game restart point to the current position. This means that
+from now on, if the player chooses the Restart Game option, it will return
+here.<P>
+This function is useful if the default restart point doesn't work properly
+in your game - just use this function to move it.<P>
+
+<HR>
+<A NAME="SetTimer"></A>
+<H3>SetTimer</H3>
+<PRE>
+SetTimer (int timer_id, int timeout)
+</PRE>
+Starts timer TIMER_ID ticking - it will tick once every game loop (normally
+40 times per second), until TIMEOUT loops, after which it will stop.
+You can check whether the timer has finished by calling the IsTimerExpired
+function.<P>
+Pass TIMEOUT as 0 to disable a currently running timer.<P>
+There are 20 available timers, with TIMER_IDs from 1 to 20.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetTimer(1,1000); 
+</PRE>
+will set the timer 1 to expire after 1000 game cycles.<P>
+<I>See Also:</I> <A HREF="ags37.htm#IsTimerExpired">IsTimerExpired</A><P>
+
+<HR>
+<A NAME="StartCutscene"></A>
+<H3>StartCutscene</H3>
+<PRE>
+StartCutscene (int skip_with)
+</PRE>
+Marks the start of a cutscene. Once your script passes this point, the player can
+choose to skip a portion by pressing a key or the mouse button. This is useful for
+things like introduction sequences, where you want the player to be able to skip
+over an intro that they've seen before.<P>
+SKIP_WITH determines how they can skip the cutscene:
+<PRE>
+1  by pressing ESC only
+2  by pressing any key
+3  by clicking a mouse button
+4  by pressing any key or clicking a mouse button
+5  by pressing ESC or clicking the right mouse button
+</PRE>
+You need to mark the end of the cutscene with the EndCutscene command.<P>
+Be <B>very careful</B> with where you place the corresponding EndCutscene command.
+The script <B>must</B> pass through EndCutscene in its normal run in order for the skipping
+to work - otherwise, when the player presses ESC the game could appear to hang.<P>
+<I>See Also:</I> <A HREF="ags37.htm#EndCutscene">EndCutscene</A><P>
+
+<HR>
+<A NAME="UnPauseGame"></A>
+<H3>UnPauseGame</H3>
+<PRE>
+UnPauseGame ()
+</PRE>
+Resumes the game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsGamePaused() == 1)
+    UnPauseGame();
+</PRE>
+will unpause the game if it is paused.<P>
+<I>See Also:</I> <A HREF="ags37.htm#PauseGame">PauseGame</A><P>
+
+<HR>
+<A NAME="Wait"></A>
+<H3>Wait</H3>
+<PRE>
+Wait (int time)
+</PRE>
+Pauses the script and lets the game continue for TIME loops. There are
+normally 40 loops/second (unless you change it with SetGameSpeed), so using
+a value of 80 will wait 2 seconds. Note that no other text scripts can
+run while the Wait function is in the background.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterBlocking(EGO,120,140,0);
+Wait(80);
+FaceLocation(EGO,1000,100);
+</PRE>
+will move the character EGO to 120,140, wait until he gets there (MoveCharacterBlocking) then wait for 2 seconds (80 game cycles) and then face right.<P>
+<I>See Also:</I> <A HREF="ags37.htm#WaitKey">WaitKey</A>, <A HREF="ags37.htm#WaitMouseKey">WaitMouseKey</A><P>
+
+<HR>
+<A NAME="WaitKey"></A>
+<H3>WaitKey</H3>
+<PRE>
+WaitKey (int time)
+</PRE>
+Pauses the script and lets the game continue until EITHER:<P>
+(a) TIME loops have elapsed, or<P>
+(b) the player presses a key<P>
+Returns 0 if the time elapsed, or 1 if the player interrupted it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+WaitKey(200);
+</PRE>
+will pause the script and wait until 5 seconds have passed or the player presses a key.<P>
+<I>See Also:</I> <A HREF="ags37.htm#Wait">Wait</A>, <A HREF="ags37.htm#WaitMouseKey">WaitMouseKey</A><P>
+
+<HR>
+<A NAME="WaitMouseKey"></A>
+<H3>WaitMouseKey</H3>
+<PRE>
+WaitMouseKey (int time)
+</PRE>
+Pauses the script and lets the game continue until EITHER:<P>
+(a) TIME loops have elapsed, or<P>
+(b) the player presses a key, or<P>
+(c) the player clicks a mouse button<P>
+Returns 0 if the time elapsed, or 1 if the player interrupted it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+WaitMouseKey(200);
+</PRE>
+will pause the script and wait until 5 seconds have passed or the player presses a key or
+clicks the mouse.<P>
+<I>See Also:</I> <A HREF="ags37.htm#Wait">Wait</A>, <A HREF="ags37.htm#WaitKey">WaitKey</A><P>
+
+
+</BODY></HTML>

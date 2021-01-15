@@ -1,0 +1,58 @@
+<HTML>
+<head><title>Debugging features</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="Debuggingfeatures"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic24"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags22.htm#topic40"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags24.htm#topic41"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Debugging features</H2>
+It happens to the best of us - you're merrily ploughing along making your game, when
+suddenly something just isn't working right. It's not always obvious where the problem is.<P>
+AGS provides a few tools to try and help you deal with these sorts of issues. Depending on
+the type of problem you are having, one of the following may help. If all else fails, you
+can of course ask for help on the AGS forums.<P>
+All of the below only work when you have the "Debug mode" checkbox ticked on the Game
+Settings pane of the editor. So, just before you release your game, untick it and compile
+the game again to make sure the player can't cheat using these features.<P>
+<B>1. The Debug() command</B><P>
+There is a scripting command, <A HREF="ags40.htm#Debug">Debug</A>, which you can use in your script
+to help you find problems. The default setup enables some hotkeys for the various features -
+in particular, Ctrl+X allows you to teleport to another room, Ctrl+A shows the walkable
+areas on the screen and Ctrl+S gives you all the inventory items.<P>
+You can also use the Debug command to assign a hotkey to toggle FPS display on and off.
+(FPS is Frames Per Second, which allows you to see the game speed and spot any slow-running
+rooms).<P>
+<B>2. Current room information</B><P>
+Pressing Ctrl+D displays some information about the current room. It tells you what
+room number you are in, followed by the current status of all objects in the room. After that,
+another messagebox tells you all the characters that are in the current room and various
+information about them.<P>
+<B>3. Debug console (unofficial feature)</B><P>
+Pressing the tilde <TT>~</TT> key (same as for the Quake console, generally to the left of the 1 key on
+the keyboard) brings up the debug console. This displays various messages telling you what
+is happening in the game - for example, "EGO starting walk to (X, Y)" and so forth. Not all
+game events are displayed here - if there's something useful you wish was displayed, say so
+on the AGS Technical Forum and it can be added.<P>
+<B>4. Script line information (unofficial feature)</B><P>
+Press Scroll Lock to bring up the Script Line window. This appears in the top right of the
+screen and tells you what script line number is currently being run. It significantly slows
+down your game because the screen has to be updated so regularly.<P>
+The information here tends to whizz by too quickly in normal game play. But during a cutscene
+or Wait() script, it is useful for seeing what is happening at the time, or for spotting
+where the script has gone wrong.<P>
+While this window is displayed, you can hold Right-Shift to pause it so you can actually
+read what it says - release Right Shift to continue the game.<P>
+If you press Left Shift, the game will be locked into a step-by-step mode, where you must
+press Left Shift every time to continue onto the next script line. Right Shift exits this
+mode.<P>
+<B>NOTE:</B> Features 3 and 4 are unofficial - that is, support and help will not be offered
+on the AGS forums. If they work, great - if not, sorry but too bad.<P>
+
+
+</BODY></HTML>

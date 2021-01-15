@@ -1,0 +1,432 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Text Scripting Tutorial</b></h2>
+      <p>Probably the most common situation faced by newbies is this:<br>
+      You've played around with Roomedit, made a basic game and it all works
+      fine. Now, you want to start using more advanced features by using
+      scripting - but where to start? The manual does include a section on
+      scripting but it doesn't cater for newbies very well. Hopefully this page
+      will go some way towards redressing the balance.
+      </p>
+      <h3><b><br>
+      The Basics</b>
+      </h3>
+      <p>Right, we'll start off by doing something very simple - displaying a
+      message to the player when they click the Look icon on a hotspot. (Of
+      course, you don't actually need to use a script to do this, a simple
+      Display Message would work just as well).
+      </p>
+      <p>So, fire up the editor and load in a room. If you don't have one, load a
+      room from the demo game, it'll work just as well. Add a new hotspot, and
+      click its Interactions button. Add the &quot;Look at hotspot&quot; event,
+      in the same way as you would to add a normal Display Message
+      command. Now, change the response to &quot;Run Script&quot;.
+      </p>
+      <p>Click the &quot;Edit Script&quot; button, and the text
+      editor should appear containing something like this:
+      </p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>// script for hotspot1: LOOK AT HOTSPOT     
+</pre>
+          </td>
+        </tr>
+      </table>
+      <p>Lines beginning with <code>//</code> are <b>comments</b> - AGS will
+      ignore them, they are just there to help you remember what your script is
+      doing. You can add your own comments to your script by starting the line
+      with the <code>//</code> symbol.
+      </p>
+      <h3 align="left"><b><br>
+      Functions Explained</b>
+      </h3>
+      <p>Each different command you can use in the script is called a <b>function</b>.
+      The name of all the available functions is listed in the text script
+      reference part of the manual, which also tells you how to use them.
+      </p>
+      <p>We want to display a message to the player, so we want the <i>Display</i>
+      function. Looking this up in the manual gives us the definition:
+      </p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#FFCCCC">
+            <pre>Display (string message, ...)
+  Displays a message to the screen. It will be displayed in  
+  the standard message box, and centred in the middle of
+  the screen. <i>(description continues...)</i></pre>
+          </td>
+        </tr>
+      </table>
+      <p>The key point here is the part of the first line inside the brackets.
+      This is called the <b>parameter list</b> and defines what parameters you
+      give to the function.&nbsp; A parameter is a number or some text that the
+      function uses to decide what to do.<br>
+      Each parameter is listed, seperated by commas. They can be one of the
+      following:
+      <ul>
+        <li>string <i>name<br>
+          </i>This parameter is a string, ie. a piece of text. This means that
+          for this parameter you supply text, surrounded by double-quotes. For
+          example,&nbsp; <code>&quot;My text&quot;</code> .<br>
+          <i>name</i> is the name by which the parameter is referred to in the
+          function description, it is not relevant for writing your script.</li>
+        <li>int <i>name</i><br>
+          This parameter is an integer, ie. a numerical value. This means that
+          for this parameter you supply a number, for example&nbsp; <code>65</code>&nbsp;
+          .</li>
+        <li>CHARID<br>
+          This parameter is a character script name. You need to supply the
+          script name of one of the game characters.</li>
+        <li>...<br>
+          This parameter is optional, and can be of any type. You do not have to
+          supply it at all, but if you do the function description will tell you
+          what type of value to use.</li>
+      </ul>
+      <p>So, we know that our Display function needs a string and an optional
+      parameter. The function description goes on to explain that the optional
+      parameter is used for advanced things like displaying variable values, so
+      we can ignore it for now.</p>
+      <p>To make our script call the function we write its name, then the
+      parameters inside brackets, and finally a semicolon. This is very
+      important, as without the semicolon the script won't compile. Also, note
+      that we DO NOT write the parameter type (eg. &quot;string&quot; or
+      &quot;int&quot;). So, we can
+      add this line to our script:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>Display(&quot;Hello from the script.&quot;);   </pre>
+          </td>
+        </tr>
+      </table>
+      <p>So, the script in the editor will look like this:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  // script for hotspot1: LOOK AT HOTSPOT     
+  Display(&quot;Hello from the script.&quot;);</pre>
+          </td>
+        </tr>
+      </table>
+      <p>Now, press Alt-F, X to exit the editor, and press Yes when it asks to
+      save changes. Click the Setup Screen, Save Room button in roomedit to
+      compile the script. If all is well the room will save, otherwise you will
+      get an error message.</p>
+      <p>Load up the game, look at the hotspot and see it display your message.</p>
+      <h3><br>
+      Command Sequences</h3>
+      <p>What we've done so far has been fairly pointless, since it could have
+      been done with a Display Message command rather than a Run Script. The
+      main power of the script lies in its ability to process a sequence of
+      function calls.</p>
+      <p>For example, suppose we want the player to be given a pink poster when
+      they look at the hotspot, as well as displaying the message. Assuming we
+      have inventory item 2 set up to be the poster (see the manual for how to
+      do this), the script enables us to easily do both.<br>
+      For this job we want AddInventory. Its description in the manual says it
+      just takes one parameter, an int, which is the inventory item number to
+      add. So:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  AddInventory(2);    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>should do the job here. Our final script will look like this:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  // script for hotspot1: LOOK AT HOTSPOT     
+  Display(&quot;Hello from the script.&quot;);
+  AddInventory(2);</pre>
+          </td>
+        </tr>
+      </table>
+      <p>Note that the script system is case sensitive, so writing&nbsp; <code>addinventory(2);&nbsp;</code>
+      will not work.
+      <p>The script commands are processed from top to bottom in the order that
+      you write them, so writing something like:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  Display(&quot;Why did the chicken cross the road?&quot;);    
+  Display(&quot;Because he was bored.&quot;);    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>will make sure that the player gets the two messages in the correct
+      order.
+      <h3><br>
+      Recap</h3>
+      <p>So, did you remember these vital points:
+      <ul>
+        <li>Strings are surrounded by double-quote marks.</li>
+        <li>Semicolon after the closing bracket on each line.</li>
+        <li>Function names are case sensitive.</li>
+      </ul>
+      <p><br>
+      <h3>Variables</h3>
+      <p>One of the script's main advantages is its ability to use variables. A
+      variable is an area of memory storage that contains a value, which you can
+      check and change with your script.
+      <p>To declare a variable, you write the variable type, followed by the
+      variable name, then a semicolon. The type is either &quot;int&quot; or
+      &quot;string&quot;, and the name can be anything you like - it is what you
+      will use to refer to it later. For example,</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  int my_counter;    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>The variable name can only contain letters A-Z, a-z and the underscore
+      _ character.
+      </p>
+      <p>You need to declare a variable before you can use it, so that the
+      compiler can spot any mistakes and knows what type of things you can store
+      in it.
+      </p>
+      <p>Initially, your variable will have the value 0. Optionally, you can set
+      the starting value within the declaration, like this:
+      </p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  int my_counter = 5;    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>which would set it to contain the value 5 initially instead.
+      </p>
+      <p><b>Variable Scope</b>
+      <p>An unfortunate side effect of the script's attempt to emulate the 'C'
+      language is variable scope. In short, this means that you need to place
+      your variable definitions OUTSIDE all the interaction event handlers,
+      otherwise their values will keep getting reset.
+      <p>So, to declare a variable for use by one of the room interaction
+      scripts, you need to edit the overall room script (Room Editor, Edit
+      Script).&nbsp;&nbsp;
+      <p>When you click that button, you will see the the text editor containing
+      all the scripts you have written for the room so far. You need to add your
+      variable declaration to the top of the file, before any of the
+      &quot;function&quot; lines. So, it should look something like:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>// room text script file
+int my_counter;
+
+function hotspot1_a() {
+  // script for hotspot1: LOOK AT HOTSPOT     
+  Display(&quot;Hello from the script&quot;);
+}
+
+<i>(rest of file follows)</i></pre>
+          </td>
+        </tr>
+      </table>
+      <p>No script commands can be placed before the first function line - just
+      variable declarations are allowed there.&nbsp;
+      <p><b>Changing variables</b>
+      <p>You can change the value of a variable very easily in the script -
+      simply write the variable name, the equals sign, then the new value,
+      followed by the semicolon. So:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  my_counter = 10;    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>will change the value of our variable to be 10.
+      <p>You can add to and subtract from a variable using the += and -=
+      operators. So, to add 3 to the current value of my_counter, do the
+      following:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  my_counter += 3;    </pre>
+          </td>
+        </tr>
+      </table>
+      <p><b>Checking variables</b><p>Obviously we need a way to find out what
+      value our variable contains, otherwise it's useless. We do this using
+      conditional statements, called <i>if</i> statements. An if statement looks
+      like this:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  if (my_counter == 5) {   
+    my_counter = 0;
+  }    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>what this means is, if my_counter contains the value 5, then the script
+      inside the { } brackets will be run (which in this case changes the value
+      of my_counter to zero).<br>
+      If my_counter does not equal 5, the script inside the brackets is skipped
+      and execution carries on from after the } .
+      <p><b>Note the double-equals in the if statement</b>. In an &quot;if&quot;
+      statement, you ALWAYS use the double-equals operator, which compares the
+      two values. If you used a single equals it would set the value instead,
+      which will yield some strange results.
+      <p>The <code>==</code> is called an operator, because it performs an
+      operation on the two values. The following basic operators are available:
+      <ul>
+        <li>==<br>
+          compares the two values, and proceeds if they are the same.</li>
+        <li>!=<br>
+          compares the two values, and proceeds if they are <b>not</b> the same.</li>
+        <li>&lt;<br>
+          compares the two values, and proceeds if the left hand value is less
+          than the right hand value</li>
+        <li>&gt;<br>
+          compares the two values, and proceeds if the left hand value is bigger
+          than the right hand value.</li>
+        <li>&lt;=<br>
+          proceeds if the left hand value is equal to or less than the right
+          hand value</li>
+        <li>&gt;=<br>
+          proceeds if the left hand value is equal to or bigger than the right
+          hand value</li>
+      </ul>
+      <p><b>Putting it into practice</b>
+      <p>Now let's do something useful with our variable.
+      Suppose that we want to have different messages every time the player
+      looks at the hotspot. So, the first time they look it will describe it,
+      then if they look again they get a different message describing something
+      in more detail. Our code will want to look something like this:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  // script for hotspot1: LOOK AT HOTSPOT     
+  if (my_counter == 0) {
+    Display(&quot;You see a bookshelf.&quot;);
+  }
+  if (my_counter == 1) {
+    Display(&quot;Looking closer, you see a book called Hamlet.&quot;);  
+  }
+  if (my_counter == 2) {
+    Display(&quot;There is also a book called Harry Potter.&quot;);
+  }
+  if (my_counter == 3) {
+    Display(&quot;There is nothing else of interest on the shelf.&quot;);  
+  }
+  if (my_counter &lt; 3) {
+    my_counter += 1;
+  }</pre>
+          </td>
+        </tr>
+      </table>
+      <p>my_counter starts off set to 0, so the first time this Look script is
+      called, it will run the first Display command, but not the others. Then,
+      since 0 is less than 3, it will increase my_counter by 1, and since 0+1 =
+      1 it now holds the value 1.<br>
+      Once the player has seen all the messages (my_counter == 3), it no longer
+      increases the value so if they click again they will keep getting the
+      final message.</p>
+      <p><b>Global variables made easy</b></p>
+      <p>Sometimes, you may want to set a variable value that can be shared
+      between a room script and your global script. For this purpose, 300
+      GlobalInts are available. You use the script functions SetGlobalInt and
+      GetGlobalInt to access them, see their manual descriptions for more
+      information.&nbsp;&nbsp;</p>
+      <h3><br>
+      Functions that return a value</h3>
+      <p>When reading function descriptions in the manual, you will notice that
+      some of them say they return a value. For example,</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#FFCCCC">
+            <pre>IsGamePaused ()
+  Returns 1 if the game is currently paused, or 0 otherwise.  </pre>
+          </td>
+        </tr>
+      </table>
+      <p>You use these much as you would use a literal value such as
+      &quot;9&quot;. For example, you can do:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  // Put the return value into our variable  
+  my_counter = IsGamePaused();  
+
+  // Test the return value directly
+  if (IsGamePaused() == 0) {
+    my_counter += 5;
+  }</pre>
+          </td>
+        </tr>
+      </table>
+      <p>Be sure to remember the parenthesis ().</p>
+      <h3><br>
+      Common Shortcuts</h3>
+      <p>The script system has a few nice shortcuts for common tasks which you
+      will find yourself using but I haven't used so far so as not to confuse
+      matters.</p>
+      <p>Firstly, the ++ and -- operators increase and decrease the variable by
+      1, respectively. So, the last part of our previous script could have been
+      written:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  if (my_counter &lt; 3) {     
+    my_counter ++;
+  }</pre>
+          </td>
+        </tr>
+      </table>
+      <p>Also, the { } brackets are only needed if you are using more than one
+      command inside them. Since we have only one command, the
+      &quot;my_counter++;&quot; line, we can remove the { } completely and just
+      be left with:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  if (my_counter &lt; 3)      
+    my_counter ++;</pre>
+          </td>
+        </tr>
+      </table>
+      <p>However, this can lead to mistakes in scripts so I would advise always
+      using the brackets anyway until you are very comfortable with the system.</p>
+      <p>Finally, if you want to test whether a value is zero or not, you can
+      just write it as follows:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  if (my_counter)      
+    Display(&quot;counter is non-zero&quot;);    </pre>
+          </td>
+        </tr>
+      </table>
+      <p>which is equivalent to:</p>
+      <table border="0">
+        <tr>
+          <td bgcolor="#99CCFF">
+            <pre>  if (my_counter != 0)      
+    Display(&quot;counter is non-zero&quot;);    </pre>
+          </td>
+        </tr>
+      </table>
+      <h3><br>
+      Summary</h3>
+      <p>We've covered the basics, so that hopefully you can now write a script
+      of your own. There are many more advanced features that the system can do,
+      but this should be enough to get you started.&nbsp;</p>
+      <p>When you're ready, feel free to proceed to the <a href="ags22.htm">Tutorial
+      Chapter 2 - The Patronising Text Returns</a> which covers more advanced
+      topics.</p>
+      <p>Enjoy AGS!</p>
+      <p><font size="2">Tutorial last updated 6 June 2002. Copyright (c) 2001-2002
+      Chris Jones.</font>        
+      </td>
+    </body></html>

@@ -1,0 +1,63 @@
+<HTML>
+<head><title>Lip sync</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic34"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic21"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags21.htm#topic33"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags23.htm#topic35"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Lip sync</H2>
+If you want, AGS can pretend to 'read' out speech text. Go to the 'Lip Sync' pane
+in the editor.<P>
+Normally when a character is talking, AGS simply cycles through the speech animation
+from start to finish, and then loops back round. However, lip syncing allows you to be
+cleverer by specifying a particular frame to go with various letters and sounds. Then,
+as the character talks, AGS plays appropriate frames to simulate the character actually
+saying those words.<P>
+In the Lip Sync Editor, you have 20 text boxes, one for each possible frame of the
+talking loop. In each box, you can enter all the letters which will cause that frame of
+the loop to be played. Letter combinations such as 'th' and 'ch' can be used too - AGS
+will match each part of the spoken text to the longest possible phrase in the lip sync
+editor.<P>
+separate the letters by forward slashes. For example,<P>
+<PRE>
+3  R/S/Th/G
+</PRE>
+will mean that frame 3 of the character's talking animation is shown whenever the
+letter R, S, Th or G is spoken.<P>
+The "Default frame for unlisted characters" box allows you to set which frame is used
+when a character not listed in any of the text boxes is encountered.<P>
+
+<B>Voice speech lip sync</B><P>
+AGS supports lip syncing voice speech to the talking animation. If you enable this
+feature, you cannot use the standard lip-sync for non-voice lines.<P>
+<B>NOTE: This is an unofficial feature and is not currently supported. Use at
+your own risk</B><P>
+<B>NOTE:</B> The voice sync feature only supports Sierra-style speech.<P>
+In order to do this, you need to download the third-party PAMELA application:<P>
+<TT>http://www-personal.monash.edu.au/~myless/catnap/pamela/</TT><P>
+Set up the phenomes in Pamela so that there are only 10 (or as many talking frames as you have)
+available choices. Then, in the Lip Sync pane of AGS, change the Type property to "Voice".
+Enter the Pamela phenomes into the text boxes to create the association
+between the pamela phenome code and the AGS frame number.<P>
+For example, enter "AY0" into frame 0's box, "E" into frame 1, and so forth - corresponding
+to how it is set up in Pamela. For multiple phenomes to share the same frame, seperate them
+with forward slashes -- for example, "AY0/AY1" allows both of those phenomes to correspond
+to the specified frame.<P>
+Use the Pamela application on each of your speech lines, and save a Pamela project file
+(.pam file) for each speech file, naming it the same as the speech.<P>
+For example, the pamela project for  EGO46.OGG  would be called  EGO46.PAM, placed
+in your game's Speech folder.<P>
+When you build the game, this pam file is compiled into the speech.vox and will be used
+to sync the animation of the talking frames during the game.<P>
+<B>NOTE:</B> Voice lip sync does not work well with MP3 files. It is strongly recommended
+that you use OGG or WAV for speech.<P>
+<P>
+
+</BODY></HTML>

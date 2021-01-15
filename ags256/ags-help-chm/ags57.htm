@@ -1,0 +1,42 @@
+<HTML>
+<head><title>Interpreter issues</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic78"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags55.htm#topic76"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags56.htm#topic77"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags58.htm#topic79"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Interpreter issues</H2>
+<B>Q. The engine quits with "Aborting due to signal SIGxxxx, Shutting down
+   allegro" and a load of numbers. What's going on?</B><P>
+A. You may have found a bug in the engine. First of all, check that you
+   haven't done anything silly, like assigning a view number to an object
+   where the view doesn't exist.
+   Otherwise, try and work out when the problem happens - does it always
+   happen at the same time (like whenever you turn an object on).
+   Write down the list of numbers (each begins with "0x") and mail me with
+   the problem. Even better, take a screen shot of the complete error display
+   and send me that.<P>
+<B>Q. When I choose the 960x600 mode in Setup, the game appears in a box in the
+   middle of the screen surrounded by black borders. What's wrong?</B><P>
+A. Nothing, that's just how it is. The reason: a monitor can only use certain
+   specific resolutions, like 320x200, 640x400, 640x480, 1024x768, and so on.
+   So, to get the 960x600 mode, AGS tells the monitor to use its 1024x768 mode,
+   and place the game window in the centre.<P>
+<B>Q. Then why doesn't AGS support a 1024x768 mode?</B><P>
+A. For compatibility. The lowest resolution supported is 320x200, and all
+   other supported resolutions are multiples of this. This gives 640x400 and
+   960x600. Without this, AGS would be stuck in 1024x768 and would not allow
+   different video modes. Whether you think that would be a good thing or
+   not isn't the issue :-)<P>
+<B>Q. I don't get sound under Windows 2000!</B><P>
+A. This is due to the way that Windows 2000 works, and cannot be fixed for
+   the DOS engine. You need to run the Windows version of the engine instead,
+   which will give you sound using DirectX.<P>
+
+</BODY></HTML>

@@ -1,0 +1,426 @@
+<HTML>
+<head><title>System functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic70"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags77.htm#topic69"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags79.htm#topic71"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>System functions and properties</H2>
+
+<A HREF="#System.AudioChannelCount">AudioChannelCount property</A><BR>
+<A HREF="#System.AudioChannels">AudioChannels property</A><BR>
+<A HREF="#System.CapsLock">CapsLock property</A><BR>
+<A HREF="#System.ColorDepth">ColorDepth property (system)</A><BR>
+<A HREF="#System.Gamma">Gamma property</A><BR>
+<A HREF="#System.HardwareAcceleration">HardwareAcceleration property</A><BR>
+<A HREF="#System.NumLock">NumLock property</A><BR>
+<A HREF="#System.OperatingSystem">OperatingSystem property</A><BR>
+<A HREF="#System.ScreenHeight">ScreenHeight property</A><BR>
+<A HREF="#System.ScreenWidth">ScreenWidth property</A><BR>
+<A HREF="#System.ScrollLock">ScrollLock property</A><BR>
+<A HREF="#System.SupportsGammaControl">SupportsGammaControl property</A><BR>
+<A HREF="#System.Version">Version property</A><BR>
+<A HREF="#System.ViewportHeight">ViewportHeight property</A><BR>
+<A HREF="#System.ViewportWidth">ViewportWidth property</A><BR>
+<A HREF="#System.Volume">Volume property (system)</A><BR>
+<A HREF="#System.VSync">VSync property</A><BR>
+<A HREF="#System.Windowed">Windowed property</A><BR>
+<P>
+
+<HR>
+<A NAME="System.AudioChannelCount"></A>
+<H3>AudioChannelCount property</H3>
+<PRE>
+readonly static int System.AudioChannelCount;
+</PRE>
+Gets the number of Audio Channels available to the game (in the current version of AGS this is 8).<P>
+This is useful if you want to loop through all the audio channels and check what is playing on them.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("There are %d audio channels.", System.AudioChannelCount);
+</PRE>
+will display a message with the number of audio channels.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.AudioChannels">System.AudioChannels</A><P>
+
+
+<HR>
+<A NAME="System.AudioChannels"></A>
+<H3>AudioChannels property</H3>
+<PRE>
+readonly static AudioChannel* System.AudioChannels[];
+</PRE>
+Gets the AudioChannel instance for the specified channel number. This allows you
+to query the audio channel and find out what is playing on it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = System.AudioChannels[2];
+Display("Channel 2's current volume is %d.", channel.Volume);
+</PRE>
+will display a message with Audio Channel 2's current volume.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannelCommands">Audio Channel commands</A>,
+<A HREF="ags78.htm#System.AudioChannelCount">System.AudioChannelCount</A><P>
+
+
+<HR>
+<A NAME="System.CapsLock"></A>
+<H3>CapsLock property</H3>
+<PRE>
+readonly static bool System.CapsLock;
+</PRE>
+Gets whether Caps Lock is active on the player's system.<P>
+You might want to use this to warn the player to switch it off before typing
+a password in, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.CapsLock)
+{
+  Display("The CAPS LOCK light is on.");
+}
+</PRE>
+will display a message if Caps Lock is on.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.NumLock">System.NumLock</A>,
+<A HREF="ags78.htm#System.ScrollLock">System.ScrollLock</A><P>
+
+
+<HR>
+<A NAME="System.ColorDepth"></A>
+<H3>ColorDepth property (system)</H3>
+<I>(Formerly known as system.color_depth, which is now obsolete)</I><P>
+<PRE>
+readonly static int System.ColorDepth;
+</PRE>
+Returns the colour depth at which the game is running. This is the overall game colour depth setting,
+and it is possible for individual sprites or backgrounds to be different.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Game is running at: %d x %d, %d-bit colour", System.ScreenWidth,
+                                  System.ScreenHeight, System.ColorDepth);
+</PRE>
+will display the current resolution and colour depth<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.ScreenHeight">System.ScreenHeight</A>,
+<A HREF="ags78.htm#System.ScreenWidth">System.ScreenWidth</A><P>
+
+
+<HR>
+<A NAME="System.Gamma"></A>
+<H3>Gamma property</H3>
+<PRE>
+static int System.Gamma;
+</PRE>
+Gets/sets the current screen Gamma level. This is 100 by default, and you can set it anywhere from 0 (pitch black)
+to 200 (double normal brightness).<P>
+<A HREF="ags78.htm#System.SupportsGammaControl">System.SupportsGammaControl</A> must return <I>true</I>
+in order for this property to have any effect.<P>
+Because every player's monitor will be different, you should normally use this property linked to a GUI Slider
+in order to allow the player to adjust it to suit their system.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.SupportsGammaControl) {
+  System.Gamma = 150;
+}
+</PRE>
+will turn the screen brightness up to <TT>50%</TT> higher than normal<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.SupportsGammaControl">System.SupportsGammaControl</A><P>
+
+
+<HR>
+<A NAME="System.HardwareAcceleration"></A>
+<H3>HardwareAcceleration property</H3>
+<PRE>
+readonly static bool System.HardwareAcceleration;
+</PRE>
+Returns whether the game is running with hardware acceleration (eg. Direct3D). If this is
+the case then RawDrawing is likely to be slower, but alpha blending and large sprites are
+likely to be faster, than when the non-accelerated driver is used.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Direct3D driver </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> No </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.HardwareAcceleration) {
+  Display("Yay, we can draw loads of alpha blended sprites fast!");
+}
+</PRE>
+will display a message if the game is being run with hardware acceleration<P>
+See Also: <A HREF="ags6.htm#GraphicsDriver">AGS Graphics Drivers</A><P>
+
+
+<HR>
+<A NAME="System.NumLock"></A>
+<H3>NumLock property</H3>
+<PRE>
+readonly static bool System.NumLock;
+</PRE>
+Gets whether Num Lock is active on the player's system.<P>
+You might want to use this to warn the player to switch it off before using
+the numeric keypad arrow keys, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.NumLock)
+{
+  Display("The NUM LOCK light is on.");
+}
+</PRE>
+will display a message if Num Lock is on.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.CapsLock">System.CapsLock</A>,
+<A HREF="ags78.htm#System.ScrollLock">System.ScrollLock</A><P>
+
+
+<HR>
+<A NAME="System.OperatingSystem"></A>
+<H3>OperatingSystem property</H3>
+<I>(Formerly known as system.os, which is now obsolete)</I><P>
+<PRE>
+readonly static eOperatingSystem System.OperatingSystem;
+</PRE>
+Returns which operating system the game is currently running under. It can be one of
+the following values:
+<PRE>
+eOSDOS
+eOSWindows
+eOSLinux
+eOSMacOS
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.OperatingSystem == eOSWindows) {
+  Display("Running on Windows!");
+}
+else {
+  Display("Not running on Windows!");
+}
+</PRE>
+
+
+<HR>
+<A NAME="System.ScreenHeight"></A>
+<H3>ScreenHeight property</H3>
+<I>(Formerly known as system.screen_height, which is now obsolete)</I><P>
+<PRE>
+readonly static int System.ScreenHeight;
+</PRE>
+Returns the actual screen height that the game is running at.  If a graphic filter is in
+use, the resolution returned will be that before any stretching by the filter has been
+applied. If letterbox borders are enabled, the screen size reported will include the size
+of these borders.<P>
+<B>NOTE:</B> Do <B>NOT</B> use this to calculate the centre of the screen when working
+with co-ordinates. Co-ordinates are relative to the viewport, so you should
+use <A HREF="ags78.htm#System.ViewportHeight">System.ViewportHeight</A> instead. Use the ScreenHeight
+property only for reporting purposes.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Game is running at: %d x %d, %d-bit colour", System.ScreenWidth,
+                                  System.ScreenHeight, System.ColorDepth);
+</PRE>
+will display the current resolution and colour depth<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.ColorDepth">System.ColorDepth</A>,
+<A HREF="ags78.htm#System.ScreenWidth">System.ScreenWidth</A>,
+<A HREF="ags78.htm#System.ViewportHeight">System.ViewportHeight</A><P>
+
+
+<HR>
+<A NAME="System.ScreenWidth"></A>
+<H3>ScreenWidth property</H3>
+<I>(Formerly known as system.screen_width, which is now obsolete)</I><P>
+<PRE>
+readonly static int System.ScreenWidth;
+</PRE>
+Returns the actual screen width that the game is running at.  If a graphic filter is in
+use, the resolution returned will be that before any stretching by the filter has been
+applied. If widescreen side borders are enabled, the screen width reported will include
+the size of these borders.<P>
+<B>NOTE:</B> Do <B>NOT</B> use this to calculate the centre of the screen when working
+with co-ordinates. Co-ordinates are relative to the viewport, so you should
+use <A HREF="ags78.htm#System.ViewportWidth">System.ViewportWidth</A> instead. Use the ScreenWidth
+property only for reporting purposes.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Game is running at: %d x %d, %d-bit colour", System.ScreenWidth,
+                                  System.ScreenHeight, System.ColorDepth);
+</PRE>
+will display the current resolution and colour depth<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.ColorDepth">System.ColorDepth</A>,
+<A HREF="ags78.htm#System.ScreenHeight">System.ScreenHeight</A>
+<A HREF="ags78.htm#System.ViewportWidth">System.ViewportWidth</A><P>
+
+
+<HR>
+<A NAME="System.ScrollLock"></A>
+<H3>ScrollLock property</H3>
+<PRE>
+readonly static bool System.ScrollLock;
+</PRE>
+Gets whether Scroll Lock is active on the player's system.<P>
+Note that when running your game under the debugger, the Scroll Lock key will break
+out of the game into the debugger, so it is not advised that you use it for any
+other purpose in your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.ScrollLock)
+{
+  Display("The SCROLL LOCK light is on.");
+}
+</PRE>
+will display a message if Scroll Lock is on.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.CapsLock">System.CapsLock</A>,
+<A HREF="ags78.htm#System.NumLock">System.NumLock</A><P>
+
+
+<HR>
+<A NAME="System.SupportsGammaControl"></A>
+<H3>SupportsGammaControl property</H3>
+<PRE>
+readonly static bool System.SupportsGammaControl;
+</PRE>
+Gets whether the player's PC supports changing the screen's gamma control settings.<P>
+This must return <I>true</I> before you try and change the <A HREF="ags78.htm#System.Gamma">System.Gamma</A> property.
+The situations in which this will be supported are listed below.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Full-screen only </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> No </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.SupportsGammaControl) {
+  Display("We can change the system gamma level!");
+}
+</PRE>
+will display a message if the system supports changing the gamma<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.Gamma">System.Gamma</A><P>
+
+
+<HR>
+<A NAME="System.Version"></A>
+<H3>Version property</H3>
+<I>(Formerly known as system.version, which is now obsolete)</I><P>
+<PRE>
+readonly static String System.Version;
+</PRE>
+Returns the AGS engine version number. This could be useful from within script modules
+in order to use features available on a particular engine version, or work around
+any known bugs.<P>
+The string returned is the full version number, for example "2.71.833".<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("AGS version: %s", System.Version);
+</PRE>
+will display the AGS version number<P>
+
+
+<HR>
+<A NAME="System.ViewportHeight"></A>
+<H3>ViewportHeight property</H3>
+<I>(Formerly known as system.viewport_height, which is now obsolete)</I><P>
+<PRE>
+readonly static int System.ViewportHeight;
+</PRE>
+Returns the height of the current viewport. This is reported in the same co-ordinate system
+that the game is using, so you can use this to find out what the maximum possible Y co-ordinate
+is within the screen.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Game viewport: %d x %d", System.ViewportWidth, System.ViewportHeight);
+</PRE>
+will display the current viewport size<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.ScreenHeight">System.ScreenHeight</A>,
+<A HREF="ags78.htm#System.ViewportWidth">System.ViewportWidth</A><P>
+
+
+<HR>
+<A NAME="System.ViewportWidth"></A>
+<H3>ViewportWidth property</H3>
+<I>(Formerly known as system.viewport_width, which is now obsolete)</I><P>
+<PRE>
+readonly static int System.ViewportWidth;
+</PRE>
+Returns the width of the current viewport. This is reported in the same co-ordinate system
+that the game is using, so you can use this to find out what the maximum possible X co-ordinate
+is within the screen.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Game viewport: %d x %d", System.ViewportWidth, System.ViewportHeight);
+</PRE>
+will display the current viewport size<P>
+<I>See Also:</I> <A HREF="ags78.htm#System.ScreenWidth">System.ScreenWidth</A>,
+<A HREF="ags78.htm#System.ViewportHeight">System.ViewportHeight</A><P>
+
+
+<HR>
+<A NAME="System.Volume"></A>
+<H3>Volume property (system)</H3>
+<I>(Formerly known as SetDigitalMasterVolume, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetMusicMasterVolume, which is now obsolete)</I><P>
+<PRE>
+static int System.Volume;
+</PRE>
+Gets/sets the overall system volume, from 0 to 100. This is the master volume control, that
+affects all audio in the game. You would usually attach this to a GUI Slider to enable the
+player to control the volume from some sort of Control Panel GUI.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+System.Volume = 80;
+</PRE>
+will set the overall output volume to 80.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.Volume">AudioChannel.Volume</A>, 
+<A HREF="ags69.htm#Game.SetAudioTypeVolume">Game.SetAudioTypeVolume</A><P>
+
+
+<HR>
+<A NAME="System.VSync"></A>
+<H3>VSync property</H3>
+<I>(Formerly known as system.vsync, which is now obsolete)</I><P>
+<PRE>
+static bool System.VSync;
+</PRE>
+Gets/sets whether AGS waits for the vertical retrace before rendering each frame.
+This is off by default.<P>
+If you switch this on, it can help to reduce the "tearing" effect that you can
+get when the screen scrolls. However, doing so will lock the game frame rate to
+the monitor's refresh rate, which will mean you cannot reliably set a game speed higher
+than 60 fps.<P>
+<B>NOTE:</B> This property has no effect with the Direct3D driver.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.VSync) {
+  Display("Vertical retrace sync is enabled!");
+}
+</PRE>
+will display a message if vsync is on<P>
+
+
+<HR>
+<A NAME="System.Windowed"></A>
+<H3>Windowed property</H3>
+<I>(Formerly known as system.windowed, which is now obsolete)</I><P>
+<PRE>
+readonly static bool System.Windowed;
+</PRE>
+Returns whether the game is currently running in a window (<I>true</I>) or
+full-screen (<I>false</I>).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (System.Windowed) {
+  Display("Game is running in a window!");
+}
+</PRE>
+will display a message if the game is running in a window<P>
+<P>
+
+
+</BODY></HTML>

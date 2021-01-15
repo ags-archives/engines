@@ -1,0 +1,94 @@
+<HTML>
+<head><title>GUI Slider properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic55"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags55.htm#topic54"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags57.htm#topic56"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI Slider properties</H2>
+<A HREF="ags51.htm#GUIControl.BringToFront">BringToFront (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.SendToBack">SendToBack (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags51.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#Slider.Max">Max property</A><BR>
+<A HREF="#Slider.Min">Min property</A><BR>
+<A HREF="#Slider.Value">Value property</A><BR>
+<P>
+
+<HR>
+<A NAME="Slider.Max"></A>
+<H3>Max property</H3>
+<PRE>
+int Slider.Max;
+</PRE>
+Gets/sets the maximum value of the specified GUI slider.<P>
+When changing the maximum, the slider's Value will be adjusted if
+necessary so that it lies within the Min - Max range.<P>
+An error occurs if you try to set the Max to a lower value than the Min.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+sldHealth.Max = 200;
+</PRE>
+sets the maximum value of the <I>sldHealth</I> slider to 200.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Slider.Min">Slider.Min</A>,
+<A HREF="ags56.htm#Slider.Value">Slider.Value</A><P>
+
+
+<HR>
+<A NAME="Slider.Min"></A>
+<H3>Min property</H3>
+<PRE>
+int Slider.Min;
+</PRE>
+Gets/sets the minimum value of the specified GUI slider.<P>
+When changing the minimum, the slider's Value will be adjusted if
+necessary so that it lies within the Min - Max range.<P>
+An error occurs if you try to set the Min to a higher value than the Max.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+sldHealth.Min = 0;
+</PRE>
+sets the minimum value of the <I>sldHealth</I> slider to 0.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Slider.Max">Slider.Max</A>,
+<A HREF="ags56.htm#Slider.Value">Slider.Value</A><P>
+
+
+<HR>
+<A NAME="Slider.Value"></A>
+<H3>Value property</H3>
+<I>(Formerly known as GetSliderValue, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetSliderValue, which is now obsolete)</I><P>
+<PRE>
+int Slider.Value;
+</PRE>
+Gets/sets the value of the specified GUI slider. You would usually
+use this in the interface_click function to find out what value the
+player has changed the slider to, in order to process their command.<P>
+When setting the value, the new value must lie between the MIN and MAX settings
+for the slider, as set up in the GUI editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicMasterVolume(sldVolume.Value);
+</PRE>
+will set the master music volume to the value of the slider <I>sldVolume</I>.<P>
+<I>See Also:</I> <A HREF="ags54.htm#Label.Text">Label.Text</A><P>
+<P>
+
+</BODY></HTML>

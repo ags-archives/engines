@@ -1,0 +1,83 @@
+<HTML>
+<head><title>Parser functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic65"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags65.htm#topic64"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags67.htm#topic66"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Parser functions</H2>
+<A HREF="#Parser.ParseText">ParseText</A><BR>
+<A HREF="#Parser.Said">Said</A><BR>
+<A HREF="#Parser.SaidUnknownWord">SaidUnknownWord</A><BR>
+<P>
+
+<HR>
+<A NAME="Parser.ParseText"></A>
+<H3>ParseText</H3>
+<PRE>
+static Parser.ParseText(string text)
+</PRE>
+Stores the supplied user text string for later use by Said.
+You need to call this command first with the user's input before using
+the Said command. You probably want to call this inside the interface_click
+function when your text box control is activated.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ String command = txtParser.Text;
+ Parser.ParseText(command);
+</PRE>
+will get the players input and store it in string "command" for use with the said command.<P>
+<I>See Also:</I> <A HREF="ags66.htm#Parser.Said">Parser.Said</A><P>
+
+
+<HR>
+<A NAME="Parser.Said"></A>
+<H3>Said</H3>
+<PRE>
+static Parser.Said(string text)
+</PRE>
+Checks whether the player typed in TEXT in their input passed to ParseText.
+Returns 1 if it matches, 0 otherwise.<P>
+See <A HREF="ags17.htm#TextParser">the text parser documentation</A> for a more detailed description.<P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String input = txtParserInput.Text;
+Parser.ParseText(input);
+if (Parser.Said("load")) {
+  txtParserInput.Text = "";
+  RestoreGameDialog();
+}
+</PRE>
+will bring up the restore game dialogue if the player types "load" in the text parser.<P>
+<I>See Also:</I> <A HREF="ags66.htm#Parser.ParseText">Parser.ParseText</A>, <A HREF="ags66.htm#Parser.SaidUnknownWord">Parser.SaidUnknownWord</A><P>
+
+
+<HR>
+<A NAME="Parser.SaidUnknownWord"></A>
+<H3>SaidUnknownWord</H3>
+<PRE>
+static String Parser.SaidUnknownWord()
+</PRE>
+If a word not in the game dictionary was submitted to the last ParseText
+call, then the word is returned by this command. This allows you to display a
+message like "Sorry, this game doesn't recognise 'XXXX'."<P>
+If all the words were recognised, this returns null.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String badWord = Parser.SaidUnknownWord();
+if (badWord != null)
+   Display("You can't use '%s' in this game.", badWord);
+</PRE>
+will display the message if the player types a word that’s not in the vocabulary.<P>
+<I>See Also:</I> <A HREF="ags66.htm#Parser.ParseText">Parser.ParseText</A>, <A HREF="ags66.htm#Parser.Said">Parser.Said</A><P>
+
+
+</BODY></HTML>

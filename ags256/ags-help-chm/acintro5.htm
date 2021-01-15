@@ -1,0 +1,101 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Getting Started with AGS - Part 5</b></h2>
+      <p>&nbsp;</p>
+      <h3>Global Messages</h3>
+      <p>Before we continue, it's important to mention global messages.<br>
+      As you saw earlier in the tutorial, each room has its own set of messages,
+      which can be edited by the message editor. However, sometimes we want to
+      display some text no matter what room the player is in - and we don't want
+      to have to add the same message to every room.</p>
+      <p>Go to the &quot;Global messages&quot; mode from the main tree, and
+      you'll see a long list of numbers, with &quot;no message&quot; beside them
+      all. These are your global message slots, and they are numbered from 500
+      upwards. This numbering is so that there is no conflict between global and
+      local (room) messages. If you use a &quot;Display Message 503&quot;
+      command, for example, there is no doubt that it refers to a global
+      message.</p>
+      <p>If you scroll to the bottom, you'll notice that slots 983-999 already
+      have messages defined. These are the texts used for various built-in
+      dialogs, such as Save, Restore and Quit dialogs, and therefore this allows
+      you some customization.</p>
+      <p>Now, in the next section we're going to need a message for when the
+      player looks at the key. So, scroll up to the top and double-click message
+      500. Write whatever you like - I'm going to say &quot;You found this yellow key cunningly placed in the middle of the
+      walkway.&quot;</p>
+      <p>&nbsp;</p>
+      <h3>Managing Inventory</h3>
+      <p>Each character in the game can carry their own set of inventory items.
+      Inventory items are totally seperate from room objects, and you must
+      explicitly set up every item which the player can carry at some point in
+      the game.</p>
+      <p>Go to the &quot;Inventory items&quot; mode. We visited this briefly in
+      part 4, but it's time to go into a bit more detail.&nbsp;</p>
+      <p align="center"><i><img border="0" src="images/intro4_2.jpg" width="503" height="340"><br>
+      The inventory editor, another look</i></p>
+      <p>Every inventory item which the player can carry at some point during
+      the game is listed in the list box. All the items there also have a number
+      beside them - this is the inventory item number which you use in calls to
+      Add Inventory, Lose Inventory and so forth.</p>
+      <p>If you want the player character to start off carrying the selected
+      item, the check the &quot;Player starts with this item&quot; checkbox. To
+      set what image is used, click the &quot;Change image&quot; button.</p>
+      <p>Now, you may have noticed that once the player had picked up the key in
+      our game, they could see it in their inventory window but not actually do
+      anything to it - clicking Look or Use on the item did nothing.</p>
+      <p>In order to set a reaction for the player looking at their inventory
+      items and so forth, we once again need to call on the Interaction Editor.
+      Click the &quot;Interaction&quot; button to bring it up:</p>
+      <p align="center"><i><img border="0" src="images/intro5_1.jpg" width="480" height="360"><br>
+      The interaction editor... this time with inventory</i></p>
+      <p>Now, the important point to note here is that if you are using the
+      built-in inventory window (which we are), the only events which can occur
+      are &quot;Look at inventory item&quot; and &quot;Use inventory on this
+      item&quot;. This is because the default inventory window only has Look and
+      a Select options. The other modes are all available if you design your own
+      inventory GUI (but that's quite complex so we'll leave it for later).
+      <p>So, double-click the &quot;Look at inventory item&quot; event. Add a
+      &quot;Game - Display a message&quot; command and change the message number
+      to 500, to use the message we just defined.<br>
+      <br>
+      <table border="0">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_warn.gif" width="32" height="32"></td>
+          <td>When handling inventory items, only use global messages since they
+            will be constant throughout the game. If you use a room message, and
+            the player then looks at the inventory item when they're in a
+            different room, you will get an error.&nbsp;</td>
+        </tr>
+      </table>
+      <p>OK out of the interaction editor, and you should be returned to the
+      inventory screen.<h4>Inventory item hotspots</h4>
+      <p>By default, when the player selects an inventory item as their mouse
+      cursor and clicks on the screen with it, the centre of the item will be
+      used to decide what to activate. However, with some items you may well not
+      want this behaviour - for example, we might want the end of our key to be
+      the activation spot.<p>To set this, simply click on the spot within the
+      image. You should see the yellow dot move to go where you clicked.<p>The
+      &quot;Draw hotspot dot on inventory cursors&quot; option, if activated,
+      will draw a spot on this part of the item in-game. You can set the inner
+      and outer colours for the spot.<h4>Recap</h4>
+      <ul>
+        <li>Inventory items are <b>not</b> objects. The two are totally
+          seperate, although often picking up an object will give the player an
+          inventory item.</li>
+        <li>Each character has their own inventory. If you are making a game
+          like Day of the Tentacle, where the player can switch between
+          characters, then they will each have their own set of inventory items.
+          All inventory commands operate on the current player character.</li>
+        <li>To give the player an inventory item, use the &quot;Player - Add
+          inventory&quot; command.</li>
+      </ul>
+      <p>&nbsp;
+      <p><b>Go to part 6:</b> <a href="acintro6.htm">Using your own graphics</a>
+      <p><font size="2">Tutorial last updated 29 November 2002. Copyright (c) 2001-2002
+      Chris Jones.</font>        
+      </td>
+    </body></html>

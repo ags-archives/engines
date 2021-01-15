@@ -1,0 +1,194 @@
+<HTML>
+<head><title>AudioClip functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="AudioClipCommands"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags47.htm#AudioChannelCommands"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags49.htm#topic45"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>AudioClip functions and properties</H2>
+AudioClips are created when you import files in the AGS Editor. The commands in this
+section allow to play them.<P>
+
+<A HREF="#AudioClip.Play">Play</A><BR>
+<A HREF="#AudioClip.PlayFrom">PlayFrom</A><BR>
+<A HREF="#AudioClip.PlayQueued">PlayQueued</A><BR>
+<A HREF="#AudioClip.Stop">Stop (audio clip)</A><BR>
+<A HREF="#AudioClip.FileType">FileType property (audio clip)</A><BR>
+<A HREF="#AudioClip.IsAvailable">IsAvailable property (audio clip)</A><BR>
+<A HREF="#AudioClip.Type">Type property (audio clip)</A><BR>
+<P>
+
+<HR>
+<A NAME="AudioClip.Play"></A>
+<H3>Play</H3>
+<I>(Formerly known as PlayAmbientSound, which is now obsolete)</I> <br> 
+<I>(Formerly known as PlayMP3File, which is now obsolete)</I> <br> 
+<I>(Formerly known as PlayMusic, which is now obsolete)</I> <br> 
+<I>(Formerly known as PlaySound, which is now obsolete)</I> <br> 
+<I>(Formerly known as PlaySoundEx, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetMusicRepeat, which is now obsolete)</I><P>
+<PRE>
+AudioChannel* AudioClip.Play(optional AudioPriority, optional RepeatStyle)
+</PRE>
+Plays the audio clip.<P>
+Optionally you can supply a priority and Repeat setting; if you do not supply these,
+the defaults set for the audio clip in the editor will be used.<P>
+This command searches through all the available audio channels to find one that is
+available for this type of audio. If no spare channels are found, it will try to find
+one that is playing a clip with a lower or equal priority, and interrupt it to replace
+it with this new sound.<P>
+If all audio channels are busy playing higher priority sounds, then this new audio clip
+will not be played.<P>
+This command returns the AudioChannel instance that the new sound is playing on, or
+<I>null</I> if it did not play for any reason.<P>
+<B>NOTE:</B> AGS can only play one MIDI file at a time.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+aExplosion.Play();
+</PRE>
+plays the <I>aExplosion</I> audio clip.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.PlayFrom">AudioClip.PlayFrom</A>,
+<A HREF="ags48.htm#AudioClip.PlayQueued">AudioClip.PlayQueued</A>,
+<A HREF="ags48.htm#AudioClip.Stop">AudioClip.Stop</A><P>
+
+
+<HR>
+<A NAME="AudioClip.PlayFrom"></A>
+<H3>PlayFrom</H3>
+<PRE>
+AudioChannel* AudioClip.PlayFrom(int position, optional AudioPriority, 
+                                 optional RepeatStyle)
+</PRE>
+Plays the audio clip, starting from <I>position</I>. For the meaning of the position,
+see the <A HREF="ags47.htm#AudioChannel.Seek">AudioChannel.Seek</A> help page.<P>
+Otherwise, this command behaves identially to <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>.
+Please see that help page for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+aExplosion.PlayFrom(1000);
+</PRE>
+plays the <I>aExplosion</I> audio clip, starting from a 1 second offset (if it is OGG/MP3).<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioClip.PlayQueued"></A>
+<H3>PlayQueued</H3>
+<I>(Formerly known as PlayMusicQueued, which is now obsolete)</I><P>
+<PRE>
+AudioChannel* AudioClip.PlayQueued(optional AudioPriority, optional RepeatStyle)
+</PRE>
+Plays the audio clip, or queues it to be played later if it cannot be played now.<P>
+This command behaves identially to <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>,
+except that if there are no available audio channels, it will queue this audio clip
+to be played when a channel becomes available.<P>
+Additionally, unlike the Play command, using PlayQueued will not interrupt an existing audio
+clip with an equal priority; it will only interrupt clips with a lower priority.<P>
+You can queue up to 10 tracks in the audio queue. Note that if you queue audio clips to
+be played after a repeating audio clip, they will never be played.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+aExplosion.Play();
+aAftermath.PlayQueued();
+</PRE>
+plays the <I>aExplosion</I> audio clip, and queues the <I>aAftermath</I> sound to be played
+afterwards.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioClip.Stop"></A>
+<H3>Stop (audio clip)</H3>
+<PRE>
+AudioClip.Stop()
+</PRE>
+Stops all currently playing instances of this audio clip.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+aExplosion.Play();
+Wait(40);
+aExplosion.Stop();
+</PRE>
+plays the <I>aExplosion</I> audio clip, waits 1 second and then stops it again.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioClip.FileType"></A>
+<H3>FileType property (audio clip)</H3>
+<PRE>
+readonly AudioFileType AudioClip.FileType;
+</PRE>
+Gets the file type of this audio clip. This is useful in conjunction with the PlayFrom
+and Seek commands to determine what the position offset represents.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (aExplosion.FileType == eAudioFileMIDI)
+{
+  Display("Explosion is a MIDI file!");
+}
+</PRE>
+displays a message if aExplosion is a MIDI file<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.Seek">AudioChannel.Seek</A>,
+<A HREF="ags47.htm#AudioChannel.Position">AudioChannel.Position</A>,
+<A HREF="ags48.htm#AudioClip.PlayFrom">AudioClip.PlayFrom</A><P>
+
+
+<HR>
+<A NAME="AudioClip.IsAvailable"></A>
+<H3>IsAvailable property (audio clip)</H3>
+<I>(Formerly known as IsMusicVoxAvailable, which is now obsolete)</I><P>
+<PRE>
+readonly bool AudioClip.IsAvailable;
+</PRE>
+Gets whether this audio clip is available on the player's system.<P>
+This will normally be <I>true</I>, unless the clip was bundled in the external AUDIO.VOX
+file and the player does not have the file on their system.<P>
+You do not normally need to check this property, since the Play command will silently
+fail if it cannot find the audio clip to play.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (aExplosion.IsAvailable)
+{
+  aExplosion.Play();
+}
+</PRE>
+checks if the aExplosion audio clip is available, and if so plays it.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioClip.Type"></A>
+<H3>Type property (audio clip)</H3>
+<PRE>
+readonly AudioType AudioClip.Type;
+</PRE>
+Gets the type of this audio clip, as initially set in the editor.<P>
+The AudioType allows you to group audio clips into areas such as Sound and Music.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (aExplosion.Type == eAudioTypeMusic)
+{
+  Display("Explosion is music!");
+}
+</PRE>
+displays a message if the <I>aExplosion</I> clip is music.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>, 
+<A HREF="ags69.htm#Game.IsAudioPlaying">Game.IsAudioPlaying</A><P>
+
+
+</BODY></HTML>

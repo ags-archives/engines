@@ -1,0 +1,43 @@
+As a user of Adventure Game Studio you are bound by this license:
+
+GAME DISTRIBUTION
+-----------------
+If you wish to distribute games created with Adventure Game Studio then you
+may do so freely (subject to file restrictions below), UNLESS you are asking
+for money for your game; if you ARE selling your game for profit then you may
+do so as long as you send a copy of the game to Chris Jones.
+
+WHICH FILES YOU MAY DISTRIBUTE (IMPORTANT):
+When you distribute your game, you are allowed to include the following files
+from the AGS package:
+  * Either the standalone USERGAME.EXE, OR both AC.EXE and AC2GAME.DAT. One
+    of these options is all you need for the game to be playable.
+  * The SETUP.BAT file, modified if necessary. This SHOULD, but is not
+    required, to be distributed.
+  * The ACDOS.EXE file, if you chose to compile to a Windows EXE file. Adding
+    this file allows people running plain MS-DOS to play your game. If you
+    include this, you should also include:
+  * The CWSDPMI.EXE file, which allows people running plain MS-DOS to play the
+    game. Without this file, the game will need to be run from a Windows (tm)
+    MS-DOS Prompt.
+    If you include the CWSDPMI.EXE file, then you MUST acknowledge it in your
+    game's documentation file. A line similar to the following will be
+    sufficient:
+    "Includes CWSDPMI DPMI host, copyright 1997 by Charles Sandmann"
+  * The EMU387.DXE file, which allows people with a 386 or 486 SX computer to
+    play the game. However, since the game will probably not run well on these
+    systems anyway, you may decide not to include this file.
+YOU MAY NOT DISTRIBUTE ANY OTHER AGS FILES WITH YOUR GAME. THAT INCLUDES THE
+ROOM EDITOR, DOCUMENTATION AND DEMO GAME FILES.
+
+
+DISTRIBUTING THE AGS PACKAGE
+----------------------------
+If you wish to distribute Adventure Game Studio itsself, for uploading to FTP
+sites, on your web page, giving to a friend, etc, then:
+
+You may distribute Adventure Game Studio ONLY in its original form in the ZIP
+file (ags_213.zip). You may NOT modify ANY of the AGS files in ANY way and then
+redistribute it.
+If you post AGS on a website then you MUST also mention that the latest
+version can be obtained from http://www.adventuregamestudio.co.uk

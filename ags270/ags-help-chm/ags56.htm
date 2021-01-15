@@ -1,0 +1,203 @@
+<HTML>
+<head><title>Overlay functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic67"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic43"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags55.htm#topic66"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags57.htm#topic68"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Overlay functions and properties</H2>
+
+<A HREF="#Overlay.CreateGraphical">CreateGraphical</A><BR>
+<A HREF="#Overlay.CreateTextual">CreateTextual</A><BR>
+<A HREF="#Overlay.Remove">Remove (overlay)</A><BR>
+<A HREF="#Overlay.SetText">SetText (overlay)</A><BR>
+<A HREF="#Overlay.Valid">Valid property (overlay)</A><BR>
+<A HREF="#Overlay.X">X property (overlay)</A><BR>
+<A HREF="#Overlay.Y">Y property (overlay)</A><BR>
+<P>
+
+<HR>
+<A NAME="Overlay.CreateGraphical"></A>
+<H3>CreateGraphical</H3>
+<I>(Formerly known as CreateGraphicOverlay, which is now obsolete)</I><P>
+<PRE>
+static Overlay* Overlay.CreateGraphical(int x, int y, int slot, bool transparent)
+</PRE>
+Creates a screen overlay containing a copy of the image from SLOT in
+the Sprite Manager. The image is placed at (X,Y) on the screen (these are
+screen co-ordinates, not room co-ordinates).<P>
+If <I>transparent</I> is true then the overlay will be drawn in the
+same way as characters/objects, if it is false
+then a black rectangle will be painted behind the sprite.<P>
+See the description of <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A> for more on overlays.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* myOverlay = Overlay.CreateGraphical(100, 100, 300, true);
+Wait(40);
+myOverlay.Remove();
+</PRE>
+will create an overlay of the image stored in sprite manager’s slot 300, at the
+coordinates 100,100. It will display for 1 second, then remove it.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A>,
+<A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+
+
+<HR>
+<A NAME="Overlay.CreateTextual"></A>
+<H3>CreateTextual</H3>
+<I>(Formerly known as CreateTextOverlay, which is now obsolete)</I><P>
+<PRE>
+static Overlay* Overlay.CreateTextual(int x, int y, int width,
+                                      int font, int color, string text)
+</PRE>
+Creates a screen overlay containing the text you pass at the position
+specified. A screen overlay looks identical to the way speech text is
+displayed in conversations, except that with this command the text stays
+on the screen until either you remove it with the Remove command, or the player
+goes to a different room, in which case it is automatically removed.<P>
+The X and Y parameters specify the upper-left corner of where the text
+will be written. WIDTH is the width, in pixels, of the text area. FONT is
+the font number from the editor to use (0 is the normal font, 1 is the speech
+font). COLOR is the text color - use one of the colours from 1 to 15.
+Finally, TEXT is obviously the text that gets displayed.<P>
+The function returns the Overlay, which you use later to reposition
+and remove the overlay.<P>
+You can insert the value of variables into the message. For more information,
+see the <A HREF="ags33.htm#StringFormats">string formatting</A> section.<P>
+<B>NOTE:</B> large overlays, in the same way as objects, can impact performance
+while displayed.<P>
+<B>NOTE:</B> there is currently a maximum of 10 overlays displayed at any one time. Some other
+commands such as Say and SayBackground create overlays internally,
+so don't rely on being able to create 10 with CreateTextual.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* myOverlay = Overlay.CreateTextual(50,80,120,2,15,"This is a text overlay");
+Wait(40);
+myOverlay.Remove();
+</PRE>
+will display a 120 pixels text area with its upper left corner at coordinates 50,80
+containing the string "This is a text overlay" using font number 1 and green color.
+It will be displayed for 1 second, then removed.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateGraphical">Overlay.CreateGraphical</A>, <A HREF="ags52.htm#MoveOverlay">MoveOverlay</A>,
+<A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+
+
+<HR>
+<A NAME="Overlay.Remove"></A>
+<H3>Remove (overlay)</H3>
+<I>(Formerly known as RemoveOverlay, which is now obsolete)</I><P>
+<PRE>
+Overlay.Remove()
+</PRE>
+Removes the specified overlay from the screen. Use this when you are
+done using the overlay.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* myOverlay = Overlay.CreateTextual(50,80,120,2,15,"This is a text overlay");
+Wait(200);
+myOverlay.Remove();
+</PRE>
+will create a text overlay , wait for 200 game cycles (about 5 seconds) and then
+remove the overlay from the screen.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A><P>
+
+
+<HR>
+<A NAME="Overlay.SetText"></A>
+<H3>SetText (overlay)</H3>
+<I>(Formerly known as SetTextOverlay, which is now obsolete)</I><P>
+<PRE>
+Overlay.SetText(int width, int font, int color, string text, ...)
+</PRE>
+Replaces the specified overlay with a new one, at the same co-ordinates but with
+the new specified text, width, font and colour.<P>
+You can insert the value of variables into the message. For more information,
+see the <A HREF="ags33.htm#StringFormats">string formatting</A> section.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* myOverlay = Overlay.CreateTextual(50,80,120,2,15,"This is a text overlay");
+Wait(200);
+myOverlay.SetText(120,2,15,"This is another text overlay");
+</PRE>
+will create a text overlay , wait for 200 game cycles (about 5 seconds) and then
+replace the overlay with another one.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A>,
+<A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+
+
+<HR>
+<A NAME="Overlay.Valid"></A>
+<H3>Valid property (overlay)</H3>
+<I>(Formerly known as IsOverlayValid, which is now obsolete)</I><P>
+<PRE>
+readonly bool Overlay.Valid;
+</PRE>
+Checks whether the overlay is a current overlay or not.
+Returns 1 if it is, 0 if it isn't.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* myOverlay = Overlay.CreateTextual(50,80,120,2,15,"This is a text overlay");
+Display("Overlay valid before: %d", myOverlay.Valid);
+myOverlay.Remove();
+Display("Overlay valid after: %d", myOverlay.Valid);
+</PRE>
+creates an overlay, and prints out the Valid property (which will be 1). Then, removes
+the overlay and prints Valid again (which will now be 0).<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A>,
+<A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+<P>
+
+<HR>
+<A NAME="Overlay.X"></A>
+<H3>X property (overlay)</H3>
+<I>(Formerly known as MoveOverlay, which is now obsolete)</I><P>
+<PRE>
+int Overlay.X;
+</PRE>
+Gets/sets the X co-ordinate of the overlay (ie. the left hand side of the overlay).<P>
+This allows you to dynamically move overlays around the screen.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* testOverlay = Overlay.CreateTextual(50,80,120,2,15,"This is a text overlay");
+while (testOverlay.X &lt; 100) {
+  testOverlay.X++;
+  Wait(1);
+}
+testOverlay.Remove();
+</PRE>
+creates a text overlay, then gradually slides it across the screen.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A>,
+<A HREF="ags56.htm#Overlay.Y">Overlay.Y</A>, <A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+
+
+<HR>
+<A NAME="Overlay.Y"></A>
+<H3>Y property (overlay)</H3>
+<I>(Formerly known as MoveOverlay, which is now obsolete)</I><P>
+<PRE>
+int Overlay.Y;
+</PRE>
+Gets/sets the Y co-ordinate of the overlay (ie. the top edge of the overlay).<P>
+This allows you to dynamically move overlays around the screen.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Overlay* testOverlay = Overlay.CreateTextual(50,50,120,2,15,"This is a text overlay");
+while (testOverlay.Y &lt; 100) {
+  testOverlay.Y++;
+  Wait(1);
+}
+testOverlay.Remove();
+</PRE>
+creates a text overlay, then gradually slides it down the screen.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Overlay.CreateTextual">Overlay.CreateTextual</A>,
+<A HREF="ags56.htm#Overlay.X">Overlay.X</A>, <A HREF="ags56.htm#Overlay.Remove">Overlay.Remove</A><P>
+
+
+</BODY></HTML>

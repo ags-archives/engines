@@ -1,0 +1,164 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b>Getting Started with AGS</b></h2>
+      <p>So, you've downloaded AGS. You want to make an adventure game. But
+      where do you start?
+      </p>
+      <p>Firstly, I should say at this point - download the demo game, and use
+      it as a reference if you get stuck. Play it through before you read this
+      tutorial, so you get a feel for how AGS works. The demo game comes in
+      source form, so you can check out how it was all done.
+      </p>
+      <p>(<b><i>NOTE</i></b>: before we start, this tutorial was made using
+      v2.5b of AGS. If you have a newer version, there may be minor
+      inconsistencies in the screenshots where extra options have been added and
+      so forth, but don't worry about it).
+      </p>
+      <h3>Creating the game
+      </h3>
+      <p align="left">Now, you feel you're ready to go ahead and make a game of
+      your own. So, start up the AGS Editor by double-clicking the <i>AGSEDIT.EXE</i>
+      file, and you should be greeted by the following screen:
+      </p>
+      <p align="center">
+		<img border="0" src="images/intro1.jpg" width="300" height="340"><br>
+            <i>The &quot;Welcome to AGS&quot; dialog</i>
+      </p>
+      <p align="left">Make sure that &quot;Start a new game&quot; is selected, and click OK. You
+      will be presented with the Create New Game dialog box:
+      </p>
+      <p align="center">
+		<img border="0" src="images/intro1a.jpg" width="294" height="248"><br>
+      <i>Create New Game dialog</i>
+      </p>
+      <p align="left">Firstly,
+      you need to choose which template you are going to use for your new game. AGS comes with 
+		two, and you can download
+      others from the internet.<br>
+		The &quot;Default Game&quot; template is what we'll be using, and it comes with 
+		some default graphics to get you started quickly. The &quot;Empty Game&quot; 
+		template is something you may want to use later on when you're familiar 
+		with AGS - it comes with no default graphics at all.</p>
+      <p align="left">Then, you need to choose a folder name for your game. This
+      is only used for the name
+      of the folder that your game is created in, and the name of the final EXE
+      file you compile. It is limited to 15 characters or less.<br>
+      <i>(NOTE: If you are going to want to make a DOS compile, you should
+      ensure it is 8 characters or less)</i>
+      </p>
+      <p align="left">Click the <i>Next</i> button, and after a short wait you
+      will be prompted to select a resolution for your game. For the purposes of
+      this tutorial, we will use 320x200. Don't worry, you can change it later
+      (via the &quot;Set Game Resolution&quot; option on the Game menu).
+      </p>
+      <p>Now, you should be faced with the main AGS Editor window:</p>
+      <p align="center">
+		<img border="0" src="images/intro2.jpg" width="400" height="241"><br>
+            <i>The main editor window</i></p>
+      <p>All these options and modes can look a bit intimidating at first, but
+      don't worry - it's not as complex as it seems!</p>
+      <h3>Starting off&nbsp;</h3>
+      <p>The first thing to do is to change that horrible &quot;New game&quot;
+      in the title bar into something more catchy. For the purposes of this
+      tutorial, I'm going to call it the incredibly lame &quot;Roger's Adventure&quot;, but you can
+      use whatever you like.</p>
+      <p>The name you type here is displayed in the taskbar while your game is
+      running, and will also be the window caption if the player runs the game
+      in Windowed mode.</p>
+      <p>Now, let's briefly examine the various options we have in front of us.
+      Let's check these options to begin with:</p>
+      <ul>
+        <li><b>Debug Mode</b> - Since we are going to be developing the game, we
+          want the assistance of the debug features in the engine. This allows
+          you to do things like teleport to different rooms, give yourself all
+          the inventory items, and so forth. You would un-check this before
+          compiling the final version of the game when it's complete.</li>
+        <li><b>Anti-glide mode</b> - without it, the character movement can look
+          somewhat silly.&nbsp;</li>
+        <li><b>Pixel-perfect click detection</b> - improves the game playability
+          by making sure that clicking transparent regions of objects won't
+          trigger them.</li>
+        <li><b>Don't automatically lose inventory</b> - makes things less
+          confusing later on because inventory items won't automatically
+          disappear when the player does things.</li>
+        <li><b>Characters turn before walking</b> - if the character is facing
+          right, and you click to move him left, he'll rotate round before
+          starting to move. This is what the Sierra and Lucasarts
+          point-and-click games did, and looks a bit more professional.</li>
+      </ul>
+      <p>Personally, I always check these 5 options when starting a new game. As
+      you get a feel for AGS, you can decide what suits you best, and change
+      these options again later. My main window now looks like this:</p>
+      <p align="center">
+		<img border="0" src="images/intro3.jpg" width="400" height="241"><br>
+      <i>The main window after I make my adjustments</i></p>
+      <p>&nbsp;</p>
+      <h3>Colour choices</h3>
+      <p>Now, at this stage we really need to decide whether we want to create a
+      palette-based (8-bit, 256-colour) game, or a hi-color (16-bit) game.</p>
+      <ul>
+        <li>The advantage of a palette is that the game size will be smaller,
+          and thus easier to distribute on the Internet. The game will also run
+          up to twice as fast as using hi-colour. Neat fading and colour cycling
+          effects are also possible.</li>
+        <li>The advantage of hi-colour is that you don't have to mess around
+          with palette slots, you just import your graphics and they just work.</li>
+      </ul>
+      <p>I'll cover both methods briefly below.</p>
+      <p><i>(NOTE: We need to decide now because when you import graphics, they
+      will be set to the game's colour depth. Should you change your mind later,
+      you would have to re-import all the graphics).</i></p>
+      <h3>Creating a 256-colour game&nbsp;</h3>
+      <p>Click on the &quot;Palette&quot; entry in the tree on the left. You
+      should see this:</p>
+      <p align="center">
+		<img border="0" src="images/intro4.jpg" width="450" height="271"><br>
+      <i>The Palette Editor</i></p>
+      <p>The palette display has a grid with the 256 colour slots on it. The
+      first 17 are marked &quot;L&quot;, which is short for Locked. These slots
+      are fixed and you cannot change the colours of them. They are needed for
+      various in-game displays such as the Save/Load dialogs, and so on.</p>
+      <p>There are then about 25 colours displayed with no &quot;L&quot;. These
+      are <b>game-wide</b> colours. That means that those palette slots have
+      those colours throughout the game, in every single room.</p>
+      <p>Finally, the remaining colours, marked &quot;X&quot;, are <b>background</b>
+      colours and vary from room to room. This allows for different types of
+      background to use different ranges of colours.</p>
+      <p>The default palette setup is a little badly weighted. Your GUI and main
+      character graphics will have to use just the game-wide colours, since they
+      are shown in more than one room. Therefore, unless you want a greyscale
+      main character, the colours displayed are probably not enough.</p>
+      <p>So, let's swap some background colours for some game-wide ones. Select
+      the first &quot;X&quot; slot, then hold shift and click on the last slot
+      in the row marked &quot;80&quot;. The screen should look as follows:</p>
+      <p align="center">
+		<img border="0" src="images/intro5.jpg" width="425" height="256"><br>
+      <i>We have selected colours 42-95</i></p>
+      <p>Now, un-check the &quot;This colour is room-dependant&quot; box. All
+      the selected &quot;X&quot;s turn into various colours.</p>
+      <p>If you select one of these colours, you'll see some R, G and B sliders
+      appear on the right, where you can manually adjust the colour of that
+      slot. You can either do this for every single colour, or you can set up
+      slots 42-95 in another paint package, save a PCX file, and use the
+      &quot;Import slots from file&quot; button.</p>
+      <p align="center">
+		<img border="0" src="images/intro6.jpg" width="425" height="256"><br>
+      <i>I've imported various colours</i></p>
+      <p>As you can see from the screenshot above, I've chosen to import various
+      skin-type colours as well as various other ranges. What colours you use is
+      up to you, and depends on what sort of colour scheme you're going for with
+      your graphics.</p>
+      <p><i>(NOTE: You should set up the palette as well as you can now, because
+      changing it later may require you to re-import some graphics).</i></p>
+      <h3>Creating a 16-bit colour game</h3>
+      <p>Again, go to the Palette mode. Click the button in the bottom-right
+      labelled &quot;Convert game to hi-colour&quot;. A warning message will
+      prompt you to make sure. Confirm it, and you're done.</p>
+      <p><br>
+      <b>Go to part 2:</b> 
+		<a href="acintro2.htm" style="font-weight: bold"> Creating your first room</a>
+      <p><font size="2">Tutorial last updated 26 August 2002. Copyright (c) 2001-2002
+      Chris Jones.</font></body></html>

@@ -1,0 +1,25 @@
+<HTML>
+<head><title>The script header</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic42"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags34.htm#topic41"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags36.htm#StringFormats"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>The script header</H2>
+This allows you to include the same information into all your scripts. For
+example, if you have a global function you want all the room scripts to use,
+you can add its import definition to the header file.<P>
+Do NOT place any actual functions or variables in this header, because if
+you do you will need to re-compile ALL the scripts whenever you modify the
+function. Instead, place your functions in your global script and just place
+an import line in the header file to allow the other scripts to access it.<P>
+
+
+</BODY></HTML>

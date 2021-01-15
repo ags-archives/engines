@@ -1,0 +1,279 @@
+<HTML>
+<head><title>Creating your first room</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic9"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags8.htm#topic7"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags9.htm#topic8"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags11.htm#topic17"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Creating your first room</H2>
+In adventure games, the character moves from one screen to another, and each
+screen consists of a pre-rendered background drawing with objects  and
+characters on top of it to give interaction. A screen is also called a "room".<P>
+First, you need to draw a background scene for the first room. You do this in
+your favourite paint program. The size must be either 320x200 or 640x400, and
+you must make sure that the colour depth is set to the same as your game.
+Save it as a BMP or PCX file (TIP: a PCX will give smaller file sizes since
+PCXs are compressed, whereas BMPs are not).<P>
+The tree on the left of the screen lists all the various parts of your game that you can
+edit. Clicking on an item there brings up details on the right.<P>
+The "Rooms" sub-tree contains settings for the current room. You control which room is
+currently being edited via the "Load room" and "Save room" options on the File menu.
+All the other options in the tree apply to the whole game.<P>
+Click on the "Settings" in the tree under "Rooms". 
+First of all we need to import a background scene for the room. Click on the
+"Actions" button and then choose the "Import background..." option.
+You will see a file selector where you should now find the background scene
+graphic which you drew. Click OK, and it will be imported.
+(If you get a message asking you what resolution the picture is drawn for,
+choose the appropriate option. For example, if you have drawn a 640x400-sized
+scene, then click "640x400").<P>
+You will see the picture displayed on the screen. Depending on your Windows resolution,
+you may also get two scroll bars which you can use to scroll around the image.<P>
+<A HREF="#topic10">Walkable areas</A><BR>
+<A HREF="#Walkbehinds">Walk-behind areas</A><BR>
+<A HREF="#TestingGame">Trying out your game</A><BR>
+<A HREF="#topic11">Hotspots</A><BR>
+<A HREF="#topic14">Screen edges</A><BR>
+<A HREF="#topic15">Objects</A><BR>
+<A HREF="#topic16">Room options</A><BR>
+<P>
+
+<HR>
+<A NAME="topic10"></A>
+<H3>Walkable areas</H3>
+Now that you have the background scene, you need to tell the game where the
+player character is allowed to walk. You do this using walkable areas. Choose
+the "Areas" mode from the tree, then choose "Walkable areas" in the combobox on
+the right hand side.<P>
+Everywhere that the character's feet are allowed to walk, you must make
+walkable. Adding walkable areas works in a similar way to most paint programs:
+you use three tools (line, fill and freehand) to draw them.<P>
+You will probably want to start off with the "Line" tool - click the button
+in the main panel. Now, draw round the outline of the walkable areas on the
+screen. To draw a line, click the left mouse button where you want to start it,
+then hold down the button and drag the mouse to the finish of the line, where
+you should release the button. Once you are sure that the area is completely
+enclosed by blue lines, choose the "Fill" button and click inside the area -
+it should be filled in.<P>
+If the entire screen is filled blue, you didn't contain
+the area properly. Click the "Undo" button to remove the fill, then draw extra lines
+to enclose the area and try again.<P>
+
+<HR>
+<A NAME="Walkbehinds"></A>
+<H3>Walk-behind areas</H3>
+The next job you need to do is to define the walk-behind areas. These areas,
+also called "priorities", tell the game where the character needs to be drawn
+behind the background. For example, in the three bottom screens of the demo
+game, the player can walk behind the fence.<P>
+Choose "Walk-behinds" from the combobox. You add walk-behind
+areas in a very similar way to the walkable areas - in fact, you have the same
+three drawing tools.<P>
+Once you have finished, you need to define the base-line for the area. This
+is a horizontal line which tells the game at what level the character must be
+in order to be drawn behind the area. For example, when the man is standing
+in front of the street lamp he must be drawn in front; when he is behind it,
+he must be drawn behind. Click the "Set Baseline" button, then click the mouse
+on the scene at the base of the walk-behind area. When the character's feet
+are below this line, he will be drawn in front of the area; when his feet are
+above the line, he will be drawn behind the area.<P>
+You may have noticed at the top of the window a coloured block with "Editing: 1" above
+it. By default, you have been drawing blue walk-behind areas onto the screen. This
+is fine for one area, but what if you have two different walk-behind areas on
+the screen? They'll need different base-lines, won't they. You can change the
+colour you are drawing by clicking the up and down arrows next to "Editing: 1".
+Each colour has its own base-line, which affects the areas drawn in that colour.<P>
+
+<HR>
+<A NAME="TestingGame"></A>
+<H3>Trying out your game</H3>
+Now that you have a semi-complete first room, it would be a good time to test
+it out. Since we haven't named the room yet, choose "Save Room As" from the File menu.
+In the file selector, type in the name you want to
+give the room file. The game uses files called ROOMx.CRM, where x is the room
+number, and the player starts in room 1, so type ROOM1 and press the OK
+button.<P>
+Now, click the "Test game" option on the File menu. Your files will be saved, and then
+the game will run.
+You should see your first screen, with the man on it. Walk around the screen,
+checking out any walk-behind areas you added. If the man won't move anywhere,
+he probably hasn't started on a walkable area and therefore can't move.
+Press Ctrl+Q to exit the engine.<P>
+<I>TIP:</I> If you imported a 640x400 background, and it looks all shrunk and pixely when
+you run the game, you need to tell the engine to run at hi-res. To do this, run the
+WINSETUP.EXE program in the Compiled folder inside your game folder, or choose the "Setup
+Game" option from the File menu.<P>
+If you need to change where the man starts, choose the "Characters" mode from the
+tree on the left, then change the co-ordinates in the "at X:" and "Y:" boxes.
+To find out co-ordinates, in the Room Settings mode as you move the mouse across the
+background it says "Mouse pos: X, Y". These co-ordinates reflect the character's feet.<P>
+<I>NOTE: Sometimes, you may create a script such that the game 'locks up' and
+you cannot press Ctrl+Q to quit. In this case, you can use the emergency break key Alt+X,
+which will always terminate the engine, and display the current script line, if any, for
+easier debugging.</I><P>
+
+<HR>
+<A NAME="topic11"></A>
+<H3>Hotspots</H3>
+Your room is now almost complete - except for one thing, interactivity. As it
+is, the player can't look at anything, talk to anything, or do anything.
+A hotspot is an area of the screen where the game will react if the player
+clicks the mouse there. For example, a wall could be a hotspot, a fence could
+be a hotspot, and so on - in fact, every part of the screen can be one hotspot
+or another.<P>
+Choose "Hotspots" from the combobox in the "Areas" pane. As with the walkable areas
+and walk-behind areas, you draw hotspots using the standard three drawing
+modes. The different colours this time represent the different game reactions:
+the player clicking on a hotspot 1 area will cause a certain response;
+clicking on a hotspot 2 area will cause a different response.
+Once you have drawn the hotspots on, you need to define what happens when the
+player interacts with them. You do this one hotspot at a time. Use the up and
+down arrow buttons to make sure that colour 1 (dark blue) is the current
+hotspot. Now, click the "Interaction" button.<P>
+
+<HR>
+<A NAME="Interaction"></A>
+<H3>Interaction</H3>
+<B>NOTE:</B> The interaction window has changed completely for v2.5, you may want to
+read below to see how it's different.<P>
+The interaction window consists of a tree, with a node for each possible event that
+can occur. These events are marked with flag icons.<P>
+To begin with, you will just see the list of events if you have not set up any
+interactions. To respond to an event, double-click on the event's name, and a
+window will open where you can select what you want to happen in response.<P>
+For example, we want to display a message when the player LOOKs at our
+hotspot 1. So, double-click "Look at hotspot". A window will appear containing various options.<P>
+The big combobox at the top defines what command (action) to perform in response to
+the event. When you click on it a menu appears, with all the possible commands you can run.
+The commands are ordered into categories, "Game", "Object", "Character" and so on, to enable
+you to find things easily.<P>
+We just want to display a message though, so click the "Game - Display message" option.
+Below, "Message number" appears along with a "Change" button. "Message number" is a
+<I>parameter</I> to the command - that is, an option you can set which affects what the command
+does. In this case, it tells the game which message to display. Click the "Change" button
+to change it.<P>
+Since this will be our first message, and since message numbering
+starts at 0, just leave it as zero.<P>
+
+<HR>
+<A NAME="topic12"></A>
+<H3>Messages</H3>
+Each room has its own set of messages. These are the strings that can be
+displayed during the game. They can be edited in two ways: when you set a Display
+Message interaction, an "Edit message" button appears where you can edit the messages.
+At other times, choose the "Edit Messages" option from the "Actions" menu in the Room
+Editor Settings pane.<P>
+The Message Editor is fairly simple. The current room messages are listed down the left
+hand side. To create a new one, click the "New Message" button. You edit the selected
+message in the right hand text box. <P>
+Type in a message appropriate to your hotspot, for example,<P>
+<PRE>
+This is a brick wall. Nothing more exciting than that.
+</PRE>
+Note the "Display next message after this one" checkbox. When this
+is on, the next message will be displayed after the player has clicked to
+remove this one. This feature is useful for conversations and long
+descriptions. We won't use it now, however, so leave it unchecked.
+Now press OK to leave the message editor. Click OK to exit the interaction
+window.<P>
+
+<HR>
+<A NAME="topic13"></A>
+<H3>Walk-to points</H3>
+You may have noticed on the Hotspots screen, a button called "Set Walk-to point". This
+allows you to set a position for each hotspot where the character will walk to
+whenever the player interacts with the hotspot. This is like the way the
+Lucasarts games like Monkey Island (tm) work. If you set a walk-to point, then
+whenever the player clicks interact or talk on the hotspot, the main character
+will first walk to that point before the relevant event is triggered.
+If you want, the man can also walk there when the LOOK mode is used - this
+option is configurable in the game General Settings pane.<P>
+To remove a walk-to point, select the appropriate hotspot and click the "Remove walk-to
+point" button.<P>
+
+<HR>
+<A NAME="topic14"></A>
+<H3>Screen edges</H3>
+Each room has four "edges". The edges define how near to the side of the
+screen the player needs to go for him to be considered to have left the
+screen. More precisely, when the man passes an edge he triggers the related
+event in the room interactions.<P>
+Edges are the usual way that room changes take place - when the man walks off
+an edge, the game responds with a "Go to screen" command to send him to a new
+location.<P>
+To view the edges, go to the "Settings" pane under "Room Editor".
+The four edges are displayed as yellow lines on top
+of the background. To move an edge, click the left button on it and drag the
+mouse.<P>
+To set what happens when the character walks off an edge, click the
+"Interactions" option from the "Actions" button. This contains four events,
+called "Walk off top", "Walk off bottom", and so on, which are triggered when
+the player passes the relevant edge. This interaction window also contains some
+other useful room events.<P>
+
+<HR>
+<A NAME="topic15"></A>
+<H3>Objects</H3>
+Objects, also known as "sprites", are images on the screen which, unlike the
+screen background, can move, change and disappear. You use objects for things
+which the player can take (so they disappear) and for things on the screen
+which you want to animate.<P>
+As as example, let's say you want to have a key on the floor of your room
+which the player can take. Go to the "Objects" pane under the Room Editor. Now, click
+the "New object" button. You now click onto the screen where you want the
+object to be added. Don't worry if you don't get its position right, you can
+move it later. The object will be added as a blue cup.<P>
+The first thing we want to do is change the look of the object - obviously, we
+want a picture of a key. Click the "Change image" button. You will be
+presented with a screen which shows all the sprite graphics available.
+There is a picture of a key already there, so double-click on that.
+(You can add your own graphics to this list; we will describe how to do that later).<P>
+If you want to move the object, just drag it around with the left mouse button.
+Lastly, we need to define what happens when the player interacts with the
+object. Click the "Interaction" button. This is almost identical to the way
+it worked with the <A HREF="ags10.htm#Interaction">hotspots</A>.<P>
+You may have noticed a couple of other controls on the Objects screen, namely
+"Set Baseline" and "Object is initially visible". Normally, the base-line for an
+object is at the base of the object (the baseline is used for front-to-back ordered
+drawing of the graphics). However, in some cases you may want to override this - for
+example, if a poster is lying flat on the ground, you wouldn't want the man to
+walk behind it. You can override the baseline for an object by clicking the
+"Set baseline" button and clicking on where you want the base to be (near the top
+of the screen would solve our poster problem). To remove a baseline and use the default,
+click on the very top line of the screen and the line will disappear completely.<P>
+Normally, you want the objects to be visible on the screen to begin with.
+However, in some situations you may not want the object to appear until later
+on in the game. To have the object start the game off, uncheck the "Object is
+initially visible" box. You can switch the object on in the game using the
+"Turn on object" command.<P>
+<I>NOTE: The game's speed is directly related to the number of objects on the
+screen. Although you probably won't notice it on faster systems, a room with 10
+large objects will noticeably slow down on lesser processors.</I><P>
+Now, we have a fully-working first room. Follow the procedures we did
+<A HREF="ags10.htm#TestingGame">here</A> to try it out.<P>
+
+<HR>
+<A NAME="topic16"></A>
+<H3>Room options</H3>
+In the <B>Settings</B> mode, you can set a few room options to configure some room-specific
+things.
+<UL>
+
+<LI> <B>Play music on room load</B> - if set, then the background music will be
+changed to the music you specify here. See <A HREF="ags14.htm#MusAndSound">here</A> for information
+on the music and sound support in AGS.
+<LI> <B>Hide player character</B> - if you check this then
+the main character will not be visible in this room. This is useful for
+close-up control panels, and cutscenes which the main character is not
+part of.
+<LI> <B>Player character view</B> - allows you to change the main character's view
+number for this screen only. This is useful if you want, for example, an
+overhead map screen, so the character should have a birdseye-type view.
+The character's view is set back to normal when they leave the screen.
+<LI> <B>Music volume adjustment</B> - allows you to change the volume of the background
+music for this screen. For example, as the player approaches a bar, on successive
+screens the music could get louder.
+</UL>
+<P>
+
+</BODY></HTML>

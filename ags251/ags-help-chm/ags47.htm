@@ -1,0 +1,622 @@
+<HTML>
+<head><title>Room / Screen functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic77"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags46.htm#topic76"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags48.htm#topic78"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Room / Screen functions</H2>
+<A HREF="#FadeIn">FadeIn</A><BR>
+<A HREF="#FadeOut">FadeOut</A><BR>
+<A HREF="#FlipScreen">FlipScreen</A><BR>
+<A HREF="#GetBackgroundFrame">GetBackgroundFrame</A><BR>
+<A HREF="#GetViewportX">GetViewportX</A><BR>
+<A HREF="#GetViewportY">GetViewportY</A><BR>
+<A HREF="#GetWalkableAreaAt">GetWalkableAreaAt</A><BR>
+<A HREF="#MoveToWalkableArea">MoveToWalkableArea</A><BR>
+<A HREF="#NewRoom">NewRoom</A><BR>
+<A HREF="#NewRoomEx">NewRoomEx</A><BR>
+<A HREF="#RawClearScreen">RawClearScreen</A><BR>
+<A HREF="#RawDrawImage">RawDrawImage</A><BR>
+<A HREF="#RawDrawLine">RawDrawLine</A><BR>
+<A HREF="#RawDrawTriangle">RawDrawTriangle</A><BR>
+<A HREF="#RawPrint">RawPrint</A><BR>
+<A HREF="#RawPrintMessageWrapped">RawPrintMessageWrapped</A><BR>
+<A HREF="#RawRestoreScreen">RawRestoreScreen</A><BR>
+<A HREF="#RawSaveScreen">RawSaveScreen</A><BR>
+<A HREF="#RawSetColor">RawSetColor</A><BR>
+<A HREF="#ReleaseViewport">ReleaseViewport</A><BR>
+<A HREF="#RemoveWalkableArea">RemoveWalkableArea</A><BR>
+<A HREF="#ResetRoom">ResetRoom</A><BR>
+<A HREF="#RestoreWalkableArea">RestoreWalkableArea</A><BR>
+<A HREF="#SetAreaLightLevel">SetAreaLightLevel</A><BR>
+<A HREF="#SetBackgroundFrame">SetBackgroundFrame</A><BR>
+<A HREF="#SetScreenTransition">SetScreenTransition</A><BR>
+<A HREF="#SetViewport">SetViewport</A><BR>
+<A HREF="#SetWalkBehindBase">SetWalkBehindBase</A><BR>
+<A HREF="#ShakeScreen">ShakeScreen</A><BR>
+<A HREF="#TintScreen">TintScreen</A><BR>
+<P>
+
+<HR>
+<A NAME="FadeIn"></A>
+<H3>FadeIn</H3>
+<PRE>
+FadeIn (int speed)
+</PRE>
+Fades in from a black screen to the current palette. This is used to restore
+the screen after a FadeOut call. SPEED is from 1 (slowest) to 64 (fastest).<P>
+<I>NOTE: This is a blocking function.<P>
+NOTE: This function does not work in hi-color modes.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FadeOut(30);
+Wait(40);
+FadeIn(10); 
+</PRE>
+will fade the screen to black wait 1 sec (40 game cycles) and then fade in to the original screen.<P>
+<I>See Also:</I> <A HREF="ags45.htm#CyclePalette">CyclePalette</A>, <A HREF="ags47.htm#FadeOut">FadeOut</A><P>
+
+<HR>
+<A NAME="FadeOut"></A>
+<H3>FadeOut</H3>
+<PRE>
+FadeOut (int speed)
+</PRE>
+Fades the screen out to black. SPEED is the speed of the fade, from 1
+(slowest) to 64 (instant). You can restore the screen with FadeIn.<P>
+Note: This is a blocking function.<P>
+Note: This function is slow in hi-color modes.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FadeOut(30);
+Wait(40);
+FadeIn(10); 
+</PRE>
+will fade the screen to black wait 1 sec (40 game cycles) and then fade in to the original screen.<P>
+<I>See Also:</I> <A HREF="ags45.htm#CyclePalette">CyclePalette</A>, <A HREF="ags47.htm#FadeIn">FadeIn</A><P>
+
+<HR>
+<A NAME="FlipScreen"></A>
+<H3>FlipScreen</H3>
+<PRE>
+FlipScreen (int way)
+</PRE>
+Flips the screen round either the horizontal or vertical axis, or both.
+This function is for special effects only - all co-ordinates remain the
+same and it doesn't effect any other script functions.<P>
+The value of WAY selects:
+<PRE>
+0  normal
+1  horizontal-flip (upside-down)
+2  vertical-flip  (left-to-right)
+3  both (upside-down and backwards)
+</PRE>
+<B>NOTE</B>: This function is still a bit buggy - black parts of the screen may
+show up wrong, and and pop-up messages will flip the screen back to normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FlipScreen(1); 
+</PRE>
+will flip the screen upsode down.<P>
+
+<HR>
+<A NAME="GetBackgroundFrame"></A>
+<H3>GetBackgroundFrame</H3>
+<PRE>
+GetBackgroundFrame()
+</PRE>
+Returns the number of the current background being displayed. In a room
+without animating backgrounds, this will always return 0. Otherwise, the
+current frame number is returned from 0 to 4.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetBackgroundFrame()==4) ObjectOn(2); 
+</PRE>
+will turn on object 2 if the background frame of the room is frame 4.<P>
+<I>See Also:</I> <A HREF="ags47.htm#SetBackgroundFrame">SetBackgroundFrame</A><P>
+
+<HR>
+<A NAME="GetViewportX"></A>
+<H3>GetViewportX</H3>
+<PRE>
+GetViewportX ()
+</PRE>
+Returns the X-offset of the current viewport in a scrolling room. This
+allows you to find out what part of the room the player is looking at.
+The co-ordinate returned is the left edge of the screen, and so it can
+have a value between 0 and (ROOM WIDTH - 320).<P>
+If the room is a non-scrolling room, returns 0.<P>
+See the SetViewport function description for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetViewportX()&gt;100)
+    ObjectOn(2); 
+</PRE>
+will turn object 2 on if the player has scrolled the room by 100 pixels to the right.<P>
+<I>See Also:</I> <A HREF="ags47.htm#GetViewportY">GetViewportY</A>, <A HREF="ags47.htm#SetViewport">SetViewport</A><P>
+
+<HR>
+<A NAME="GetViewportY"></A>
+<H3>GetViewportY</H3>
+<PRE>
+GetViewportY ()
+</PRE>
+Returns the Y-offset of the current viewport in a scrolling room. This
+allows you to find out what part of the room the player is looking at.
+The co-ordinate returned is the top edge of the screen, and so it can
+have a value between 0 and (ROOM HEIGHT - 200).<P>
+If the room is a non-scrolling room, returns 0.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetViewportY()&gt;20)
+    ObjectOn(2); 
+</PRE>
+will turn object 2 on if the player has scrolled the room by 20 pixels to the bottom.<P>
+<I>See Also:</I> <A HREF="ags47.htm#GetViewportX">GetViewportX</A>, <A HREF="ags47.htm#SetViewport">SetViewport</A><P>
+
+
+<HR>
+<A NAME="GetWalkableAreaAt"></A>
+<H3>GetWalkableAreaAt</H3>
+<PRE>
+GetWalkableAreaAt (int x, int y)
+</PRE>
+Returns the number of the walkable area at SCREEN co-ordinates (X,Y).
+If there is no walkable area there, or if invalid co-ordinates are specified,
+returns 0.<P>
+NOTE: The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetWalkableAreaAt(mouse.x,mouse.y) == 0)
+    Display ("You can't walk there.");
+</PRE>
+
+<I>See Also:</I> <A HREF="ags39.htm#GetHotspotAt">GetHotspotAt</A><P>
+
+
+<HR>
+<A NAME="MoveToWalkableArea"></A>
+<H3>MoveToWalkableArea</H3>
+<PRE>
+MoveToWalkableArea (CHARID)
+</PRE>
+Places character CHARID in the nearest walkable area to its current
+location. If the character is already on a walkable area, nothing happens.
+Otherwise it is placed in the nearest available area.<P>
+This is useful for placing for example in the Player Enters Screen event
+of a screen, to make sure the character can move if a NewRoomEx has been
+issued to get there. You could also use this in on_event for ENTER_ROOM
+to use whenever a player enters a room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+character[EGO].x=Random(320);
+character[EGO].y=Random(200);
+MoveToWalkableArea(EGO); 
+</PRE>
+will move character EGO to a random position but make sure that he is on a walkable area.<P>
+
+<HR>
+<A NAME="NewRoom"></A>
+<H3>NewRoom</H3>
+<PRE>
+NewRoom (int room_number)
+</PRE>
+Changes the room the player is in. This command unloads the current room
+from memory and loads instead ROOMx.CRM, where X is room_number.<P>
+IMPORTANT: This command does not change the room immediately; instead, it
+will perform the actual room change once your script function has finished
+(This is to avoid problems with unloading the script while it is still
+running). This means that you should not use any other commands which rely
+on the new room (object positionings, and so on) after this command within
+the same function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+NewRoom (4); 
+</PRE>
+will move the player character to room 4.<P>
+<I>See Also:</I> <A HREF="ags47.htm#NewRoomEx">NewRoomEx</A><P>
+
+<HR>
+<A NAME="NewRoomEx"></A>
+<H3>NewRoomEx</H3>
+<PRE>
+NewRoomEx (int room_number, int x, int y)
+</PRE>
+Identical to NewRoom, except that the player character is placed at
+co-ordinates (X,Y) in the new room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+NewRoomEx(4,100,50); 
+</PRE>
+will move the player character to room 4 and also place  him at coordinates 100,50.<P>
+<I>See Also:</I> <A HREF="ags47.htm#NewRoom">NewRoom</A><P>
+
+<HR>
+<A NAME="RawClearScreen"></A>
+<H3>RawClearScreen</H3>
+<PRE>
+RawClearScreen (int colour)
+</PRE>
+The family of "raw" functions allow you direct access to the screen to
+do whatever you want with it. However, anything you do with these functions
+is permanent on the screen until the player leaves the room. They are
+most useful for things like a character stats screen where you want to
+print information directly to the screen.
+This function clears the screen to the specified COLOUR. (this is a number
+you can find in the Game, Palette mode of the editor). Whatever is currently
+on the background will be wiped.<P>
+NOTE: any GUIs you have will still appear on top of the screen, so if you
+want complete control you'll need to turn the GUIs off too.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawClearScreen(31); 
+</PRE>
+will clear the screen to a blue color.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawSetColor">RawSetColor</A><P>
+
+<HR>
+<A NAME="RawDrawImage"></A>
+<H3>RawDrawImage</H3>
+<PRE>
+RawDrawImage (int x, int y, int slot)
+</PRE>
+Draws image SLOT from the sprite manager onto the screen at location (X,Y).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawDrawImage(100,100,134); 
+</PRE>
+will draw the image that’s stored in sprite manager’s slot 134 at the coordinates 100,100.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawPrint">RawPrint</A>, <A HREF="ags47.htm#RawDrawLine">RawDrawLine</A><P>
+
+<HR>
+<A NAME="RawDrawLine"></A>
+<H3>RawDrawLine</H3>
+<PRE>
+RawDrawLine (int from_x, int from_y, int to_x, int to_y)
+</PRE>
+Draws a line from (FROM_X, FROM_Y) to (TO_X, TO_Y) in the current raw
+drawing colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawDrawLine(0,0,160,100); 
+</PRE>
+will draw a line from the left top of the screen (0,0) to the middle of the screen (160,100);<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawSetColor">RawSetColor</A>, <A HREF="ags47.htm#RawDrawTriangle">RawDrawTriangle</A><P>
+
+<HR>
+<A NAME="RawDrawTriangle"></A>
+<H3>RawDrawTriangle</H3>
+<PRE>
+RawDrawTriangle (int x1, int y1, int x2, int y2, int x3, int y3)
+</PRE>
+Draws a filled triangle in the current colour with corners at the points
+(x1,y1), (x2,y2) and (x3,y3).<P>
+Well, don't look at me, you might find it useful for something :-)<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawDrawTriangle(0,0,160,100,0,200); 
+</PRE>
+will draw a triangle with corners at the points (0,0),(160,100),(0,200).<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawDrawImage">RawDrawImage</A>, <A HREF="ags47.htm#RawDrawLine">RawDrawLine</A><P>
+
+<HR>
+<A NAME="RawPrint"></A>
+<H3>RawPrint</H3>
+<PRE>
+RawPrint (int x, int y, string text, ...)
+</PRE>
+This function prints the specified TEXT to screen location (X,Y). It
+accepts Display-style "<TT>%d</TT>" and "<TT>%s</TT>" arguments to display variable values.
+The text will be printed using the normal font and the current raw colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int power;
+RawPrint (10,10,"Power:%d",power); 
+</PRE>
+will display the string Power: and the value of the integer power at 10,10. Useful for making stats screens.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawPrintMessageWrapped">RawPrintMessageWrapped</A>,
+<A HREF="ags47.htm#RawSetColor">RawSetColor</A>, <A HREF="ags37.htm#SetNormalFont">SetNormalFont</A><P>
+
+
+<HR>
+<A NAME="RawPrintMessageWrapped"></A>
+<H3>RawPrintMessageWrapped</H3>
+<PRE>
+RawPrintMessageWrapped (int x, int y, int width, int font, int message_number)
+</PRE>
+This function prints the message MESSAGE_NUMBER (which can be a global message
+or room message) directly to the screen at (X,Y), using the specified FONT.<P>
+WIDTH is the width of the virtual textbox enclosing the text, and is the point that
+the text will wrap at. This function is designed for writing a long message to the
+screen with it wrapping normally like a standard textbox.<P>
+The text will be printed using the current raw colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawPrintMessageWrapped (80, 40, 160, 1, 10); 
+</PRE>
+will display room message 10 in the centre of the screen, starting from Y = 40.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawPrint">RawPrint</A>, <A HREF="ags47.htm#RawSetColor">RawSetColor</A><P>
+
+
+<HR>
+<A NAME="RawRestoreScreen"></A>
+<H3>RawRestoreScreen</H3>
+<PRE>
+RawRestoreScreen ()
+</PRE>
+Restores the screen from the backup image created with RawSaveScreen.
+Use this when you want to get back what was there before you started
+drawing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawSaveScreen();
+RawDrawTriangle(0,0,160,100,0,200);
+Wait(80);
+RawRestoreScreen(); 
+</PRE>
+will save the screen draw a triangle wait for a while and then restore the original screen.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawSaveScreen">RawSaveScreen</A><P>
+
+<HR>
+<A NAME="RawSaveScreen"></A>
+<H3>RawSaveScreen</H3>
+<PRE>
+RawSaveScreen ()
+</PRE>
+Makes a backup of the current background screen, in order that it can be
+restored later. This could be useful to back up the original image before
+writing over it, or to save a certain state of your drawing to restore
+later. Only one raw backup image can exist at a time, so this overwrites
+any previous saves you made.<P>
+NOTE: The backup image is lost when the player leaves the screen, or if
+they load a saved game position. Therefore, this is best only for short-term
+effects.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawSaveScreen();
+RawDrawTriangle(0,0,160,100,0,200);
+Wait(80);
+RawRestoreScreen(); 
+</PRE>
+will save the screen draw a triangle wait for a while and then restore the original screen.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawRestoreScreen">RawRestoreScreen</A><P>
+
+<HR>
+<A NAME="RawSetColor"></A>
+<H3>RawSetColor</H3>
+<PRE>
+RawSetColor (int colour)
+</PRE>
+Sets the colour to be used for future raw drawing routines to COLOUR. This
+is a number you can obtain from the Game, Palette mode in the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RawSetColor(1984); 
+</PRE>
+will set the drawing color to green.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RawClearScreen">RawClearScreen</A>, <A HREF="ags47.htm#RawDrawLine">RawDrawLine</A>, <A HREF="ags47.htm#RawPrint">RawPrint</A><P>
+
+<HR>
+<A NAME="ReleaseViewport"></A>
+<H3>ReleaseViewport</H3>
+<PRE>
+ReleaseViewport ()
+</PRE>
+Releases the lock on the screen viewport, allowing it to automatically
+scroll around following the player character as normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int x;
+while (x&lt;100)
+      {SetViewPort(x,0);
+       x++; 
+       Wait(1); }
+SetViewPort(0,0);
+ReleaseViewPort();
+</PRE>
+will scroll the room 100 pixels to the right and then return the screen to its original position and unlock the screen viewport.<P>
+<I>See Also:</I> <A HREF="ags47.htm#SetViewport">SetViewport</A><P>
+
+<HR>
+<A NAME="RemoveWalkableArea"></A>
+<H3>RemoveWalkableArea</H3>
+<PRE>
+RemoveWalkableArea (int areanum)
+</PRE>
+Removes the walkable areas in colour AREANUM from the current room. You can
+put the area back with RestoreWalkableArea.<P>
+NOTE: When the player leaves the screen, all the walkable areas are reset.
+Therefore, if you want an area to remain off when they leave the screen,
+you will need to set a flag, then run the RemoveWalkableArea command in
+the "Player enters screen" event when they return.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RemoveWalkableArea(5); 
+</PRE>
+will make the walking area 5 unwalkable.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RestoreWalkableArea">RestoreWalkableArea</A><P>
+
+<HR>
+<A NAME="ResetRoom"></A>
+<H3>ResetRoom</H3>
+<PRE>
+ResetRoom (int room_number)
+</PRE>
+Discards all the data that the engine has in memory about when the player
+last visited ROOM_NUMBER, and resets it as if they'd never been there. The
+next time the player goes to that room, all the objects and scripts will
+be in their initial state (as set up in the editor), and not how they were
+when the player left the room. The "First time enters screen" event will be
+run when they enter this room again.<P>
+This function is useful if you want to have a "View intro" option to allow
+the player to watch an intro again - this function can reset all the
+objects in the intro rooms to their starting positions.<P>
+NOTE: You cannot reset the current room (ie. the room that the player is in).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ResetRoom(0); 
+</PRE>
+will reset the intro room so it can be played again if the player wants to.<P>
+
+<HR>
+<A NAME="RestoreWalkableArea"></A>
+<H3>RestoreWalkableArea</H3>
+<PRE>
+RestoreWalkableArea (int areanum)
+</PRE>
+Makes the area AREANUM walkable again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RestoreWalkableArea(4); 
+</PRE>
+will make the walking area 4 walkable again.<P>
+<I>See Also:</I> <A HREF="ags47.htm#RemoveWalkableArea">RemoveWalkableArea</A><P>
+
+<HR>
+<A NAME="SetAreaLightLevel"></A>
+<H3>SetAreaLightLevel</H3>
+<PRE>
+SetAreaLightLevel (int area, int level)
+</PRE>
+Changes walkable area number AREA to have light level LEVEL. This does
+the same thing as the Light Level textbox in the editor, but allows you to
+change it at run-time.<P>
+AREA is from 1 to 15 (the walkable area number), and LEVEL is from -100
+to 100. (0 is the defualt non-lit level).<P>
+NOTE: The light level will be reset when the player leaves the room,
+so you need to use it in Player Enters Screen if you want a permanent
+change.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(10)==1)
+    SetAreaLightLevel(2,100); 
+</PRE>
+will set the area’s 2 level light to 100 if the Global Integer 10 is 1.<P>
+
+<HR>
+<A NAME="SetBackgroundFrame"></A>
+<H3>SetBackgroundFrame</H3>
+<PRE>
+SetBackgroundFrame (int frame)
+</PRE>
+Locks the background to frame number FRAME of an animating-background
+screen. (Values for FRAME are from 0 to 4). This allows you to use the
+animating backgrounds feature for another purpose - you can have two
+frames of the background, one for example with a spaceship crashed on it.
+Then, once the right event has happened, call SetBackgroundFrame in the
+Player Enters Screen event to set the background before the screen fades in.<P>
+Call SetBackgroundFrame(-1) to set the default animating frames.<P>
+The frame lock is released when the game changes rooms.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(20)==1)
+    SetBackgroundFrame(4); 
+</PRE>
+will change the current room’s background frame to 4 if the global integer 20 is 1.<P>
+<I>See Also:</I> <A HREF="ags47.htm#GetBackgroundFrame">GetBackgroundFrame</A><P>
+
+<HR>
+<A NAME="SetScreenTransition"></A>
+<H3>SetScreenTransition</H3>
+<PRE>
+SetScreenTransition (int trans_type)
+
+</PRE>
+Changes the default screen transition. trans_type can be one of the
+following:
+<PRE>
+TRANSITION_FADE
+TRANSITION_INSTANT
+TRANSITION_DISSOLVE
+</PRE>
+All future transitions will be done as specified until you call this
+function again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetScreenTransition (TRANSITION_FADE); 
+</PRE>
+will change the room transitions to Fade.<P>
+
+<HR>
+<A NAME="SetViewport"></A>
+<H3>SetViewport</H3>
+<PRE>
+SetViewport (int x, int y)
+</PRE>
+Locks the screen viewport to having the top-left hand corner at (X,Y) in
+a scrolling room. This allows you to manually pan across a scrolling room
+or to have the screen follow a non-player character.<P>
+The lock is released when you either call ReleaseViewport or the player
+changes rooms.<P>
+NOTE: The co-ordinates supplied are 320x200-scale co-ordinates, and will
+be automatically multiplied up by the engine.<P>
+NOTE: This function has no effect if the current room isn't a scrolling room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetViewport (character[MAN].x - 160, character[MAN].y - 110);
+</PRE>
+will scroll around and follow character MAN in a specific room,
+( you must put this in the room's repeatedly execute event)<P>
+<I>See Also:</I> <A HREF="ags47.htm#GetViewportX">GetViewportX</A>, <A HREF="ags47.htm#GetViewportY">GetViewportY</A>, <A HREF="ags47.htm#ReleaseViewport">ReleaseViewport</A><P>
+
+<HR>
+<A NAME="SetWalkBehindBase"></A>
+<H3>SetWalkBehindBase</H3>
+<PRE>
+SetWalkBehindBase (int area, int baseline)
+</PRE>
+Changes the walk-behind AREA to have new BASELINE. This effectively allows
+you to turn walk-behinds on and off, although you can do other tricks with
+it as well. BASELINE is from 1 to the height of the room (normally 200) and
+moves the line which you set originally in the editor.<P>
+Passing BASELINE as 0 disables the walk-behind area, so that the player
+will always walk in front of it.<P>
+Basically, if the character's feet are below BASELINE, he will be drawn in
+front of it, otherwise he will be drawn behind it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetWalkBehindBase (3,0); 
+</PRE>
+will disable the walkbehind area number 3.<P>
+<I>See Also:</I> <A HREF="ags43.htm#SetObjectBaseline">SetObjectBaseline</A><P>
+
+<HR>
+<A NAME="ShakeScreen"></A>
+<H3>ShakeScreen</H3>
+<PRE>
+ShakeScreen (int amount)
+</PRE>
+Shakes the screen to simulate, for example, an earthquake. AMOUNT is
+how much the screen shakes: 1 is hardly anything, and 25 is a lot.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ShakeScreen(5); 
+</PRE>
+will shake the screen a little.<P>
+
+<HR>
+<A NAME="TintScreen"></A>
+<H3>TintScreen</H3>
+<PRE>
+TintScreen (int red, int green, int blue)
+</PRE>
+Tints the screen with the specified RGB values. RED, GREEN and BLUE range
+from 1 to 100. <P>
+Pass (0, 0, 0) to turn off the tinting and go back to how the screen
+normally looks.<P>
+NOTE: This command is currently experimental, since it causes a massive
+slowdown in the engine, especially at high resolutions. If you use it, you
+should provide an option for the player to turn it off.<P>
+NOTE: This feature only works in hi-colour games.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+TintScreen (100, 50, 50); 
+</PRE>
+will tint a heavy dose of red. <P>
+
+</BODY></HTML>

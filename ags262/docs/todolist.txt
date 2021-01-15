@@ -1,0 +1,1267 @@
+
+
+The to-do list is now based on the Tracker online at:
+
+http://www.agsforums.com/tracker.php
+
+Below is an archive
+
+
+====================================================================================================
+WEBSITE / COMMUNITY
+====================================================================================================
+
+ * - Roger - trivia2, Add !addquote, !randomquote
+   random responses a|b|c
+   !agstrivia with seperate set of questions
+ * Forum - display date joined under user title on all posts
+ * games page - add e-mail addresses, register username to link games together
+ * online manual allowing user comments on manual pages
+ * games page Keywords to allow a 'similar games' feature
+   games page release dates for games
+   games page link to forums - each game should have list of contributors as forum names
+                               allowing "view my games" link in peoples profiles
+ * Add link to Plugins category page to the Resources page
+ * make a downloadabel version of the KB
+
+====================================================================================================
+MISCELLANEOUS
+====================================================================================================
+
+ * tutorials on:
+    - basic LEC GUI - in particular, how to make 'Give X to Y' mode
+    - custm save/load window
+    - keyboard walking 
+    - save game screenshots
+&* quick tutorial on making a custom save window
+ * better document what happens when right-click on GUI (ie. on_event)
+ * mittens easter egg -> jellyfish photo
+ * mention * and / operators in the manual or scripting tut
+
+====================================================================================================
+FIXED
+====================================================================================================
+
+ * 256-col animated backgrounds - ticking both Use Exacy Palette and Share Palette doesn't
+   seem to use exact palette
+ * only display dynamic sprite warning if game exits normally
+ * int result = lists[letter[1].list].entries[letter[1].position];
+   doens't work - the second subscript is wrong
+ * editor Script menu, repeatedly_Execute goes to _always because it doesn't check for (
+ * strgetcharat returns negative numbers for chars > 127
+ * bug with:
+   run-script 1
+   ego: some text
+   run-script 2
+   second script doesn't run
+ * check 'Clear all actions from this event' crashing if a Run Script is involved
+ * if there is a DisplaySpeech in First Time Enters Sceen, then Enters Screen AFter Fadein
+   doesn't get run
+ * check neole's problem of it trying to allocate 47 MB of memory in one go - same as exe file size
+ * memory leak in RunAGSGame
+//CJ: Unsure, remove this from the list
+ * check generation of translation source for messages with  \"  in them
+ * check hit-testing z-order when SetObjectIgnoreWalkbehinds is used
+ * unchecking "remove message after time" doesn't play speech anim
+ * if another application pops up while playing the game, it will freeze
+ * problem with interactions not sticking with Run Script, getting switched back
+ * sierra w/bgrnd window background doesn't shrink to fit text
+ * check sierra w/bg speech doesn't shorten box for short "Hello" speech
+ * check character turning with diagonal loops (press Up-right, only turns to right frame)
+ * check having multiple inventory windows doesn't update (ie. switch on GUI with second window, stops updating)
+ * Changing room area zoom level does not mark room as Changed for save confirmation
+ * Normal text box messages with auto remove don't disappear
+ * check setviewport with large rooms
+//CJ: Not sure about this one, probably fixed
+ * MP3 volume control hardly has any effect
+ * No speech text on top of GUIs
+&* don't display speech on background GUIs
+ * check if allow GUIs on top of full-screen dialog pics
+ * sometimes doesn't use idle view for idle anim
+ * if char behind walk-behind area, don't recognise in GEtCharAt
+ * check transparent corners to text windows
+ * make character import/export idle view too
+ * check behaviour when icon bar gui is popped up - inconsistent pausedness
+ * check memory allocation in load_lzw for large anim bkgrnd rooms
+ * setsoundvolume affects mp3s after restoring game
+ * check tiled psrite import in 256-cols
+ * check numbers in character script names
+ * check animating background import eg 640x290 room
+ * scaled characters hit-testing with pixel-perfect detection is wrong
+ * check inquisitor's problem - Open Inventory needs to click elsewhere first
+ * check DisplaySpeechBackground when new speech is displayed for character already talking
+ * check GUI responsiveness when activated by another GUI
+ - check click open btton on LEC then inv item doesn't work
+ - check global script compile error messes up sprite file
+//CJ: never managed to replicate this, I think it was a misleading bug report
+ - speed up engine (esp prob with low-mem vid cards)
+ - DisplaySpeech max string length = 150 chars
+ - walking speed 1 jumps to destination
+ - bug: setbackgroundframe pops up another frame
+ * auto-remove narrator text if set taht way
+ * check importing 640x280 graphics at 640x400
+
+====================================================================================================
+IMPLEMENTED
+====================================================================================================
+
+ * AddInvToNPC/LoseInvFromNPC function
+&* AddInventoryToCharacter; keep track of inventory item order for all chars
+ * more hotspots (30);
+   display current hotspot in red and all others in grey
+&* increase max hotspots
+&* more hotspots
+&* more hotspots
+&- more hotspots
+&- increase max hotspots
+&* stop hotspots 16-19 being grey - maybe make only current hotspot coloured, others all grey
+ * view preview window should remember X/Y co-ords of where it last was
+ * RawDrawViewFrame(view,loop,frame)
+ * GetNumObjects() to return number of objectsin room
+ * Recompile All Rooms should tell you the room number if there is a compile error
+ * per-object option to make them obey scaling, lighting, etc
+ * display X/Y co-ordinates of objects in the editor
+ * GUIObjectOff/GUIObjectOn to temporarily remove GUI controls from their GUI
+ * pixel-perfect click detection on scaled sprites
+ * Popup Gamewide GUI type, to stop all clicks on other GUIs while it's active
+ * option to only display current area in Room AReas editor,
+   and to display all other areas in grey
+ * suggestions on bug tracker
+&* Tracker feature requests - annotations, naming views, etc
+&* check bug tracker for latest bugs/requests
+//Done! :)
+ * allow different X and Y movement speeds
+&* character movement X and Y speed can be different
+&- different vertical move speed to horizontal move speed
+ * pivot point X co-ordinate for animation frames, so they don't have to line up
+   at the left hand side
+   function is in progress
+&* set X 'axis' for view frames, to be used as an automatic offset to move the frames around
+ * interaction command "Move NPC to other room (specific co-ordinates)"
+ * SetCharacterIgnoreWalkbehind(CHARID, int walkbehind_to_ignore)
+ * GUI objects should have "x", "y" settings to place exactly
+&* x/y property for GUI objects in editor
+ * check playing flcs in hi-color games
+ * script compiler should detect errors like:  string result = StrGetCharAt ();
+ * option for if multiple of an inventory item, display it twice - useful for RPG's
+ * coloured light tint for regions
+ * multi-select in sprite manager
+ * name views (like chars/GUIs)
+ - add room transition type: cross-fade
+ * unhandled_event with Use Inventory - check for "If inv used" responses - if root level
+   only has "If inv used" conditionals then run unhandled_event
+&* should run unhandled_event if inv not handled
+ * allow read-only access to the rest of agsedit while script editor is open
+ * custom checkboxes/textboxes for objects/hotspots/characters to allow user options for them
+ * max cursors
+ * clean up general settings tab (order stuff/etc)
+ * script check int/string use as parameters to functions
+&* script compiler should catch int passed as string or vice versa
+ * new skip speech style - Only mouse click skips, not keyboard
+ * change "Default text" to "Text" in GUI Editor for textbox/label
+ * store whether screen faded out, to allow FadeOut, Wait(10), FadeIn in hi-col
+ * different walking style, go left, then up-left, then up, to allow smooth
+   rotation of character
+ - Make characters block so you can't walk through them.
+&* Stop walking through other characters
+&* stop chars moving through each other
+ * regions - like an extra hotspot map, but for Stands On only
+ * templates for new games
+ * clicking on inventory window should run a script, to allow custom right-click, etc
+&* way for script to handle right-click on LEC inventory
+&* option to change right click action on LEC inv
+&* allow user processing of mouse clicks on LEC inv control
+&* allow custom handling of LEC-style inventory right click
+ * more characters
+&* more characters, since the file needs to be changed anyway
+ * New Room (inc maybe room templates etc) option in editor
+ * Option to make objects use area light levels
+&- lighting effects on objects
+ * RawDrawImageTransparent(x,y,slot,transpercent)
+ * turn through front if going from left to right
+ * script command to change Do Not Modify Inv Cursor, Always Disp as Speech, and
+   GUI change when disabled
+ * option to automatically face characters before talking and face front when not in dialog
+&- automatically face characters in conversation
+&* automatically face characters before talking option
+ * GetInvITemPic
+ * runAnotherGame("datfile.ags");  to execl new instance to run different game instead
+ * play loop backwards option for animateobject
+&- way of playing loops backwards in animation
+ * some sort of special character in speech text to not play animation while displayed
+   (for pause in conversation) - or just Wait dialog script command
+ * moveCharacterThen, to set a path for the character (append to route)
+&- movement paths, so in cutscenes characters can move in predefined paths
+ * setareazoomlevel function
+ * allow right-to-left text display (for hebrew/etc)
+ * game checker, to count rooms, hotspots, etc, and print along with maximums
+ * allow if (!variable) in texts cript
+ * animations on GUI buttons - use pushedpic to store view number??
+&- animating buttons on gui
+ * way to flip sprites to save importing left & right views seperately
+&- option to flip frames of animation left-to-right
+ * new transition (Shrinking square of old room into new)
+ * more GUIs and GUI controls of each type
+ * save thumbnail into save games
+ * add Talk To option for hotspots and objects
+ * preview in sprite manager to show whole sprite
+ * language packs, to override game text & if necessary graphics
+ * setmusicvolume/mastervolume should affect mp3
+ * allow cursor change on GUI
+&- check mouse over static gui doesn't change pointer
+ * add "bottom-rihgt pixel" import method
+ * option to set current mouse cursor position
+ * interact with inv/talk to inventory
+ * more globalints
+ * animateobjectblocking
+ * make Instant transition work with fades (ie. make it black out the palette)
+ * customize position of sierra-style speech window (eg. face on right)
+ - IsObjectAniatming
+ - walk slower when zoomed out
+ - direction-dependant idle animations (not random loop)
+ - option for scaling to define level at top and bottom of walk area - gradual scaling
+ - allow mouse hold down when cycling thru views
+ - enable/disable walk-behind (for specific characters preferably)
+ - longer global messages (use local message editor or summink)
+ - new animation editor, where you can test animation etc. 
+ - add back Delete Sprite
+ - strip down size of default game
+ - mouse hover text
+ - dialog in seperate window customizable
+ - export art in sprite manager
+ - custom normal mode names which show up in interaction windows
+ - customizable save/load dialogs
+ - control speech frame within dialog script
+ - ability to add text to screen in background
+ - add hi-res masks for walk-behind
+ - select character for global mesages
+ * coloured light levels for walkable areas
+&* allow coloured lighting for walkable areas
+&* colour tint for screen/walkable area (eg. tint red)
+ * only use background to speech if no speech.vox
+ * CrossfadeMusic
+ - lock speech co-ords to virtual screen, not physical (scrolling oroms)
+ - export dialog as text option, for recording speech
+ - save speed/tempo of XM music in save games
+ * way of grabbing really small GUI buttons
+ * music playlist
+ * move qfg4-style dialog options to the side if using qfg4-style speech
+ - scale objects
+ - multiple text windows, specify which one to use for various stuff
+ * allow having a secondary walkable area mask and switching between the active one
+   eg. to give two different player characters different walkable areas
+
+====================================================================================================
+BUG REPORTS
+====================================================================================================
+
+!* strange effect if while importing an image while right dragging you select off
+   the bottom of the image while zoomed in - the selection rectangle suddenly jumps
+   down
+// http://www.agsforums.com/tracker.php?action=detail&id=76
+!* with crossfading enabled, if you go from one room to another with a higher volume
+   setting, the volume increases while it is fading out
+// http://www.agsforums.com/tracker.php?action=detail&id=77
+!* changing a object name needs to mark room as dirty
+&* changing hotspot/object names does not prompt to save game in editor
+// http://www.agsforums.com/tracker.php?action=detail&id=78
+!* GetScalingAt problem when the character skirts around the edge of walkable areas
+   solution to have a GetCharactreScaling?
+// http://www.agsforums.com/tracker.php?action=detail&id=79
+!* If a single word is wider than the label width, it should display as much as poss
+// http://www.agsforums.com/tracker.php?action=detail&id=80
+!* preload pic in 640x480 is squashed to 640x400
+// http://www.agsforums.com/tracker.php?action=detail&id=269
+!* problem with GetTextExtent returning wrong height of some ttf fonts
+&* check bottom of some fonts getting cut off (eg HollyWierd 28pt)
+   seems to be alfont reporting wrong height for text
+// http://www.agsforums.com/tracker.php?action=detail&id=270
+!* all edges should be checked so that if the bottom edge has no interactions
+   but the left edge does, being below and to the left will trigger the left one
+&* check all room edges (ie. char could be outside right and bototm edge)
+// http://www.agsforums.com/tracker.php?action=detail&id=81
+!* FlipScreen slows game down?
+// http://www.agsforums.com/tracker.php?action=detail&id=465
+!* S3M's don't work in win engine
+// http://www.agsforums.com/tracker.php?action=detail&id=82
+!- stop sfx on leaving room
+// http://www.agsforums.com/tracker.php?action=detail&id=83
+!- mouseoverhotspot doesn't run if there's an object between the hotspot & screen
+// http://www.agsforums.com/tracker.php?action=detail&id=84
+!- sierra-style speech window reset to first frame instead of disappearing
+// http://www.agsforums.com/tracker.php?action=detail&id=466
+
+====================================================================================================
+FEATURE REQUESTS
+====================================================================================================
+
+!* void as function parameter should give compile error
+// http://www.agsforums.com/tracker.php?action=detail&id=85
+!* initialize variables to zero (automatically in the ADD_STACK opcode, perhaps?)
+// http://www.agsforums.com/tracker.php?action=detail&id=271
+!* stop allowing room messages from inv & char interactions
+// http://www.agsforums.com/tracker.php?action=detail&id=86
+!* operator precedence witih "a = 5 - 2 - 3" for example - should be L-R
+// http://www.agsforums.com/tracker.php?action=detail&id=87
+!* some way of checking number of args passed to Display/StrFormat, and check that there 
+   aren't too many '%' in format string
+// http://www.agsforums.com/tracker.php?action=detail&id=88
+!* dialog_options_x & y should work with text-window dialog options (should enlarge window)
+// http://www.agsforums.com/tracker.php?action=detail&id=89
+!* rename "No interaction" checkbox to "Invisible to clicks"
+// http://www.agsforums.com/tracker.php?action=detail&id=90
+!* freehand tool should plot a single pixel if you don't move the mouse
+&* ability to draw single dot on room masks
+// http://www.agsforums.com/tracker.php?action=detail&id=56
+!* at runtime, if a script function cannot be found (eg. missing plugin), link it to a
+   stub that quits the game - this would allow conditional use of plugins depending on OS
+   Also, add a IsPluginLoaded scirpt function
+// http://www.agsforums.com/tracker.php?action=detail&id=91
+!* settextboxfocus to decide which text box gets input; also disabled text boxes
+   should not receive input
+&* 'active' text box, to allow more than one at a time
+   import; and of Game Setup config
+// http://www.agsforums.com/tracker.php?action=detail&id=272
+!* listboxsetitemtext, getnumguis, getnumobjects, getnumcharacters, filewriterawchar
+// http://www.agsforums.com/tracker.php?action=detail&id=273
+// http://www.agsforums.com/tracker.php?action=detail&id=274
+!* settextboxcolor, setbuttontextcolor
+// http://www.agsforums.com/tracker.php?action=detail&id=275
+// http://www.agsforums.com/tracker.php?action=detail&id=276
+!* sqrt
+&* MathSqrt and MathRaiseToPower functions
+// http://www.agsforums.com/tracker.php?action=detail&id=92
+!* allow saving	game anyway when script errors - but don't create the exe
+// http://www.agsforums.com/tracker.php?action=detail&id=93
+!* room.edge_left, edge_right, edge_top, edge_bottom
+&* game.left_edge, right_edge, etc to find out room edges
+// http://www.agsforums.com/tracker.php?action=detail&id=94
+!* CreateGraphicOverlay support alpha blended sprites
+// http://www.agsforums.com/tracker.php?action=detail&id=95
+!* multi-byte TTF support
+&* try out the new multi-byte TTF support
+// http://www.agsforums.com/tracker.php?action=detail&id=277
+!* SetFrameSpeed, like setframesound
+// http://www.agsforums.com/tracker.php?action=detail&id=96
+!* plugin API:
+   QueueRunScriptFunction to run as soon as possible
+   NotifySpriteUpdated - use with dynamic sprites to tell it to refresh 
+     object/character image cache if they currently use that sprite
+   SetSpriteAlphaBlended - to allow plugin to specify whether dynamic sprites it
+     creates are alpha blended or not
+// http://www.agsforums.com/tracker.php?action=detail&id=97
+// http://www.agsforums.com/tracker.php?action=detail&id=98
+// http://www.agsforums.com/tracker.php?action=detail&id=99
+!* COM plugin API: access to script header, or a seperate 'plugin header' for each
+   plugin that's compiled into the game at compile-time (allow plugin to add #defines)
+   get current game dir; SaveGame; LoadGame; QUitEditor, etc
+   GameSettings with game name, totalscore, options
+   Characters[] with access to characters; GetCharByScriptName
+// http://www.agsforums.com/tracker.php?action=detail&id=278
+// http://www.agsforums.com/tracker.php?action=detail&id=279
+// http://www.agsforums.com/tracker.php?action=detail&id=280
+// http://www.agsforums.com/tracker.php?action=detail&id=281
+// http://www.agsforums.com/tracker.php?action=detail&id=282
+// http://www.agsforums.com/tracker.php?action=detail&id=283
+// http://www.agsforums.com/tracker.php?action=detail&id=284
+!* alT+enter toggle full-screen in-game
+// http://www.agsforums.com/tracker.php?action=detail&id=100
+!* tip of the day on editor startup, using strazer's tips from teh forums
+// http://www.agsforums.com/tracker.php?action=detail&id=101
+!* SaveScreenShotFull option to save mouse cursor & GUIs
+// http://www.agsforums.com/tracker.php?action=detail&id=102
+!* GetOverlayX, GetOverlayY
+// http://www.agsforums.com/tracker.php?action=detail&id=103
+!* Copy GUI command in editor
+&* import/export single gui
+&* export/import single GUI
+&* import/export individual GUIs
+&* export/import individual GUI
+// http://www.agsforums.com/tracker.php?action=detail&id=104
+!* strings >200 chars
+// http://www.agsforums.com/tracker.php?action=detail&id=105
+!* hi-col palette pane colour should be text box to allow copy & paste
+// http://www.agsforums.com/tracker.php?action=detail&id=106
+!* allow arrays to be initialized at declaration, eg.  int x[5]={1,2,3,4,5};
+// http://www.agsforums.com/tracker.php?action=detail&id=107
+!* DisplaySpeechBackgroundQueued to allow a conversation to be set up in one go
+// http://www.agsforums.com/tracker.php?action=detail&id=108
+!* switch, for, arrays of strings
+// http://www.agsforums.com/tracker.php?action=detail&id=109
+// http://www.agsforums.com/tracker.php?action=detail&id=110
+// http://www.agsforums.com/tracker.php?action=detail&id=111
+!* changing a setting in the Sprite import window should prompt to re-import graphic
+// http://www.agsforums.com/tracker.php?action=detail&id=112
+!* Adjust Volume with Scaling option for character footstep sounds
+// http://www.agsforums.com/tracker.php?action=detail&id=113
+// http://www.agsforums.com/tracker.php?action=detail&id=114
+!* export room area masks
+&* export current walk-behind mask to BMP file
+&* export walk-behind/hotspot mask
+// http://www.agsforums.com/tracker.php?action=detail&id=115
+!* GUI Drop Down List control, GUI Frame control
+// http://www.agsforums.com/tracker.php?action=detail&id=285
+// http://www.agsforums.com/tracker.php?action=detail&id=286
+!* game.max_speech_width to set max width of lec-style speech
+// http://www.agsforums.com/tracker.php?action=detail&id=287
+!* allow manual 1-pixel shifts of GUI objects and room objects with arrow keys
+// http://www.agsforums.com/tracker.php?action=detail&id=116
+// http://www.agsforums.com/tracker.php?action=detail&id=117
+!* game.ignore_extended_chars to blank out >127 in SCI fonts rather than error out
+   (and print warning message)
+// http://www.agsforums.com/tracker.php?action=detail&id=118
+!* support up to 256 chars in SCI fonts
+// http://www.agsforums.com/tracker.php?action=detail&id=119
+!* GUI text windows should have a Font property in the gui editor
+// http://www.agsforums.com/tracker.php?action=detail&id=120
+!* SetCursorAnimationEnabled  to allow them to disable the animating mouse cursor
+// http://www.agsforums.com/tracker.php?action=detail&id=121
+!* Display() should support a tab character '\t' to tab to next N pixels
+// http://www.agsforums.com/tracker.php?action=detail&id=122
+!* NoTranslate function which does nothing but allows to wrap text you don't want
+   translated (editor ignores it as with GetxxxProperty)
+// http://www.agsforums.com/tracker.php?action=detail&id=123
+!* character collisions - make the non-walkable area to the proper width of the character
+   (blocking characters blocking width should include width/2 of the walking character)
+// http://www.agsforums.com/tracker.php?action=detail&id=124
+!* SetCharacterSpeed (EGO, 0) should work, but stop the character from moving
+// http://www.agsforums.com/tracker.php?action=detail&id=125
+!* set z-order of overlays, to allow them to be interspersed with GUIs (and for speech
+   to appear on top of an existing GUI)
+   Set default z-order of speech (so that it can always be displayed on top of guis
+   if they want)
+&* proper z-order support for overlays
+// http://www.agsforums.com/tracker.php?action=detail&id=126
+!* startup-off  for dialog, to stop the startup script from running
+// http://www.agsforums.com/tracker.php?action=detail&id=127
+!* sprite import window should move import rect even wheen mouse is above the area
+// http://www.agsforums.com/tracker.php?action=detail&id=128
+!* check out al2xsai scaling proggie for antialiasing stuff at hi-res
+// http://www.agsforums.com/tracker.php?action=detail&id=129
+!* option to leave global script open while testing game, for debugging purposes
+// http://www.agsforums.com/tracker.php?action=detail&id=130
+!* "locations" like walk-to points but more generic, identified by name not number
+&* room 'locations', to save having to use co-ordinates
+&- marker points in room - used as co-ordinates to move player to, etc and
+   could also be used as entry points to the room. eg getMarkerX(4);
+// http://www.agsforums.com/tracker.php?action=detail&id=131
+!* revamped areas editor, fullscreen, zooming, etc
+&* allow zoom in when editing areas, important for hi-res walkbehinds
+&* zoom in on Areas tab, esp. for walk-behinds
+// http://www.agsforums.com/tracker.php?action=detail&id=49
+!* SetObjectViewOffset
+// http://www.agsforums.com/tracker.php?action=detail&id=132
+!* allow to import 24-bit images for masks, and editor then finds the closest colour
+   to dark blue for area 1, closest to green for area 2, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=133
+!* SetFrameGraphic to change a view frame pic
+// http://www.agsforums.com/tracker.php?action=detail&id=134
+!* GetThisID function to return char/hotspot/obj number that this func was called for
+// http://www.agsforums.com/tracker.php?action=detail&id=135
+!* increase sfx sound channels from 3 to 7; more ambient sound channels
+// http://www.agsforums.com/tracker.php?action=detail&id=136
+// http://www.agsforums.com/tracker.php?action=detail&id=137
+!* "if globalint 5 == 10" support for conditionals in dialog scripts
+// http://www.agsforums.com/tracker.php?action=detail&id=138
+!* allow music/sound files to be named  music001.mid, sound002.wav, etc, to help with
+   sorting files in explorer
+// http://www.agsforums.com/tracker.php?action=detail&id=139
+!* hotkeys for area editor (eg. for +/- area number, Interactions, Properties etc)
+// http://www.agsforums.com/tracker.php?action=detail&id=140
+!* script names for dialogs, fonts and rooms
+&* script names for rooms
+// http://www.agsforums.com/tracker.php?action=detail&id=141
+// http://www.agsforums.com/tracker.php?action=detail&id=142
+// http://www.agsforums.com/tracker.php?action=detail&id=143
+!* background image for top bar in displaytopbar
+// http://www.agsforums.com/tracker.php?action=detail&id=144
+!* Autocomplete of #defined names
+// http://www.agsforums.com/tracker.php?action=detail&id=145
+!* InteractionSummary - presents a table similar to:
+   Hotspot   0 | 1 | 2 | ...
+   Look at   - | X |   | ...
+   Interact  X |   | X | ...
+   where X would be Run Script, double-click to edit; - would be Other Interactions
+   and blank means nothing set, double-click to add run script
+// http://www.agsforums.com/tracker.php?action=detail&id=146
+!* encrypt string segment in text scripts, to avoid player cheating
+// http://www.agsforums.com/tracker.php?action=detail&id=288
+!* option to run the game at 320x200, but stretch to 640x400 window
+&* allow game to run windowed, but expanded (eg. running 320x200 game in a 960x600 window)
+// http://www.agsforums.com/tracker.php?action=detail&id=147
+!* SetPreviousCursorMode (opposite of SetNextCursorMode)
+// http://www.agsforums.com/tracker.php?action=detail&id=148
+!* option for displayspeechbackground to play talking anim, and support voice speech
+&* DisplaySpeechBackground support voice speech
+&* support speech in DisplaySpeechBackground
+// http://www.agsforums.com/tracker.php?action=detail&id=149
+// http://www.agsforums.com/tracker.php?action=detail&id=150
+!* preview graphic of room background in Rooms list in editor
+// http://www.agsforums.com/tracker.php?action=detail&id=151
+!* drag-and-drop of interaction commands
+&* drag and drop commands to move them around in interaction editor
+// http://www.agsforums.com/tracker.php?action=detail&id=152
+!* add UpdateResource support for 2000/XP to set the icon to any colour depth
+// http://www.agsforums.com/tracker.php?action=detail&id=153
+!* have both LECTalkView and SierraTalkView for a character, to enable both to animate
+   at the same time - and also, to use sierra-style message boxes but with lec-style
+   character animations
+// http://www.agsforums.com/tracker.php?action=detail&id=154
+!* set_mod_speed (SetMODTempo)
+   pause_mod, resume_mod;  GetMODPattern, SeekMODLine(pattern, pos)
+>> MOD music doesn't save speed & tempo (Seek To Pattern doesn't check previous
+   patterns - we need to save current speed & tempo manually)
+&* GetModPattern
+// http://www.agsforums.com/tracker.php?action=detail&id=301
+// http://www.agsforums.com/tracker.php?action=detail&id=302
+// http://www.agsforums.com/tracker.php?action=detail&id=303
+// http://www.agsforums.com/tracker.php?action=detail&id=304
+!* CreateNewObject(x,y,pic,interaction_func) to add objects to the room
+   or alternatively specify a inventory item to link its interaction to
+&* AddNewObjectToRoom(x,y,pic) to add a new object with no interactions
+// http://www.agsforums.com/tracker.php?action=detail&id=155
+!* way to customize the X,Y,Width for sierra-style speech - basically, set a default
+   rather than having to use DisplaySpeechAt all the time
+   * and the same for normal Displays
+&* option to set location of sierra-style speech pic & text
+&* ability to set x,y,width for all text boxes (eg. so that they always appear at
+   the bottom of the screen)
+// http://www.agsforums.com/tracker.php?action=detail&id=156
+!* allow colouring within a Display statement using special control characters to
+   mark a colour change
+&* highlight words in speech/dialog in different colour if wrapped in [] or something
+// http://www.agsforums.com/tracker.php?action=detail&id=157
+!* DisableHotspot/Object/CharInteraction(hotspot, mode) to make IsInteractionAvailable
+   return false for that hotspot. Could be made redundant by settable custom properties
+// http://www.agsforums.com/tracker.php?action=detail&id=158
+!* delete dialog topics, views, characters (maybe just blank out and not display in list)
+&- option to delete characters
+&* export and reset (delete) views
+// http://www.agsforums.com/tracker.php?action=detail&id=159
+// http://www.agsforums.com/tracker.php?action=detail&id=160
+// http://www.agsforums.com/tracker.php?action=detail&id=161
+!* new interface for plugin to implement, which includes:
+    plugin hook for _display_at to override text/speech display (or just log it)
+    plugin interface to sound system, eg allow creation of custom drivers
+    plugin API way to take over drawing of fonts
+&* plugin interface to sound system, eg allow creation of custom drivers
+// http://www.agsforums.com/tracker.php?action=detail&id=290
+// http://www.agsforums.com/tracker.php?action=detail&id=291
+// http://www.agsforums.com/tracker.php?action=detail&id=292
+!* dialog_request_ex(int topic, int parameter)  pass in the topic number, to simplify
+   checking it
+// http://www.agsforums.com/tracker.php?action=detail&id=162
+!* option to set width of auto font outline
+// http://www.agsforums.com/tracker.php?action=detail&id=163
+!* allow dialog_request to be handled by rooms, like on_key_press
+// http://www.agsforums.com/tracker.php?action=detail&id=164
+!* "show objects" option in areas editor to show location of objects while drawing areas
+// http://www.agsforums.com/tracker.php?action=detail&id=165
+!* AnimateButton should support Flipped view frames
+// http://www.agsforums.com/tracker.php?action=detail&id=166
+!* editor interface to name and set initial value of globalints (maybe combine it
+   with a revamped global message editor?)
+&* some sort of in-roomedit list of globalint names to help remember what they are
+   ( and maybe not allow setting if not named)
+// http://www.agsforums.com/tracker.php?action=detail&id=167
+!* allow specify sprite number to start importing multiple sprites to
+// http://www.agsforums.com/tracker.php?action=detail&id=168
+!* importing alpha image with pixel RGBA(x,x,x,0) should be replaced with (255,0,255,0)
+   because some paint programs use alpha=0 for the transparent colour
+// http://www.agsforums.com/tracker.php?action=detail&id=169
+!* allow setting of pixel-perfect click detection on a per-object basis
+// http://www.agsforums.com/tracker.php?action=detail&id=170
+!* add game.sierra_speech_xmargin & ymargin, to customize offset of speech from edge
+// http://www.agsforums.com/tracker.php?action=detail&id=171
+!* game.dialog_options_highlight_colour
+// http://www.agsforums.com/tracker.php?action=detail&id=172
+!* allow customization of angles used for various loops (specify each loop as x/y ratio)
+// http://www.agsforums.com/tracker.php?action=detail&id=293
+!* GetDialogOptionText(topic,option,buffer) ; GetNumDialogOptions(topic)
+// http://www.agsforums.com/tracker.php?action=detail&id=173
+!* Frame Speed -> Frame Duration/Time; Animation Speed -> Anim Delay  to reflect higher number is slower
+// http://www.agsforums.com/tracker.php?action=detail&id=174
+!* shake screen option to do left-right as well as up-down
+// http://www.agsforums.com/tracker.php?action=detail&id=175
+!* SetObjectViewEx, similar to the Char one
+// http://www.agsforums.com/tracker.php?action=detail&id=176
+!* way to export animated background frames from editor
+// http://www.agsforums.com/tracker.php?action=detail&id=177
+!* DelayedProcessClick function to enable easy non-blocking walk-to interactions
+&* ProcessClickWait to enable easy non-blocking interactions
+// http://www.agsforums.com/tracker.php?action=detail&id=178
+!* option to display walkalbe/walk-behind areas semi-transparent in editor
+&* option to see room areas semi-transparent in editor
+&* hotkey to make room areas semi-transparent to see their placement
+&- translucency for walk-behinds
+// http://www.agsforums.com/tracker.php?action=detail&id=179
+!* option to choose vertical alignment of text in GUI buttons
+&* align text vertically option for GUI buttons - top, bottom, centre
+// http://www.agsforums.com/tracker.php?action=detail&id=180
+!* option to use speech bubbles for speech as well as thoughts
+&* speech bubbles by using text window GUI display above character's head
+// http://www.agsforums.com/tracker.php?action=detail&id=181
+!* option to anti-alias resizing of screenshots
+// http://www.agsforums.com/tracker.php?action=detail&id=182
+!* GetMouseCursor to complement SetMouseCursor
+// http://www.agsforums.com/tracker.php?action=detail&id=183
+!* SetListBoxColor and SetListboxHighlightColor
+// http://www.agsforums.com/tracker.php?action=detail&id=184
+!* Go To Function option inside script editor
+&* "zoom to script function" editor option to list all functions in script
+// http://www.agsforums.com/tracker.php?action=detail&id=185
+!* enable re-ordering of views in view editor list
+// http://www.agsforums.com/tracker.php?action=detail&id=186
+!* SetCharacterScaling to manually set scaling level
+&* SetCharacterSize/SetObjectSize(obj, width%, height%) to set manual scaling level
+&* SetCharacterZoom to override walkable area settings
+&* manual setting of character zoom level (eg. for effects like character shrinking)
+   script SetCharZoomLevel(x,y) function
+// http://www.agsforums.com/tracker.php?action=detail&id=187
+!* add game. variable to customize margin given to text inside text windows
+// http://www.agsforums.com/tracker.php?action=detail&id=188
+!* centre the text window background graphic in the window
+// http://www.agsforums.com/tracker.php?action=detail&id=189
+!* different Room Properties schema from everything else
+// http://www.agsforums.com/tracker.php?action=detail&id=190
+!* Set custom properties at run-time
+// http://www.agsforums.com/tracker.php?action=detail&id=191
+!* simple command parser to allow running specific command in debug
+&* console to type debug commands
+&* debug interface in engine to type script commands
+&* debug feature to execute arbitrary text script command
+&- debug option to type name of function to run
+&- text input from player
+// http://www.agsforums.com/tracker.php?action=detail&id=30
+!* patch system - or at least a "comapre versions" of the game to show differences
+&* Patch system, to allow patching of finished games AND to incorporate other team members 
+   changes into the editor
+&* enable creation of patches
+&* allow creation of .PAT files to include graphics/rooms/etc to be a secure patch
+// http://www.agsforums.com/tracker.php?action=detail&id=193
+!* DisplaySpeechBackgroundAt
+// http://www.agsforums.com/tracker.php?action=detail&id=192
+!* option to set a sprite as the drawing surface for the Raw commands
+&* allow sprites in sprite editor to be marked "dynamic", so they will persist in memory
+   and can be drawn on - RawDraw functions should work on dynamic sprites
+   CreateBlankSprite(width,height,hires)
+// http://www.agsforums.com/tracker.php?action=detail&id=194
+!* on_event CHAR_STOPPED_MOVING
+// http://www.agsforums.com/tracker.php?action=detail&id=195
+!* allow scroll down in sprite importer while stretching selection area;
+   or allow them to manually enter X, Y, Width, Height of selection
+// http://www.agsforums.com/tracker.php?action=detail&id=196
+// http://www.agsforums.com/tracker.php?action=detail&id=58
+!* enlarge max size of sprite import window
+// http://www.agsforums.com/tracker.php?action=detail&id=197
+!* click on GUI backgorund should run interface_click with -1 as button number
+// http://www.agsforums.com/tracker.php?action=detail&id=198
+!* when importing functions, remember number of parameters
+// http://www.agsforums.com/tracker.php?action=detail&id=199
+!* allow specify "workingdir" in acsetup.cfg to put save games, temp files, etc in
+// http://www.agsforums.com/tracker.php?action=detail&id=201
+!* allow  set-speech-view-loop VIEW LOOP  for use with sierra-style speech
+// http://www.agsforums.com/tracker.php?action=detail&id=200
+!* customize script editor font
+// http://www.agsforums.com/tracker.php?action=detail&id=203
+!* ScrollScreenTo(x,y,speed,blocking)
+// http://www.agsforums.com/tracker.php?action=detail&id=74
+!* per-character setting of anti-glide mode
+// http://www.agsforums.com/tracker.php?action=detail&id=204
+!* track type of exported variables & functions, to check when they're imported
+&* check type/args of imported variables/functions match those of the export
+// http://www.agsforums.com/tracker.php?action=detail&id=205
+!* GetKeycodeDescription(key, buffer)  to get name of key for display
+// http://www.agsforums.com/tracker.php?action=detail&id=206
+!* dialog editor update @ lines in script with comment of option name
+&* update the // comment in dialog script when change option description
+// http://www.agsforums.com/tracker.php?action=detail&id=207
+!* allow insertion/deletion of dialog options
+&* way to delete dialog options (and associated dialog script)
+// http://www.agsforums.com/tracker.php?action=detail&id=208
+!* display dialog options as a tree
+&* graphical tree representation of dialog structure
+   eg.  Topic 1 -> Option1, option2 (-> topic2.1, 2.2 ), option 3
+// http://www.agsforums.com/tracker.php?action=detail&id=209
+!* option to make Dialog Options GUI remain on screen (but blank) while characters
+   talk
+&* option for dialog options GUI not to appear during first speech lines before options
+are presented to player
+// http://www.agsforums.com/tracker.php?action=detail&id=289
+!* SetMusicLoop(int ms_start, int ms_end) or PlayMusicLooped(ms_start,ms_end)
+// http://www.agsforums.com/tracker.php?action=detail&id=211
+!* RunDialogOption(topic,option) to manually run an option
+// http://www.agsforums.com/tracker.php?action=detail&id=212
+!* way of allowing dialog scripts to respond to parser input
+   eg. extra entry points @("apple")  as an entry point for saying 'apple'
+&* option to use parsed text instead of selecting dialog option in conversations
+   (option names used as comparison for parser)
+// http://www.agsforums.com/tracker.php?action=detail&id=213
+!* option to define dialog options upside-down (ie. "Goodbye" first)
+// http://www.agsforums.com/tracker.php?action=detail&id=214
+!* text parser option to automatically check names of all objects in room
+   and match cursor modes against the text the user typed in, for auto
+   interaction parsing
+// http://www.agsforums.com/tracker.php?action=detail&id=215
+!* allow continuous scaling in 4 directions (down, up, left, right) to scale
+   the appropriate way
+&* seperate horizontal and vertical zoom level for walkable areas; or just a text
+// http://www.agsforums.com/tracker.php?action=detail&id=59
+!* per-inventory option as to whether to display multiple times or not
+// http://www.agsforums.com/tracker.php?action=detail&id=68
+!* inventory items should be able to have a special mouse cursor image as well as normal image
+// http://www.agsforums.com/tracker.php?action=detail&id=216
+!* button to toggle display of walkable areas in Room Settings pane
+// http://www.agsforums.com/tracker.php?action=detail&id=217
+!* SetHotspotName
+&* SetHotspotName & SetObjectName to change names in script
+&* sethotspotname
+&- SetHotspotName ( int hotspot, string) : Change hotspot's name.
+&- set/getobjectname
+&- SetObjectName (int object, string) : Change object's name.
+// http://www.agsforums.com/tracker.php?action=detail&id=218
+// http://www.agsforums.com/tracker.php?action=detail&id=219
+!* DisableWalkableArea/EnableWalkableArea as interaction command
+// http://www.agsforums.com/tracker.php?action=detail&id=220
+!* dump all graphics option, to SPR0052.BMP, SPR0021.BMP, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=221
+!* per-character option to disable lip-sync
+// http://www.agsforums.com/tracker.php?action=detail&id=222
+!* beta versions should warn if loading an old game into them
+// http://www.agsforums.com/tracker.php?action=detail&id=223
+!* option to disable diagonal walking, BASS-style
+&* option to make character movement perpendicular (north/east/south/west) only (Helm)
+// http://www.agsforums.com/tracker.php?action=detail&id=224
+!* type in more characters into parser than width of box, should scroll across windows-style
+// http://www.agsforums.com/tracker.php?action=detail&id=225
+!* some sort of "\x14" thing for scripts to display special characters in messages
+&* add a way to display the first 32 characters of a font, eg. a "\x14" type script extension
+// http://www.agsforums.com/tracker.php?action=detail&id=226
+!* name sprites in sprite manager - default name would be import filename
+// http://www.agsforums.com/tracker.php?action=detail&id=227
+!* add SetScreenTransition as interaction editor command
+// http://www.agsforums.com/tracker.php?action=detail&id=228
+!* Print option in script editor
+// http://www.agsforums.com/tracker.php?action=detail&id=229
+!* Scroll when more than X dialog options
+// http://www.agsforums.com/tracker.php?action=detail&id=230
+!* two overlapping GUI objects, click twice should alternate between them
+// http://www.agsforums.com/tracker.php?action=detail&id=231
+!* have "RoomS", "Sounds", "Music" subfolders
+&* allow sound files in sub-dir to limit number of files in game folder
+// http://www.agsforums.com/tracker.php?action=detail&id=232
+!* "Any Character Stands on Region" event
+// http://www.agsforums.com/tracker.php?action=detail&id=233
+!* mark static strings area in script, to catch  StrCopy("constant", buffer);  mistakes
+// http://www.agsforums.com/tracker.php?action=detail&id=294
+!* script 'modules'
+&* "modules", to allow easy sharing of scripts/GUIs/etc
+&* #include for scripts
+&* Multiple global scripts, to easily allow "add-in" modules
+&* some sort of text script include system / multiple scripts
+&* script library system, to allow add-on scripts
+&- plug-in scripts
+// http://www.agsforums.com/tracker.php?action=detail&id=234
+!* more obvious way to select "No sprite" in sprite selector than using the blue cup
+// http://www.agsforums.com/tracker.php?action=detail&id=235
+!* option to space outline font characters by the spacing of the main font, to
+   allow the shadows to 'meld' together (ie. font kerning option)
+&* option to kern text (move left 1 pixel for each character)
+// http://www.agsforums.com/tracker.php?action=detail&id=236
+!* allow switching font mid-sentence for a particular word, eg. to do italics
+// http://www.agsforums.com/tracker.php?action=detail&id=237
+!* make all the normal sound channels use Ambient Sound structure to allow maximum
+   freedom in looping etc, eg.  PlaySoundChannel (snd, vol, x, y, loop)
+&- looping sfx
+// http://www.agsforums.com/tracker.php?action=detail&id=238
+!* sound panning option to set left-rightness of a sound (eg SetChannelPan)
+// http://www.agsforums.com/tracker.php?action=detail&id=239
+!* SetThoughtStyle, to avoid having to rely on the speech style
+// http://www.agsforums.com/tracker.php?action=detail&id=240
+!* Sierra-style speechw ith character name as text window title
+// http://www.agsforums.com/tracker.php?action=detail&id=241
+!* allow assign each character a specific speech font
+// http://www.agsforums.com/tracker.php?action=detail&id=242
+!* increase from 30 to 60 gui objects per gui
+// http://www.agsforums.com/tracker.php?action=detail&id=243
+!* Allow set Inventory control's background colour, and set it to display a specific
+   character's inventory
+// http://www.agsforums.com/tracker.php?action=detail&id=244
+// http://www.agsforums.com/tracker.php?action=detail&id=245
+!* SetHotspotWalkToPoint (X, y)   to enable it to be disabled
+// http://www.agsforums.com/tracker.php?action=detail&id=246
+!* movement issues with speed - make some way the speed can be dynamically altered
+   while movement is in progress
+   Also seperate X and Y speeds for characters
+// http://www.agsforums.com/tracker.php?action=detail&id=247
+!* GUI Sliders - Read-Only setting for displaying info
+&- allow locking sliders
+// http://www.agsforums.com/tracker.php?action=detail&id=248
+!* text box control should allow cursor movement with left & right arrows optionally
+// http://www.agsforums.com/tracker.php?action=detail&id=249
+!* button to cycle through GUI Objects on a GUI
+// http://www.agsforums.com/tracker.php?action=detail&id=250
+!* dialog options as images (and so dialog option would be slot number)
+// http://www.agsforums.com/tracker.php?action=detail&id=69
+!* right-click "Edit sprite" for sprite manager, which would launch eg. PSP
+// http://www.agsforums.com/tracker.php?action=detail&id=251
+!* ProgressBar GUI control - for stuff like health bars, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=252
+!* enable close debug console during conversation; option to output console to file
+// http://www.agsforums.com/tracker.php?action=detail&id=253
+// http://www.agsforums.com/tracker.php?action=detail&id=254
+!* allow frame-sound offset for different walkable areas, to play different sound on diff surface
+&- walkable area have sound effect for foodsteps
+// http://www.agsforums.com/tracker.php?action=detail&id=255
+!* option to allow speech on top of GUIs
+http://www.agsforums.com/tracker.php?action=detail&id=256
+!* script editor pop-up listing room names for each number and object and hotspot names
+// http://www.agsforums.com/tracker.php?action=detail&id=257
+!* allow == for strings, with new opcode for script system
+&* add clever string handling to text script, eg. string2 = "this" + 25 + "more";
+&* script compielr convert "a = b" into StrCopy(a,b) automatically
+// http://www.agsforums.com/tracker.php?action=detail&id=258
+!* head on collision between two chars should be handled better - at the moment
+   one stops and the other walks through it
+// http://www.agsforums.com/tracker.php?action=detail&id=463
+!- make ctrl-A an overlay on top of bg but underneath characters and objs, and allow game to continue running.
+// http://www.agsforums.com/tracker.php?action=detail&id=259
+!- make ctrl-A cycle none, walkable, walk-behind, hotspots, none.
+// http://www.agsforums.com/tracker.php?action=detail&id=260
+!- allow to start drawing areas outside of the drawing area
+// http://www.agsforums.com/tracker.php?action=detail&id=261
+!- center drawing area within pane, in order to allow start drawing areas on top and left as well
+// http://www.agsforums.com/tracker.php?action=detail&id=262
+!- allow tab between all the options in different areas of the editor
+// http://www.agsforums.com/tracker.php?action=detail&id=263
+!- an option for SetMouseBounds to NOT reset after leaving the screen
+// http://www.agsforums.com/tracker.php?action=detail&id=264
+!- add CTRL key in GUI making, to select multiple gui buttons.  then when you drag, it drags them all.
+// http://www.agsforums.com/tracker.php?action=detail&id=265
+!* SetGuiOBjectStyle(font,color)
+// http://www.agsforums.com/tracker.php?action=detail&id=266
+!* text annotations/notes for views, fonts, etc
+&* Notes area, for typing text notes about fonts, views, etc into the editor
+// http://www.agsforums.com/tracker.php?action=detail&id=48
+!* DialogOptionFont, to allow it to be different to normal
+&* SetDialogOptionsFont (?? uses Normal font atm)
+// http://www.agsforums.com/tracker.php?action=detail&id=267
+!* MOveObjectBlocking
+// http://www.agsforums.com/tracker.php?action=detail&id=268
+!* background colours and borders for GUI labels
+// http://www.agsforums.com/tracker.php?action=detail&id=295
+// http://www.agsforums.com/tracker.php?action=detail&id=296
+!* talking idle-anim - eg. blinking/flexing muscles. should be overlaid on top of
+   normal talking anim occasionally
+// http://www.agsforums.com/tracker.php?action=detail&id=297
+!* copy & paste interactions in interaction editor
+// http://www.agsforums.com/tracker.php?action=detail&id=298
+!* room option to walk character in from off-screen on left, bottom & right sides
+&* checkbox to automatically walk character in off edge
+&* option to walk in from an edge, to avoid scripting x=-20, movecharblocking(20,y)
+// http://www.agsforums.com/tracker.php?action=detail&id=299
+!* wipe colour-with colour areas option (to convert eg. all hotspot 1 to hotspot 2)
+// http://www.agsforums.com/tracker.php?action=detail&id=55
+!* queueModSeek to jump pattern after the current one finishes
+// http://www.agsforums.com/tracker.php?action=detail&id=300
+!* option for shadow fonts rather than outline - so the font is printed twice, 1 pixel down-right
+// http://www.agsforums.com/tracker.php?action=detail&id=305
+!* put game name & id into speech.vox file, much like replays
+// http://www.agsforums.com/tracker.php?action=detail&id=306
+!* write an "Error.log" with the illegal exception message when it crashes
+// http://www.agsforums.com/tracker.php?action=detail&id=307
+!* ObjectOn/OffInRoom to turn objects on/off in other rooms
+// http://www.agsforums.com/tracker.php?action=detail&id=308
+!* topic-option-off (topic_num) (option_num) & -on & -off-forever
+// http://www.agsforums.com/tracker.php?action=detail&id=309
+!* mouse sensitivity setting in Setup
+&* option to set mouse cursor speed
+// http://www.agsforums.com/tracker.php?action=detail&id=310
+!* ChangeDialogOptionName
+// http://www.agsforums.com/tracker.php?action=detail&id=311
+!* "plugins" sub-folder to put plugins in for editor
+// http://www.agsforums.com/tracker.php?action=detail&id=312
+!* interaction editor right-click "add new 'Run Script' action & Edit" menu option
+// http://www.agsforums.com/tracker.php?action=detail&id=313
+!* SetGUIOBjectTransparency
+// http://www.agsforums.com/tracker.php?action=detail&id=314
+!* game setting to emulate behaviour of letterbox mode selected in setup
+// http://www.agsforums.com/tracker.php?action=detail&id=315
+!* SetSaveGameDirectory to allow a "Change Dir" button on save gui
+&* Set directory for save games (including option for My Docuemnts)
+// http://www.agsforums.com/tracker.php?action=detail&id=316
+!* 'Character - Set Location' function for setting npc x/y
+// http://www.agsforums.com/tracker.php?action=detail&id=317
+!* Default dialog option, to use if they are all off
+// http://www.agsforums.com/tracker.php?action=detail&id=318
+!* usermodes for interaction on inventory items
+// http://www.agsforums.com/tracker.php?action=detail&id=319
+!* save current line number in script editor when exiting editor and returning
+// http://www.agsforums.com/tracker.php?action=detail&id=320
+!* password protect rooms
+// http://www.agsforums.com/tracker.php?action=detail&id=321
+!* MOUSE_ENTER, MOUSE_LEAVE on_events for hotspots/objects/etc
+// http://www.agsforums.com/tracker.php?action=detail&id=322
+!* DisplayMessageBox for always-speech games
+// http://www.agsforums.com/tracker.php?action=detail&id=323
+!* option to save script within editor, without exiting it
+// http://www.agsforums.com/tracker.php?action=detail&id=324
+!* Reset button for GUIs/characters/inventory (rather than delete)
+// http://www.agsforums.com/tracker.php?action=detail&id=325
+!* per-inventory item option to say "cannot be selected" - if you click it,
+   it automatically uses it in Interact mode rather than select
+&- inventory item can be used on its own (click in inv window activates it)
+// http://www.agsforums.com/tracker.php?action=detail&id=326
+!* nice way of start/stopping recording and playback of replays
+// http://www.agsforums.com/tracker.php?action=detail&id=327
+!* import series of bitmap files (eg. image1.pcx .. image25.pcx or whatever)
+// http://www.agsforums.com/tracker.php?action=detail&id=328
+!* allow GUI text boxes to have ascii chars > 128 if ttf font
+// http://www.agsforums.com/tracker.php?action=detail&id=329
+!* automatically add a "If inv was used" when creating a Use Inventory interaction
+// http://www.agsforums.com/tracker.php?action=detail&id=330
+!* Text dumper should put divider between each dialog topic
+// http://www.agsforums.com/tracker.php?action=detail&id=331
+!* Copy To Clipboard option for Text Script Equivalent code, and for number in hi-col palette editor
+// http://www.agsforums.com/tracker.php?action=detail&id=332
+!* Option for new QFG3-style speech, where if no speech view it displays
+   at the top as if there is one, rather than doing LEC-style as at present
+// http://www.agsforums.com/tracker.php?action=detail&id=333
+!* option in Setup to disable music fading when speech is on
+// http://www.agsforums.com/tracker.php?action=detail&id=334
+!* http://www.geocities.com/netmonkster/AGS/
+// http://www.agsforums.com/tracker.php?action=detail&id=335
+!* different colour flag in interaction editor for repeatedly_execute
+// http://www.agsforums.com/tracker.php?action=detail&id=336
+!* max cursors, allow cursor loop choice
+// http://www.agsforums.com/tracker.php?action=detail&id=337
+!* more bg frames for rooms, set delay of each frame
+// http://www.agsforums.com/tracker.php?action=detail&id=338
+!* allow naming of rooms 301+ in room list
+// http://www.agsforums.com/tracker.php?action=detail&id=339
+!* character idle animation speed option
+&- allow setting of idle animation speed
+// http://www.agsforums.com/tracker.php?action=detail&id=340
+!* set listbox border and textbox border colours
+&* allow define border colour seperately to foreground col
+&* different color for text box outline than text
+// http://www.agsforums.com/tracker.php?action=detail&id=342
+// http://www.agsforums.com/tracker.php?action=detail&id=343
+!* each background should have its own palette in hi-col games
+&* 16-bit mode that uses 8-bit background palette and 8-bit sprite palette
+&- add eg. 16 palettes for hi-colour mode to save space with 8-bit sprites
+&- multuple 256-col palettes in hi-col
+//CJ: I think it's still an outstanding request but hasn't been asked about lately; I think more people are warming to just using hi-color
+// http://www.agsforums.com/tracker.php?action=detail&id=462
+!* option to disable default scroll buttons on list boxes
+// http://www.agsforums.com/tracker.php?action=detail&id=344
+!* game option to change which cursor mode selects inventory items
+// http://www.agsforums.com/tracker.php?action=detail&id=345
+!* option to centre text in Display messagebox
+&* option to centre text within message box
+// http://www.agsforums.com/tracker.php?action=detail&id=346
+!* option to centre text within text box
+// http://www.agsforums.com/tracker.php?action=detail&id=347
+!* mouse-over for objects
+// http://www.agsforums.com/tracker.php?action=detail&id=348
+!* option for 2-3 pixel wide hotspot on cursor, to make it easier to click stuff
+// http://www.agsforums.com/tracker.php?action=detail&id=349
+!* FOA-style speech (always as background, moves with char)
+// http://www.agsforums.com/tracker.php?action=detail&id=350
+!* AddCredit, ScrollCredits; specify to scroll timed to length of music
+&* ScrollingCredit ("credit", font, colour);
+// http://www.agsforums.com/tracker.php?action=detail&id=351
+!* on_event for OnDisplaySpeech to allow custom ways of displaying it
+// http://www.agsforums.com/tracker.php?action=detail&id=352
+!* words with spaces in parser dictionary
+// http://www.agsforums.com/tracker.php?action=detail&id=353
+!* SQ6-style dialog (scrollable textbox which saves old dialog (eg last 10 sentences))
+// http://www.agsforums.com/tracker.php?action=detail&id=354
+!* Add Dithering as option to hi-col graphic import
+&- option to turn dithering back on
+// http://www.agsforums.com/tracker.php?action=detail&id=355
+!* display room number/description on Areas tab
+// http://www.agsforums.com/tracker.php?action=detail&id=356
+!* Freeze screen, to merge all chars/objects into the background for Raw transitions
+// http://www.agsforums.com/tracker.php?action=detail&id=357
+!* walk-to point for objects; set starting location for each room
+// http://www.agsforums.com/tracker.php?action=detail&id=358
+!- SetObjectIgnoreLight would be useful too.
+// http://www.agsforums.com/tracker.php?action=detail&id=359
+!* Loop oscillate animation (1-2-3-4-3-2-1-2-3-4 etc)
+// http://www.agsforums.com/tracker.php?action=detail&id=360
+!* DisableSound/DisableMusic
+&* SoundOff/On, MusicOff/On
+// http://www.agsforums.com/tracker.php?action=detail&id=361
+// http://www.agsforums.com/tracker.php?action=detail&id=362
+!* allow extra help files to be added to help menu
+// http://www.agsforums.com/tracker.php?action=detail&id=363
+!* path editor in windows editor, to allow easy path construction
+// http://www.agsforums.com/tracker.php?action=detail&id=364
+!* import sprite to exact slot number
+// http://www.agsforums.com/tracker.php?action=detail&id=365
+!* add Room Save As as a button in the settings win
+// http://www.agsforums.com/tracker.php?action=detail&id=366
+!* hi-res mask import
+// http://www.agsforums.com/tracker.php?action=detail&id=367
+!* TintObject (R,G,B) , TintCharacter (R,G,B)
+// http://www.agsforums.com/tracker.php?action=detail&id=368
+!* allow naming of rooms not restricted to ROOMx.CRM, then link them up in editor
+// http://www.agsforums.com/tracker.php?action=detail&id=369
+!* sprite hotspots, to prevent having to add extra blank lines to sprites to level out
+// http://www.agsforums.com/tracker.php?action=detail&id=370
+!* way to mark GUI element as "deleted" when deleted rather than remove & re-number
+// http://www.agsforums.com/tracker.php?action=detail&id=371
+!* TextOverlayCentreText, RemoveAllBackgroundSpeech
+// http://www.agsforums.com/tracker.php?action=detail&id=373
+!* isCurrentlyScrolling function (check if offsetx/y change this frame)
+// http://www.agsforums.com/tracker.php?action=detail&id=374
+!* background masking sprite, to allow different areas of the screen to take pixels from
+   various anim bgrnd scenes
+// http://www.agsforums.com/tracker.php?action=detail&id=375
+!* option to change bg anim speed at runtime
+// http://www.agsforums.com/tracker.php?action=detail&id=376
+!* way of having custom modes, inc unhandled_Event handling
+// http://www.agsforums.com/tracker.php?action=detail&id=377
+!* Face Hotspot in look mode option
+// http://www.agsforums.com/tracker.php?action=detail&id=378
+!* import/export parser vocab
+// http://www.agsforums.com/tracker.php?action=detail&id=379
+!* on_event for BeginDialog, EndDialog
+// http://www.agsforums.com/tracker.php?action=detail&id=380
+!* FileDelete (but restrict to game folder only)
+// http://www.agsforums.com/tracker.php?action=detail&id=381
+!* extra-debug mode - messages like "you added blue cup to inv" and "you switched on
+   script-only gui, thus pausing the game"
+!* option to allow on_keY_press while speech is displayed
+// http://www.agsforums.com/tracker.php?action=detail&id=383
+!* multiple animations on top of each other, for random body movement & speech
+// http://www.agsforums.com/tracker.php?action=detail&id=384
+!* option to stretch flics like media player (ie until first edge reaches screen edge)
+// http://www.agsforums.com/tracker.php?action=detail&id=385
+!* FadeToColor (startslot, endslot, r, g, b) for 256-col mod
+&* fadescreencolorin/out for night effects
+// http://www.agsforums.com/tracker.php?action=detail&id=387
+!* IsCharacterTalking
+&* character[].talking variable
+// http://www.agsforums.com/tracker.php?action=detail&id=388
+!* vox for flics
+// http://www.agsforums.com/tracker.php?action=detail&id=389
+!* option to skip entire dialog by pressing ESC
+// http://www.agsforums.com/tracker.php?action=detail&id=390
+!* allow specifying number of loops for music repeat
+&* allow setting number of times to repeat music
+// http://www.agsforums.com/tracker.php?action=detail&id=391
+!* getsaveslotroom, getsaveslotglobalint for finding out info about saved games
+// http://www.agsforums.com/tracker.php?action=detail&id=392
+!* leaveObjPerm (like MergeObject but keeps object alive)
+// http://www.agsforums.com/tracker.php?action=detail&id=393
+!* DisplayGUI (GUINumber, text, ...)
+// http://www.agsforums.com/tracker.php?action=detail&id=394
+!* removeinvwindow to remove sierra inv window rather than re-displaying after script finishes
+&* script command to close sierra inventory when executed from it
+// http://www.agsforums.com/tracker.php?action=detail&id=395
+!* double-click event
+// http://www.agsforums.com/tracker.php?action=detail&id=396
+!* text script floating point vars
+// http://www.agsforums.com/tracker.php?action=detail&id=397
+!* option to make characters & objects block like walls
+&- option for objects to block at their base
+// http://www.agsforums.com/tracker.php?action=detail&id=398
+!* preLoadRoom, to precache a specific room in memory 
+// http://www.agsforums.com/tracker.php?action=detail&id=399
+!* import whole folder, automatically does Import New on every PCX in folder
+// http://www.agsforums.com/tracker.php?action=detail&id=400
+!* FileOpen use clibfopen to enable user files included in .dat
+// http://www.agsforums.com/tracker.php?action=detail&id=461
+!* zoom for objects/overlays
+// http://www.agsforums.com/tracker.php?action=detail&id=401
+!* projectile support (one-shot objects) - eg. NewProjectile(x,y,to_x,to_y,speed)
+// http://www.agsforums.com/tracker.php?action=detail&id=402
+!* default script action "INTERACT WITH HOTSPOT_NAME" not "hotspot5"
+// http://www.agsforums.com/tracker.php?action=detail&id=403
+!* easy option for character reflection in roomedit
+// http://www.agsforums.com/tracker.php?action=detail&id=404
+!* Windows launcher program
+// http://www.agsforums.com/tracker.php?action=detail&id=405
+!* gamma correction
+// http://www.agsforums.com/tracker.php?action=detail&id=406
+!* support "&1" in CreateTextOverlay
+// http://www.agsforums.com/tracker.php?action=detail&id=407
+!* customize colours of save/restore/inputbox
+// http://www.agsforums.com/tracker.php?action=detail&id=408
+!* animated inventory items
+&- animating inventory items
+// http://www.agsforums.com/tracker.php?action=detail&id=409
+!* show Wait cursor while loading room
+// http://www.agsforums.com/tracker.php?action=detail&id=410
+!* FLC background scenes
+&- play movie in background of screen
+&- using FLC as animating backgournd
+// http://www.agsforums.com/tracker.php?action=detail&id=411
+!* drawing functions, eg. DrawLine, DrawPixel, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=412
+!- add drawing functions, eg. createLineOverlay
+// http://www.agsforums.com/tracker.php?action=detail&id=413
+!* add option to display images in letterbox borders
+// http://www.agsforums.com/tracker.php?action=detail&id=460
+!* option to reduce all graphics to 256-color when converting game
+// http://www.agsforums.com/tracker.php?action=detail&id=414
+!* some way of darkening the entire room, eg when light switched off
+&- dark effect - eg. for turning off the lights and just having torch
+&- light setting for actual room; also adjustable light mask for fine control
+// http://www.agsforums.com/tracker.php?action=detail&id=415
+!* popup-YP BELOW option
+// http://www.agsforums.com/tracker.php?action=detail&id=416
+!* list of user-friendly options for GUI button clicks
+// http://www.agsforums.com/tracker.php?action=detail&id=417
+!* enable multiple scripts to be run at once
+// http://www.agsforums.com/tracker.php?action=detail&id=418
+!* GUI radio buttons
+&- check box, radio button on gui
+// http://www.agsforums.com/tracker.php?action=detail&id=419
+// http://www.agsforums.com/tracker.php?action=detail&id=420
+!- setting screen transition for each room
+// http://www.agsforums.com/tracker.php?action=detail&id=421
+!- color picker tool, to find out palette num of a color
+// http://www.agsforums.com/tracker.php?action=detail&id=422
+!- more transitions, eg. fade-between, marquee, etc
+&- more transitions, eg those from animation shop - also fade to white/red
+// http://www.agsforums.com/tracker.php?action=detail&id=423
+!- IT music
+// http://www.agsforums.com/tracker.php?action=detail&id=424
+!- option for speech text to appear in normal window, and also in teletype fashion
+// http://www.agsforums.com/tracker.php?action=detail&id=425
+!- right-click on hotspot event
+// http://www.agsforums.com/tracker.php?action=detail&id=426
+!- FaceDirection function
+// http://www.agsforums.com/tracker.php?action=detail&id=427
+!- option for GUI to change cursor when over it
+// http://www.agsforums.com/tracker.php?action=detail&id=428
+!- allow changing of background colour in sprite manager
+// http://www.agsforums.com/tracker.php?action=detail&id=429
+!- Someway for QFG2 Desert type walk-behinds... where the user goes down
+   instead of foward.
+// http://www.agsforums.com/tracker.php?action=detail&id=430
+!- inventory window background
+// http://www.agsforums.com/tracker.php?action=detail&id=431
+!- change cursor when over screen edge (eg. for "exit" cursor)
+// http://www.agsforums.com/tracker.php?action=detail&id=432
+!- set character shade (overall, not area-specific)
+// http://www.agsforums.com/tracker.php?action=detail&id=433
+!- change to using a more accurate positioning system (eg. 1000x1000)
+// http://www.agsforums.com/tracker.php?action=detail&id=434
+!- allow user specify angles for movement
+// http://www.agsforums.com/tracker.php?action=detail&id=449
+!- allow customiable sierra-style inv window
+&- customizable sierra-style inventory window
+// http://www.agsforums.com/tracker.php?action=detail&id=435
+!- change tempo of music, play 2 simulatneous music
+// http://www.agsforums.com/tracker.php?action=detail&id=302
+// http://www.agsforums.com/tracker.php?action=detail&id=464
+!- fade-in object (eg. ObjectOnFade(x) - translucency)
+// http://www.agsforums.com/tracker.php?action=detail&id=436
+!- command to flip character horiz/vert
+// http://www.agsforums.com/tracker.php?action=detail&id=437
+!- try all resolutions above what is required in engine
+// http://www.agsforums.com/tracker.php?action=detail&id=438
+!- make Debug's teleport command take you to a walkable area on the scren
+// http://www.agsforums.com/tracker.php?action=detail&id=439
+!- export/import single gui element
+// http://www.agsforums.com/tracker.php?action=detail&id=440
+!- roomedit allow setting of default directory for gfx, sound, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=441
+!- split up DAT file into sound.dat, rooms.dat, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=442
+!- naming sound/music in roomedit
+// http://www.agsforums.com/tracker.php?action=detail&id=12
+!- easy non-script based way of doing SetPlayerCharacter and ChangeCharView
+// http://www.agsforums.com/tracker.php?action=detail&id=443
+!- font import from bmp/pcx
+// http://www.agsforums.com/tracker.php?action=detail&id=34
+!- text window type for each character
+// http://www.agsforums.com/tracker.php?action=detail&id=444
+!- character view preset editor (to change default loop order)
+// http://www.agsforums.com/tracker.php?action=detail&id=445
+!- Add an option in the ROOMS Options that specifies if this room is a map
+   (with all interfaces off ) or not. So when entering this room all
+   interfaces will be off and when exiting on.
+// http://www.agsforums.com/tracker.php?action=detail&id=446
+!- option to not draw bottom half of character in areas, ie. shallow water
+// http://www.agsforums.com/tracker.php?action=detail&id=447
+!- diagonal base lines
+// http://www.agsforums.com/tracker.php?action=detail&id=448
+!- option to disable walking to walk-to spots on Interact & Talk
+// http://www.agsforums.com/tracker.php?action=detail&id=450
+!- walk-lines, to help pathfinder with narrow areas
+// http://www.agsforums.com/tracker.php?action=detail&id=451
+!- ability to export views, cursors, etc
+// http://www.agsforums.com/tracker.php?action=detail&id=42
+// http://www.agsforums.com/tracker.php?action=detail&id=452
+!- interface previewer - preview pushed and mouseover pictures
+// http://www.agsforums.com/tracker.php?action=detail&id=453
+!- "beginner" mode in RoomEdit, to hide advanced features for beginners
+// http://www.agsforums.com/tracker.php?action=detail&id=454
+!- link a script to a view frame
+// http://www.agsforums.com/tracker.php?action=detail&id=455
+!- per-room disabling of look, use and talk modes (not just walk as at present)
+// http://www.agsforums.com/tracker.php?action=detail&id=456
+!- sub-rooms, like drawer/locker/etc in sierra games
+// http://www.agsforums.com/tracker.php?action=detail&id=457
+!- map editor, to link rooms together
+// http://www.agsforums.com/tracker.php?action=detail&id=458
+!- new game option without restarting editor
+// http://www.agsforums.com/tracker.php?action=detail&id=459
+
+====================================================================================================
+====================================================================================================
+
+ - dialog box which you can add stuff to , eg. for cutscene
+//CJ: Hmm, not really sure
+ - script .view= must be view - 1
+//CJ: Perhaps documentation needs to be clarified; otherwise close
+ * restore game immediate effect
+//CJ: request for RestoreGameSlot to work immediately, not after the script finishes running. Not really viable to do
+ * characters_in_room array updated once per loop for speed optimization
+//CJ: That's an 'internal' request to remind me to do it, it's the reason for adding the NewRoomNPC function and is still outstanding
+ * music glitch after restarting game in QFG2
+//CJ: Some sort of PlayMusicQueued glitch, details are so scarce there's not really anything of substance to say
+ * check wrong extension being assigned to some run script interactions? eg. room_a
+   is created by AGS but doesn't work; but room_b works instead?
+//CJ: Possibly some sort of problem if you keep changing an interaction type to and from Run Script, but I can't replicate it
+ * occasional crash on Paste From Clipboard (20x20 24-bit)
+//CJ: I haven't been able to replicate this myself
+ * First Time ENters Screen happening twice sometimes
+&* bug with First Enters Screen happeneing twice
+&* problem with First Time Enters Screen getting run twice somehow
+&- make sure first-time-enters-screen only runs once
+&- check first time enters screen happens twice
+&- check using NewRoom runs First Time Enters scirpts even if not first time[/color]
+//CJ: This was definitely a problem but I never managed to replicate it myself. It may still be a bug, but it hasn't been mentioned in a while so I'm not sure.
+
+ * priority of events to do when script finishes - should be in same order as they were
+   in the script
+//CJ: not entirely sure
+
+ * "No transparency" sprite import option
+&* add a "no transparency" option to sprite imports
+// "Palette index 0"? Maybe renaming it would be in order.
+
+ - put speech skipping into script (eg. IfSpeechDisplayed)
+//game.skip_speech_specific_key sufficient?
+
+ * option to use old-style inv order updateing
+&* add Inventory Compatibility mode (ie. call update_invorder every time)
+// Difference between old and new style?
+
+ * scripting bug with arrays of strings
+// Arrays of strings are possible?
+
+ - view (walkable-)areas for NPCs
+// ?
+
+ * trainer messages, that pop up at bottom of screen when for example add blue cup to inv
+// ?
+
+ * more room options
+// ?

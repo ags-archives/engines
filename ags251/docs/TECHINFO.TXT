@@ -1,0 +1,69 @@
+Adventure Game Studio Technical Information (c) 2000 Chris Jones
+Updated 26 December 2001
+----------------------------------------------------------------
+This document is aimed at readers who have some experience with programming,
+and want to know more detail about how AGS works.
+
+1. FILE FORMATS
+---------------
+1.1 PALETTE FILE
+The raw palette format which AGS uses is simply an array of 256 elements,
+each a 3-byte (R,G,B) triplet. Therefore, the file size is always 768 bytes.
+Each of the colour values is an unsigned byte ranging from 0 (black) to 255
+(full intensity).
+
+1.2 CHARACTER FILE
+The character file format (used in .CHA files) is as follows:
+The first 12 bytes in the file hold the string 'AGSCharacter'. This is the
+signature to identify the file as a character file.
+Next, there is a 16-bit word, which is the file version, and should always
+be 2.
+After that comes the palette. This is an array of 256 (RGB0) records, where
+the 0 is a padding byte to make each index aligns on 4-byte boundary.
+Therefore, the palette always takes up 1024 bytes.
+After the palette comes the character information block. This is structured
+as follows:
+offset size  description
++00h  DWORD  default view number for character (normal walking view)
++04h  DWORD  talking view number
++08h  DWORD  current view number (=default view number)
++0Ch  DWORD  starting room number
++10h  DWORD  [used internally by AGS]
++14h  DWORD  X-coordinate of starting location
++18h  DWORD  Y-coordinate of starting location
++1Ch  DWORD  [used internally by AGS]
++20h  DWORD  character flags (bit-field)
++24h 28BYTEs [used internally by AGS]
++40h  WORD   movement speed
++42h  WORD   animation speed
++44h 204BYTEs [used internally by AGS]
++xxh 30BYTEs character name (zero-padded ASCIIZ string)
++xxh 16BYTEs script name (zero-padded ASCIIZ string)
++xxh  BYTE   [reserved]
+Following this block comes the actual character graphics.
+<note to self: finish this section later when I have time>
+
+2. AGS-INTERNAL MODULE INFORMATION
+----------------------------------
+Q. What compiler is used for the text script language?
+A. The compiler used is CSCOMP v0.79, which I wrote myself.
+
+Q. What is the music player?
+A. The MOD, XM and S3M player is JGMOD, available here:
+   http://surf.to/jgmod
+
+Q. What compiler did you use to make AGS?
+A. The DOS version uses DJGPP, available at:
+   http://www.delorie.com/djgpp/
+
+Q. What about the MP3 player?
+A. It's called ALMP3 v1.5, which is an adaptation of Freeamp to work with
+   allegro, by Javier Gonzalez.
+
+Q. Does AGS use Allegro?
+A. Yes it does, and you can get Allegro here:
+   http://alleg.sourceforge.net/
+   However, AGS uses its own font-drawing routines.
+
+---------------------------------------------------------------
+[end of technical information]

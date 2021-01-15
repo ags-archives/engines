@@ -1,0 +1,277 @@
+<HTML>
+<head><title>DialogOptionsRenderingInfo functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="DialogOptionsRenderingInfoFunctions"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags51.htm#topic47"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags53.htm#DrawingSurfaceFunctions"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>DialogOptionsRenderingInfo functions and properties</H2>
+The DialogOptionsRenderingInfo instance is used by the <A HREF="ags44.htm#CustomDialogOptions">custom dialog options</A>
+system. You can never create one yourself, it will be passed in to the dialog option functions as
+described in the linked page.<P>
+
+<A HREF="#DialogOptionsRenderingInfo.ActiveOptionID">ActiveOptionID property</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.DialogToRender">DialogToRender property</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.Height">Height property (DialogOptionsRenderingInfo)</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.ParserTextBoxWidth">ParserTextBoxWidth property</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.ParserTextBoxX">ParserTextBoxX property</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.ParserTextBoxY">ParserTextBoxY property</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.Surface">Surface property (DialogOptionsRenderingInfo)</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.Width">Width property (DialogOptionsRenderingInfo)</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.X">X property (DialogOptionsRenderingInfo)</A><BR>
+<A HREF="#DialogOptionsRenderingInfo.Y">Y property (DialogOptionsRenderingInfo)</A><BR>
+<P>
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.ActiveOptionID"></A>
+<H3>ActiveOptionID property</H3>
+<PRE>
+int DialogOptionsRenderingInfo.ActiveOptionID;
+</PRE>
+Gets/sets the currently active option on the dialog options screen. You set this in the
+<TT>dialog_options_get_active</TT> function to tell AGS which option the mouse is hovering over.
+This ensures that the correct option is activated when the player clicks the mouse button.<P>
+You can read this property in the <TT>dialog_options_render</TT> function in order to highlight
+the selected option in a different manner to the others.<P>
+This property can be set to <B>0</B> which indicates that no option is selected; otherwise it
+will be the option number from 1 to the number of options in the dialog.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_active(DialogOptionsRenderingInfo *info)
+{
+  info.ActiveOptionID = 1;
+}
+</PRE>
+always selects the first option<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Dialog.GetOptionState">Dialog.GetOptionState</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.DialogToRender"></A>
+<H3>DialogToRender property</H3>
+<PRE>
+Dialog* DialogOptionsRenderingInfo.DialogToRender;
+</PRE>
+Gets the dialog that needs to be rendered. You can loop through all the options in the dialog
+in order to decide what to display on the screen.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example please see the <A HREF="ags44.htm#CustomDialogOptions">custom dialog options</A> page.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Dialog.GetOptionState">Dialog.GetOptionState</A>,
+<A HREF="ags52.htm#DialogOptionsRenderingInfo.Surface">DialogOptionsRenderingInfo.Surface</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.Height"></A>
+<H3>Height property (DialogOptionsRenderingInfo)</H3>
+<PRE>
+int DialogOptionsRenderingInfo.Height;
+</PRE>
+Gets/sets the height of the area needed to draw the dialog options.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function, but
+can be read in other functions in order to render the options.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.Width = 300;
+  info.Height = 150;
+}
+</PRE>
+creates a 300x150 size area to draw the dialog options in<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.Width">DialogOptionsRenderingInfo.Width</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.ParserTextBoxWidth"></A>
+<H3>ParserTextBoxWidth property</H3>
+<PRE>
+int DialogOptionsRenderingInfo.ParserTextBoxWidth;
+</PRE>
+Gets/sets the width of the text parser textbox on the dialog options.
+If the text parser is not enabled for this dialog, this setting will be ignored.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.Width = 300;
+  info.Height = 150;
+  // Put the text parser at the bottom (if enabled)
+  info.ParserTextBoxX = 10;
+  info.ParserTextBoxY = 130;
+  info.ParserTextBoxWidth = 180;
+}
+</PRE>
+positions the parser text box at (10,130) inside the 300x150 dialog options area<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.Width">DialogOptionsRenderingInfo.Width</A>,
+<A HREF="ags52.htm#DialogOptionsRenderingInfo.ParserTextBoxX">DialogOptionsRenderingInfo.ParserTextBoxX</A>,
+<A HREF="ags52.htm#DialogOptionsRenderingInfo.ParserTextBoxY">DialogOptionsRenderingInfo.ParserTextBoxY</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.ParserTextBoxX"></A>
+<H3>ParserTextBoxX property</H3>
+<PRE>
+int DialogOptionsRenderingInfo.ParserTextBoxX;
+</PRE>
+Gets/sets the X-position of the text parser textbox on the dialog options.
+If the text parser is not enabled for this dialog, this setting will be ignored.<P>
+This X-position is relative to the dialog options surface. That is, an X of 10
+will position it 10 pixels within the dialog options area, not 10 pixels from
+the edge of the screen.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.Width = 300;
+  info.Height = 150;
+  // Put the text parser at the bottom (if enabled)
+  info.ParserTextBoxX = 10;
+  info.ParserTextBoxY = 130;
+  info.ParserTextBoxWidth = 180;
+}
+</PRE>
+positions the parser text box at (10,130) inside the 300x150 dialog options area<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.ParserTextBoxWidth">DialogOptionsRenderingInfo.ParserTextBoxWidth</A>,
+<A HREF="ags52.htm#DialogOptionsRenderingInfo.ParserTextBoxY">DialogOptionsRenderingInfo.ParserTextBoxY</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.ParserTextBoxY"></A>
+<H3>ParserTextBoxY property</H3>
+<PRE>
+int DialogOptionsRenderingInfo.ParserTextBoxY;
+</PRE>
+Gets/sets the Y-position of the text parser textbox on the dialog options.
+If the text parser is not enabled for this dialog, this setting will be ignored.<P>
+This Y-position is relative to the dialog options surface. That is, a Y of 10
+will position it 10 pixels within the dialog options area, not 10 pixels from
+the edge of the screen.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.Width = 300;
+  info.Height = 150;
+  // Put the text parser at the bottom (if enabled)
+  info.ParserTextBoxX = 10;
+  info.ParserTextBoxY = 130;
+  info.ParserTextBoxWidth = 180;
+}
+</PRE>
+positions the parser text box at (10,130) inside the 300x150 dialog options area<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.ParserTextBoxX">DialogOptionsRenderingInfo.ParserTextBoxX</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.Surface"></A>
+<H3>Surface property (DialogOptionsRenderingInfo)</H3>
+<PRE>
+DrawingSurface* DialogOptionsRenderingInfo.Surface;
+</PRE>
+Gets the drawing surface that can be used to draw the dialog options.<P>
+This can only be used within the <TT>dialog_options_render</TT> function; in all other
+functions it will return <I>null</I>.<P>
+Unlike most other uses of the DrawingSurface, you do <B>NOT</B> have to release this one.
+AGS will automatically do that for you after the <TT>dialog_options_render</TT> function
+has completed.<P>
+The size of the surface should correspond to the Width and Height requested in
+the <TT>dialog_options_get_dimensions</TT> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_render(DialogOptionsRenderingInfo *info)
+{
+  info.Surface.Clear(14);
+}
+</PRE>
+clears the dialog options area to yellow.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DrawingSurfaceFunctions">DrawingSurface functions</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.Width"></A>
+<H3>Width property (DialogOptionsRenderingInfo)</H3>
+<PRE>
+int DialogOptionsRenderingInfo.Width;
+</PRE>
+Gets/sets the width of the area needed to draw the dialog options.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function, but
+can be read in other functions in order to render the options.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.Width = 300;
+  info.Height = 150;
+}
+</PRE>
+creates a 300x150 size area to draw the dialog options in<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.Height">DialogOptionsRenderingInfo.Height</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.X"></A>
+<H3>X property (DialogOptionsRenderingInfo)</H3>
+<PRE>
+int DialogOptionsRenderingInfo.X;
+</PRE>
+Gets/sets the horizontal co-ordinate of the top-left corner of the dialog options area.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function, but
+can be read in other functions in order to render the options.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.X = 50;
+  info.Y = 20;
+  info.Width = 200;
+  info.Height = 150;
+}
+</PRE>
+creates a 200x150 size area at (50, 20) to draw the dialog options in<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.Y">DialogOptionsRenderingInfo.Y</A><P>
+
+
+<HR>
+<A NAME="DialogOptionsRenderingInfo.Y"></A>
+<H3>Y property (DialogOptionsRenderingInfo)</H3>
+<PRE>
+int DialogOptionsRenderingInfo.Y;
+</PRE>
+Gets/sets the vertical co-ordinate of the top-left corner of the dialog options area.<P>
+This can only be set within the <TT>dialog_options_get_dimensions</TT> function, but
+can be read in other functions in order to render the options.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  info.X = 50;
+  info.Y = 20;
+  info.Width = 200;
+  info.Height = 150;
+}
+</PRE>
+creates a 200x150 size area at (50, 20) to draw the dialog options in<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags52.htm#DialogOptionsRenderingInfo.X">DialogOptionsRenderingInfo.X</A><P>
+<P>
+
+</BODY></HTML>

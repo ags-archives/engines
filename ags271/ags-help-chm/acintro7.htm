@@ -1,0 +1,191 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b>Getting Started with AGS - Part 7</b></h2>
+      <h3>&nbsp;</h3>
+      <h3>Animations</h3>
+      <p>A graphical adventure game would be no good without animations. These
+      range from commonly-used animations such as the main character walking, to
+      a flag waving in the background in one particular screen.</p>
+      <p>Animations in AGS are managed using <i>Views</i>. A view is a set of
+      one or more <i>loops</i>. A loop is a set of frames which, when played in
+      sequence, give the illusion of movement. Go to the &quot;Views&quot; mode
+      in the main tree. This is the View Editor where you will put together all
+      your animations.</p>
+      <p align="center"><i>
+		<img border="0" src="images/intro7_2.jpg" width="535" height="397"><br>
+      The View Editor showing view 1</i></p>
+      <p>You should see View 1 selected in the list, and on the right you'll see
+      lots of frames of Roger's walking animation. As I'm sure you've guessed,
+      the &quot;New view&quot; button will create a new blank view.</p>
+      <p>Each loop is displayed as a row of images (one for each frame), going
+      from left to right. To change the image for a frame, double-click the
+      image, and you'll be presented with the sprite manager where you can
+      select the image to use. <b>All images for use with views are imported as
+      usual via the sprite manager </b>before they can be inserted into a frame.<br>
+      At the right hand end of a loop, you'll see the text &quot;New
+      frame&quot;, which you can click to create a new extra frame at the end of
+      the loop. You can also right-click a frame to insert a new one before or
+      after it.</p>
+      <p>You'll notice each frame has three pieces of text underneath the image:</p>
+      <ul>
+        <li><b>SPD: 0</b>&nbsp; is the frame's <b>relative</b> speed, which you
+          can change by clicking on the &quot;SPD:&quot; text. This number adds
+          a delay to the amount of time which the frame is displayed for,
+          therefore a larger number makes it stay longer. You can use negative
+          numbers to specifically shorten the frame's display time.&nbsp;</li>
+        <li><b>NO SND</b>&nbsp; allows you to assign a sound number that will
+          get played when this frame comes around in the animation. This feature
+          is designed for footstep sounds, but has many other uses as well.
+          Using sound will be covered later in the tutorial.</li>
+        <li><b>NORMAL&nbsp; </b>toggles whether the frame is displayed normally
+          or mirrored left-right. This feature allows you to just create
+          animations for your character walking right, and then use the same
+          images for the walking left loop, but simply toggle this flag to
+          &quot;<i>FLIPPED</i>&quot;.</li>
+      </ul>
+      <p>How you use these views to actually run an animation in game will be
+      explained later on.</p>
+      <h3>Characters</h3>
+      <p>If you remember back to part 3 of this tutorial, we talked about three
+      types of thing that the player can interact with - hotspots, objects and
+      characters. We've now covered the former two, so now it's time to take a
+      look at characters.</p>
+      <p>Put simply, a character is similar to an object, except that it can
+      move between different rooms in the game, take part in conversations,
+      carry its own inventory, be scaled up and down, lit according to light
+      levels in the room, and more.</p>
+      <p>Go to the &quot;Characters&quot; mode in the main tree. You'll see that
+      so far you only have one character in the list, labelled &quot;0:
+      ROGER&quot;. You can create a new character by clicking the &quot;New
+      Character&quot; button under the list.</p>
+      <p align="center"><i>
+		<img border="0" src="images/intro7_1.jpg" width="535" height="397"><br>
+      The Character Editor</i></p>
+      <p>There are quite a few options available for each character. Rather than
+      explain them all here, we'll just cover the most important ones - you can
+      find a full description of all the options in the manual.</p>
+      <ul>
+        <li><b>Start in room</b> - this sets which room number the character
+          starts off in at the beginning of the game.</li>
+        <li><b>This is the player character</b> - sets the currently selected
+          character as the initial player character when the game starts up. The
+          game will start off in whatever room number the <i>Starts in room</i>
+          option is set to for the player character.<br>
+          This option is greyed out for the currently selected player character.
+          To change it, simply select the box on another character.</li>
+        <li><b>Normal view </b>- sets which view is used for the normal walking
+          animation of the character. The view specified here must have 4 or 8
+          loops, and the first frame of each loop is the standing still frame.<br>
+          For a 4-loop character, when walking diagonally the closest straight
+          direction is chosen for display. With an 8-loop character, all 8
+          directions are displayed depending on the character's direction.<br>
+          Which loop represents which direction is shown in the Views mode (eg.
+          &quot;Loop 0 (down)&quot;).&nbsp;</li>
+        <li><b>No interaction</b> - if checked, then this character will be
+          see-through to mouse clicks. This is similar to the way the player
+          character worked in Lucasarts games - you cannot actually click on
+          Guybrush, it will always activate whatever is behind him.&nbsp;&nbsp;</li>
+        <li><b>The &quot;Import character&quot; button</b> allows you to import
+          a pre-made AGS character into your game. This is <b>NOT</b> how you
+          normally create a character from scratch - rather, this option is what
+          you use if someone else has specifically created a CHA file for you.<br>
+          Note that importing a character will create a new slot for the import,
+          so you cannot use it to overwrite an existing character.</li>
+        <li><b>The &quot;Export character&quot; button</b> exports the current
+          character to a CHA file, in order that it can be imported into another
+          game.</li>
+      </ul>
+      <p>The character's &quot;<i>Name</i>&quot; field simply gives you an easy
+      way to identify the character in the editor, and can also be accessed from
+      the game script if desired.</p>
+      <p>The &quot;<i>Script name</i>&quot; field is very important, as it sets
+      the name by which the character will be referred to in dialog scripting
+      and text scripting. The reason for having this seperate name is that the
+      script name can only contain the letters A-Z, whereas the main <i>Name </i>field
+      can contain any characters.</p>
+      <h3>Game starting point</h3>
+      <p>Just in case you missed it, I'll repeat what was just said in the
+      Characters section - the &quot;<i>Starts in room</i>&quot; setting of the
+      player character is used to determine which room the game starts off in.</p>
+      <table border="0" id="table3">
+        <tr>
+          <td valign="top">
+			<img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td><b>TIP:</b> This feature can be handy for testing various parts of
+            your game. For example, when you're working on room 16, set the
+            starting room to room 16 so that you can get to it instantly when
+            you run the game to test it.&nbsp;&nbsp;</td>
+        </tr>
+      </table>
+      <h3>Cutscenes</h3>
+      <p>You can easily add intro, outro and cutscene sequences to your game.
+      There is no specific feature to do this - you simply use the provided
+      animation and movement commands to do whatever you like.</p>
+      <table border="0" id="table4">
+        <tr>
+          <td valign="top">
+			<img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>A <i>cutscene</i> is simply the name given to a sequence of
+            actions over which the player has no control. This usually applies
+            to the entire introduction sequence, as well as far simpler in-game
+            events. For example, if the player goes to pick up a rock from the
+            ground, you may wish to use a bending-down animation to show him
+            picking it up. During this bending down and standing back up, the
+            player cannot control proceedings, so it is a cutscene.</td>
+        </tr>
+      </table>
+      <p>There are two main ways of creating cutscenes - the Interaction Editor,
+      and the text script.</p>
+      <p>To start with, you'll probably be more comfortable using the
+      Interaction Editor, as it provides a point-and-click way of setting up the
+      commands. As you progress with AGS, or if you have some programming
+      experience, you may prefer to jump straight to the text script.</p>
+      <p>Right, firstly let's do something very simple. When the player goes to
+      pick up the key from the floor of our room, we want him to walk over to it
+      first rather than it just disappearing from wherever he's standing.</p>
+      <p>So, we want to add something extra to picking up the key. How do we do
+      this? Yes, that's right, we need the Interaction Editor for Object 0 in
+      Room 1 (which is the key). If it's not already loaded, fire it up and
+      return to the interactions we created earlier:</p>
+      <p align="center"><i>
+		<img border="0" src="images/intro4_3.jpg" width="480" height="360"><br>
+      Remember this?</i></p>
+      <p>Now, we want the player to walk across to the key <b>before</b> it
+      disappears, so right-click on &quot;Object - Remove an object&quot; and
+      select &quot;Add action before this&quot;. We're greeted by the Action
+      Editor once again.</p>
+      <p>Select &quot;Character - Move Character&quot; from the drop-down list.
+      Change the Character setting to &quot;Roger&quot; (it will then be
+      displayed as &quot;EGO&quot;, the script name).</p>
+      <p><b>Eeek!</b> It wants a destination X and Y location! We don't know
+      that yet, so press OK to close the action editor, and then Close the
+      interaction editor too.</p>
+      <p>Move the mouse cursor to where the key is on the background. Look just
+      above the background image, and you should see &quot;Mouse pos: 205,
+      128&quot; or something similar. These are the X and Y co-ordinates,
+      respectively, of the key's location. So, note them down, and return to
+      the Interaction Editor.</p>
+      <p>Double-click the &quot;Character - Move Character&quot; entry to open
+      it up for editing, and click Change on the Destination X and Y locations
+      to set them to the numbers we just discovered. We also want to set the
+      &quot;Wait for move to finish&quot; option to True - otherwise, the
+      command will just start Roger off on his way, and then immediately proceed
+      to pick the key up before he gets there!</p>
+      <p>OK out of the action editor and you should see something similar to
+      this:</p>
+      <p align="center"><i>
+		<img border="0" src="images/intro7_3.jpg" width="509" height="230">&nbsp;<br>
+      Our new command is top of the list for execution</i></p>
+      <p>Save the room and game, and try it out!<p>OK, I think we've had enough
+      of animations and cutscenes for now. We'll return later to explore actual
+      animations and more complex cutscenes. If you want to try some out, check
+      out the &quot;Character - Quick animation&quot; command to get you
+      going.&nbsp;
+      <p>&nbsp;
+      <p><b>Go to part 8:</b>  &nbsp;<a href="acintro8.htm" style="font-weight: bold">Conversations</a>
+      <p><font size="2">Tutorial last updated 19 January 2003. Copyright (c) 2003
+      Chris Jones.</font>        
+      </body></html>

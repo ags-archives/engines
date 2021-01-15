@@ -1,0 +1,185 @@
+<HTML>
+<head><title>DynamicSprite functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic52"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic43"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags38.htm#topic51"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags40.htm#topic53"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>DynamicSprite functions and properties</H2>
+
+<A HREF="#DynamicSprite.CreateFromFile">CreateFromFile</A><BR>
+<A HREF="#DynamicSprite.CreateFromSaveGame">CreateFromSaveGame</A><BR>
+<A HREF="#DynamicSprite.CreateFromScreenShot">CreateFromScreenShot</A><BR>
+<A HREF="#DynamicSprite.Delete">Delete (dynamic sprite)</A><BR>
+<A HREF="#DynamicSprite.Graphic">Graphic property (dynamic sprite)</A><BR>
+<P>
+
+<HR>
+<A NAME="DynamicSprite.CreateFromFile"></A>
+<H3>CreateFromFile</H3>
+<I>(Formerly known as LoadImageFile, which is now obsolete)</I><P>
+<PRE>
+static DynamicSprite* DynamicSprite.CreateFromFile(string filename)
+</PRE>
+Loads an external image FILENAME into memory as a sprite.<P>
+Returns the DynamicSprite instance representing the sprite, or <I>null</I> if the image
+could not be loaded (file not found or unsupported format).<P>
+Only BMP and PCX files can be loaded with this command.<P>
+Use the <A HREF="ags39.htm#DynamicSprite.Graphic">Graphic</A> property of the DynamicSprite to
+interface with other commands and to use the new sprite in the game.<P>
+<B>IMPORTANT:</B> This command loads an extra sprite into memory which is not controlled
+by the normal AGS sprite cache and will not be automatically disposed of. Therefore, when
+you are finished with the image you <B>MUST</B> call Delete on it to free its memory.<P>
+<B>IMPORTANT:</B> If the DynamicSprite instance is released from memory (ie. there is
+no longer a DynamicSprite* variable pointing to it), then the sprite will also be
+removed from memory. Make sure that you keep a global variable pointer to the sprite
+until you are finished with it, and at that point call Delete.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DynamicSprite* sprite = DynamicSprite.CreateFromFile("CustomAvatar.bmp");
+if (sprite != null) {
+  RawDrawImage(100, 80, sprite.Graphic);
+  sprite.Delete();
+}
+</PRE>
+will load the file "CustomAvatar.bmp" and if successful draw the image near the middle
+of the screen.<P>
+Once the image is finished with, Delete should be called on it.<P>
+<I>See Also:</I> <A HREF="ags39.htm#DynamicSprite.Delete">DynamicSprite.Delete</A>, 
+<A HREF="ags39.htm#DynamicSprite.CreateFromSaveGame">DynamicSprite.CreateFromSaveGame</A><P>
+
+
+<HR>
+<A NAME="DynamicSprite.CreateFromSaveGame"></A>
+<H3>CreateFromSaveGame</H3>
+<I>(Formerly known as LoadSaveSlotScreenshot, which is now obsolete)</I><P>
+<PRE>
+static DynamicSprite* DynamicSprite.CreateFromSaveGame
+                        (int saveSlot, int width, int height)
+</PRE>
+Loads the screenshot for save game SAVESLOT into memory, resizing it to WIDTH x HEIGHT.<P>
+Returns the DynamicSprite instance of the image if successful, or returns <I>null</I> if
+the screenshot could not be loaded (perhaps the save game didn't include one).<P>
+In order for this to work, the "Save screenshots in save games" option must be ticked
+in the main Game Settings pane.<P>
+<B>IMPORTANT:</B> This command loads an extra sprite into memory which is not controlled
+by the normal AGS sprite cache and will not be automatically disposed of. Therefore, when
+you are finished with the image you <B>MUST</B> call Delete on it to free its memory.<P>
+<B>IMPORTANT:</B> If the DynamicSprite instance is released from memory (ie. there is
+no longer a DynamicSprite* variable pointing to it), then the sprite will also be
+removed from memory. Make sure that you keep a global variable pointer to the sprite
+until you are finished with it, and at that point call Delete.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+// at top of script, outside interactions
+DynamicSprite *buttonSprite;  
+
+// inside an interaction
+buttonSprite = DynamicSprite.CreateFromSaveGame(1, 50, 50);
+if (buttonSprite != null) {
+  btnScrnshot.NormalGraphic = buttonSprite.Graphic;
+}
+</PRE>
+will load the screenshot for save game 1 and resize it to 50x50. It then places it onto
+the btnScrnshot GUI button.<P>
+Once the GUI is disposed of, Delete should be called on the sprite.<P>
+<I>See Also:</I> <A HREF="ags39.htm#DynamicSprite.Delete">DynamicSprite.Delete</A>, 
+<A HREF="ags41.htm#GetSaveSlotDescription">GetSaveSlotDescription</A>,
+<A HREF="ags39.htm#DynamicSprite.CreateFromFile">DynamicSprite.CreateFromFile</A>,
+<A HREF="ags39.htm#DynamicSprite.CreateFromScreenShot">DynamicSprite.CreateFromScreenShot</A><P>
+
+
+<HR>
+<A NAME="DynamicSprite.CreateFromScreenShot"></A>
+<H3>CreateFromScreenShot</H3>
+<PRE>
+static DynamicSprite* DynamicSprite.CreateFromScreenShot
+                        (optional int width, optional int height)
+</PRE>
+Creates a new DynamicSprite instance with a copy of the current screen in it,
+resized to WIDTH x HEIGHT. If you do not supply the width or height, then a full screen
+sized sprite will be created.<P>
+This command can be useful if you're creating a save game screenshots GUI, in order to
+display the current game position as well as the saved slot positions.<P>
+<B>IMPORTANT:</B> This command loads an extra sprite into memory which is not controlled
+by the normal AGS sprite cache and will not be automatically disposed of. Therefore, when
+you are finished with the image you <B>MUST</B> call Delete on it to free its memory.<P>
+<B>IMPORTANT:</B> If the DynamicSprite instance is released from memory (ie. there is
+no longer a DynamicSprite* variable pointing to it), then the sprite will also be
+removed from memory. Make sure that you keep a global variable pointer to the sprite
+until you are finished with it, and at that point call Delete.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+// at top of script, outside interactions
+DynamicSprite *buttonSprite;  
+
+// inside an interaction
+buttonSprite = DynamicSprite.CreateFromScreenShot(80, 50);
+if (buttonSprite != null) {
+  btnScrnshot.NormalGraphic = buttonSprite.Graphic;
+}
+</PRE>
+places a screen grab of the current game session onto btnScrnshot.<P>
+Once the GUI is disposed of, Delete should be called on the sprite.<P>
+<I>See Also:</I> <A HREF="ags39.htm#DynamicSprite.Delete">DynamicSprite.Delete</A>, 
+<A HREF="ags41.htm#GetSaveSlotDescription">GetSaveSlotDescription</A>,
+<A HREF="ags39.htm#DynamicSprite.CreateFromFile">DynamicSprite.CreateFromFile</A>,
+<A HREF="ags39.htm#DynamicSprite.CreateFromSaveGame">DynamicSprite.CreateFromSaveGame</A><P>
+
+
+<HR>
+<A NAME="DynamicSprite.Delete"></A>
+<H3>Delete (dynamic sprite)</H3>
+<I>(Formerly known as DeleteSprite, which is now obsolete)</I><P>
+<PRE>
+DynamicSprite.Delete();
+</PRE>
+Deletes the specified dynamic sprite from memory. Use this when you are no longer displaying
+the sprite and it can be safely disposed of.<P>
+You do not normally need to delete sprites, since the AGS Sprite Cache manages loading
+and deleting sprites automatically.<P>
+However, when an extra sprite has been loaded into the game (for example, with the
+CreateFromFile or CreateFromScreenShot commands) then AGS does not delete it automatically,
+and you must call this command instead.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DynamicSprite* sprite = DynamicSprite.CreateFromFile("CustomAvatar.bmp");
+object[1].Graphic = sprite.Graphic;
+Wait(200);
+object[1].Graphic = 22;
+sprite.Delete();
+</PRE>
+will load the file "CustomAvatar.bmp", change Object 1 to display this graphic, wait 5
+seconds, then change object 1 back to its old sprite 22 and free the new image.<P>
+<I>See Also:</I> <A HREF="ags39.htm#DynamicSprite.CreateFromScreenShot">DynamicSprite.CreateFromScreenShot</A>,
+<A HREF="ags39.htm#DynamicSprite.Graphic">DynamicSprite.Graphic</A><P>
+
+
+<HR>
+<A NAME="DynamicSprite.Graphic"></A>
+<H3>Graphic property (dynamic sprite)</H3>
+<PRE>
+readonly int DynamicSprite.Graphic;
+</PRE>
+Gets the sprite slot number in which this dynamic sprite is stored.
+This value can then be passed to other functions and properties, such as
+<A HREF="ags44.htm#Button.NormalGraphic">Button.NormalGraphic</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DynamicSprite* ds = DynamicSprite.CreateFromScreenShot(50, 50);
+RawDrawImage(100, 100, ds.Graphic);
+ds.Delete();
+</PRE>
+takes a screen shot, and draws it onto the background scene at (100,100).<P>
+<I>See Also:</I> <A HREF="ags39.htm#DynamicSprite.CreateFromScreenShot">DynamicSprite.CreateFromScreenShot</A>,
+<A HREF="ags39.htm#DynamicSprite.Delete">DynamicSprite.Delete</A><P>
+
+
+</BODY></HTML>

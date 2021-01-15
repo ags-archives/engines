@@ -1,0 +1,49 @@
+As a user of Adventure Game Studio you are bound by this license:
+
+GAME DISTRIBUTION
+-----------------
+If you wish to distribute games created with Adventure Game Studio then you
+may do so freely (subject to file restrictions below). You may NOT sell your
+game for profit without consulting Chris Jones beforehand, due to licensing
+restrictions of software used in the AGS engine.
+
+WHICH FILES YOU MAY DISTRIBUTE (IMPORTANT):
+When you distribute your game, you are allowed to include the following files
+from the AGS package:
+  * ACDOS.EXE, ACWIN.EXE, or your game's custom EXE.
+  * AC2GAME.DAT; only needed if you don't use your custom EXE.
+  * The SETUP.BAT file, modified if necessary. Note that this does not work
+    with Windows 2000/XP systems so ideally you would create a shortcut
+    instead.
+  * The CWSDPMI.EXE file, which allows people running plain MS-DOS to play the
+    game. Without this file, the game will need to be run from a Windows (tm)
+    MS-DOS Prompt. (This file is not needed if you use the Windows engine).
+    If you include the CWSDPMI.EXE file, then you MUST acknowledge it in your
+    game's documentation file. A line similar to the following will be
+    sufficient:
+    "Includes CWSDPMI DPMI host, copyright 1997 by Charles Sandmann"
+  * The EMU387.DXE file, which allows people with a 386 or 486 SX computer to
+    play the game. However, since the game will probably not run well on these
+    systems anyway, you may decide not to include this file.
+YOU MAY NOT DISTRIBUTE ANY OTHER AGS FILES WITH YOUR GAME. THAT INCLUDES THE
+ROOM EDITOR, DOCUMENTATION AND DEMO GAME FILES.
+
+
+DISTRIBUTING THE AGS PACKAGE
+----------------------------
+If you wish to distribute Adventure Game Studio itsself, for uploading to FTP
+sites, on your web page, giving to a friend, etc, then:
+
+You may distribute Adventure Game Studio ONLY in its original form in the ZIP
+file (ags_231.zip). You may NOT modify ANY of the AGS files in ANY way and then
+redistribute it.
+If you post AGS on a website then you MUST also mention that the latest
+version can be obtained from http://www.adventuregamestudio.co.uk
+
+
+RESPONSIBILITY
+--------------
+I, Chris Jones, provide AGS to you in order for you to use and enjoy it. It
+is provided in good faith, for you to create games which relive the good old
+times. Chris Jones cannot be held responsible for any works created with AGS
+which infringe on copyright laws or otherwise.

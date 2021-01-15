@@ -1,0 +1,39 @@
+<HTML>
+<head><title>Graphics driver selection</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="GraphicsDriver"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags4.htm#topic3"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags5.htm#topic4"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags7.htm#topic5"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Graphics driver selection</H2>
+AGS has two different graphics drivers when run on Windows -- DirectDraw and Direct3D.<P>
+DirectDraw is the 'classic' software graphics driver, that AGS has used ever since
+the initial Windows version was released. It's perfectly fine for simple games
+that don't use many large sprites, tinting or alpha blending. It's also quite fast
+at doing RawDrawing to the screen.<P>
+Direct3D is a new, hardware accelerated graphics driver. It uses the Direct3D 9.0 to
+render the game in a fully hardware-accelerated environment. This means that the
+game will run a lot faster if you use features such as alpha blending and tinting,
+which are quite slow to perform in software mode. However, with Direct3D doing RawDraw
+operations can be quite slow, and the driver won't work on all graphics cards.<P>
+No matter which you choose as your default graphics driver, the player can always
+run the Setup program and switch to using the other driver if they are having problems
+on their PC.<P>
+<B>System Requirements</B><P>
+<B>DirectDraw</B>: any Windows-based PC with DirectX 5 or later installed <br> 
+<B>Direct3D</B>: any Windows-based PC with DirectX 9.0 installed and a graphics card designed
+for DirectX 8.1 or later (most cards manufactured from 2003 onwards).<P>
+If you get the error message "Graphics card does not support Pixel Shader 1.4" on startup,
+this indicates that your graphics card is too old to run with the Direct3D driver. You
+should choose the DirectDraw driver instead.<P>
+See Also: <A HREF="ags71.htm#System.HardwareAcceleration">System.HardwareAcceleration property</A><P>
+
+
+</BODY></HTML>

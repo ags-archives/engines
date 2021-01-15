@@ -1,0 +1,50 @@
+<HTML>
+<head><title>ASCII code table</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="ASCIIcodes"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags63.htm#topic74"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags68.htm#topic82"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags70.htm#topic83"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>ASCII code table</H2>
+This section lists the key codes which can be passed to  on_key_press  and
+which keys they represent:
+<PRE>
+ 1..26     Ctrl+A .. Ctrl+Z
+ 8         Backspace (Ctrl+H is also Backspace)
+ 9         Tab (Ctrl+I is also Tab)
+ 13        Enter (Ctrl+M is also Enter)
+ 27        Escape
+ 32        Space
+ 48..57    '0' key .. '9' key
+ 65..90    'A' .. 'Z'  (letters are always passed as uppercase)
+ 359..368  F1 .. F10
+ 371       Home (numeric pad)
+ 372       Up arrow
+ 373       PgUp (numeric pad)
+ 375       Left arrow
+ 376       '5' (numeric pad)
+ 377       Right arrow
+ 379       End (numeric pad)
+ 380       Down arrow
+ 381       PgDn (numeric pad)
+ 433..434  F11 .. F12
+</PRE>
+Extra codes, which only work with IsKeyPressed (ie. on_key_press is never
+called with these codes):
+<PRE>
+ 403       Left shift
+ 404       Right shift
+ 405       Left ctrl
+ 406       Right ctrl
+ 407       Alt
+</PRE>
+<P>
+
+</BODY></HTML>

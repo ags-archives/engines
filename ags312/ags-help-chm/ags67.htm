@@ -1,0 +1,790 @@
+<HTML>
+<head><title>Object functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic63"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags66.htm#topic62"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags68.htm#topic64"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Object functions and properties</H2>
+
+<A HREF="#Object.Animate">Animate (object)</A><BR>
+<A HREF="#Object.GetAtScreenXY">GetAtScreenXY (object)</A><BR>
+<A HREF="#Object.GetProperty">GetProperty (object)</A><BR>
+<A HREF="#Object.GetTextProperty">GetTextProperty (object)</A><BR>
+<A HREF="#Object.IsCollidingWithObject">IsCollidingWithObject (object)</A><BR>
+<A HREF="#Object.MergeIntoBackground">MergeIntoBackground</A><BR>
+<A HREF="#Object.Move">Move (object)</A><BR>
+<A HREF="#Object.RemoveTint">RemoveTint (object)</A><BR>
+<A HREF="#Object.RunInteraction">RunInteraction (object)</A><BR>
+<A HREF="#Object.SetPosition">SetPosition (object)</A><BR>
+<A HREF="#Object.SetView">SetView</A><BR>
+<A HREF="#Object.StopAnimating">StopAnimating (object)</A><BR>
+<A HREF="#Object.StopMoving">StopMoving (object)</A><BR>
+<A HREF="#Object.Tint">Tint (object)</A><BR>
+<A HREF="#Object.Animating">Animating property (object)</A><BR>
+<A HREF="#Object.Baseline">Baseline property (object)</A><BR>
+<A HREF="#Object.BlockingHeight">BlockingHeight property (object)</A><BR>
+<A HREF="#Object.BlockingWidth">BlockingWidth property (object)</A><BR>
+<A HREF="#Object.Clickable">Clickable property (object)</A><BR>
+<A HREF="#Object.Frame">Frame property (object)</A><BR>
+<A HREF="#Object.Graphic">Graphic property (object)</A><BR>
+<A HREF="#Object.ID">ID property (object)</A><BR>
+<A HREF="#Object.IgnoreScaling">IgnoreScaling property (object)</A><BR>
+<A HREF="#Object.IgnoreWalkbehinds">IgnoreWalkbehinds property (object)</A><BR>
+<A HREF="#Object.Loop">Loop property (object)</A><BR>
+<A HREF="#Object.Moving">Moving property (object)</A><BR>
+<A HREF="#Object.Name">Name property (object)</A><BR>
+<A HREF="#Object.Solid">Solid property (object)</A><BR>
+<A HREF="#Object.Transparency">Transparency property (object)</A><BR>
+<A HREF="#Object.View">View property (object)</A><BR>
+<A HREF="#Object.Visible">Visible property (object)</A><BR>
+<A HREF="#Object.X">X property (object)</A><BR>
+<A HREF="#Object.Y">Y property (object)</A><BR>
+<P>
+
+<HR>
+<A NAME="Object.Animate"></A>
+<H3>Animate (object)</H3>
+<I>(Formerly known as AnimateObject, which is now obsolete)</I> <br> 
+<I>(Formerly known as AnimateObjectEx, which is now obsolete)</I><P>
+<PRE>
+Object.Animate(int loop, int delay, optional RepeatStyle,
+               optional BlockingStyle, optional Direction)
+</PRE>
+Starts the object animating, using loop number LOOP of its current view.
+The overall speed of the animation is set with DELAY, where 0 is the
+fastest, and increasing numbers mean slower. The delay for each frame
+is worked out as DELAY + FRAME SPD, so the individual frame speeds are
+relative to this overall speed.<P>
+The <I>RepeatStyle</I> parameter sets whether the animation will continuously repeat
+the cycling through the frames. This can be <I>eOnce</I> (or zero), in which case the animation
+will start from the first frame of LOOP, and go through each frame in turn until the
+last frame, where it will stop. If RepeatStyle is <I>eRepeat</I> (or 1), then when the last frame
+is reached, it will go back to the first frame and start over again with the animation.
+If RepeatStyle is 2 then it will do the animation once, but then return
+the graphic to the first frame and stop (whereas repeat=0 will leave the
+graphic on the last frame).<P>
+For <I>blocking</I> you can pass either eBlock (in which case the function will wait
+for the animation to finish before returning), or eNoBlock (in which case the animation
+will start to play, but your script will continue). The default is eBlock.<P>
+<I>direction</I> specifies which way the animation plays. You can either pass eForwards (the
+default) or eBackwards.<P>
+You need to use SetView at some stage before this command, in order to set up the object's
+current view.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[0].Animate(2, 5);
+object[1].Animate(1, 3, eOnce, eBlock, eBackwards);
+</PRE>
+will animate object 0 using loop 2 of its current view, at speed 5, and play the
+animation once only. This happens in the background.
+Then, object 1 will animate backwards using loop 1 of its current view, at speed 3. The
+function won't return until the animation is finished.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.Animate">Character.Animate</A>,
+<A HREF="ags67.htm#Object.Animating">Object.Animating</A>, <A HREF="ags67.htm#Object.SetView">Object.SetView</A>,
+<A HREF="ags67.htm#Object.StopAnimating">Object.StopAnimating</A><P>
+
+
+<HR>
+<A NAME="Object.GetAtScreenXY"></A>
+<H3>GetAtScreenXY (object)</H3>
+<I>(Formerly known as global function GetObjectAt, which is now obsolete)</I><P>
+<PRE>
+static GameObject* Object.GetAtScreenXY(int x, int y)
+</PRE>
+Checks if there is a room object at SCREEN co-ordinates (X,Y).
+Returns the object if there is, or <I>null</I> if there is not.<P>
+See the description of GetLocationName for more on screen co-ordinates.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (Object.GetAtScreenXY(211,145) == oRock) {
+  // code here
+}
+</PRE>
+will execute the code only if object oRock is on the screen coordinates 211,145.<P>
+<I>See Also:</I> <A HREF="ags62.htm#Hotspot.GetAtScreenXY">Hotspot.GetAtScreenXY</A>,
+<A HREF="ags53.htm#Game.GetLocationName">Game.GetLocationName</A><P>
+
+
+<HR>
+<A NAME="Object.GetProperty"></A>
+<H3>GetProperty (object)</H3>
+<I>(Formerly known as GetObjectProperty, which is now obsolete)</I><P>
+<PRE>
+Object.GetProperty(string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the specified object.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent GetTextProperty function to get a text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (object[0].GetProperty("Value") &gt; 200)
+  Display("Object 0's value is over 200!");
+</PRE>
+will print the message if object 0 has its "Value" property set to more than 200.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.GetTextProperty">Object.GetTextProperty</A><P>
+
+
+<HR>
+<A NAME="Object.GetTextProperty"></A>
+<H3>GetTextProperty (object)</H3>
+<I>(Formerly known as GetObjectPropertyText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Object.GetPropertyText, which is now obsolete)</I><P>
+<PRE>
+String Object.GetTextProperty(string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the specified object.<P>
+This command works with Text properties only. The property's text will be
+returned from this function.<P>
+Use the equivalent GetProperty function to get a non-text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String description = object[0].GetTextProperty("Description");
+Display("Object 0's description: %s", description);
+</PRE>
+will retrieve Object 0's "description" property then display it.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.GetProperty">Object.GetProperty</A><P>
+
+
+<HR>
+<A NAME="Object.IsCollidingWithObject"></A>
+<H3>IsCollidingWithObject (object)</H3>
+<I>(Formerly known as AreObjectsColliding, which is now obsolete)</I><P>
+<PRE>
+bool Object.IsCollidingWithObject(Object* obj2)
+</PRE>
+Checks if the specified object and OBJ2 are touching each other. Returns <I>true</I> if they
+are, and <I>false</I> if they are not.<P>
+<B>NOTE:</B> This function only performs a rectangular check, even when pixel-perfect
+click detection is turned on.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (object[2].IsCollidingWithObject(object[3])) 
+{
+  Display("object 2 and 3 are colliding!");
+}
+</PRE>
+will display the message if the objects 2 and 3 are colliding.<P>
+<I>See Also:</I> <A HREF="ags72.htm#AreThingsOverlapping">AreThingsOverlapping</A><P>
+
+
+<HR>
+<A NAME="Object.MergeIntoBackground"></A>
+<H3>MergeIntoBackground</H3>
+<I>(Formerly known as MergeObject, which is now obsolete)</I><P>
+<PRE>
+Object.MergeIntoBackground()
+</PRE>
+Merges the object into the background scene for this room.
+By doing this, the object becomes part of the background and so does not
+slow the game down. This is a 1-way operation - once the object has
+been merged, it cannot be changed back and the state of the room is
+permanently altered. Therefore you should only use this function if a game
+event has occurred that means the room is permanently changed.<P>
+<B>NOTE:</B> after calling this function, you cannot use the object any more and
+it is permanently removed from the game.<P>
+<B>NOTE:</B> objects can only be merged if the object graphic was imported at
+the same colour depth as the background graphic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[3].MergeIntoBackground();
+</PRE>
+will merge the object's image into the room's background image and make the object unusable.<P>
+
+
+<HR>
+<A NAME="Object.Move"></A>
+<H3>Move (object)</H3>
+<I>(Formerly known as MoveObject, which is now obsolete)</I> <br> 
+<I>(Formerly known as MoveObjectDirect, which is now obsolete)</I><P>
+<PRE>
+Object.Move(int x, int y, int speed, optional BlockingStyle,
+            optional WalkWhere);
+</PRE>
+Starts the object moving from its current location to (X,Y). It will
+move at speed SPEED, which uses the same scale as the character Walk Speed
+values in the AGS Editor.<P>
+If <I>BlockingStyle</I> is eNoBlock (the default), then control returns to the script
+immediately, and the object will move in the background.<P>
+If <I>BlockingStyle</I> is eBlock then this command will wait for the object
+to finish moving before your script resumes.<P>
+If <I>WalkWhere</I> is eWalkableAreas (the default), then the object will attempt to
+get as close a possible to (X,Y) by using the room's walkable areas.<P>
+If <I>WalkWhere</I> is eAnywhere, then the object will simply walk directly from its
+current location to (X,Y), ignoring the room walkable areas.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].Move(125, 40, 4, eBlock);
+</PRE>
+will move object 2 to 125,40 and return control to the player when the object gets there.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Moving">Object.Moving</A>, <A HREF="ags46.htm#Character.Walk">Character.Walk</A>,
+<A HREF="ags67.htm#Object.StopMoving">Object.StopMoving</A><P>
+
+ 
+
+<HR>
+<A NAME="Object.RemoveTint"></A>
+<H3>RemoveTint (object)</H3>
+<I>(Formerly known as RemoveObjectTint, which is now obsolete)</I><P>
+<PRE>
+Object.RemoveTint()
+</PRE>
+Undoes the effects of calling Tint, and returns the object to using the room's ambient tint.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[1].Tint(0, 250, 0, 30, 100);
+Wait(40);
+object[1].RemoveTint();
+</PRE>
+will tint object 1 green for a second, then turn it back to normal.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Tint">Object.Tint</A><P>
+
+
+<HR>
+<A NAME="Object.RunInteraction"></A>
+<H3>RunInteraction (object)</H3>
+<I>(Formerly known as RunObjectInteraction, which is now obsolete)</I><P>
+<PRE>
+Object.RunInteraction(CursorMode)
+</PRE>
+Runs the event handler as if the player had clicked the mouse
+on the object in the current room, using the specified cursor mode.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[3].RunInteraction(eModeInteract);
+</PRE>
+will execute the code defined in object 3's "Interact with object" event handler.<P>
+<I>See Also:</I> <A HREF="ags53.htm#ProcessClick">ProcessClick</A>,
+<A HREF="ags46.htm#Character.RunInteraction">Character.RunInteraction</A>,
+<A HREF="ags62.htm#Hotspot.RunInteraction">Hotspot.RunInteraction</A><P>
+
+
+<HR>
+<A NAME="Object.SetPosition"></A>
+<H3>SetPosition (object)</H3>
+<I>(Formerly known as SetObjectPosition, which is now obsolete)</I><P>
+<PRE>
+Object.SetPosition(int x, int y)
+</PRE>
+Changes the object's position to (X,Y). These co-ordinates specify the lower-left
+hand corner of the object.<P>
+This command is equivalent to setting the object.X and object.Y separately, but provides a
+more convenient way of doing so.<P>
+<B>NOTE:</B> This command cannot be used while the object is moving.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].SetPosition(50, 100);
+</PRE>
+will change object's 2 position to 50,100.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.X">Object.X</A>, <A HREF="ags67.htm#Object.Y">Object.Y</A><P>
+
+
+<HR>
+<A NAME="Object.SetView"></A>
+<H3>SetView</H3>
+<I>(Formerly known as SetObjectFrame, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetObjectView, which is now obsolete)</I><P>
+<PRE>
+Object.SetView(int view, optional int loop, optional int frame)
+</PRE>
+Sets the object's view to VIEW, and changes the object's graphic to FRAME of LOOP in VIEW.
+If you do not supply the loop or frame, they will be left unchanged.<P>
+You must use this command before calling Animate, so that AGS knows which view to animate
+the object with.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[3].SetView(14);
+object[1].SetView(5, 2, 0);
+</PRE>
+will change object 3's view to view number 14, and change object 1 to view 5, loop 2, frame 0.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Animate">Object.Animate</A><P>
+
+
+<HR>
+<A NAME="Object.StopAnimating"></A>
+<H3>StopAnimating (object)</H3>
+<PRE>
+Object.StopAnimating()
+</PRE>
+Stops the object from animating. It will remain on its current frame until you change it
+or start a new animation.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (object[2].Animating) {
+  object[2].StopAnimating();
+}
+</PRE>
+will stop object 2 animating if it currently is doing so.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Animate">Object.Animate</A>,
+<A HREF="ags67.htm#Object.Animating">Object.Animating</A><P>
+
+
+<HR>
+<A NAME="Object.StopMoving"></A>
+<H3>StopMoving (object)</H3>
+<I>(Formerly known as StopObjectMoving, which is now obsolete)</I><P>
+<PRE>
+Object.StopMoving()
+</PRE>
+Stops the object from moving. It will remain in its current position
+until any further commands are issued.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (object[2].Moving) {
+  object[2].StopMoving();
+}
+</PRE>
+will stop object 2 moving if it currently is doing so.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Moving">Object.Moving</A>, <A HREF="ags67.htm#Object.Move">Object.Move</A>,
+<A HREF="ags46.htm#Character.StopMoving">Character.StopMoving</A><P>
+
+
+<HR>
+<A NAME="Object.Tint"></A>
+<H3>Tint (object)</H3>
+<I>(Formerly known as SetObjectTint, which is now obsolete)</I><P>
+<PRE>
+Object.Tint(int red, int green, int blue,
+            int saturation, int luminance)
+</PRE>
+Tints the object on the screen to (RED, GREEN, BLUE) with SATURATION percent
+saturation.<P>
+This function applies a tint to a specific object. For the meaning of all the parameters,
+see <A HREF="ags53.htm#SetAmbientTint">SetAmbientTint</A>.<P>
+The tint set by this function overrides any ambient tint set for the room. For this
+reason, passing the SATURATION as 0 to this function does not turn it off - rather, it
+ensures that no tint is applied to the object (even if an ambient tint is set).<P>
+To remove the tint set by this function and return to using the ambient tint for this
+object, call <A HREF="ags67.htm#Object.RemoveTint">RemoveTint</A>.<P>
+<B>NOTE:</B> This function only works in hi-colour games and with hi-colour sprites.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[1].Tint(0, 250, 0, 30, 100);
+</PRE>
+will tint object 1 green.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.RemoveTint">Object.RemoveTint</A>,
+<A HREF="ags53.htm#SetAmbientTint">SetAmbientTint</A><P>
+<P>
+
+<HR>
+<A NAME="Object.Animating"></A>
+<H3>Animating property (object)</H3>
+<I>(Formerly known as IsObjectAnimating, which is now obsolete)</I><P>
+<PRE>
+readonly bool Object.Animating
+</PRE>
+Returns 1 if the specified object is currently animating. <br> 
+Returns 0 if the object has finished its animation.<P>
+This property is read-only. To change object animation, use the
+<A HREF="ags67.htm#Object.Animate">Animate</A> command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].Animate(5, 0);
+while (object[2].Animating) Wait(1);
+</PRE>
+will animate object 2 and wait until the animation finishes.<P>
+In reality, you would simply use the Blocking parameter of Animate so you wouldn't need
+to do this.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Animate">Object.Animate</A>,
+<A HREF="ags67.htm#Object.Moving">Object.Moving</A>,
+<A HREF="ags67.htm#Object.StopAnimating">Object.StopAnimating</A>,
+<A HREF="ags67.htm#Object.X">Object.X</A>, <A HREF="ags67.htm#Object.Y">Object.Y</A><P>
+
+
+<HR>
+<A NAME="Object.Baseline"></A>
+<H3>Baseline property (object)</H3>
+<I>(Formerly known as GetObjectBaseline, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetObjectBaseline, which is now obsolete)</I><P>
+<PRE>
+int Object.Baseline
+</PRE>
+Gets/sets the object's baseline. This allows you to modify the line you can
+set in the editor. You can disable the baseline (and revert to using the
+base of the object's image on the screen) by setting it to 0.<P>
+Otherwise, set it to the Y screen co-ordinate you want to use,
+normally from 1 to 200 unless you have a taller than usual room.<P>
+If you want to get the baseline and it returns 0, then the baseline is the
+object's Y co-ordinate.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[4].Baseline = 100;
+</PRE>
+will change object's 4 baseline to a line positioned at y coordinate 100.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.Baseline">Character.Baseline</A>,
+<A HREF="ags67.htm#Object.Y">Object.Y</A>,
+<A HREF="ags72.htm#SetWalkBehindBase">SetWalkBehindBase</A><P>
+
+
+<HR>
+<A NAME="Object.BlockingHeight"></A>
+<H3>BlockingHeight property (object)</H3>
+<PRE>
+int Object.BlockingHeight
+</PRE>
+Gets/sets the object's blocking height.<P>
+The blocking height determines how large of a blocking rectangle the object exerts to
+stop characters walking through it. If this is set to 0 (the default), then the
+blocking rectangle is automatically calculated to be the object's width, and 5 pixels
+high.<P>
+You can manually change the setting by entering a blocking height in pixels, which is the
+size of walkable area that the object effectively removes by being there.<P>
+<B>NOTE:</B> This property has no effect unless the <A HREF="ags67.htm#Object.Solid">Solid</A> property
+is set to <I>true</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+oRock.BlockingHeight = 20;
+</PRE>
+will make the Rock object block 20 pixels high (10 above and 10 below its baseline)<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.BlockingWidth">Object.BlockingWidth</A>,
+<A HREF="ags67.htm#Object.Solid">Object.Solid</A><P>
+
+
+<HR>
+<A NAME="Object.BlockingWidth"></A>
+<H3>BlockingWidth property (object)</H3>
+<PRE>
+int Character.BlockingWidth
+</PRE>
+Gets/sets the object's blocking width.<P>
+The blocking width determines how large of a blocking rectangle the object exerts to
+stop characters walking through it. If this is set to 0 (the default), then the
+blocking rectangle is automatically calculated to be the object's width, and 5 pixels
+high.<P>
+You can manually change the setting by entering a blocking width in pixels, which is the
+size of walkable area that the object effectively removes by being there.<P>
+<B>NOTE:</B> This property has no effect unless the <A HREF="ags67.htm#Object.Solid">Solid</A> property
+is set to <I>true</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+oRock.BlockingWidth = 50;
+</PRE>
+will make the Rock object block 50 pixels wide (25 pixels to the left of his centre, and 25 to the right)<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.BlockingHeight">Object.BlockingHeight</A>,
+<A HREF="ags67.htm#Object.Solid">Object.Solid</A><P>
+
+
+<HR>
+<A NAME="Object.Clickable"></A>
+<H3>Clickable property (object)</H3>
+<I>(Formerly known as SetObjectClickable, which is now obsolete)</I><P>
+<PRE>
+bool Object.Clickable
+</PRE>
+Gets/sets whether the object is recognised as something which the player can
+interact with.<P>
+If this is set to 1, then the player can look at, speak to, and so on the
+object. If it is set to 0, then the object will not respond to clicks and
+the mouse will activate whatever is behind the object.
+This is useful if you are using the object for visual effects and don't
+want it to be clicked on by the player.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].Clickable = 0;
+</PRE>
+will make object 2 ignore clicks from the player.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.Clickable">Character.Clickable</A>,
+<A HREF="ags67.htm#Object.IgnoreWalkbehinds">Object.IgnoreWalkbehinds</A><P>
+
+
+<HR>
+<A NAME="Object.Frame"></A>
+<H3>Frame property (object)</H3>
+<PRE>
+readonly int Object.Frame
+</PRE>
+Gets the frame number that the object is currently set to. If the object is not currently
+assigned a view, this will be 0 (in which case the Graphic property will
+hold its sprite number).<P>
+This property is read-only. To change the frame, use the animation functions.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object oDoor's frame is currently %d.", oDoor.Frame);
+</PRE>
+will display the oDoor object's current frame number<P>
+<I>SeeAlso:</I> <A HREF="ags67.htm#Object.Graphic">Object.Graphic</A>,
+<A HREF="ags67.htm#Object.Loop">Object.Loop</A>,
+<A HREF="ags67.htm#Object.View">Object.View</A><P>
+
+
+<HR>
+<A NAME="Object.Graphic"></A>
+<H3>Graphic property (object)</H3>
+<I>(Formerly known as GetObjectGraphic, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetObjectGraphic, which is now obsolete)</I><P>
+<PRE>
+int Object.Graphic
+</PRE>
+Gets/sets the sprite slot number that the object is currently displayed as.
+You can get the slot number from the Sprite Manager. If the object is
+currently animating (from an Animate command) and you change the Graphic, then the
+animation will be stopped.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].Graphic = 100;
+</PRE>
+will change the object 2's image to the image stored in the sprite manager's slot 100.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.SetView">Object.SetView</A><P>
+
+
+<HR>
+<A NAME="Object.ID"></A>
+<H3>ID property (object)</H3>
+<PRE>
+readonly int Object.ID
+</PRE>
+Gets the object's ID number. This is the object's number from the editor, and is
+useful if you need to interoperate with legacy code that uses the object's number
+rather than name.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveObject(oRock.ID, 100, 50, 5);
+</PRE>
+uses the obsolete MoveObject function to move the Rock object to (100, 50) at speed 5.<P>
+
+
+<HR>
+<A NAME="Object.IgnoreScaling"></A>
+<H3>IgnoreScaling property (object)</H3>
+<PRE>
+bool Object.IgnoreScaling
+</PRE>
+Gets/sets whether the object is affected by walkable area scaling. This is equivalent,
+<B>though opposite</B>, to the "Use walkable area scaling" checkbox in the Objects pane of the editor.<P>
+If this is set to true, the object will always be the same size. If it is set to false, then
+the object will be stretched or shrunk as appropriate on walkable areas.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+oDoor.IgnoreScaling = true;
+</PRE>
+will tell the Door object not to be scaled on walkable areas.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.IgnoreWalkbehinds">Object.IgnoreWalkbehinds</A><P>
+
+
+<HR>
+<A NAME="Object.IgnoreWalkbehinds"></A>
+<H3>IgnoreWalkbehinds property (object)</H3>
+<I>(Formerly known as SetObjectIgnoreWalkbehinds, which is now obsolete)</I><P>
+<PRE>
+bool Object.IgnoreWalkbehinds
+</PRE>
+Sets whether the object is affected by walkbehind areas. Setting this to 0 (the
+default setting) means that the object will be placed behind walk-behind
+areas according to the relevant baselines.<P>
+If this is set to 1, then the object will never be placed behind a walk-behind
+area. This is useful if for example you want an object to be a picture on
+a wall, and the wall can be walked behind - but you also want it to act
+correctly in relation to characters, so changing its baseline wouldn't work.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[1].IgnoreWalkbehinds = 1;
+</PRE>
+will make object 1 ignore walk behinds.<P>
+
+<I>See Also:</I> <A HREF="ags46.htm#Character.IgnoreWalkbehinds">Character.IgnoreWalkbehinds</A>,
+<A HREF="ags67.htm#Object.Clickable">Object.Clickable</A>, <A HREF="ags67.htm#Object.IgnoreScaling">Object.IgnoreScaling</A><P>
+
+
+<HR>
+<A NAME="Object.Loop"></A>
+<H3>Loop property (object)</H3>
+<PRE>
+readonly int Object.Loop
+</PRE>
+Gets the loop that the object is currently set to. If the object is not currently
+assigned a view, this will be 0 (in which case the Graphic property will
+hold its sprite number).<P>
+This property is read-only. To change the loop, use the animation functions.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object oDoor's loop is currently %d.", oDoor.Loop);
+</PRE>
+will display the oDoor object's current loop number<P>
+<I>SeeAlso:</I> <A HREF="ags67.htm#Object.Frame">Object.Frame</A>,
+<A HREF="ags67.htm#Object.Graphic">Object.Graphic</A>,
+<A HREF="ags67.htm#Object.View">Object.View</A><P>
+
+
+<HR>
+<A NAME="Object.Moving"></A>
+<H3>Moving property (object)</H3>
+<I>(Formerly known as IsObjectMoving, which is now obsolete)</I><P>
+<PRE>
+readonly bool Object.Moving
+</PRE>
+Returns 1 if the object is currently moving, or 0 if not.<P>
+This property is read-only; to change the object's movement, use the <A HREF="ags67.htm#Object.Move">Move</A>
+and <A HREF="ags67.htm#Object.StopMoving">StopMoving</A> commands.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[2].Move(125,40,3);
+while (object[2].Moving) Wait(1);
+</PRE>
+will move object 2 to 125,40 and return control to the player when the object gets there.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Animating">Object.Animating</A>,
+<A HREF="ags67.htm#Object.StopMoving">Object.StopMoving</A><P>
+
+
+<HR>
+<A NAME="Object.Name"></A>
+<H3>Name property (object)</H3>
+<I>(Formerly known as GetObjectName, which is now obsolete)</I> <br> 
+<I>(Formerly known as Object.GetName, which is now obsolete)</I><P>
+<PRE>
+readonly String Object.Name;
+</PRE>
+Gets the name of the object.<P>
+<B>NOTE</B>: This property is read-only. It is not currently possible to change the name
+of an object at run-time.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object 0's name is %s.", object[0].Name);
+</PRE>
+will retrieve and then display object 0's name.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Game.GetLocationName">Game.GetLocationName</A><P>
+
+
+<HR>
+<A NAME="Object.Solid"></A>
+<H3>Solid property (object)</H3>
+<PRE>
+bool Object.Solid
+</PRE>
+Gets/sets whether the object can be walked through by characters.<P>
+If this is set to true, then the object is solid and will block the path of solid
+characters. If this is set to false, then the object can be walked through by
+characters.<P>
+<B>NOTE:</B> solid objects only block characters, they don't block other objects from
+moving through them.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+oSmallrock.Solid = true;
+</PRE>
+will mean that the Smallrock object blocks the path of characters.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.BlockingHeight">Object.BlockingHeight</A>,
+<A HREF="ags67.htm#Object.BlockingWidth">Object.BlockingWidth</A><P>
+
+
+<HR>
+<A NAME="Object.Transparency"></A>
+<H3>Transparency property (object)</H3>
+<I>(Formerly known as SetObjectTransparency, which is now obsolete)</I><P>
+<PRE>
+int Object.Transparency
+</PRE>
+Gets/sets the object's transparency level.<P>
+If this is set to 100, it means that the object is totally invisible, and lower values
+represent varying levels of transparency. Set this to 0 to stop the object being transparent.<P>
+<B>NOTE:</B> Transparency only works in 16-bit and 32-bit colour games.<P>
+<B>NOTE:</B> When using the DirectX 5 driver, a large transparent object can significantly slow
+down AGS.<P>
+Some rounding is done internally when the transparency is stored -- therefore, if you get
+the transparency after setting it, the value you get back might be one out. Therefore, using
+a loop with <TT>object[0].Transparency++;</TT> is not recommended as it will probably
+end too quickly.<P>
+In order to fade an object in/out, the best approach is shown in the example below:<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int trans = object[0].Transparency;
+while (trans &lt; 100) {
+  trans++;
+  object[0].Transparency = trans;
+  Wait(1);
+}
+</PRE>
+will gradually fade out the object from its current transparency level to being fully
+invisible.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.Transparency">Character.Transparency</A>,
+<A HREF="ags54.htm#GUI.Transparency">GUI.Transparency</A><P>
+
+
+<HR>
+<A NAME="Object.View"></A>
+<H3>View property (object)</H3>
+<PRE>
+readonly int Object.View
+</PRE>
+Gets the view that the object is currently set to. This is either the view number, or 0
+if the object is not currently assigned a view (in which case the Graphic property will
+hold its sprite number instead).<P>
+This property is read-only. To change the view, use the SetView function. To remove
+the view, set the Graphic property to a sprite slot.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object oDoor's view is currently view %d.", oDoor.View);
+</PRE>
+will display the oDoor object's current view number<P>
+<I>SeeAlso:</I> <A HREF="ags67.htm#Object.SetView">Object.SetView</A>,
+<A HREF="ags67.htm#Object.Graphic">Object.Graphic</A>, <A HREF="ags67.htm#Object.Loop">Object.Loop</A>,
+<A HREF="ags67.htm#Object.Frame">Object.Frame</A><P>
+
+
+<HR>
+<A NAME="Object.Visible"></A>
+<H3>Visible property (object)</H3>
+<I>(Formerly known as IsObjectOn, which is now obsolete)</I> <br> 
+<I>(Formerly known as ObjectOff, which is now obsolete)</I> <br> 
+<I>(Formerly known as ObjectOn, which is now obsolete)</I><P>
+<PRE>
+bool Object.Visible
+</PRE>
+Gets/sets the visible state of the object. If this is 1 (true), the object is switched on
+and visible in the room. If you set this to 0 (false), the object disappears and no longer
+appears in the room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+object[5].Visible = false;
+</PRE>
+will make object number 5 in the current room disappear.<P>
+
+
+<HR>
+<A NAME="Object.X"></A>
+<H3>X property (object)</H3>
+<I>(Formerly known as GetObjectX, which is now obsolete)</I><P>
+<PRE>
+int Object.X
+</PRE>
+Gets/sets the X co-ordinate of the object.<P>
+<B>NOTE:</B> This property cannot be changed while the object is moving.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object 1's X co-ordinate is %d.", object[1].X);
+</PRE>
+will display the X co-ordinate of object 1.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Y">Object.Y</A>, <A HREF="ags67.htm#Object.Animating">Object.Animating</A>,
+<A HREF="ags67.htm#Object.Visible">Object.Visible</A>, <A HREF="ags67.htm#Object.SetPosition">Object.SetPosition</A><P>
+
+
+<HR>
+<A NAME="Object.Y"></A>
+<H3>Y property (object)</H3>
+<I>(Formerly known as GetObjectY, which is now obsolete)</I><P>
+<PRE>
+int Object.Y
+</PRE>
+Gets/sets the Y co-ordinate of the object, which is the bottom of the object's image.<P>
+<B>NOTE:</B> This property cannot be changed while the object is moving.<P>
+<B>NOTE:</B> If you try to use this co-ordinate with Object.GetAtScreenXY, you will find that
+the object does not get picked up. The object's sprite is drawn from the Y co-ordinate
+at (Object.Y - Height) to (Object.Y - 1).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Object 1's Y co-ordinate is %d.", object[1].Y);
+</PRE>
+will display the Y co-ordinate of object 1.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Animating">Object.Animating</A>,
+<A HREF="ags67.htm#Object.Baseline">Object.Baseline</A>, <A HREF="ags67.htm#Object.X">Object.X</A>, 
+<A HREF="ags67.htm#Object.SetPosition">Object.SetPosition</A><P>
+<P>
+
+
+</BODY></HTML>

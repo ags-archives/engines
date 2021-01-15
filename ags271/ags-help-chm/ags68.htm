@@ -1,0 +1,212 @@
+<HTML>
+<head><title>Built-in enumerated types</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="BuiltInEnums"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags64.htm#topic73"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags67.htm#TextScriptEvents"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags69.htm#topic81"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Built-in enumerated types</H2>
+AGS has several <A HREF="ags37.htm#enum">enumerated types</A> built in. These are used in calls to
+various commands, and will usually pop up automatically in autocomplete. However, for times
+where autocomplete doesn't do the job, having a manual reference is invaluable:<P>
+<PRE>
+enum BlockingStyle {
+  eBlock,
+  eNoBlock
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags38.htm#Character.Animate">Character.Animate</A>,
+<A HREF="ags38.htm#Character.FaceCharacter">Character.FaceCharacter</A>,
+<A HREF="ags38.htm#Character.FaceLocation">Character.FaceLocation</A>,
+<A HREF="ags38.htm#Character.FaceObject">Character.FaceObject</A>,
+<A HREF="ags38.htm#Character.Walk">Character.Walk</A>,
+<A HREF="ags38.htm#Character.WalkStraight">Character.WalkStraight</A>,
+<A HREF="ags56.htm#Object.Animate">Object.Animate</A>,
+<A HREF="ags56.htm#Object.Move">Object.Move</A><P>
+<PRE>
+enum Direction {
+  eForwards,
+  eBackwards
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags38.htm#Character.Animate">Character.Animate</A>,
+<A HREF="ags56.htm#Object.Animate">Object.Animate</A><P>
+<PRE>
+enum WalkWhere {
+  eAnywhere,
+  eWalkableAreas
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags38.htm#Character.Walk">Character.Walk</A>,
+<A HREF="ags56.htm#Object.Move">Object.Move</A><P>
+<PRE>
+enum RepeatStyle {
+  eOnce,
+  eRepeat
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags45.htm#Button.Animate">Button.Animate</A>,
+<A HREF="ags38.htm#Character.Animate">Character.Animate</A>,
+<A HREF="ags56.htm#Object.Animate">Object.Animate</A><P>
+<PRE>
+enum Alignment {
+  eAlignLeft,
+  eAlignCentre,
+  eAlignRight
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags38.htm#Character.LockViewAligned">Character.LockViewAligned</A><P>
+<PRE>
+enum eFlipDirection {
+  eFlipLeftToRight,
+  eFlipUpsideDown,
+  eFlipBoth
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags40.htm#DynamicSprite.Flip">DynamicSprite.Flip</A><P>
+<PRE>
+enum TransitionStyle {
+  eTransitionFade,
+  eTransitionInstant,
+  eTransitionDissolve,
+  eTransitionBoxout,
+  eTransitionCrossfade
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags61.htm#SetScreenTransition">SetScreenTransition</A>,
+<A HREF="ags61.htm#SetNextScreenTransition">SetNextScreenTransition</A><P>
+<PRE>
+enum MouseButton {
+  eMouseLeft,
+  eMouseRight,
+  eMouseMiddle,
+  eMouseLeftInv,
+  eMouseRightInv,
+  eMouseWheelNorth,
+  eMouseWheelSouth
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags54.htm#Mouse.IsButtonDown">Mouse.IsButtonDown</A> <br> 
+<I>Passed into:</I> on_mouse_click<P>
+<PRE>
+enum EventType {
+  eEventLeaveRoom,
+  eEventEnterRoom,
+  eEventGotScore,
+  eEventGUIMouseDown,
+  eEventGUIMouseUp,
+  eEventAddInventory,
+  eEventLoseInventory,
+  eEventRestoreGame
+};
+</PRE>
+<I>Passed into:</I> on_event<P>
+<PRE>
+enum RoundDirection {
+  eRoundDown,
+  eRoundNearest,
+  eRoundUp
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags53.htm#FloatToInt">FloatToInt</A><P>
+<PRE>
+enum eSpeechStyle {
+  eSpeechLucasarts,
+  eSpeechSierra,
+  eSpeechSierraWithBackground,
+  eSpeechFullScreen
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags63.htm#SetSpeechStyle">SetSpeechStyle</A><P>
+<PRE>
+enum eVoiceMode {
+  eSpeechTextOnly,
+  eSpeechVoiceAndText,
+  eSpeechVoiceOnly
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags55.htm#SetVoiceMode">SetVoiceMode</A><P>
+<PRE>
+enum DialogOptionState {
+  eOptionOff,
+  eOptionOn,
+  eOptionOffForever
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags63.htm#GetDialogOption">GetDialogOption</A>,
+<A HREF="ags63.htm#SetDialogOption">SetDialogOption</A><P>
+<PRE>
+enum CutsceneSkipType {
+  eSkipESCOnly,
+  eSkipAnyKey,
+  eSkipMouseClick,
+  eSkipAnyKeyOrMouseClick,
+  eSkipESCOrRightButton
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags42.htm#StartCutscene">StartCutscene</A><P>
+<PRE>
+enum eCDAudioFunction {
+  eCDIsDriverPresent,
+  eCDGetPlayingStatus,
+  eCDPlayTrack,
+  eCDPausePlayback,
+  eCDResumePlayback,
+  eCDGetNumTracks,
+  eCDEject,
+  eCDCloseTray,
+  eCDGetCDDriveCount,
+  eCDSelectActiveCDDrive
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags55.htm#CDAudio">CDAudio</A><P>
+<PRE>
+enum CursorMode {
+  eModeXXXX,
+  eModeXXXX,
+  ...
+};
+</PRE>
+The CursorMode enumeration is generated automatically based on your mouse cursors.
+The cursor mode name is taken, all its spaces are removed, and <I>eMode</I> is added
+to the front. <br> 
+<I>Used by:</I> <A HREF="ags42.htm#IsInteractionAvailable">IsInteractionAvailable</A>,
+<A HREF="ags42.htm#ProcessClick">ProcessClick</A>,
+<A HREF="ags54.htm#Mouse.ChangeModeGraphic">Mouse.ChangeModeGraphic</A>,
+<A HREF="ags54.htm#Mouse.ChangeModeHotspot">Mouse.ChangeModeHotspot</A>,
+<A HREF="ags54.htm#Mouse.DisableMode">Mouse.DisableMode</A>,
+<A HREF="ags54.htm#Mouse.EnableMode">Mouse.EnableMode</A>,
+<A HREF="ags54.htm#Mouse.UseModeGraphic">Mouse.UseModeGraphic</A>,
+<A HREF="ags54.htm#Mouse.Mode">Mouse.Mode</A>,
+<A HREF="ags52.htm#InventoryItem.IsInteractionAvailable">InventoryItem.IsInteractionAvailable</A>,
+<A HREF="ags52.htm#InventoryItem.RunInteraction">InventoryItem.RunInteraction</A>,
+<A HREF="ags51.htm#Hotspot.RunInteraction">Hotspot.RunInteraction</A>,
+<A HREF="ags56.htm#Object.RunInteraction">Object.RunInteraction</A>,
+<A HREF="ags38.htm#Character.RunInteraction">Character.RunInteraction</A><P>
+<PRE>
+enum LocationType {
+  eLocationNothing,
+  eLocationHotspot,
+  eLocationCharacter,
+  eLocationObject
+};
+</PRE>
+<I>Returned by:</I> <A HREF="ags42.htm#GetLocationType">GetLocationType</A><P>
+<PRE>
+enum FileMode {
+  eFileRead,
+  eFileWrite,
+  eFileAppend
+};
+</PRE>
+<I>Used by:</I> <A HREF="ags41.htm#File.Open">File.Open</A><P>
+<P>
+
+</BODY></HTML>

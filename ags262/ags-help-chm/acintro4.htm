@@ -1,0 +1,164 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Getting Started with AGS - Part 4</b></h2>
+      <p>&nbsp;</p>
+      <h3>Objects</h3>
+      <p>Objects are images on the screen which, unlike the screen background,
+      can move, change and disappear. You use objects for things in the room
+      that the player can take (since they can disappear), and for things which
+      need to animate.</p>
+      <p>So, let's revisit the age-old &quot;key&quot; inventory item. Let's say
+      we've got a locked door, and the player can pick up a key from another
+      room to open it with. Please don't use this puzzle when you're making a
+      proper game, it's been done far too many times ;-)&nbsp;</p>
+      <p>Go to the <i>Objects</i> pane under the Room Editor. Click the
+      &quot;New object&quot; button at the top of the screen. Nothing will seem
+      to happen, but you now click on the background image, and a new object
+      will be placed there as a blue cup. Don't worry if you don't put it in the
+      right place, you can move it later.</p>
+      <p>The first thing we need to do is to change how it looks. That blue cup
+      we can see is the default sprite in AGS, and will appear anywhere that you
+      haven't chosen a replacement for. Click the &quot;Change image&quot;
+      button in the top part of the screen.</p>
+      <p>The screen will now change to present you with the <i>Sprite Manager</i>.
+      We'll explain this in more detail later, but basically it is the focal
+      point of AGS where you import and export all the graphics (except room
+      backgrounds). You should see a small key picture as sprite number 2.
+      Double-click that for now, we'll import our own graphics later.</p>
+      <p>You should now be returned to the Objects pane, and see that the blue
+      cup has changed into a key. You can move it around by left-clicking and
+      dragging the sprite within the background image. Place it somewhere
+      sensible on your screen. Also, notice in the top part of the editor is an
+      &quot;Object name&quot; box. This allows you to name the item, similar to
+      the Hotspot Name box for hotspots.</p>
+      <p align="center"><img border="0" src="images/intro4_1.jpg" width="503" height="340"><br>
+      <i>I've placed the key cunningly in the middle of the walkway ;-)</i></p>
+      <p>Before we enable the key to be taken by the player, let me quickly go
+      over the other options on this screen:</p>
+      <ul>
+        <li><b>Lock this object in position</b> - sometimes, you might have two
+          objects that are overlapping each other. In this case, you can lock
+          one of the objects, which prevents it from being selected and dragged.
+          The Lock setting is only temporary and is not saved in your game
+          files, as it's only needed briefly in order to get at an object that's
+          stuck behind another.</li>
+        <li><b>Set baseline</b> - normally, the baseline for an object is set to
+          the bottom of the object graphic (baselines are used to calculate
+          which items on the screen are drawn in front and which are drawn at
+          the back). However, in some cases you might want to override this.<br>
+          What you'll notice with our key is that if the player walks just
+          behind it, the key will appear in front of his feet. This is not what
+          we want, since the key is supposed to be lying flat on the ground. To
+          correct this, click Set Baseline, then click near the top of the room
+          image. A blue line will be drawn across. This will make sure that the
+          player is always drawn in front of the key.</li>
+        <li><b>Object is initially visible </b>- this toggles whether the object
+          is switched on at the beginning of the game or not. For our key we
+          want it checked, but sometimes you'll have objects which you don't
+          want the player to see until they've done something else in the game.</li>
+      </ul>
+      <table border="0">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>The game speed is directly related to the number and size of
+            objects on-screen. AGS imposes a limit of 15 objects per room, but
+            even if you use all of these and have them visible at the same time,
+            the game speed could suffer.</td>
+        </tr>
+      </table>
+      <p>Right, now back to the pressing matter at hand - letting the player
+      pick up the key.<br>
+      </p>
+      <h3>Inventory</h3>
+      <p>Now wait, there's one more step we need to do first. At the moment we
+      could let the player pick up the key, but then what would happen to it?
+      Where would it go? We need to define the player's <i>inventory</i>.</p>
+      <p>Click on the <i>&quot;Inventory Items&quot;</i> mode in the left-hand
+      tree. You will see that there are already two items defined -
+      &quot;Key&quot; and &quot;Pink poster&quot;. These are just defaults to
+      help you get started. Select &quot;1: Key&quot; in the list. You should
+      see the key image appear on the right. But that's a bit small for an
+      inventory item, I'm sure I saw something better in the sprite list
+      earlier.</p>
+      <p>Click the &quot;Change image&quot; button below the key, and the sprite
+      manager re-appears. Find sprite number 5, and you should see
+      that it's a much larger picture of a key. Let's use that as our inventory
+      icon. Double-click the sprite to select it.</p>
+      <p align="center"><img border="0" src="images/intro4_2.jpg" width="503" height="340"><br>
+      <i>Yay, we've got a big inventory icon for the key</i></p>
+      <p>Ok, there are a few other settings on this screen, but let's return to
+      our objective - letting the player pick up the key. Note that the
+      inventory item number of the key here is 1, as we will need it later.</p>
+      <h4>Back to the interactions</h4>
+      <p>Go back to the <i>Objects</i> pane of the Room Editor, and click on,
+      yes you've guessed it, the <i>Interaction</i> button. We see our old
+      friend, the Interaction Editor, once again. The events here are very
+      similar to the ones we had for the hotspot.</p>
+      <p>Notice there are two possibilities - &quot;Interact object&quot; and
+      &quot;Pick up object&quot;. We actually want to use the &quot;Interact
+      object&quot; event, because we are using the default Sierra-style
+      interface which doesn't have a specific Pick Up mode. The &quot;Pick
+      up&quot;, &quot;Usermode1&quot; and &quot;Usermode2&quot; events are
+      useful if you go for a lucasarts-style interface which has more verb types
+      available to the player.&nbsp;</p>
+      <p>So, double-click on &quot;Interact object&quot;. Now, when the player
+      picks it up we want two things to happen - firstly, the object on-screen
+      needs to disappear, and secondly, the inventory item needs to be added to
+      the player's inventory.</p>
+      <p>See if you can guess which commands we'll need from the listbox. As a
+      clue, we are removing object number 0 from the room, and adding inventory
+      item number 1 to the player's inventory.</p>
+      <table border="0">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>Remember, to add more than one command to an event, right-click
+            the event and choose &quot;New action...&quot;.</td>
+        </tr>
+      </table>
+      <p>Ok, well here's my solution. As an added bonus, I've also given the
+      player 5 points for their trouble, but you don't need to have that third
+      command:</p>
+      <p align="center"><img border="0" src="images/intro4_3.jpg" width="480" height="360"><br>
+      <i>I've added the two commands we need (and one we don't)</i></p>
+      <p>Note that our solution is not perfect - the player can click the hand
+      icon on the key from anywhere in the room and it will disappear. We are
+      also not displaying a message informing the player of what happened. But,
+      the functionality is there, and this will do fine for now.</p>
+      <p>Okey, so we now have a fully-working first room. Save and test the game
+      as before, and try it out. Once the player has taken the key, call up his
+      inventory and you should see the large key picture there.</p>
+      <p align="center"><img border="0" src="images/intro4_4.jpg" width="326" height="225"><br>
+      <i>Roger stands contemplating the key<br>
+      </i></p>
+      <h3>Room Settings</h3>
+      <p>Finally, let's just quickly go over the available settings on the
+      Settings pane:</p>
+      <ul>
+        <li><b>Play music on room load</b> - if set, you can type a music number
+          in the box and that background music will start playing when the
+          player enters the room. For more about music and sound, see later in
+          the manual.</li>
+        <li><b>Save/load disabled </b>- if checked, then if the player tries to
+          save or load the game while in this room, global message 983
+          (&quot;Sorry, not now&quot;) is displayed instead. Global messages are
+          described later.</li>
+        <li><b>Hide player character </b>- if checked, the player character will
+          not be visible in this room, and the Walk mode will be disabled.
+          Useful for close-up displays of control panels and so forth.</li>
+        <li><b>Player character view </b>- you can type a number in here to
+          override the player character's graphic for this room. For example, if
+          you have an overhead map screen, you will probably want a different
+          image of the character from an overhead perspective.</li>
+        <li><b>Music volume adjustment</b> - this allows you to modify the
+          background music volume for this screen.</li>
+      </ul>
+      <p>&nbsp;<p><b>Go to part 5:</b>  &nbsp;<a href="acintro5.htm">Global
+      messages and Inventory</a>
+      <p><font size="2">Tutorial last updated 24 November 2002. Copyright (c) 2001-2002
+      Chris Jones.</font>        
+      </td>
+    </body></html>

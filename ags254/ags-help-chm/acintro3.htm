@@ -1,0 +1,148 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Getting Started with AGS - Part 3</b></h2>
+      <p>&nbsp;</p>
+      <h3>Adding some interaction</h3>
+      <p>Ok, so we now have a working room. The player can walk around it as
+      much as they like. However, our game so far is pretty boring - the player
+      can't actually do anything of value yet!</p>
+      <p>AGS provides you with three types of things that the player can
+      interact with - <i>hotspots</i>, <i>objects</i> and <i>characters</i>:</p>
+      <ul>
+        <li>A <b>hotspot</b> is an area of the background image that the player
+          can look at, interact with, and so forth. Hotspots are generally used
+          for parts of the screen such as a tree or the grass, which won't
+          change as the game progresses.</li>
+        <li>An <b>object</b> is an item in the room that can move around the
+          screen, and be switched on and off at will. Objects must stay within
+          the room that they are created in.</li>
+        <li>A <b>character</b> is like an object, except that it can move
+          between rooms and therefore appear all over the game. Characters also
+          have special properties such as talking animations and so forth, which
+          means you will usually use one to represent each NPC (non-player
+          character) in the game.</li>
+      </ul>
+      <h4>Hotspots</h4>
+      <p>The easiest thing to start off with is hotspots. Go to the
+      &quot;Areas&quot; pane under the Room Editor, and select
+      &quot;Hotspots&quot; from the drop-down list box.</p>
+      <p>Hotspots are drawn in exactly the same way as walk-behind and walkable
+      areas. This time though, the different colours that are available for
+      drawing with each represent a different hotspot. That is, if the player
+      clicks a dark blue area of the screen, then one response will be
+      triggered. If they click a green area, a different response will happen,
+      and so forth.</p>
+      <p>You can use the same colour in two different areas of the screen if
+      they represent the same object - for example, you could use colour 1 for
+      two different trees, as long as you want a common response for clicking on
+      both of them.</p>
+      <p align="center"><img border="0" src="images/intro3_1.jpg" width="431" height="291"><br>
+      <i>I've drawn four types of hotspot onto my screen</i></p>
+      <p>Notice the &quot;Name: Hotspot 1&quot;. This allows you to give the
+      hotspot a name, which is vital if you are going to use a Lucasarts-style
+      interface where the player can move the mouse over the screen to see
+      what's where.</p>
+      <h4>Interactions</h4>
+      <p>Right, now it's time to make something happen! Make sure the first
+      hotspot is selected (it should read &quot;Editing: 1&quot;), and click the
+      &quot;Interaction...&quot; button. You should be presented with a window
+      that looks like this:</p>
+      <p align="center"><img border="0" src="images/intro3_2.jpg" width="360" height="270"><br>
+      <i>The interaction editor</i></p>
+      <p>This is the Interaction Editor, and you will become very familiar with
+      this window during your AGS development.</p>
+      <p>You should see a list of <i>events</i>, from &quot;Player stands on
+      hotspot&quot; at the top down to &quot;Usermode2 hotspot&quot; at the
+      bottom. The events are represented by flag icons.</p>
+      <p>These events show you all the possible things that can happen to this
+      hotspot during the game. At the moment, nothing is set to happen in
+      response to any of the events, so whatever the player does to the hotspot,
+      they will get no reply.</p>
+      <p>Right, let's start with something simple. When the player looks at my
+      hotspot, I want to display a message telling them what they can see. So,
+      double-click the &quot;Look at hotspot&quot; event, and a new window
+      should pop-up:</p>
+      <p align="center"><img border="0" src="images/intro3_3.jpg" width="240" height="225"><br>
+      <i>The action editor</i></p>
+      <p>You'll see that this new window is quite plain and empty at the moment.
+      The most important thing is the large drop-down list box near the top of
+      the window, which currently says &quot;Do nothing&quot;. This box is where
+      you set what you want the game to do when the player looks at the hotspot.</p>
+      <p>Open up the combobox, and you'll see quite an extensive list of options
+      - but don't worry, they're in alphabetical order! Scroll down and select
+      &quot;Game - Display a message&quot;. The rest of the window is updated
+      with information related to this command:</p>
+      <p align="center"><img border="0" src="images/intro3_4.jpg" width="280" height="263"><br>
+      <i>The action editor with &quot;Display message&quot; selected</i></p>
+      <p>The text &quot;Message number: 0&quot; is a <i>parameter</i> for the
+      command. Different commands have various parameters, and they let you set
+      specific information for this use of the command. Here, we are being asked
+      which message we want to display. Click the &quot;Change&quot; button if
+      you need to change it, but since this will be our first message, number 0
+      will be fine.</p>
+      <h4>Messages</h4>
+      <p>Each room in the game has its own set of messages. A message is simply
+      a string of text that can be displayed during the game. To bring up the
+      room message editor, there are two options - either click the &quot;Edit
+      message&quot; button in the action editor (like we have here), or at other
+      times you can use the &quot;Edit messages&quot; button in the Room
+      Settings pane.</p>
+      <p align="center"><img border="0" src="images/intro3_5.jpg" width="300" height="229"><br>
+      <i>The room message editor</i></p>
+      <p>Click the &quot;New message&quot; button in the bottom left. A new item
+      should be added to the left hand list box, and the cursor is placed in the
+      text box on the right.</p>
+      <p>Simply type your message into the text box. The &quot;Display message
+      as&quot; box allows you to have one of the characters saying the text if
+      you want, otherwise leave it as &quot;Normal text&quot; to use the
+      standard message box.</p>
+      <p>Once you're done typing the message in, press OK.</p>
+      <p>You should be back at the Action Editor now. We've set it all up
+      correctly to display the message when the player looks at the hotspot, so
+      click OK to exit this dialog box. You should notice that a new tree node
+      &quot;Game - Display a message (0)&quot; has appeared in the main
+      interaction editor under Look at Hotspot. The (0) shows you at a glance
+      the values of the parameters to the command.</p>
+      <p>You can add as many commands as you like to be run when an event
+      happens. But now, since double-clicking collapses the tree, you need to
+      right-click on &quot;Look at hotspot&quot; and select &quot;New
+      action&quot; instead. However, let's not worry about that for now. Click
+      &quot;Close&quot; to exit the interaction editor.</p>
+      <h4>Walk-to points</h4>
+      <p>Ok, since we're back at the Areas screen, let me quickly explain the
+      &quot;Set walk-to point&quot; button. This allows you to set a position
+      for each hotspot where the character will walk to whenever the player
+      interacts with the hotspot - just like the way the Lucasarts games like
+      Monkey Island (tm) worked.</p>
+      <p>If you set a walk-to point, then whenever the player clicks interact or
+      talk on the hotspot, the main character will first walk to that point
+      before the relevant event is triggered. If you want, the man can also walk
+      there when the LOOK mode is used - this option is configurable in the game
+      General Settings pane.</p>
+      <p>To remove a walk-to point, select the appropriate hotspot and click the
+      &quot;Remove walk-to point&quot; button.</p>
+      <h4>Edges revisited</h4>
+      <p>Ok, so we've covered the basics of creating a room. However, there's
+      one thing that we did way back in the tutorial that we need to clear up -
+      yes, the edges.</p>
+      <p>Go to the &quot;Settings&quot; mode under the Room Editor. If you press
+      the Interactions button here, the Interaction Editor will appear, but this
+      time with a different set of events.</p>
+      <p align="center"><img border="0" src="images/intro3_6.jpg" width="132" height="58"><br>
+      <i>The &quot;Interactions&quot; button&nbsp;</i></p>
+      <p>Among the events listed, you'll see &quot;Walk off left edge&quot;,
+      &quot;Walk off right edge&quot;, and so on. These use the edges we defined
+      back in part 2. A common command to use in response to these events is the
+      &quot;Player - Go to a different room&quot; command.</p>
+      <p>Now, save the room and the game, then choose File, Test Game to test
+      out your room like we did before.</p>
+      <p>&nbsp;</p>
+      <p><b>Go to part 4:</b>&nbsp;<a href="acintro4.htm">Objects and inventory</a>
+      <p><font size="2">Tutorial last updated 21 November 2002. Copyright (c) 2001-2002
+      Chris Jones.</font>        
+      </td>
+    </body></html>

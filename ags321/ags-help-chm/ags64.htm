@@ -1,0 +1,93 @@
+<HTML>
+<head><title>GUI Text Box functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic56"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags63.htm#topic55"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags65.htm#topic57"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI Text Box functions and properties</H2>
+<A HREF="ags58.htm#GUIControl.BringToFront">BringToFront (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SendToBack">SendToBack (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#TextBox.Font">Font property (text box)</A><BR>
+<A HREF="#TextBox.Text">Text property (text box)</A><BR>
+<A HREF="#TextBox.TextColor">TextColor property (text box)</A><BR>
+<P>
+
+<HR>
+<A NAME="TextBox.Font"></A>
+<H3>Font property (text box)</H3>
+<I>(Formerly known as SetTextBoxFont, which is now obsolete)</I><P>
+<PRE>
+FontType TextBox.Font
+</PRE>
+Gets/sets the font used by the specified text box.
+This might be useful if you need a player input text box to use a different
+font with foreign language translations, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+txtUserInput.Font = eFontNormal;
+</PRE>
+will change the <I>txtUserInput</I> text box to use Font "Normal".<P>
+<I>See Also:</I> <A HREF="ags61.htm#Label.Font">Label.Font</A>, <A HREF="ags64.htm#TextBox.Text">TextBox.Text</A><P>
+
+
+<HR>
+<A NAME="TextBox.Text"></A>
+<H3>Text property (text box)</H3>
+<I>(Formerly known as GetTextBoxText, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetTextBoxText, which is now obsolete)</I> <br> 
+<I>(Formerly known as TextBox.GetText, which is now obsolete)</I> <br> 
+<I>(Formerly known as TextBox.SetText, which is now obsolete)</I><P>
+<PRE>
+String TextBox.Text;
+</PRE>
+Gets/sets the text box contents. This might be useful to reset
+the text box to blank after the user has typed something in, or to fill
+in a default value.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+txtUserInput.Text = "";
+</PRE>
+will clear the txtUserInput text box.<P>
+<I>See Also:</I> <A HREF="ags64.htm#TextBox.Font">TextBox.Font</A>,
+<A HREF="ags77.htm#String.CompareTo">String.CompareTo</A>,
+<A HREF="ags61.htm#Label.Text">Label.Text</A><P>
+
+
+<HR>
+<A NAME="TextBox.TextColor"></A>
+<H3>TextColor property (text box)</H3>
+<PRE>
+int TextBox.TextColor;
+</PRE>
+Gets/sets the text colour used to draw the text box. This affects both the text in the text
+box, and also the text box's border.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+txtInput.TextColor = 14;
+</PRE>
+will change text box 'txtInput' to have yellow text.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags64.htm#TextBox.Text">TextBox.Text</A><P>
+<P>
+
+</BODY></HTML>

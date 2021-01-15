@@ -1,0 +1,126 @@
+<HTML>
+<head><title>Integration with Windows</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic38"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic21"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags25.htm#topic37"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags27.htm#SourceControl"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Integration with Windows</H2>
+AGS has the ability to integrate with Windows in two ways. Firstly, it can
+be set up to launch save games directly from explorer when the player double-clicks
+them; and secondly, in Windows Vista, AGS can integrate with the Game Explorer feature.<P>
+
+<A HREF="#EnhancedSaveGames">Enhanced Save Games</A><BR>
+<A HREF="#GameExplorer">Windows Vista Game Explorer</A><BR>
+<P>
+
+<HR>
+<A NAME="EnhancedSaveGames"></A>
+<H3>Enhanced Save Games</H3>
+Optionally, AGS can set up Windows Explorer so that you can double-click on a save game
+file to directly launch the game and continue from where you left off.<P>
+<B>Setting it up</B><P>
+In order to enable this, open the General Settings pane, and look for the "Saved Games"
+section. Here, there is an option called "Enhanced Save Games". If you switch this on,
+then AGS will enable the integration with Windows Explorer. <P>
+To make this work, you need to set the Save Game File Extension setting to a file extension.
+This is how Windows will identify the save game files, and you must supply an extension
+of between 5 and 20 characters in length ("DemoQuestSave" would be an appropriate
+extension for Demo Quest, for example).<P>
+By changing these settings, your game's saved game filenames will change, and therefore
+you will lose access to any existing saved games.<P>
+<B>Windows Vista extras</B><P>
+If the player is running Windows Vista, then this feature will also allow them to see
+the save game description and screenshot (if enabled) in the Explorer preview window:<P>
+   <img src="images/GameExplorer3.jpg" >    <br> 
+<I>Save games with embedded screenshots on Vista</I><P>
+<B>Enabling the integration</B><P>
+Once you've built the game, the integration won't be enabled immediately. If you want to
+use this feature, you'll need to distribute your game in an installer rather than a zip
+file, because there's an extra step you need to run after installation to set up the
+association.<P>
+In your installer, you need to run the game executable with the special
+parameter <TT>-registergame</TT>  When you do this, AGS will create the necessary
+associations in Explorer to get the feature working. If it is successful, it will
+not display any messages.<P>
+You can manually test this by creating a shortcut to your game EXE file, and modifying
+it to add <TT>-registergame</TT> to the end of the command line. Then, run the shorcut
+and the associations should be created for you.<P>
+For un-installing, run the game EXE again but with a  <TT>-unregistergame</TT>  parameter.
+This will cause AGS to remove the associations from the player's system.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> No </B><P>
+
+
+<HR>
+<A NAME="GameExplorer"></A>
+<H3>Windows Vista Game Explorer</H3>
+Windows Vista has a feature called the Game Explorer, which is a special folder on
+the Start Menu that lists all the games installed on the user's system and provides
+easy shortcuts to play them.<P>
+AGS is now able to add your games to this list. However, in order to do so you
+would need to distribute your game using an installer rather than just in a plain
+zip file, since you need to tell AGS to add the game to the list at install-time.<P>
+   <img src="images/GameExplorer1.jpg" >    <br> 
+<I>The "Games" option launches the Game Explorer</I><P>
+<B>Enabling Game Explorer support</B><P>
+Open the General Settings pane in the editor. If you scroll down to the bottom of the
+list, you'll find a section titled "Windows Vista Game Explorer". The main setting
+is called "Enable Game Explorer integration", and is disabled by default. Set this
+to True if you want to be able to add your game to the Game Explorer (it will
+have no effect on Windows XP and earlier versions).<P>
+<B>Game Explorer settings</B><P>
+The rest of the settings here allow you to set up various fields that the Game Explorer
+can display. <B>Developer Website</B> must be a URL starting with "http://" if you fill
+it in, and <B>Version</B> must be a four-point version number (eg. 1.0.0.0).<P>
+The <B>Windows Experience Index</B> is a score that Vista gives each computer depending
+on its game-playing prowess. 1 is the lowest score, and 5 is the highest at present.
+This field allows you to specify the minimum score required to play your game (this
+will usually be 1 for AGS games, unless you have high resolution and lots of animation).<P>
+<B>Save games</B><P>
+If you set the <I>Save games folder name</I> property in the Saved Games section, then
+the Game Explorer will provide a right-click option to go straight to the save game folder.
+This is only useful if you also enable Enhanced Save Games.<P>
+<B>Parental controls</B><P>
+AGS is not currently able to support the Vista Parental Controls, due to Vista requiring
+the game to be digitally signed for this to work. Digital signatures require you to buy
+a certificate from an authority such as Verisign, so at present they are not supported.
+Your game will be classed as "Unrated" by Vista.<P>
+<B>Boxart image</B><P>
+The Game Explorer can display a high-resolution alpha-blended image for your game, rather
+than the standard game icon. To utilise this, place a file called <TT>GameExplorer.png</TT>
+in your game folder, and rebuild the game EXE. This must be a PNG image, no larger
+than 256 x 256 pixels:<P>
+   <img src="images/GameExplorer2.jpg" >    <br> 
+<I>My game ("Chris Kwest") in the Game Explorer</I><P>
+<B>Adding the game to the Game Explorer</B><P>
+In order to actually add the game to the Game Explorer's list, you need to run the
+game executable with the special parameter <TT>-registergame</TT>  When you do this,
+AGS will add the game to the Game Explorer and exit. If it is successful, it will
+not display any messages.<P>
+Therefore, as part of your installer, once the game files are all installed you should
+add a step at the end to run the game EXE file with this parameter. It will do nothing
+on Windows XP and earlier versions.<P>
+For un-installing, run the game EXE again but with a  <TT>-unregistergame</TT>  parameter.
+This will cause AGS to remove the game from the Game Explorer's list.<P>
+<B>NOTE:</B> If you have both Enhanced Save Games and Game Explorer Integration enabled,
+then the <TT>-registergame</TT> and <TT>-unregistergame</TT> commands will register/unregister
+both.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Vista only </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> No </B><P>
+
+
+</BODY></HTML>

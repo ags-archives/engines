@@ -1,0 +1,124 @@
+<HTML>
+<head><title>Region functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic71"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags36.htm#topic57"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags49.htm#topic70"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags51.htm#topic72"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Region functions</H2>
+
+<A HREF="#DisableRegion">DisableRegion</A><BR>
+<A HREF="#EnableRegion">EnableRegion</A><BR>
+<A HREF="#GetRegionAt">GetRegionAt</A><BR>
+<A HREF="#RunRegionInteraction">RunRegionInteraction</A><BR>
+<A HREF="#SetAreaLightLevel">SetAreaLightLevel</A><BR>
+<P>
+
+<HR>
+<A NAME="DisableRegion"></A>
+<H3>DisableRegion</H3>
+<PRE>
+DisableRegion (int regnum)
+</PRE>
+Disables region number REGNUM in the current room. All areas of the screen
+that were previously REGNUM now act as type 0 (no region). You can turn it
+back on later with the EnableRegion command.<P>
+While a region is disabled, it will not be returned by GetRegionAt, and if
+the character walks onto the region then its interactions will not get run.<P>
+This command permanently disables the region - that is, it will not be
+reset when the player re-enters the room. The only way of turning it back on
+is to use the EnableRegion command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisableRegion(3);
+</PRE>
+will disable region number 3.<P>
+<I>See Also:</I> <A HREF="ags42.htm#DisableHotspot">DisableHotspot</A>, <A HREF="ags50.htm#EnableRegion">EnableRegion</A><P>
+
+
+<HR>
+<A NAME="EnableRegion"></A>
+<H3>EnableRegion</H3>
+<PRE>
+EnableRegion (int regnum)
+</PRE>
+Re-enables region number REGNUM in the current room, that was previously disabled
+by the DisableRegion command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+EnableRegion(3);
+</PRE>
+will re-enable region number 3.<P>
+<I>See Also:</I> <A HREF="ags50.htm#DisableRegion">DisableRegion</A><P>
+
+
+<HR>
+<A NAME="GetRegionAt"></A>
+<H3>GetRegionAt</H3>
+<PRE>
+GetRegionAt (int x, int y)
+</PRE>
+Returns the number of the region at ROOM co-ordinates (X,Y).
+If there is no region there, or if invalid co-ordinates are specified,
+returns 0.<P>
+NOTE: Unlike GetHotspotAt, the co-ordinates specified are ROOM co-ordinates. This
+means that if you want to use the mouse cursor location, you have to add the
+screen offset to make it work in scrolling rooms.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetRegionAt(player.x, player.y) == 0)
+    Display ("The player is not currently standing on a region.");
+</PRE>
+<I>See Also:</I> <A HREF="ags51.htm#GetWalkableAreaAt">GetWalkableAreaAt</A><P>
+
+
+<HR>
+<A NAME="RunRegionInteraction"></A>
+<H3>RunRegionInteraction</H3>
+<PRE>
+RunRegionInteraction (int region, int event)
+</PRE>
+Processes the interaction list as if the EVENT for REGION had been activated.
+REGION is the region number, 1 to 15.<P>
+EVENT is the event type: <br> 
+0  While player stands on region <br> 
+1  Player walks onto region <br> 
+2  Player walks off region<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunRegionInteraction(4, 1);
+</PRE>
+will run the actions defined in the interaction editor for "Player walks onto region"
+for region 4.<P>
+<I>See Also:</I> <A HREF="ags38.htm#RunCharacterInteraction">RunCharacterInteraction</A>, <A HREF="ags42.htm#RunHotspotInteraction">RunHotspotInteraction</A><P>
+
+
+<HR>
+<A NAME="SetAreaLightLevel"></A>
+<H3>SetAreaLightLevel</H3>
+<PRE>
+SetAreaLightLevel (int area, int level)
+</PRE>
+Changes region number AREA to have light level LEVEL. This does
+the same thing as the Light Level textbox in the editor, but allows you to
+change it at run-time.<P>
+AREA is from 1 to 15 (the region number), and LEVEL is from -100
+to 100. (0 is the defualt non-lit level).<P>
+NOTE: The light level will be reset when the player leaves the room,
+so you need to use it in Player Enters Screen if you want a permanent
+change.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(10)==1)
+    SetAreaLightLevel(2,100); 
+</PRE>
+will set region 2's level light to 100 if the Global Integer 10 is 1.<P>
+<P>
+
+</BODY></HTML>

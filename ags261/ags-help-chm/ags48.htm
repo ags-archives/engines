@@ -1,0 +1,541 @@
+<HTML>
+<head><title>Object functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic69"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags38.htm#topic58"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags47.htm#topic68"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags49.htm#topic70"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Object functions</H2>
+<A HREF="#AnimateObject">AnimateObject</A><BR>
+<A HREF="#AnimateObjectEx">AnimateObjectEx</A><BR>
+<A HREF="#AreObjectsColliding">AreObjectsColliding</A><BR>
+<A HREF="#GetObjectAt">GetObjectAt</A><BR>
+<A HREF="#GetObjectGraphic">GetObjectGraphic</A><BR>
+<A HREF="#GetObjectProperty">GetObjectProperty</A><BR>
+<A HREF="#GetObjectPropertyText">GetObjectPropertyText</A><BR>
+<A HREF="#GetObjectX">GetObjectX</A><BR>
+<A HREF="#GetObjectY">GetObjectY</A><BR>
+<A HREF="#IsObjectAnimating">IsObjectAnimating</A><BR>
+<A HREF="#IsObjectMoving">IsObjectMoving</A><BR>
+<A HREF="#IsObjectOn">IsObjectOn</A><BR>
+<A HREF="#MergeObject">MergeObject</A><BR>
+<A HREF="#MoveObject">MoveObject</A><BR>
+<A HREF="#MoveObjectDirect">MoveObjectDirect</A><BR>
+<A HREF="#ObjectOff">ObjectOff</A><BR>
+<A HREF="#ObjectOn">ObjectOn</A><BR>
+<A HREF="#RunObjectInteraction">RunObjectInteraction</A><BR>
+<A HREF="#SetObjectBaseline">SetObjectBaseline</A><BR>
+<A HREF="#SetObjectClickable">SetObjectClickable</A><BR>
+<A HREF="#SetObjectFrame">SetObjectFrame</A><BR>
+<A HREF="#SetObjectGraphic">SetObjectGraphic</A><BR>
+<A HREF="#SetObjectIgnoreWalkbehinds">SetObjectIgnoreWalkbehinds</A><BR>
+<A HREF="#SetObjectPosition">SetObjectPosition</A><BR>
+<A HREF="#SetObjectTransparency">SetObjectTransparency</A><BR>
+<A HREF="#SetObjectView">SetObjectView</A><BR>
+<A HREF="#StopObjectMoving">StopObjectMoving</A><BR>
+<P>
+
+<HR>
+<A NAME="AnimateObject"></A>
+<H3>AnimateObject</H3>
+<PRE>
+AnimateObject (int object, int loop, int delay, int repeat)
+</PRE>
+Starts the object number OBJECT animating, using loop number LOOP of its
+current view. The overall speed of the animation is set with DELAY,
+where 0 is the fastest, and increasing numbers mean slower. The delay for
+each frame is worked out as DELAY + FRAME SPD, so the individual frame
+speeds are relative to this overall speed.<P>
+The REPEAT parameter sets whether the animation will continuously repeat
+the cycling through the frames. If REPEAT is zero, the animation will start
+from the first frame of LOOP, and go through each frame in turn until the
+last frame, where it will stop. If REPEAT is 1, when the last frame is
+reached, it will go back to the first frame and start over again with the
+animation. If REPEAT is 2, it will do the animation once, but then return
+the graphic to the first frame and stop (whereas repeat=0 will leave the
+graphic on the last frame).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AnimateObject(0,2,0,0);
+</PRE>
+will animate object 0 using loop 2 of its current view once.<P>
+<I>See Also:</I> <A HREF="ags40.htm#AnimateCharacter">AnimateCharacter</A>, <A HREF="ags48.htm#AnimateObjectEx">AnimateObjectEx</A>,
+<A HREF="ags48.htm#IsObjectAnimating">IsObjectAnimating</A>, <A HREF="ags48.htm#SetObjectView">SetObjectView</A><P>
+
+
+<HR>
+<A NAME="AnimateObjectEx"></A>
+<H3>AnimateObjectEx</H3>
+<PRE>
+AnimateObjectEx (int object, int loop, int delay, int repeat, int direction, int blocking)
+</PRE>
+As AnimateObject, except that you can specify two extra parameters:<P>
+If DIRECTION is 0, it will play forwards as normal. If DIRECTION is 1, the loop will
+play backwards.<P>
+If BLOCKING is 1, then the function will wait for the animation to finish before returning.<P>
+See the description of <A HREF="ags48.htm#AnimateObject">AnimateObject</A> for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AnimateObjectEx(0,2,0,0,0,1);
+</PRE>
+will animate object 0 using loop 2 of its current view once, forwards, and wait for it
+to finish before continuing.<P>
+<I>See Also:</I> <A HREF="ags40.htm#AnimateCharacterEx">AnimateCharacterEx</A><P>
+<P>
+
+<HR>
+<A NAME="AreObjectsColliding"></A>
+<H3>AreObjectsColliding</H3>
+<PRE>
+AreObjectsColliding (int obj1, int obj2)
+</PRE>
+Checks if object OBJ1 and OBJ2 are touching each other. Returns 1 if they
+are, and 0 if they are not.<P>
+NOTE: This function only performs a rectangular check, even when pixel-
+perfect click detection is turned on.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+If (AreObjectsColliding(2,3)==1) 
+    { collision code}
+</PRE>
+will execute the collision code only if the objects 2 and 3 are colliding.<P>
+<I>See Also:</I> <A HREF="ags40.htm#AreThingsOverlapping">AreThingsOverlapping</A><P>
+<P>
+
+<HR>
+<A NAME="GetObjectAt"></A>
+<H3>GetObjectAt</H3>
+<PRE>
+GetObjectAt (int x, int y)
+</PRE>
+Checks if there is a room object at SCREEN co-ordinates (X,Y).
+Returns the object number if there is, or -1 if there is not.<P>
+See the description of GetLocationName for more on screen co-ordinates.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+If (GetObjectAt(211,145)==4}
+    {code here} 
+</PRE>
+will execute the code only if object 4 is on the screen coordinates 211,145.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GetHotspotAt">GetHotspotAt</A>, <A HREF="ags42.htm#GetLocationName">GetLocationName</A><P>
+
+<HR>
+<A NAME="GetObjectGraphic"></A>
+<H3>GetObjectGraphic</H3>
+<PRE>
+GetObjectGraphic (int object)
+</PRE>
+Returns the current slot number that OBJECT is displayed as.<P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+If (GetObjectGraphic(3)==155)
+    { code here}
+</PRE>
+will wxecute the code if object 3 is displayed as the image stored in sprite manager’s slot 155.<P>
+<I>See Also:</I> <A HREF="ags48.htm#SetObjectGraphic">SetObjectGraphic</A><P>
+
+
+<HR>
+<A NAME="GetObjectProperty"></A>
+<H3>GetObjectProperty</H3>
+<PRE>
+GetObjectProperty (int object, string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the specified object.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent GetPropertyText function to get a text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetObjectProperty(0, "Value") &gt; 200)
+  Display("Object 0's value is over 200!");
+</PRE>
+will print the message if object 0 has its "Value" property set to more than 200.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectPropertyText">GetObjectPropertyText</A><P>
+
+
+<HR>
+<A NAME="GetObjectPropertyText"></A>
+<H3>GetObjectPropertyText</H3>
+<PRE>
+GetObjectPropertyText (int object, string property, string buffer)
+</PRE>
+Returns the custom property setting of the PROPERTY for the specified object.<P>
+This command works with Text properties only. The property's text will be
+copied into the BUFFER that you pass to this command.<P>
+Use the equivalent GetProperty function to get a non-text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetObjectPropertyText(0, "Description", buffer);
+Display("Object 0's description: %s", buffer);
+</PRE>
+will retrieve Object 0's "description" property into the buffer, then display it.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectProperty">GetObjectProperty</A><P>
+<P>
+
+<HR>
+<A NAME="GetObjectX"></A>
+<H3>GetObjectX</H3>
+<PRE>
+GetObjectX (int object)
+</PRE>
+Returns the X co-ordinate of room object number OBJECT.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int objectx = GetObjectX(1);
+</PRE>
+will pass the X coordinate of object 1 to the integer objectx.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectY">GetObjectY</A>, <A HREF="ags48.htm#IsObjectAnimating">IsObjectAnimating</A>,
+<A HREF="ags48.htm#IsObjectOn">IsObjectOn</A>, <A HREF="ags48.htm#SetObjectPosition">SetObjectPosition</A><P>
+
+<HR>
+<A NAME="GetObjectY"></A>
+<H3>GetObjectY</H3>
+<PRE>
+GetObjectY (int object)
+</PRE>
+Returns the Y co-ordinate of room object number OBJECT.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int objecty = GetObjectY(1);
+</PRE>
+will pass the Y coordinate of object 1 to the integer objecty.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectX">GetObjectX</A>, <A HREF="ags48.htm#IsObjectAnimating">IsObjectAnimating</A>, <A HREF="ags48.htm#SetObjectPosition">SetObjectPosition</A><P>
+
+<HR>
+<A NAME="IsObjectAnimating"></A>
+<H3>IsObjectAnimating</H3>
+<PRE>
+IsObjectAnimating (int object)
+</PRE>
+Returns 1 if the specified OBJECT is currently animating.
+Returns 0 if the object has finished its animation.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AnimateObject(2,5,0,0);
+while (IsObjectAnimating(2)==1) Wait(1);
+</PRE>
+will animate object 2 and wait until the animation finishes.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectMoving">IsObjectMoving</A>, <A HREF="ags48.htm#GetObjectX">GetObjectX</A>, <A HREF="ags48.htm#GetObjectY">GetObjectY</A><P>
+
+
+<HR>
+<A NAME="IsObjectMoving"></A>
+<H3>IsObjectMoving</H3>
+<PRE>
+IsObjectMoving (int object)
+</PRE>
+Returns 1 if the object is currently moving, or 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveObject(2,125,40,3);
+while (IsObjectMoving(2)==1) Wait(1);
+</PRE>
+will move object 2 to 125,40 and return control to the player when the object gets there.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectAnimating">IsObjectAnimating</A>,
+<A HREF="ags48.htm#StopObjectMoving">StopObjectMoving</A><P>
+
+
+<HR>
+<A NAME="IsObjectOn"></A>
+<H3>IsObjectOn</H3>
+<PRE>
+IsObjectOn (int object)
+</PRE>
+Returns 1 if the object is currently turned on, or 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsObjectOn (2) == 0) {
+  ObjectOn (2);
+  Display("The evil object has appeared!!!");
+}
+</PRE>
+will turn on object 2 if it is currently off.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectX">GetObjectX</A>, <A HREF="ags48.htm#IsObjectAnimating">IsObjectAnimating</A>,
+<A HREF="ags48.htm#ObjectOff">ObjectOff</A>, <A HREF="ags48.htm#ObjectOn">ObjectOn</A><P>
+
+
+<HR>
+<A NAME="MergeObject"></A>
+<H3>MergeObject</H3>
+<PRE>
+MergeObject (int object)
+</PRE>
+Merges object number OBJECT into the background scene for this room.
+By doing this, the object becomes part of the background and so does not
+slow the game down. This is a 1-way operation - once the object has
+been merged, it cannot be changed back and the state of the room is
+permanently altered. Therefore you should only use this function if a game
+event has occured that means the room is permanently changed.<P>
+NOTE: after calling this function, you cannot use the object any more and
+it is permanently removed from the game.<P>
+NOTE: objects can only be merged if the object graphic was imported at
+the same colour depth as the background graphic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MergeObject(3);
+</PRE>
+will merge the object’s image into the room’s background image and make the image unusable.<P>
+
+<HR>
+<A NAME="MoveObject"></A>
+<H3>MoveObject</H3>
+<PRE>
+MoveObject (int object, int x, int y, int speed)
+</PRE>
+Starts the object OBJECT moving from its current location to (X,Y). It will
+move at speed SPEED, which uses the same scale as the character Walk Speed
+values in the Room Editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveObject(2,125,40,4);
+while (IsObjectMoving(2)==1) Wait(1);
+</PRE>
+will move object 2 to 125,40 and return control to the player when the object gets there.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectMoving">IsObjectMoving</A>, <A HREF="ags40.htm#MoveCharacter">MoveCharacter</A>,
+<A HREF="ags48.htm#MoveObjectDirect">MoveObjectDirect</A>, <A HREF="ags48.htm#StopObjectMoving">StopObjectMoving</A><P>
+<P>
+
+<HR>
+<A NAME="MoveObjectDirect"></A>
+<H3>MoveObjectDirect</H3>
+<PRE>
+MoveObjectDirect (int object, int x, int y, int speed)
+</PRE>
+Starts OBJECT moving from its current location to (X,Y), ignoring all
+walkable areas on the screen. The object will therefore move directly to
+the destination in a straight line.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveObjectDirect(4,245,34,3);
+</PRE>
+will move object 4 to 245,34 ignoring walkable areas.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectMoving">IsObjectMoving</A>, <A HREF="ags48.htm#MoveObject">MoveObject</A>,
+<A HREF="ags48.htm#StopObjectMoving">StopObjectMoving</A><P>
+ 
+
+<HR>
+<A NAME="ObjectOff"></A>
+<H3>ObjectOff</H3>
+<PRE>
+ObjectOff (int object)
+</PRE>
+Turns object number OBJECT off. It will no longer be displayed in this room
+until you use an ObjectOn command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ObjectOff(5);
+</PRE>
+will make object number 5 of the current room disappear.<P>
+
+<HR>
+<A NAME="ObjectOn"></A>
+<H3>ObjectOn</H3>
+<PRE>
+ObjectOn (int object)
+</PRE>
+Turns object number OBJECT on. It may have been turned off previously with
+ObjectOff or may have been set initially off in the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ObjectOn(5);
+</PRE>
+will make object 5 of the current room appear.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectOn">IsObjectOn</A>, <A HREF="ags48.htm#ObjectOff">ObjectOff</A><P>
+
+
+<HR>
+<A NAME="RunObjectInteraction"></A>
+<H3>RunObjectInteraction</H3>
+<PRE>
+RunObjectInteraction (int object, int mode)
+</PRE>
+Processes the interaction list as if the player had clicked the mouse
+on object number OBJECT in the current room, using cursor mode MODE.
+MODE is one of the MODE_* constants listed in the ProcessClick description.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunObjectInteraction(3,MODE_USE);
+</PRE>
+will execute the code defined in the object’s number 3 "USE OBJECT" interaction.<P>
+<I>See Also:</I> <A HREF="ags42.htm#ProcessClick">ProcessClick</A>, <A HREF="ags40.htm#RunCharacterInteraction">RunCharacterInteraction</A>, <A HREF="ags44.htm#RunHotspotInteraction">RunHotspotInteraction</A><P>
+
+<HR>
+<A NAME="SetObjectBaseline"></A>
+<H3>SetObjectBaseline</H3>
+<PRE>
+SetObjectBaseline (int object, int baseline)
+</PRE>
+Changes OBJECT's baseline to BASELINE. This modifies the line you can
+set in the editor. You can disable the baseline (and revert to using the
+base of the object's image on the screen) by passing 0 as the baseline.
+Otherwise, the baseline is the Y screen co-ordinate you want to use,
+normally from 1 to 200 unless you have a taller than usual room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectBaseline(4,100);
+</PRE>
+will change object’s 4 baseline to a line positioned at y coordinate 100.<P>
+<I>See Also:</I> <A HREF="ags40.htm#SetCharacterBaseline">SetCharacterBaseline</A>, <A HREF="ags53.htm#SetWalkBehindBase">SetWalkBehindBase</A><P>
+
+<HR>
+<A NAME="SetObjectClickable"></A>
+<H3>SetObjectClickable</H3>
+<PRE>
+SetObjectClickable (int object, int is_clickable)
+</PRE>
+Sets whether the OBJECT is recognised as something which the player can
+interact with.
+If you pass IS_CLICKABLE as 1, then the player can look at, speak to, and
+so on the object. If you pass IS_CLICKABLE as 0, then the object will not
+respond to clicks and the mouse will activate whatever is behind the object.
+This is useful if you are using the object for visual effects and don't
+want it to be clicked on by the player.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectClickable(2,0);
+</PRE>
+will make object 2 ignore clicks from the player.<P>
+<I>See Also:</I> <A HREF="ags40.htm#SetCharacterClickable">SetCharacterClickable</A>, <A HREF="ags48.htm#SetObjectIgnoreWalkbehinds">SetObjectIgnoreWalkbehinds</A><P>
+
+
+<HR>
+<A NAME="SetObjectFrame"></A>
+<H3>SetObjectFrame</H3>
+<PRE>
+SetObjectFrame (int object, int view, int loop, int frame)
+</PRE>
+Sets object number OBJECT's graphic to frame FRAME of loop LOOP of view
+number VIEW. This is useful if you want the object to use the second loop
+in a view for an animation, because using the SetObjectView function in
+room startup code will cause loop 0 to breifly flash on the screen first.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectFrame(1,12,2,0);
+</PRE>
+will  change the object’s 1 image to frame 0 of loop 2 of view 12.<P>
+<I>See Also:</I> <A HREF="ags48.htm#SetObjectView">SetObjectView</A><P>
+
+
+<HR>
+<A NAME="SetObjectGraphic"></A>
+<H3>SetObjectGraphic</H3>
+<PRE>
+SetObjectGraphic (int object, int slot)
+</PRE>
+Sets the graphic for object number OBJECT to slot number SLOT. You can get
+the slot number from the Sprite Manager. If the object is
+currently animating (from an AnimateObject command) then the animation will
+be stopped.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectGraphic(2,100);
+</PRE>
+will change the object’s 2 image to the image stored in the sprite manager’s slot 100.<P>
+<I>See Also:</I> <A HREF="ags48.htm#SetObjectFrame">SetObjectFrame</A>, <A HREF="ags48.htm#SetObjectView">SetObjectView</A><P>
+
+<HR>
+<A NAME="SetObjectIgnoreWalkbehinds"></A>
+<H3>SetObjectIgnoreWalkbehinds</H3>
+<PRE>
+SetObjectIgnoreWalkbehinds (int object, int ignore)
+</PRE>
+Sets whether object OBJECT is affected by walkbehind areas. Passing 0 (the
+default setting) means that the object will be placed behind walk-behind
+areas according to the relevant baselines.
+Passing 1 means that the object will never be placed behind a walk-behind
+area. This is useful if for example you want an object to be a picture on
+a wall, and the wall can be walked behind - but you also want it to act
+correctly in relation to characters, so changing its baseline wouldn't work.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectIgnoreWalkbehinds (1,1);
+</PRE>
+will make object 1 ignore walk behinds.<P>
+
+<I>See Also:</I> <A HREF="ags40.htm#SetCharacterIgnoreWalkbehinds">SetCharacterIgnoreWalkbehinds</A>, <A HREF="ags48.htm#SetObjectClickable">SetObjectClickable</A><P>
+
+<HR>
+<A NAME="SetObjectPosition"></A>
+<H3>SetObjectPosition</H3>
+<PRE>
+SetObjectPosition (int object, int x, int y)
+</PRE>
+Changes the object number OBJECT's position to (X,Y). These co-ordinates
+specify the lower-left hand corner of the object.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectPosition(2,100,100);
+</PRE>
+will change object’s 2 position to 100,100.<P>
+<I>See Also:</I> <A HREF="ags48.htm#GetObjectX">GetObjectX</A>, <A HREF="ags48.htm#GetObjectY">GetObjectY</A><P>
+
+<HR>
+<A NAME="SetObjectTransparency"></A>
+<H3>SetObjectTransparency</H3>
+<PRE>
+SetObjectTransparency (int object, int amount)
+</PRE>
+Sets OBJECT to be AMOUNT <TT>%</TT> transparent.<P>
+Setting AMOUNT to 100 means it is totally invisible, and lower values
+represent varying levels of transparency. Pass AMOUNT as 0 to stop the
+object being transparent.<P>
+NOTE: Transparency currently only works in hi-color games, and the object
+must have been imported in hi-colour for the transparency to work.<P>
+NOTE: Having a large transparent object can significantly slow down the
+engine.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectTransparency(0,90);
+</PRE>
+will make object 0 almost invisible.<P>
+<I>See Also:</I> <A HREF="ags40.htm#SetCharacterTransparency">SetCharacterTransparency</A>,
+<A HREF="ags43.htm#SetGUITransparency">SetGUITransparency</A><P>
+
+
+<HR>
+<A NAME="SetObjectView"></A>
+<H3>SetObjectView</H3>
+<PRE>
+SetObjectView (int object, int view)
+</PRE>
+Sets object number OBJECT's view to VIEW. The graphic is set to the first
+frame of loop 0 of the view.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetObjectView(3,14);
+</PRE>
+will change object’s 3 view to view number 14.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AnimateObject">AnimateObject</A>, <A HREF="ags48.htm#SetObjectFrame">SetObjectFrame</A><P>
+
+
+<HR>
+<A NAME="StopObjectMoving"></A>
+<H3>StopObjectMoving</H3>
+<PRE>
+StopObjectMoving (int object)
+</PRE>
+Stops object number OBJECT from moving. It will remain in its current position
+until any further commands are issued.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsObjectMoving(2)) {
+  StopObjectMoving(2);
+}
+</PRE>
+will stop object 2 moving if it currently is doing so.<P>
+<I>See Also:</I> <A HREF="ags48.htm#IsObjectMoving">IsObjectMoving</A>, <A HREF="ags48.htm#MoveObject">MoveObject</A>,
+<A HREF="ags40.htm#StopMoving">StopMoving</A><P>
+<P>
+
+
+</BODY></HTML>

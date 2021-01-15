@@ -1,0 +1,35 @@
+<HTML>
+<head><title>Dynamic Arrays</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="DynamicArrays"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags38.htm#BlockingScripts"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags40.htm#ExtenderFunctions"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Dynamic Arrays</H2>
+Suppose that you're writing a script that you want people to be able
+to use in their games. You need to store the Health for every character
+in the game, but you don't know how many characters there will be. What do you do?<P>
+Dynamic Arrays are designed for just this purpose. You can declare an array like this:<P>
+<TT>int characterHealth[];</TT><P>
+in your script file. This special notation tells AGS that you don't yet know how large
+you want the array to be. Now, before you use the array (so probably in game_start),
+you can do this:<P>
+<TT>characterHealth = new int[Game.CharacterCount];</TT><P>
+If you forget to do this <TT>new</TT> command, you'll get a Null Pointer Error if you try
+to access the array. You can change the size of an array by simply using another
+<TT>new</TT> command with a different size; but this will erase the contents of the
+array in the process.<P>
+Currently dynamic arrays are supported as global and local variables, but
+you can't put one inside a struct.
+Also, at present you can create arrays of basic types (int, char, etc) and
+of built-in types (String, Character, etc) but not of custom structs.<P>
+
+
+</BODY></HTML>

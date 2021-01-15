@@ -1,0 +1,292 @@
+<HTML>
+<head><title>Game variables</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="Globalvariables"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags39.htm#ExtenderFunctions"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags41.htm#TextScriptEvents"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Game variables</H2>
+The following variables are available to your script. They allow you to do various tweaks
+to the engine at run-time.<P>
+Names in <B>bold</B> are <B>read-only variables</B> and should NOT be modified by the script.<P>
+All the following variables are <TT>int</TT> variables.<P>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT>  game.abort_key </TD>
+<TD ALIGN=LEFT> The keycode for Abort Game, which allows the you to quit even if your script is stuck. Default 324 (Alt+X). 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.ambient_sounds_persist  </TD>
+<TD ALIGN=LEFT>  If 0 (default), ambient sounds are stopped on room change.
+                                      Set to 1 to tell AGS to leave ambient sounds playing when going to a new room. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.anim_background_speed  </TD>
+<TD ALIGN=LEFT> The current room's animating background speed - same values as in editor. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.auto_use_walkto_points  </TD>
+<TD ALIGN=LEFT> Default 1; set to 0 to stop AGS automatically using hotspot walk-to points. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.bgspeech_game_speed    </TD>
+<TD ALIGN=LEFT> If 0 (default), background speech stays on the screen
+                           for the same amount of time, no matter what the game speed.
+                           If 1, the amount of time it stays is relative to the game speed. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.bgspeech_stay_on_display    </TD>
+<TD ALIGN=LEFT> If 0 (default), background speech is removed when
+                           a Say command happens; if 1, it isn't.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.close_mouth_end_speech_time </TD>
+<TD ALIGN=LEFT> At the end of speech text, the speech animation
+                           will stop for this number of game loops. Default 10. No affect in voice mode.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.debug_mode    </TD>
+<TD ALIGN=LEFT>     Whether we are in debug mode or not.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.dialog_options_x    </TD>
+<TD ALIGN=LEFT> Offset into dialog options GUI to compensate for borders 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.dialog_options_y    </TD>
+<TD ALIGN=LEFT> Offset into dialog options GUI to compensate for borders 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.disable_antialiasing </TD>
+<TD ALIGN=LEFT> Set to 1 to disable smoothing of scaled characters,
+                              overriding the user's choice in Setup. Default 0. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.following_room_timer</TD>
+<TD ALIGN=LEFT> How long to wait before following char emerges in
+                           new room, default 150. (higher is longer).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.keep_screen_during_instant_transition </TD>
+<TD ALIGN=LEFT> Normally the Instant transition blacks the screen in 8-bit 
+  colour modes, to avoid strange palette effects. However you can set this to 1 to prevent it doing so. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.inv_activated    </B></TD>
+<TD ALIGN=LEFT> Inventory item that the player last clicked on. Useful for unhandled_event. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.inventory_greys_out </TD>
+<TD ALIGN=LEFT> Set to 1 to make inventory controls grey out when GUI disabled is set to "GUIs Grey Out" 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.lipsync_speed </TD>
+<TD ALIGN=LEFT> Similar to game.text_speed, but this determines how quickly the text is 'read' out by the mouth moving.
+                           You should normally only set this faster than text_speed, otherwise the reading will get cut off when the text times out. Default 15. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.max_dialogoption_width  </TD>
+<TD ALIGN=LEFT> Maximum width of textwindow-based dialog options
+                           box. Default 180. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.min_dialogoption_width  </TD>
+<TD ALIGN=LEFT> Minimum width of textwindow-based dialog options
+                           box. Default 0. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.narrator_speech </TD>
+<TD ALIGN=LEFT> Which character ID to use for voice speech within Display() command. Default initial player character. You can also use NARRATOR which uses 'NARR' prefix - special narrator character. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.no_textbg_when_voice  </TD>
+<TD ALIGN=LEFT>  Normally 0. If 1, and the Sierra-style With Background
+                           speech style is in use, will change to the Sierra-style (No Bg) if
+                           a voice speech line is present. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.read_dialog_option_color  </TD>
+<TD ALIGN=LEFT>  By default, -1. You can set this to a colour number, in which
+                case dialog options that the player has selected before will be displayed in this colour. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.roomscript_finished </TD>
+<TD ALIGN=LEFT>  The on_call function has completed executing. (See
+<A HREF="ags49.htm#CallRoomScript">CallRoomScript</A>) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.score          </B></TD>
+<TD ALIGN=LEFT>    The player's score. To modify the score, use the
+  GiveScore script function.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.score_sound    </TD>
+<TD ALIGN=LEFT>    Sound effect to play when the player gets points, originally
+  set in the editor. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.screenshot_height </TD>
+<TD ALIGN=LEFT>  The height of screenshot images when saved into save games.
+     The largest you can have is the full screen size (320x200), which gives the highest
+     quality but the largest size save game files. The default is 160x100. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.screenshot_width </TD>
+<TD ALIGN=LEFT>  The width of screenshot images when saved into save games. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.show_single_dialog_option </TD>
+<TD ALIGN=LEFT> If only a single dialog option is available, show it anyway (default=0) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.sierra_inv_color </TD>
+<TD ALIGN=LEFT>  The background color of the sierra-style inventory.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.skip_display   </TD>
+<TD ALIGN=LEFT>    Setting for how Display() messages are skipped;
+                           valid values are same as for SetSkipSpeech (default 3).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.skip_speech_specific_key </TD>
+<TD ALIGN=LEFT> Default 0. You can set it to a keycode, in which case only that key can skip speech text. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.skipping_cutscene  </B></TD>
+<TD ALIGN=LEFT> Set to 1 if a cutscene is currently being skipped over rather than played normally. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_bubble_width </TD>
+<TD ALIGN=LEFT> Maximum width of the thought bubble text window (default 100) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_music_drop </TD>
+<TD ALIGN=LEFT>   How much to drop music volume when speech is played (default 60).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_text_align </TD>
+<TD ALIGN=LEFT> Sets how text in Lucasarts-style speech is aligned. Same possible values as game.text_align, default eAlignCentre 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_text_gui </TD>
+<TD ALIGN=LEFT>   The textwindow GUI number used for sierra-style speech.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.talkanim_speed </TD>
+<TD ALIGN=LEFT>    The animation speed for talking views (default 5).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.text_align </TD>
+<TD ALIGN=LEFT> Sets how text in message boxes and Sierra-style speech is aligned: <br> 
+ eAlignLeft:   text aligned to left within message box (default) <br> 
+ eAlignCentre: text is centred within the message box <br> 
+ eAlignRight:  text is right-aligned within the message box <br> 
+ These options do not affect Lucasarts-style speech, which is always centred. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.text_shadow_color</TD>
+<TD ALIGN=LEFT>  Color used for speech text shadow (default 16).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.text_speed    </TD>
+<TD ALIGN=LEFT>     How long speech text stays on the screen. Default 15,
+                           higher number means shorter time.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.top_bar_XXXX  </TD>
+<TD ALIGN=LEFT> Customizations for <A HREF="ags72.htm#DisplayTopBar">DisplayTopBar</A>, see link for details 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.total_score   </TD>
+<TD ALIGN=LEFT>     Maximum possible score, initially set in the editor.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.used_mode     </TD>
+<TD ALIGN=LEFT>     Cursor mode used with last click (use with "any click"
+                           events to find out which mode was used)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>mouse.x         </B></TD>
+<TD ALIGN=LEFT>       Mouse X co-ordinate when the last game loop was run (320-res)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>mouse.y          </B></TD>
+<TD ALIGN=LEFT>      Mouse Y co-ordinate when the last game loop was run (320-res)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].r </TD>
+<TD ALIGN=LEFT>       The red component (0-63) of palette slot SLOT
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].g  </TD>
+<TD ALIGN=LEFT>      The green component (0-63) of palette slot SLOT 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].b  </TD>
+<TD ALIGN=LEFT>      The blue component (0-63) of palette slot SLOT
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  player.[x,y,name,...] </TD>
+<TD ALIGN=LEFT> Alias to the current player character. 
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+</BODY></HTML>

@@ -1,0 +1,616 @@
+<HTML>
+<head><title>Character</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic65"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags34.htm#topic64"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags36.htm#topic66"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Character</H2>
+<A HREF="#AnimateCharacter">AnimateCharacter</A><BR>
+<A HREF="#AreCharactersColliding">AreCharactersColliding</A><BR>
+<A HREF="#AreCharObjColliding">AreCharObjColliding</A><BR>
+<A HREF="#ChangeCharacterView">ChangeCharacterView</A><BR>
+<A HREF="#FaceCharacter">FaceCharacter</A><BR>
+<A HREF="#FaceLocation">FaceLocation</A><BR>
+<A HREF="#FollowCharacter">FollowCharacter</A><BR>
+<A HREF="#FollowCharacterEx">FollowCharacterEx</A><BR>
+<A HREF="#GetCharacterAt">GetCharacterAt</A><BR>
+<A HREF="#GetPlayerCharacter">GetPlayerCharacter</A><BR>
+<A HREF="#MoveCharacter">MoveCharacter</A><BR>
+<A HREF="#MoveCharacterBlocking">MoveCharacterBlocking</A><BR>
+<A HREF="#MoveCharacterDirect">MoveCharacterDirect</A><BR>
+<A HREF="#MoveCharacterPath">MoveCharacterPath</A><BR>
+<A HREF="#MoveCharacterStraight">MoveCharacterStraight</A><BR>
+<A HREF="#MoveCharacterToHotspot">MoveCharacterToHotspot</A><BR>
+<A HREF="#MoveCharacterToObject">MoveCharacterToObject</A><BR>
+<A HREF="#ReleaseCharacterView">ReleaseCharacterView</A><BR>
+<A HREF="#RunCharacterInteraction">RunCharacterInteraction</A><BR>
+<A HREF="#SetCharacterBaseline">SetCharacterBaseline</A><BR>
+<A HREF="#SetCharacterClickable">SetCharacterClickable</A><BR>
+<A HREF="#SetCharacterIdle">SetCharacterIdle</A><BR>
+<A HREF="#SetCharacterIgnoreLight">SetCharacterIgnoreLight</A><BR>
+<A HREF="#SetCharacterIgnoreWalkbehinds">SetCharacterIgnoreWalkbehinds</A><BR>
+<A HREF="#SetCharacterProperty">SetCharacterProperty</A><BR>
+<A HREF="#SetCharacterSpeed">SetCharacterSpeed</A><BR>
+<A HREF="#SetCharacterTransparency">SetCharacterTransparency</A><BR>
+<A HREF="#SetCharacterView">SetCharacterView</A><BR>
+<A HREF="#SetPlayerCharacter">SetPlayerCharacter</A><BR>
+<A HREF="#StopMoving">StopMoving</A><BR>
+<P>
+
+<HR>
+<A NAME="AnimateCharacter"></A>
+<H3>AnimateCharacter</H3>
+<PRE>
+AnimateCharacter (CHARID, int loop, int speed, int repeat)
+</PRE>
+Starts the character named CHARID animating, using loop number LOOP of his 
+current view. The overall speed of the animation is set with SPEED,
+where 0 is the fastest, and increasing numbers mean slower. The delay for
+each frame is worked out as SPEED + FRAME SPD, so the individual frame
+speeds are relative to this overall speed.
+The REPEAT parameter sets whether the animation will continuously repeat
+the cycling through the frames. If REPEAT is zero, the animation will start
+from the first frame of LOOP, and go through each frame in turn until the
+last frame, where it will stop. If REPEAT is 1, when the last frame is
+reached, it will go back to the first frame and start over again with the
+animation.<P>
+If the character is moving it will be stopped.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AnimateCharacter(EGO,3,0,0);
+</PRE>
+will animate the character using loop number 3 of his current view only once.<P>
+<I>See Also:</I> <A HREF="ags43.htm#AnimateObject">AnimateObject</A>, <A HREF="ags35.htm#SetCharacterView">SetCharacterView</A><P>
+
+<HR>
+<A NAME="AreCharactersColliding"></A>
+<H3>AreCharactersColliding</H3>
+<PRE>
+AreCharactersColliding (CHARID1, CHARID2)
+</PRE>
+Checks if character CHARID1 is touching CHARID2. This function just checks
+the base line of both characters, so that if one is standing a fair
+distance behind the other, it will not be marked as colliding.
+Returns 1 if the characters feet are touching, 0 otherwise.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (AreCharactersColliding(EGO,MAN)==1)
+   { colliding code here }
+</PRE>
+will execute the colliding code only if the characters EGO and MAN are colliding. <P>
+<I>See Also:</I> <A HREF="ags35.htm#AreCharObjColliding">AreCharObjColliding</A>, <A HREF="ags43.htm#AreObjectsColliding">AreObjectsColliding</A><P>
+
+<HR>
+<A NAME="AreCharObjColliding"></A>
+<H3>AreCharObjColliding</H3>
+<PRE>
+AreCharObjColliding (CHARID, int obj)
+</PRE>
+Checks if character CHARID and object OBJ are touching each other.
+Returns 1 if they are, and 0 if they are not.<P>
+NOTE: This function checks the character's feet against the whole of the
+object. This is used to see if the character is standing on an object, and
+so on. The top two-thirds of the character do not trigger.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (AreCharObjColliding(EGO,3)==1) { colliding code here }
+</PRE>
+will execute the colliding code only if the character EGO and the object number 3 are colliding. <P>
+<I>See Also:</I> <A HREF="ags35.htm#AreCharactersColliding">AreCharactersColliding</A>, <A HREF="ags43.htm#AreObjectsColliding">AreObjectsColliding</A><P>
+
+<HR>
+<A NAME="ChangeCharacterView"></A>
+<H3>ChangeCharacterView</H3>
+<PRE>
+ChangeCharacterView (CHARID, int newview)
+</PRE>
+Changes the normal view number of character CHARID to NEWVIEW. This is
+useful if, for example, you want the character to change the clothes
+they are wearing, and so permanently alter their view number.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ChangeCharacterView(EGO,5);
+</PRE>
+will make the character use view number 5 as his walking view.<P>
+<I>See Also:</I> <A HREF="ags35.htm#SetCharacterView">SetCharacterView</A><P>
+
+<HR>
+<A NAME="FaceCharacter"></A>
+<H3>FaceCharacter</H3>
+<PRE>
+FaceCharacter (CHARID, int tofaceid)
+</PRE>
+Turns the graphic of character CHARID so that it looks like he is facing
+character TOFACEID. This involves changing the current loop of CHARID
+to the appropriate loop number, and setting the frame number to 0 (standing).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FaceCharacter(EGO,MAN);
+</PRE>
+will make the character EGO face the character MAN<P>
+<I>See Also:</I> <A HREF="ags35.htm#FaceLocation">FaceLocation</A>, <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A><P>
+
+<HR>
+<A NAME="FaceLocation"></A>
+<H3>FaceLocation</H3>
+<PRE>
+FaceLocation (CHARID, int x, int y)
+</PRE>
+Similar to the FaceCharacter function, except that this faces the character
+to screen location (X,Y). This allows him to face not only other characters,
+but also objects and hotspots as well (you can get their co-ordinates from
+the Ask Position feature in the Room Editor).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FaceLocation(EGO,150,146);
+</PRE>
+will make the character face at the room location (150,146)<P>
+<I>See Also:</I> <A HREF="ags35.htm#FaceCharacter">FaceCharacter</A><P>
+
+<HR>
+<A NAME="FollowCharacter"></A>
+<H3>FollowCharacter</H3>
+<PRE>
+FollowCharacter (CHARID, int chartofollow)
+</PRE>
+Tells the character CHARID to follow CHARTOFOLLOW around, wherever he goes.
+You could use this command to have a group of main characters who go around
+together, or for example when the hero has rescued someone from the bad
+guy, they can follow the hero home.<P>
+Pass CHARTOFOLLOW as -1 to stop the character following.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FollowCharacter(MAN,EGO);
+</PRE>
+will make character MAN follow the characterEGO wherever he goes.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FollowCharacterEx">FollowCharacterEx</A><P>
+
+<HR>
+<A NAME="FollowCharacterEx"></A>
+<H3>FollowCharacterEx</H3>
+<PRE>
+FollowCharacterEx (CHARID, int chartofollow, int dist, int eagerness)
+</PRE>
+Does the same thing as FollowCharacter (see above), but allows you to set
+extra parameters. DIST sets how far away from CHARTOFOLLOW that CHARID will
+stand. If DIST is 1, they will try to stand very close; if DIST is for
+example 20, they will stand about 20 pixels away.<P>
+EAGERNESS sets on average how long the character will stand around before
+checking if he needs to move again. Setting this to 0 means that he will
+always be on the move until he reaches CHARTOFOLLOW; setting this to 99
+means that he will pause and think for a while on route. Values in between
+specify different lengths of idle time.<P>
+The default values are DIST=10 and EAGERNESS=97.<P>
+As a special case, setting DIST=0 and EAGERNESS=0 makes CHARID behave as if
+it is chasing CHARTOFOLLOW - it will try and get there as quickly as possible.
+Setting EAGERNESS=0 also tells the character not to stop when they reach
+CHARTOFOLLOW, but instead to randomly wander around the character - useful
+perhaps for a very energetic dog or something.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FollowCharacterEx(MAN,EGO,5,80);
+</PRE>
+will make character MAN follow character EGO standing about 5 pixels near him and waiting for a while before he makes his move.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FollowCharacter">FollowCharacter</A><P>
+
+<HR>
+<A NAME="GetCharacterAt"></A>
+<H3>GetCharacterAt</H3>
+<PRE>
+GetCharacterAt (int x, int y)
+</PRE>
+Checks if there is a character at SCREEN co-ordinates (X,Y).
+Returns the character number if there is, or -1 if there is not.
+See the description of GetLocationName for more on screen co-ordinates.<P>
+NOTE: Any characters with the "No interaction" flag set will not be seen
+by this function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GetCharacterAt(124,200);
+</PRE>
+will get the character’s number standing at co ordinates 124,200 or -1 if no character is there.<P>
+<I>See Also:</I> <A HREF="ags39.htm#GetHotspotAt">GetHotspotAt</A>, <A HREF="ags43.htm#GetObjectAt">GetObjectAt</A>, <A HREF="ags37.htm#GetLocationName">GetLocationName</A><P>
+
+<HR>
+<A NAME="GetPlayerCharacter"></A>
+<H3>GetPlayerCharacter</H3>
+<PRE>
+GetPlayerCharacter ()
+</PRE>
+Returns the current character which the player is controlling.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetPlayerCharacter()==2)
+    { code here}
+</PRE>
+will execute the code only if the player controls the character number 2.<P>
+<I>See Also:</I> <A HREF="ags35.htm#SetPlayerCharacter">SetPlayerCharacter</A><P>
+
+<HR>
+<A NAME="MoveCharacter"></A>
+<H3>MoveCharacter</H3>
+
+<PRE>
+MoveCharacter (CHARID, int x, int y)
+</PRE>
+Starts the character CHARID moving from its current location to X,Y. CHARID can
+be either the character's number (as GetPlayerCharacter returns) or its ID
+set in the Room Editor. If the character cannot get to X,Y it will be moved
+as close as possible.<P>
+Control returns to the script immediately. The character will move in the background.<P>
+NOTE: this function only works with characters which are on the current
+screen.<P>
+NOTE: if you need to find out when the character has reached its destination,
+use the  character[charid].walking  variable. See the variables section
+for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacter(EGO,155,122);
+while (character[EGO].walking) Wait(1);
+</PRE>
+will make the character walk to 155,122 and return control to the player when he gets there.
+(in reality you would use MoveCharacterBlocking instead of this).<P>
+<I>See Also:</I> <A HREF="ags35.htm#FaceCharacter">FaceCharacter</A>, <A HREF="ags35.htm#MoveCharacterBlocking">MoveCharacterBlocking</A>,
+<A HREF="ags35.htm#MoveCharacterToObject">MoveCharacterToObject</A>, <A HREF="ags43.htm#MoveObject">MoveObject</A>, <A HREF="ags35.htm#StopMoving">StopMoving</A><P>
+
+<HR>
+<A NAME="MoveCharacterBlocking"></A>
+<H3>MoveCharacterBlocking</H3>
+<PRE>
+MoveCharacterBlocking (CHARID, int x, int y, int direct)
+</PRE>
+Moves the character CHARID to location (X,Y), waiting until they arrive
+there before returning to the script.<P>
+If DIRECT is 0, this acts like MoveCharacter; if it is 1 then this acts
+like MoveCharacterDirect.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterBlocking(EGO,234,122,1);
+</PRE>
+will make the character EGO walk to 234,122 ignoring walkable areas and return the control to the player when he gets there.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#MoveCharacterDirect">MoveCharacterDirect</A><P>
+
+<HR>
+<A NAME="MoveCharacterDirect"></A>
+<H3>MoveCharacterDirect</H3>
+<PRE>
+MoveCharacterDirect (CHARID, int x, int y)
+</PRE>
+Moves the character CHARID from its current location to (X,Y) directly,
+ignoring walkable areas on the screen. This is identical to the "Move to,
+ignore walls" animation command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterDirect(EGO,222,145);
+</PRE>
+will make the character EGO walk to 222,145 ignoring walkable areas <P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>,
+<A HREF="ags35.htm#MoveCharacterPath">MoveCharacterPath</A>, <A HREF="ags35.htm#MoveCharacterStraight">MoveCharacterStraight</A><P>
+
+<HR>
+<A NAME="MoveCharacterPath"></A>
+<H3>MoveCharacterPath</H3>
+<PRE>
+MoveCharacterPath (CHARID, int x, int y)
+</PRE>
+Tells the character CHARID to move to (X,Y) directly, after it has finished its current
+move. This function allows you to queue up a series of moves for the character to make, if
+you want them to take a preset path around the screen. Note that this works equivalently
+to MoveCharacterDirect, ignoring walkable areas.<P>
+This is useful for situations when you might want a townsperson to wander onto the screen
+from one side, take a preset route around it and leave again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacter (SOMEGUY, 160, 100);
+MoveCharacterPath (SOMEGUY, 50, 150);
+MoveCharacterPath (SOMEGUY, 50, 50);
+</PRE>
+tells character SOMEGUY to first of all walk to the centre of the screen normally (obeying
+walkable areas), then move to the bottom left corner and then top left corner afterwards.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#MoveCharacterDirect">MoveCharacterDirect</A><P>
+
+<HR>
+<A NAME="MoveCharacterStraight"></A>
+<H3>MoveCharacterStraight</H3>
+<PRE>
+MoveCharacterStraight (CHARID, int x, int y)
+</PRE>
+Moves the character CHARID from its current location to (X,Y) in a straight
+line as far as is possible before hitting a non-walkable area. This is
+useful for use with the arrow keys for character movement, since it
+guarantees that the character will move in a straight line in the direction
+specified. This function is non-blocking.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterStraight(EGO,166,78);
+</PRE>
+will move the character EGO in a straight line towards co ordinates 166,78 until he hits a non walkable area.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#MoveCharacterDirect">MoveCharacterDirect</A><P>
+
+<HR>
+<A NAME="MoveCharacterToHotspot"></A>
+<H3>MoveCharacterToHotspot</H3>
+<PRE>
+MoveCharacterToHotspot (CHARID, int hotspot)
+</PRE>
+Moves the character CHARID from its current location to the walk-to point
+for the specified hotspot. If the hotspot has no walk-to point, nothing
+happens.<P>
+This is a blocking call - control is not returned to the script until the
+character has reached its destination.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterToHotspot(EGO,6);
+</PRE>
+will move the character EGO to the hotspot’s 6 "walk to point".<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#MoveCharacterToObject">MoveCharacterToObject</A><P>
+
+<HR>
+<A NAME="MoveCharacterToObject"></A>
+<H3>MoveCharacterToObject</H3>
+<PRE>
+MoveCharacterToObject (CHARID, int object)
+</PRE>
+Moves the character CHARID from its current location to a position just below
+the object OBJECT. This is useful for example, if you want the man to pick
+up an object. 
+This is a blocking call - control is not returned to the script until the
+character has reached its destination.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterToObject (EGO, 0);
+ObjectOff (0);
+AddInventory (3);
+</PRE>
+Will move the character EGO below object number 0, then disappear object 0 and add inventory item number 3 in the players inventory.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#MoveCharacterToHotspot">MoveCharacterToHotspot</A><P>
+
+<HR>
+<A NAME="ReleaseCharacterView"></A>
+<H3>ReleaseCharacterView</H3>
+<PRE>
+ReleaseCharacterView (CHARID)
+</PRE>
+Allows the engine to automatically control the character's view, as normal.
+Use this once you have finished doing the animation which you started with
+the SetCharacterView command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ReleaseCharacterView(EGO);
+</PRE>
+will return character EGO to its original view.<P>
+<I>See Also:</I> <A HREF="ags35.htm#SetCharacterView">SetCharacterView</A><P>
+
+<HR>
+<A NAME="RunCharacterInteraction"></A>
+<H3>RunCharacterInteraction</H3>
+<PRE>
+RunCharacterInteraction (CHARID, int mode)
+</PRE>
+Processes the interaction list as if the player had clicked the mouse
+on character CHARID in cursor mode MODE. MODE is one of the MODE_* constants
+listed in the ProcessClick description.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunCharacterInteraction(MAN,MODE_TALK);
+</PRE>
+will execute the code defined in the MAN’S "TALK TO CHARACTER" interaction.<P>
+<I>See Also:</I> <A HREF="ags37.htm#ProcessClick">ProcessClick</A>, <A HREF="ags39.htm#RunHotspotInteraction">RunHotspotInteraction</A>,
+<A HREF="ags40.htm#RunInventoryInteraction">RunInventoryInteraction</A><P>
+
+
+<HR>
+<A NAME="SetCharacterBaseline"></A>
+<H3>SetCharacterBaseline</H3>
+<PRE>
+SetCharacterBaseline (CHARID, int baseline)
+</PRE>
+Changes CHARID's baseline to BASELINE. This allows you to set a specific
+base line for the character, which works similarly to walk-behind area and
+object baselines.
+BASELINE can be from 1 to the height of the room (normally 200), or set it
+to 0 to go back to using the character's feet as the baseline.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterBaseline(MAN, 120);
+</PRE>
+will move the character’s baseline ( which can be used for testing collisions, or for walk-behinds) to a line positioned at y coordinate = 120.<P>
+<I>See Also:</I> <A HREF="ags43.htm#SetObjectBaseline">SetObjectBaseline</A>, <A HREF="ags47.htm#SetWalkBehindBase">SetWalkBehindBase</A><P>
+
+<HR>
+<A NAME="SetCharacterClickable"></A>
+<H3>SetCharacterClickable</H3>
+<PRE>
+SetCharacterClickable (CHARID, int is_clickable)
+</PRE>
+Sets whether the character CHARID is recognised as something which the
+player can interact with. This allows you to modify the "No interaction"
+tick-box set initially in the GUI Editor.
+If you pass IS_CLICKABLE as 1, then the player can look at, speak to, and
+so on the character (as with the old Sierra games). If you pass IS_CLICKABLE
+as 0, then if the player clicks on the character it will activate whatever
+is behind them (as with the old Lucasarts games).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterClickable(MAN,0);
+</PRE>
+will make the game ignore clicks on the character MAN.<P>
+<I>See Also:</I> <A HREF="ags43.htm#SetObjectClickable">SetObjectClickable</A><P>
+
+<HR>
+<A NAME="SetCharacterIdle"></A>
+<H3>SetCharacterIdle</H3>
+<PRE>
+SetCharacterIdle (CHARID, int idleview, int delay)
+</PRE>
+Changes the character CHARID's idle view to IDLEVIEW, with a timeout
+of DELAY seconds of inactivity before it is played. Inactivity is defined
+as when the character is not moving and not being animated.
+Setting DELAY to 0 causes the idle view to be looped continuously when
+the character is not moving - this is useful when for example the character
+is swimming and they need to tread water when idle.
+Pass IDLEVIEW as -1 to disable the idle view completely.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterIdle(EGO,12,30);
+</PRE>
+will change/set the character’s EGO idle view to 12. The idle view will be played if the character is idle for 30 seconds.<P>
+
+<HR>
+<A NAME="SetCharacterIgnoreLight"></A>
+<H3>SetCharacterIgnoreLight</H3>
+<PRE>
+SetCharacterIgnoreLight (CHARID, int ignore)
+</PRE>
+Allows you to dynamically modify the "ignore lighting" checkbox for the
+character. Pass IGNORE as 1 for this character to always look
+the same, and not be affected by the light level of walkable areas.
+Pass 0 for this character to behave as normal and be affected by area light
+levels.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterIgnoreLight(EGO,1);
+</PRE>
+will make the character look the same no matter if he stands on walkable areas with different light levels.<P>
+
+<HR>
+<A NAME="SetCharacterIgnoreWalkbehinds"></A>
+<H3>SetCharacterIgnoreWalkbehinds</H3>
+<PRE>
+SetCharacterIgnoreWalkbehinds (CHARID, int ignore)
+</PRE>
+Sets whether character CHARID is affected by walkbehind areas. Passing 0
+(the default setting) means that the character will be placed behind walk-
+behind areas according to the relevant baselines.
+Passing 1 means that the character will never be placed behind a walk-behind
+area. This is useful if for example you want to use the character as an
+overlay to display rain or snow onto a scene.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterIgnoreWalkbehinds (EGO,1);
+</PRE>
+will make the character EGO ignore walk-behinds.<P>
+<I>See Also:</I> <A HREF="ags35.htm#SetCharacterProperty">SetCharacterProperty</A>, 
+<A HREF="ags43.htm#SetObjectIgnoreWalkbehinds">SetObjectIgnoreWalkbehinds</A><P>
+
+<HR>
+<A NAME="SetCharacterProperty"></A>
+<H3>SetCharacterProperty</H3>
+<PRE>
+SetCharacterProperty (CHARID, PROPERTY, int new_value)
+</PRE>
+Changes one of the character properties, originally set in the editor. CHARID is the
+character, PROPERTY is which property to change, and NEW_VALUE is either 0 or 1, depending
+on whether you want to switch that property on or off.<P>
+PROPERTY's possible values are as follows:
+<PRE>
+CHAR_IGNORESCALING       the editor 'Ignore room area scaling' checkbox
+CHAR_NOINTERACTION       the editor 'No interaction' checkbox
+CHAR_NODIAGONAL          the editor 'No diagonal loops' checkbox
+CHAR_IGNORELIGHT         the editor 'Ignore room area lighting' checkbox
+CHAR_NOTURNING           the editor 'Do not turn before walking' checkbox
+</PRE>
+<I>See Also:</I> <A HREF="ags35.htm#SetCharacterIgnoreWalkbehinds">SetCharacterIgnoreWalkbehinds</A><P>
+
+<HR>
+<A NAME="SetCharacterSpeed"></A>
+<H3>SetCharacterSpeed</H3>
+<PRE>
+SetCharacterSpeed (CHARID, int newspeed)
+</PRE>
+Changes the character CHARID's walking speed to NEWSPEED. The values
+used for NEWSPEED are identical to those set in the Room Editor for
+walking speed.<P>
+<I>NOTE:</I> This function CANNOT be called while the character is moving, so
+you must stop him first.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterSpeed(EGO,10);
+</PRE>
+will change the character’s EGO speed to 10.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A>, <A HREF="ags35.htm#StopMoving">StopMoving</A><P>
+
+<HR>
+<A NAME="SetCharacterTransparency"></A>
+<H3>SetCharacterTransparency</H3>
+<PRE>
+SetCharacterTransparency (CHARID, int amount)
+</PRE>
+Sets CHARID to be AMOUNT Setting AMOUNT to 100 means it is totally invisible, and lower values
+represent varying levels of transparency. Pass AMOUNT as 0 to stop the
+character being transparent.<P>
+<I>NOTE: Transparency currently only works in hi-color games, and the object
+must have been imported in hi-colour for the transparency to work.</I><P>
+<I>NOTE: Having a large transparent character can significantly slow down the
+engine.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterTransparency(EGO,50);
+</PRE>
+will make the character EGO look semi transparent.<P>
+<I>See Also:</I> <A HREF="ags43.htm#SetObjectTransparency">SetObjectTransparency</A><P>
+
+<HR>
+<A NAME="SetCharacterView"></A>
+<H3>SetCharacterView</H3>
+<PRE>
+SetCharacterView (CHARID, int view)
+</PRE>
+Sets character CHARID's view to VIEW. This can be used to perform animations
+with charaters, for example bending down to pick something up, which don't
+use the default view.
+NOTE: This function locks the character's view to the specified view, so
+that it can only be changed by other script commands (ie. it won't
+automatically be changed by the program on shadow areas, screen changes,
+etc). When you are done with the animation, call ReleaseCharacterView to
+allow the program to take control back.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCharacterView(EGO,12);
+AnimateCharacter(EGO,0,0,0);
+while(character[EGO].animating) Wait(1);
+ReleaseCharacterView(EGO);
+</PRE>
+will change the character’s EGO view to view 12, perform an animation using loop 0, wait until the animation finishes and then return the character to his normal view.<P>
+<I>See Also:</I> <A HREF="ags35.htm#AnimateCharacter">AnimateCharacter</A>, <A HREF="ags35.htm#ChangeCharacterView">ChangeCharacterView</A>, <A HREF="ags35.htm#ReleaseCharacterView">ReleaseCharacterView</A><P>
+
+<HR>
+<A NAME="SetPlayerCharacter"></A>
+<H3>SetPlayerCharacter</H3>
+<PRE>
+SetPlayerCharacter (int char_id)
+</PRE>
+Changes the character which the player controls to CHAR_ID. You can either
+use the character's number, or the ID string set in the Room Editor.
+This function will also cause the room to change to the room which the
+chosen character is currently in. (It calls NewRoom with the character's
+room, so the change won't happen until the end of the script).<P>
+Note: The "player" global variable is not updated with the new character;
+so using "player.x", "player.name" and so on will change the original
+character, not the current player character.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetPlayerCharacter(MAN);
+</PRE>
+will change the character that the player controls to character MAN and also change (if needed) the room to the room that the character MAN is .<P>
+<I>See Also:</I> <A HREF="ags35.htm#GetPlayerCharacter">GetPlayerCharacter</A>, <A HREF="ags47.htm#NewRoom">NewRoom</A><P>
+
+<HR>
+<A NAME="StopMoving"></A>
+<H3>StopMoving</H3>
+<PRE>
+StopMoving (CHARID)
+</PRE>
+Stops the character CHARID moving and sets its graphic to the standing frame
+of the current loop.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (character[EGO].x&gt;299)
+    StopMoving(EGO); 
+</PRE>
+will stop the character when he reaches the coordinate x=300.<P>
+<I>See Also:</I> <A HREF="ags35.htm#MoveCharacter">MoveCharacter</A><P>
+
+
+</BODY></HTML>

@@ -1,0 +1,42 @@
+<HTML>
+<head><title>Dumping text to file</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic36"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic24"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags16.htm#topic35"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags18.htm#TextParser"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Dumping text to file</H2>
+AGS now has the ability to dump all of your in-game text out to a flat text
+file, which you can edit by hand and then import back later.
+This is useful if you need to edit lots of scripts or messages for some reason,
+and then recombine them all back into the game.<P>
+To dump your game's text, choose the "Dump game text to file" option from the
+Game menu.
+Here you get five check-boxes where you can choose which parts of the game
+you want exported. You may wish to just tick all the boxes. Once done, click the "Dump
+It!" button, type a file name, and click OK. 
+You should find that file inside your game's folder ready to be edited.<P>
+<I>NOTE: The file contains special tags, which look like this:</I><P>
+<TT>$$$!$$$ GM 3</TT><P>
+<I><B>DO NOT MODIFY THESE LINES IN ANY WAY.</B> They are used by AGS to track what
+each line of the file means, and changing any of the special lines could
+really mess up your game when you import it back.</I><P>
+When you have made your changes to the text file, and want to combine it back
+into the game, first of all MAKE A BACKUP COPY OF YOUR GAME FOLDER. Because
+the import operation jibbles every part of your game, if it crashes or messes
+up at any point, your game is most likely lost. So, make a backup of your
+game before proceeding.<P>
+Once done, choose "Import dumped text from file" on the Game menu, select the
+things you want to import back in, then click the "Import" button.
+There you can select the text file to import, and it should import everything back in.<P>
+In conclusion, the Dump Text feature is a very powerful tool, however you <B>must</B>
+be careful with its use or you could corrupt your game beyond repair.<P>
+
+</BODY></HTML>

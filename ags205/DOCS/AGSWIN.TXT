@@ -1,0 +1,34 @@
+Included in the archive is a beta version of the Windows DirectX version
+of the AGS engine. It should look and play identically to the DOS version.
+The reason I have started on this is because of the impending Windows 2000,
+which has very bad DOS support. Once people start getting Win2000 with their
+new computers, AGS-DOS may not work. Therefore, I will provide two versions
+of the engine. And don't worry - I'm not about to abandon DOS support: for one
+thing, the Room Editor is still DOS-only.
+
+The Windows version currently has the following limitations:
+ * Some files cannot be used from the main game data file; so you need all
+   sound effects and music present in the directory seperately
+ * MOD, XM and MP3 music do not play
+ * The function keys (F1 to F10) do not work.
+ * You cannot build a standalone EXE file with the Windows version
+ * The CDAudio text script function does not work.
+ * There is no Setup program: to change the screen resolution, run the DOS-
+   based Setup program, and the Windows version will use the setup from that.
+   Note that the Windows version uses your DirectX sound setup, so the sound
+   settings you enter into DOS-based setup are not used.
+
+To use the Windows version:
+Copy the ACWIN.EXE, SEER.DLL and ALL3927.DLL into your game's directory (ie.
+the directory with the AC2GAME.DAT file in it). Then, double-click Acwin.exe.
+
+Please try it out and tell me the results. Remember that it is a beta and so
+is not guaranteed to work properly. And don't just tell me "it crashes" - try
+and give more information which might help me solve the problem.
+
+If you're wondering: Yes, it is designed so that the Windows and DOS versions
+both use the same game file. You only need to save your game once; then the
+AC2GAME.DAT file is accessed by both versions of the interpreter.
+The two versions can even share saved game positions.
+
+Chris Jones

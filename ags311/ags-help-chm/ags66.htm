@@ -1,0 +1,842 @@
+<HTML>
+<head><title>Multimedia functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic62"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags65.htm#topic61"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags67.htm#topic63"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Multimedia functions</H2>
+<A HREF="#CDAudio">CDAudio</A><BR>
+<A HREF="#GetCurrentMusic">GetCurrentMusic</A><BR>
+<A HREF="#GetMIDIPosition">GetMIDIPosition</A><BR>
+<A HREF="#Game.GetMODPattern">GetMODPattern</A><BR>
+<A HREF="#GetMP3PosMillis">GetMP3PosMillis</A><BR>
+<A HREF="#IsChannelPlaying">IsChannelPlaying</A><BR>
+<A HREF="#IsMusicPlaying">IsMusicPlaying</A><BR>
+<A HREF="#IsMusicVoxAvailable">IsMusicVoxAvailable</A><BR>
+<A HREF="#IsSoundPlaying">IsSoundPlaying</A><BR>
+<A HREF="#IsSpeechVoxAvailable">IsSpeechVoxAvailable</A><BR>
+<A HREF="#PlayAmbientSound">PlayAmbientSound</A><BR>
+<A HREF="#PlayFlic">PlayFlic</A><BR>
+<A HREF="#PlayMP3File">PlayMP3File</A><BR>
+<A HREF="#PlayMusic">PlayMusic</A><BR>
+<A HREF="#PlayMusicQueued">PlayMusicQueued</A><BR>
+<A HREF="#PlaySilentMIDI">PlaySilentMIDI</A><BR>
+<A HREF="#PlaySound">PlaySound</A><BR>
+<A HREF="#PlaySoundEx">PlaySoundEx</A><BR>
+<A HREF="#PlayVideo">PlayVideo</A><BR>
+<A HREF="#SeekMIDIPosition">SeekMIDIPosition</A><BR>
+<A HREF="#SeekMODPattern">SeekMODPattern</A><BR>
+<A HREF="#SeekMP3PosMillis">SeekMP3PosMillis</A><BR>
+<A HREF="#SetChannelVolume">SetChannelVolume</A><BR>
+<A HREF="#SetDigitalMasterVolume">SetDigitalMasterVolume</A><BR>
+<A HREF="#SetMusicMasterVolume">SetMusicMasterVolume</A><BR>
+<A HREF="#SetMusicRepeat">SetMusicRepeat</A><BR>
+<A HREF="#SetMusicVolume">SetMusicVolume</A><BR>
+<A HREF="#Game.SetSaveGameDirectory">SetSaveGameDirectory</A><BR>
+<A HREF="#SetSoundVolume">SetSoundVolume</A><BR>
+<A HREF="#SetSpeechVolume">SetSpeechVolume</A><BR>
+<A HREF="#SetVoiceMode">SetVoiceMode</A><BR>
+<A HREF="#StopAmbientSound">StopAmbientSound</A><BR>
+<A HREF="#StopChannel">StopChannel</A><BR>
+<A HREF="#StopMusic">StopMusic</A><BR>
+<A HREF="#Game.StopSound">StopSound</A><BR>
+<P>
+
+<HR>
+<A NAME="CDAudio"></A>
+<H3>CDAudio</H3>
+<PRE>
+CDAudio (eCDAudioFunction, int param)
+</PRE>
+This function allows you to play and control an audio CD in your game.
+Different tasks are performed, depending on the value of the AudioFunction
+parameter. If there is no CD-ROM drive on the system, the function does
+nothing.<P>
+The PARAM parameter is used by some of the functions for various reasons; if
+it is not needed for the particular function you are calling, pass zero
+instead.<P>
+The tasks performed are as follows depending on the COMMAND parameter:
+<PRE>
+eCDIsDriverPresent - checks if there is a CD-ROM driver available on
+   the system. Returns 1 if there is, and 0 if there is not.
+eCDGetPlayingStatus - checks whether the CD drive is currently playing
+   an audio track. Returns 1 if it is, and 0 if it is not.
+eCDPlayTrack - starts playback from track PARAM on the CD. If the track
+   does not exist, or if it is a data track, nothing happens.
+eCDPausePlayback - pauses the currently playing audio track.
+eCDResumePlayback - continues from where the track was paused.
+eCDGetNumTracks - returns the number of tracks on the CD
+   currently in the drive. If the drive is empty, returns 0.
+eCDEject - ejects the drive tray if the drive has the ability. This is
+   a feature you'll play with to start off because it's neat, and then
+   realize that it has no real use in your game.
+   Your script does not continue until the drive is fully ejected.
+eCDCloseTray - the reverse of Eject. This will pull the drive tray back
+   in again. Your script does not continue until the drive has been
+   fully closed.
+eCDGetCDDriveCount - returns the number of CD drives in the
+   system, normally 1.
+eCDSelectActiveCDDrive - changes the current CD drive to PARAM,
+   where PARAM ranges from 1 to (number of CD drives). All the other
+   CD Audio functions operate on the current CD drive.
+</PRE>
+NOTE: These CD Audio functions are slow compared to all the other script
+functions. This will not be noticeable if you call them from most scripts,
+but using CDAudio in a repeatedly_execute script will noticeably slow down
+the game.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes, but supports 1 CD-ROM drive only </B><br> 
+MS-DOS: <B> Yes, if CD-ROM device driver loaded </B><br> 
+Linux: <B> Yes, but supports 1 CD-ROM drive only </B><br> 
+MacOS: <B> No </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CDAudio(eCDPlayTrack, 3);
+</PRE>
+will play track 3 of the CD that's in the CD ROM drive.<P>
+
+<HR>
+<A NAME="GetCurrentMusic"></A>
+<H3>GetCurrentMusic</H3>
+<PRE>
+GetCurrentMusic()
+</PRE>
+Returns the number of the currently playing background music, or -1 if
+no music is playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetCurrentMusic()==-1)
+    PlayMusic(2);
+</PRE>
+will play music2 if no music is playing.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsMusicPlaying">IsMusicPlaying</A>, <A HREF="ags66.htm#IsSoundPlaying">IsSoundPlaying</A>, <A HREF="ags66.htm#SetMusicRepeat">SetMusicRepeat</A>, <A HREF="ags66.htm#SetMusicVolume">SetMusicVolume</A><P>
+
+<HR>
+<A NAME="GetMIDIPosition"></A>
+<H3>GetMIDIPosition</H3>
+<PRE>
+GetMIDIPosition ()
+</PRE>
+Returns the current MIDI beat number of the current track. If there is
+no track playing, or if it's not a MIDI track, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT><P>
+<PRE>
+if(GetMIDIPosition()==50)
+PlayMusic(2);
+</PRE>
+will play music2 if the current midi's beat is the 50th beat.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SeekMIDIPosition">SeekMIDIPosition</A><P>
+
+
+<HR>
+<A NAME="Game.GetMODPattern"></A>
+<H3>GetMODPattern</H3>
+<PRE>
+static int Game.GetMODPattern()
+</PRE>
+Returns the currently playing pattern/track with MOD/XM music.<P>
+If there is no mod music currently playing, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (Game.GetMODPattern() &gt;= 10) {
+  SeekMODPattern(2);
+}
+</PRE>
+will loop back to pattern 2 when it reaches pattern 10.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SeekMODPattern">SeekMODPattern</A><P>
+
+
+<HR>
+<A NAME="GetMP3PosMillis"></A>
+<H3>GetMP3PosMillis</H3>
+<PRE>
+GetMP3PosMillis ()
+</PRE>
+Returns the position of the currently playing MP3 or OGG background music
+file, in milliseconds from the start.<P>
+If the current track is not an MP3 or OGG track, returns 0.<P>
+If the background music is currently crossfading between two tracks, this returns
+the position of the old track which is fading out.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetMP3PosMillis() &gt; 30000)
+  SeekMP3PosMillis(0);
+</PRE>
+will loop the track back to the start after 30 seconds.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SeekMP3PosMillis">SeekMP3PosMillis</A><P>
+
+
+<HR>
+<A NAME="IsChannelPlaying"></A>
+<H3>IsChannelPlaying</H3>
+<PRE>
+IsChannelPlaying (int channel)
+</PRE>
+Returns 1 if sound channel number CHANNEL is currently playing sound. If the specified
+channel is not currently playing anything, returns 0.<P>
+NOTE: Be careful with this function for actions like looping sounds, since
+if the user doesn't have a sound card this will always return 0.<P>
+See the description of <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A> for more on sound channels.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsChannelPlaying(3)==0)
+  PlaySoundEx(20, 3);
+</PRE>
+will play sound20 on channel 3 if no other sound is playing.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsSoundPlaying">IsSoundPlaying</A>, <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A><P>
+
+
+<HR>
+<A NAME="IsMusicPlaying"></A>
+<H3>IsMusicPlaying</H3>
+<PRE>
+IsMusicPlaying ()
+</PRE>
+Returns 1 if the background music track is still playing. If you are using
+the Repeat Music option, this will always return 1 since the music will
+loop round when it finishes. Otherwise, this will return 0 once the
+current track finishes.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if(IsMusicPlaying()==0)
+PlayMusic(3);
+</PRE>
+will play music3 if no music is playing.<P>
+<I>See Also:</I> <A HREF="ags66.htm#GetCurrentMusic">GetCurrentMusic</A>
+ 
+
+<HR>
+<A NAME="IsMusicVoxAvailable"></A>
+<H3>IsMusicVoxAvailable</H3>
+<PRE>
+IsMusicVoxAvailable()
+</PRE>
+Returns whether the MUSIC.VOX file is being used by the game.
+This could be useful if you have an optional MP3 download pack, and
+you want to know whether the player has it or not.<P>
+Returns 1 if the MP3/OGG music files are available, 0 if not.<P>
+<I>NOTE:</I> This function <B>ONLY</B> deals with the MUSIC.VOX file. If you have
+bundled MP3 files separately in the game directory, they will still be played
+by the game, but this function will not return 1 if they are there.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsMusicVoxAvailable()==0)
+    Display ("You don't have the music pack"); 
+</PRE>
+will display a message if the music pack is not available.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsSpeechVoxAvailable">IsSpeechVoxAvailable</A><P>
+
+
+<HR>
+<A NAME="IsSoundPlaying"></A>
+<H3>IsSoundPlaying</H3>
+<PRE>
+IsSoundPlaying ()
+</PRE>
+Returns 1 if there is currently a sound effect playing. This could be
+a manually started sound (eg. with PlaySound) or an automatic sound (eg.
+with GiveScore).<P>
+If the sound has finished, or none was played, returns 0.<P>
+NOTE: Be careful with this function for actions like looping sounds, since
+if the user doesn't have a sound card this will always return 0.<P>
+NOTE: This function does not report if background music or ambient sounds are playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsSoundPlaying()==0)
+  PlaySound(20);
+</PRE>
+will play sound20 if no sound is playing.<P>
+<I>See Also:</I> <A HREF="ags66.htm#GetCurrentMusic">GetCurrentMusic</A>, <A HREF="ags66.htm#IsChannelPlaying">IsChannelPlaying</A><P>
+
+
+<HR>
+<A NAME="IsSpeechVoxAvailable"></A>
+<H3>IsSpeechVoxAvailable</H3>
+<PRE>
+IsSpeechVoxAvailable()
+</PRE>
+Returns whether the SPEECH.VOX file is being used by the game.
+This could be useful if you have an optional speech download pack, and
+you want to know whether the player has it or not.<P>
+Returns 1 if the speech files are available, 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsSpeechVoxAvailable()==0)
+    Display ("You don't have the voice pack"); 
+</PRE>
+will display a message if the voice pack is not available.<P>
+<B>NOTE:</B> This function used to be called IsVoxAvailable, but has now been renamed to avoid confusion.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsMusicVoxAvailable">IsMusicVoxAvailable</A><P>
+
+<HR>
+<A NAME="PlayAmbientSound"></A>
+<H3>PlayAmbientSound</H3>
+<PRE>
+PlayAmbientSound (int channel, int sound, int volume, int x, int y)
+</PRE>
+Plays a looping sound effect in the background.<P>
+<I>channel</I> is the sound channel number. Channel 1 is reserved for ambient sounds
+only, so you should use that wherever possible. However, if you want more than
+one ambient sound to play simultaneously, you can specify one of the standard
+sound channels (3-7) instead, and the new sound will play on that channel.<P>
+<I>sound</I> is the sound number, which identifies the file to load. The game will try to
+load SOUNDx.MP3 and SOUNDx.WAV, where X is the sound number you specify here.<P>
+<I>volume</I> is the volume of the sound. This can be from 1 to 255, where 255 is the loudest.
+Generally you won't want to make this very loud since it's only supposed to be a background
+noise, such as a humming machine room or flowing water.<P>
+X and Y allow you to specify co-ordinates if you want a directional ambient sound. If you
+just pass X and Y as zero, the sound will be played at the specified volume throughout the
+room. However, if there is a certain spot in the room where the sound is emanating from,
+you can pass its co-ordinates here, and the sound will get louder as the player approaches
+that spot in the room. In this case, the VOLUME parameter specifies the maximum possible volume,
+when the player is standing right on the spot. <P>
+<I>NOTE: The sound will stop when the player leaves the room, unless the game.ambient_sounds_persist
+variable is set to 1. </I><P>
+<I>NOTE: In order to optimise the looping of the sound, the entire sound effect
+is loaded into memory. Therefore, do not use this function to play normal background music
+with, since music files tend to be very large and are better streamed from disk with the
+normal music functions.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayAmbientSound(1, 10, 150, 250, 110);
+</PRE>
+starts SOUND10.MP3 playing in the background, at a medium volume and coming from co-ordinates
+(250, 110).<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMusic">PlayMusic</A>, <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A>,
+<A HREF="ags66.htm#StopAmbientSound">StopAmbientSound</A><P>
+
+
+<HR>
+<A NAME="PlayFlic"></A>
+<H3>PlayFlic</H3>
+<PRE>
+PlayFlic (int flic_number, int options)
+</PRE>
+Plays a FLI or FLC animation. The game checks for FLICx.FLC and FLICx.FLI
+(where X is FLIC_NUMBER) and if it finds one, plays it.<P>
+OPTIONS has these meanings:
+<PRE>
+0  player can't skip animation
+1  player can press ESC to skip animation
+2  player can press any key or click mouse to skip animation
++10 (ie.10,11,12) do not stretch to full-screen, just play at flc size
++100 do not clear the screen before starting playback
+</PRE>
+The game is paused while the animation plays.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayFlic(2, 1);
+</PRE>
+will play flic2 and the player will be able to skip the flic by pressing the ESC key.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayVideo">PlayVideo</A><P>
+
+
+<HR>
+<A NAME="PlayMP3File"></A>
+<H3>PlayMP3File</H3>
+<PRE>
+PlayMP3File (string filename)
+</PRE>
+Changes the currently playing background music to FILENAME, which must be an MP3 or OGG file.<P>
+Since normally MP3 files are built into the MUSIC.VOX file, there may be occasions where
+you want one MP3 (for example, the intro music) to be distributed with your main game
+rather than the music pack. So, this function allows you to play any named MP3 or OGG file. However,
+you will have to bundle the file separately in your game distribution (it is not automatically
+compiled into the EXE).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayMP3File ("chesney.mp3");
+</PRE>
+will play "chesney.mp3" as the background music.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMusic">PlayMusic</A>, <A HREF="ags66.htm#StopMusic">StopMusic</A><P>
+
+
+<HR>
+<A NAME="PlayMusic"></A>
+<H3>PlayMusic</H3>
+<PRE>
+PlayMusic (int music_number)
+</PRE>
+Changes the currently playing background music to MUSICx.OGG, MUSICx.MP3, MUSICx.MID,
+MUSICx.MOD or MUSICx.XM (where X is MUSIC_NUMBER). The game will search for the files
+in that order until it finds one to play.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayMusic(2);
+</PRE>
+will play music2.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMP3File">PlayMP3File</A>, <A HREF="ags66.htm#PlayMusicQueued">PlayMusicQueued</A>,
+<A HREF="ags66.htm#PlaySound">PlaySound</A>, <A HREF="ags66.htm#StopMusic">StopMusic</A><P>
+
+
+<HR>
+<A NAME="PlayMusicQueued"></A>
+<H3>PlayMusicQueued</H3>
+<PRE>
+PlayMusicQueued (int music_number)
+</PRE>
+Queues up MUSIC_NUMBER to be played after the current background music finishes.<P>
+This command allows you to build up a playlist of music to be played, one after another. You
+can call this up to 10 times, to add up to 10 tracks to the playlist.<P>
+<B>NOTE:</B> This command uses the current setting of SetMusicRepeat to determine whether
+the queued track will repeat or not. You can only queue one track while SetMusicRepeat
+is on (since it will never finish, any further queued tracks would never play).<P>
+<B>NOTE:</B> The playlist is cancelled if you call PlayMusic (or use any other Play Music
+commands such as the Play Music On Room Load feature), or if you call StopMusic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicRepeat(0);
+PlayMusic(2);
+PlayMusicQueued(3);
+SetMusicRepeat(1);
+PlayMusicQueued(4);
+</PRE>
+will play music 2, and then play music 3 after it finishes. After that, music 4 will play
+and loop continuously.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMusic">PlayMusic</A>, <A HREF="ags66.htm#SetMusicRepeat">SetMusicRepeat</A>,
+<A HREF="ags66.htm#StopMusic">StopMusic</A><P>
+<P>
+
+<HR>
+<A NAME="PlaySilentMIDI"></A>
+<H3>PlaySilentMIDI</H3>
+<PRE>
+PlaySilentMIDI (int music_number)
+</PRE>
+Plays MIDI music MUSIC_NUMBER silently in the background. While it is playing, GetMIDIPosition
+and SeekMIDIPosition will operate on this track.<P>
+This is a very specialised command and will not be needed by most games. It is designed to
+allow the beats of a MIDI file to be used for timing of game events and for other purposes.<P>
+The MIDI is silently played on the speech sound channel, so you cannot use this in a talkie
+game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlaySilentMIDI(2);
+</PRE>
+will play music2.mid silently in the background.<P>
+<I>See Also:</I> <A HREF="ags66.htm#GetMIDIPosition">GetMIDIPosition</A>, <A HREF="ags66.htm#SeekMIDIPosition">SeekMIDIPosition</A><P>
+
+
+<HR>
+<A NAME="PlaySound"></A>
+<H3>PlaySound</H3>
+<PRE>
+PlaySound (int sound_number)
+</PRE>
+Plays a sound effect. The game will search for SOUNDx.OGG, SOUNDx.MP3, SOUNDx.WAV
+and SOUNDx.VOC (where x is SOUND_NUMBER) and play the first one it finds.<P>
+This command will find a free channel to play the sound on, if it can. Otherwise,
+it will silence any previously playing sounds and override them with the new sound.<P>
+Pass -1 as SOUND_NUMBER to stop any currently playing sounds.<P>
+This command returns the channel number that the new sound is playing on, or -1
+if it did not play for any reason.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlaySound(3);
+</PRE>
+will play sound3.mp3<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMusic">PlayMusic</A>, <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A><P>
+
+
+<HR>
+<A NAME="PlaySoundEx"></A>
+<H3>PlaySoundEx</H3>
+<PRE>
+PlaySoundEx (int sound_number, int channel)
+</PRE>
+Plays sound effect SOUND_NUMBER on channel number CHANNEL.<P>
+<B>About sound channels</B><P>
+AGS now uses a multi-channel sound system. There are currently 8 sound channels,
+numbered from 0 to 7. They are used as follows:<P>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT>  0 </TD>
+<TD ALIGN=LEFT> Background music, used by PlayMusic 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> 1 </TD>
+<TD ALIGN=LEFT> Ambient sounds, used by PlayAmbientSound 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> 2 </TD>
+<TD ALIGN=LEFT> Voice speech, used when you have automatic speech in your game. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> 3-7 </TD>
+<TD ALIGN=LEFT> Free channels, used by PlaySound, view frame sounds and so on. 
+</TD>
+</TR>
+</TABLE>
+<P>
+When you use a Play Sound command, AGS automatically chooses a free channel from 3-7 to
+play the sound on. This means you can have up to 5 simultaneous sound effects. If they
+are all in use and you want to play another sound, one of the previous sounds will be cut off.<P>
+With PlaySoundEx, you can elect to play a sound effect on a specific channel, from 3 to 7.
+This gives you greater control of the sound effects, should you need it.<P>
+You cannot play a sound on channels 0-2 using this function, because there are separate
+ways of starting sound on those channels.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlaySoundEx(3, 4);
+</PRE>
+will play sound 3 on channel 4. If a sound was already playing on channel 4 it will be stopped.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsChannelPlaying">IsChannelPlaying</A>, <A HREF="ags66.htm#PlaySound">PlaySound</A>,
+<A HREF="ags66.htm#SetChannelVolume">SetChannelVolume</A>, <A HREF="ags66.htm#StopChannel">StopChannel</A><P>
+
+
+<HR>
+<A NAME="PlayVideo"></A>
+<H3>PlayVideo</H3>
+<PRE>
+PlayVideo (string filename, VideoSkipStyle, int flags)
+</PRE>
+Plays an AVI, MPG or OGG Theora file, or any other file type supported by Media Player.
+The game is paused while the video plays.<P>
+<I>VideoSkipStyle</I> defines how the player can skip the video:
+<PRE>
+eVideoSkipNotAllowed     player can't skip video
+eVideoSkipEscKey         player can press ESC to skip video
+eVideoSkipAnyKey         player can press any key to skip video
+eVideoSkipAnyKeyOrMouse  player can press any key or click mouse to skip
+</PRE>
+FLAGS can be one of the following:
+<PRE>
+0: the video will be played at original size, with AVI audio
+1: the video will be stretched to full screen, with appropriate
+   black borders to maintain its aspect ratio and AVI audio.
+10: original size, with game audio continuing (AVI audio muted)
+11: stretched to full screen, with game audio continuing (AVI audio muted)
+</PRE>
+There are two distinct type of videos that the PlayVideo function can play.<P>
+The first is OGG Theora, which is a recently introduced video file format. AGS
+has built-in support for playing these videos, so everyone who plays your game
+will be able to see the video. OGG Theora videos are also built into the game EXE
+file when you compile the game (just make sure the file has a .OGV extension and
+is placed in your main game folder).<P>
+The second type of files that AGS can play is anything supported by Windows Media
+Player. This includes AVI, MPG and more. However, in order for these to work on
+the player's system, they will need to have the correct codecs installed. For example,
+if you create your video with the XVid codec, the player will need to have XVid installed
+to be able to view it. These types of video cannot be included into the game EXE, 
+so you will have to place them separately in the Compiled folder for them to work.<P>
+<B>NOTE:</B> In 256-colour games, PlayVideo is not supported. Please use a FLC/FLI video
+with the <A HREF="ags66.htm#PlayFlic">PlayFlic</A> command instead.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> Yes </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayVideo("intro.mpg", eVideoSkipEscKey, 1);
+</PRE>
+will play the video Intro.mpg, allowing the player to skip with ESC if they've seen it
+before.<P>
+<I>Compatibility:</I> OGG Theora supported by <B>AGS 3.1.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayFlic">PlayFlic</A><P>
+
+
+<HR>
+<A NAME="SeekMIDIPosition"></A>
+<H3>SeekMIDIPosition</H3>
+<PRE>
+SeekMIDIPosition (int position)
+</PRE>
+Seeks the currently playing MIDI file to midi beat number POSITION. If
+the current track is not a MIDI track, has no effect.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SeekMIDIPosition(60);
+</PRE>
+will play the current midi from beat number 60.<P>
+<I>See Also:</I> <A HREF="ags66.htm#GetMIDIPosition">GetMIDIPosition</A><P>
+
+
+<HR>
+<A NAME="SeekMODPattern"></A>
+<H3>SeekMODPattern</H3>
+<PRE>
+SeekMODPattern (int pattern)
+</PRE>
+Jumps directly to PATTERN in the currently playing MOD/XM music. If the
+pattern does not exist, the music will stop.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SeekMODPattern(30);
+</PRE>
+will play the current mod from pattern 30.<P>
+<I>See Also:</I> <A HREF="ags66.htm#Game.GetMODPattern">Game.GetMODPattern</A><P>
+
+
+<HR>
+<A NAME="SeekMP3PosMillis"></A>
+<H3>SeekMP3PosMillis</H3>
+<PRE>
+SeekMP3PosMillis (int position)
+</PRE>
+Seeks the currently playing MP3 or OGG background music file to POSITION milliseconds from
+the start. If the current track is not an MP3 or OGG track, has no effect.<P>
+If the background music is currently crossfading between two tracks, this acts on the new
+track which is fading in.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SeekMP3PosMillis(30000);
+</PRE>
+will seek the current MP3 to 30 seconds from its start.<P>
+<I>See Also:</I> <A HREF="ags66.htm#GetMP3PosMillis">GetMP3PosMillis</A><P>
+
+
+<HR>
+<A NAME="SetChannelVolume"></A>
+<H3>SetChannelVolume</H3>
+<PRE>
+SetChannelVolume (int channel, int volume)
+</PRE>
+Changes the volume of sound channel number CHANNEL to VOLUME. VOLUME is a number
+from 0-255, where 255 is the loudest and 0 is silence.<P>
+This command adjusts the volume of the specified channel relative to the other channels. It
+is still constrained within the master volume, set by SetDigitalMasterVolume and
+SetMusicMasterVolume.<P>
+<B>NOTE:</B> This command only affects the current sound being played on the channel.
+If you start a new sound on the channel using PlaySoundEx for instance, then the
+channel volume will be changed back to the main Sound Volume setting.<P>
+See <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A> for more on sound channels.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetChannelVolume (3, 255);
+</PRE>
+will make the sound on channel 3 very loud.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetDigitalMasterVolume">SetDigitalMasterVolume</A>, <A HREF="ags66.htm#SetMusicMasterVolume">SetMusicMasterVolume</A>, <A HREF="ags66.htm#SetSoundVolume">SetSoundVolume</A><P>
+
+
+<HR>
+<A NAME="SetDigitalMasterVolume"></A>
+<H3>SetDigitalMasterVolume</H3>
+<PRE>
+SetDigitalMasterVolume (int volume)
+</PRE>
+Sets the overall digital sound volume, from 0-100. This affects all sound output
+in the game, except for MIDI music.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetDigitalMasterVolume(80);
+</PRE>
+will set the overall output volume to 80.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicMasterVolume">SetMusicMasterVolume</A><P>
+
+
+<HR>
+<A NAME="SetMusicMasterVolume"></A>
+<H3>SetMusicMasterVolume</H3>
+<PRE>
+SetMusicMasterVolume (int volume)
+</PRE>
+Sets the overall music volume, from 0-100. This is slightly modified by the
+individual room volume settings.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicMasterVolume(80);
+</PRE>
+will set the music volume to 80.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicVolume">SetMusicVolume</A><P>
+
+<HR>
+<A NAME="SetMusicRepeat"></A>
+<H3>SetMusicRepeat</H3>
+<PRE>
+SetMusicRepeat (int loopflag)
+</PRE>
+Tells the system whether to repeat background music tracks. LOOPFLAG is
+either 1 (repeat, default) or 0 (don't repeat).<P>
+This function must be called BEFORE PlayMusic - it sets whether future music
+tracks will repeat or not. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicRepeat(1);
+</PRE>
+will loop the background music.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicVolume">SetMusicVolume</A><P>
+
+<HR>
+<A NAME="SetMusicVolume"></A>
+<H3>SetMusicVolume</H3>
+<PRE>
+SetMusicVolume (int volume)
+</PRE>
+Overrides the room volume setting and sets the volume to VOLUME instead.
+The values range from -3 to 3, representing each stage in the editor
+volume options (ie. -3 = quietest, 0=normal, 3=loudest).<P>
+<B>NOTE:</B> The volume will be reset when the player enters a new room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicVolume(-3);
+</PRE>
+will set the room volume to quietest.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicMasterVolume">SetMusicMasterVolume</A>, <A HREF="ags66.htm#SetSoundVolume">SetSoundVolume</A>, <A HREF="ags66.htm#GetCurrentMusic">GetCurrentMusic</A><P>
+
+
+<HR>
+<A NAME="Game.SetSaveGameDirectory"></A>
+<H3>SetSaveGameDirectory</H3>
+<PRE>
+static bool Game.SetSaveGameDirectory(string directory)
+</PRE>
+Changes the directory where save game files are stored to the supplied <I>directory</I>.
+If the directory does not exist, AGS will attempt to create it. <P>
+You cannot use fully qualified directories with this command (eg. <TT>C:\Games\Cool\Saves</TT>), because
+the player might have installed your game to any folder, and they might not be running Windows.<P>
+Therefore, only two types of path are supported: <br> 
+1. Relative paths (eg. "Saves"). This will create a "Saves" folder inside your game folder <br> 
+2. The special tag <TT>$MYDOCS$</TT> which allows you to create a folder for your save games
+inside the user's documents folder. On Vista, this is the "Saved Games" folder;
+on Windows XP and earlier, this is "My Documents". On Mac and Linux, currently this just points
+to the game folder.<P>
+Returns <I>true</I> if the save game directory has been changed successfully; <I>false</I> if not.<P>
+<B>NOTE:</B> It is recommended that you do not use this function. Instead, set the "Save games
+folder name" property in the General Settings of the editor, which allows the save games to be
+detected by Vista's Game Explorer, and avoids problems writing to the Program Files folder.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Game.SetSaveGameDirectory("$MYDOCS$/My Cool Game Saves");
+</PRE>
+will change the save game directory to "My Cool Game Saves" in My Documents, and create the
+folder if it does not exist (might be useful to do this in game_start).<P>
+<I>See Also:</I> <A HREF="ags59.htm#ListBox.FillSaveGameList">ListBox.FillSaveGameList</A>,
+<A HREF="ags53.htm#RestoreGameDialog">RestoreGameDialog</A><P>
+
+
+<HR>
+<A NAME="SetSoundVolume"></A>
+<H3>SetSoundVolume</H3>
+<PRE>
+SetSoundVolume (int volume)
+</PRE>
+Sets the sound effect volume. VOLUME ranges from 0-255, where 255 is the
+loudest. This also effects MOD and XM music.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSoundVolume(230);
+</PRE>
+will set the sound effects volume to 230.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicVolume">SetMusicVolume</A><P>
+
+<HR>
+<A NAME="SetSpeechVolume"></A>
+<H3>SetSpeechVolume</H3>
+<PRE>
+SetSpeechVolume (int volume)
+</PRE>
+Sets the volume for in-game speech. VOLUME ranges from 0-255, where 255 is
+the loudest. The default speech volume is 255 so this function can only
+be used to reduce the volume.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSpeechVolume(200);
+</PRE>
+will set the speech volume to 200.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetMusicVolume">SetMusicVolume</A>, <A HREF="ags66.htm#SetSoundVolume">SetSoundVolume</A><P>
+
+
+<HR>
+<A NAME="SetVoiceMode"></A>
+<H3>SetVoiceMode</H3>
+<PRE>
+SetVoiceMode (VoiceMode)
+</PRE>
+Determines whether voice speech and/or text captions are used in the game.<P>
+Valid values for VoiceMode are:
+<PRE>
+eSpeechTextOnly      no voice, text only
+eSpeechVoiceAndText  both voice and text
+eSpeechVoiceOnly     voice only, no text
+</PRE>
+The default is <I>eSpeechVoiceAndText</I> if in-game speech is enabled, and <I>eSpeechTextOnly</I> if it
+is not. Changing this setting changes the behaviour of all <A HREF="ags46.htm#Character.Say">Say</A> and
+<A HREF="ags76.htm#Display">Display</A> commands which have a speech file assigned to them.<P>
+<B>WARNING:</B> you should only ever use <I>eSpeechVoiceOnly</I> at the player's request to
+do so, because there is no guarantee that they even have a sound card and so may
+not understand what is going on.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsSpeechVoxAvailable()==1)
+    SetVoiceMode(eSpeechVoiceAndText); 
+</PRE>
+will set the voice mode to voice and text if the voice pack is available.<P>
+
+
+<HR>
+<A NAME="StopAmbientSound"></A>
+<H3>StopAmbientSound</H3>
+<PRE>
+StopAmbientSound (int channel)
+</PRE>
+Stops the currently playing ambient sound on the specified channel.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlayAmbientSound">PlayAmbientSound</A>, <A HREF="ags66.htm#Game.StopSound">Game.StopSound</A><P>
+
+
+<HR>
+<A NAME="StopChannel"></A>
+<H3>StopChannel</H3>
+<PRE>
+StopChannel (int channel)
+</PRE>
+Stops the currently playing sound on channel number CHANNEL.<P>
+See the description of <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A> for more on sound
+channels.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+StopChannel (3);
+</PRE>
+will stop any currently playing sound effect on channel 3.<P>
+<I>See Also:</I> <A HREF="ags66.htm#IsChannelPlaying">IsChannelPlaying</A>, <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A>,
+<A HREF="ags66.htm#Game.StopSound">Game.StopSound</A><P>
+
+
+<HR>
+<A NAME="StopMusic"></A>
+<H3>StopMusic</H3>
+<PRE>
+StopMusic ()
+</PRE>
+Stops the currently playing background music.<P>
+If there are tracks queued with PlayMusicQueued, then they are all cancelled.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+StopMusic();
+</PRE>
+<I>See Also:</I> <A HREF="ags66.htm#PlayMusic">PlayMusic</A>, <A HREF="ags66.htm#PlayMusicQueued">PlayMusicQueued</A><P>
+
+
+<HR>
+<A NAME="Game.StopSound"></A>
+<H3>StopSound</H3>
+<PRE>
+static Game.StopSound(optional bool stopAmbientSounds)
+</PRE>
+Stops all currently playing sounds. This will stop all sound effects started with PlaySound; it
+will <B>not</B> stop background music or speech.<P>
+The <I>stopAmbientSounds</I> parameter defines whether ambient sounds should be stopped as well.
+If it is <I>false</I> (the default), then only sound effects will stop, and ambient sounds will
+continue. If it is <I>true</I>, then both sound effects and ambient sounds will be stopped.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Game.StopSound();
+</PRE>
+will stop any currently playing sound effects.<P>
+<I>See Also:</I> <A HREF="ags66.htm#PlaySoundEx">PlaySoundEx</A>, <A HREF="ags66.htm#StopAmbientSound">StopAmbientSound</A>,
+<A HREF="ags66.htm#StopChannel">StopChannel</A><P>
+
+
+</BODY></HTML>

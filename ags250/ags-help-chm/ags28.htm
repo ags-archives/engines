@@ -1,0 +1,227 @@
+<HTML>
+<head><title>Interaction events</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic55"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic54"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags27.htm#topic54"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags29.htm#topic61"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Interaction events</H2>
+The following events are avialable in Interaction windows.<P>
+<A HREF="#topic56">Hotspot interactions</A><BR>
+<A HREF="#topic57">Object interactions</A><BR>
+<A HREF="#topic58">Room interactions</A><BR>
+<A HREF="#topic59">Inventory item interactions</A><BR>
+<A HREF="#topic60">Character interactions</A><BR>
+<P>
+
+<HR>
+<A NAME="topic56"></A>
+<H3>Hotspot interactions</H3>
+<DL>
+
+
+</TD>
+<DT> Character stands on hotspot
+<DD> occurs repeatedly while the player character
+is standing on the hotspot.
+
+</TD>
+<DT> Look at hotspot
+<DD> occurs when the player clicks on the hotspot while in
+the "Look" mode (cursor mode 1).
+
+</TD>
+<DT> Interact with hotspot
+<DD> occurs when the player clicks on the hotspot while
+in the "Interact" mode (cursor mode 2).
+
+</TD>
+<DT> Use inventory on hotspot
+<DD> occurs when the player clicks on the hotspot
+while in the "Use inventory" mode (cursor mode 4). You can use the "If inventory
+item was used" conditional to distinguish which item they used.
+ 
+<B>IMPORTANT:</B> When the "If inventory was used" conditional is met, the
+player will lose the inventory item, UNLESS "do not lose inventory items" is
+checked in the General Settings pane.<P>
+
+</TD>
+<DT> Speak to hotspot
+<DD> occurs when the player clicks on the hotspot while in
+the "Talk" mode (cursor mode 3).
+
+</TD>
+<DT> Any click on hotspot
+<DD> occurs when the player clicks on the hotspot in
+any cursor mode (except Walk). This allows you to add extra modes like
+smell, taste, push, pull, and so on. This event also occurs as well as
+the other event for the Look, Interact and Talk modes.
+
+</TD>
+<DT> Mouse moves over hotspot
+<DD> occurs repeatedly while the mouse cursor is
+over the hotspot. You can use this to highlight the cursor, and for other
+various effects.
+</DL>
+<P>
+
+<HR>
+<A NAME="topic57"></A>
+<H3>Object interactions</H3>
+<DL>
+
+
+</TD>
+<DT> Look at object
+<DD> occurs when the player clicks on the object while in
+the "Look" mode (cursor mode 1).
+
+</TD>
+<DT> Interact with object
+<DD> occurs when the player clicks on the object in
+the "Interact" mode (cursor mode 2).
+
+</TD>
+<DT> Speak to object
+<DD> occurs when the player clicks on the object in the
+"Talk" mode (cursor mode 3).
+
+</TD>
+<DT> Use inventory on object
+<DD> works like "Use inventory on hotspot" - see
+that description (above) for more information.
+</DL>
+<P>
+
+<HR>
+<A NAME="topic58"></A>
+<H3>Room interactions</H3>
+<DL>
+
+
+</TD>
+<DT> Walk off left
+<DD> occurs when the player character walks off the left edge
+of the screen.
+
+</TD>
+<DT> Walk off right
+<DD> occurs when the player walks off the right edge of the
+screen.
+
+</TD>
+<DT> Walk off bottom
+<DD> occurs when the player character walks off the bottom
+edge of the screen.
+
+</TD>
+<DT> Walk off top
+<DD> occurs when the player character walks off the top edge
+of the screen.
+
+</TD>
+<DT> First time enters screen
+<DD> occurs the first time the player enters the
+room. This event occurs AFTER the screen has faded in, so it allows you to
+display a message describing the scene.
+
+</TD>
+<DT> Player enters screen (before fadein)
+<DD> occurs just after the room is loaded into memory.
+This event occurs every time the player enters the screen, and it happens
+BEFORE the screen has faded in, which allows you to change object graphics
+and do other things to the screen which the player won't notice.<P>
+<I>NOTE: This event is ONLY meant for adjusting things such as object and
+character placement. Do NOT use this event for any sort of automated intro
+to the room - use the "Enters Screen After Fade In" event for that instead.</I>
+
+</TD>
+<DT> Repeatedly execute
+<DD> occurs repeatedly on every interpreter cycle. The
+normal game speed is 40 cycles per second, so this event occurs about
+every 25 milliseconds.
+
+</TD>
+<DT> Player enters screen (after fadein)
+<DD> occurs every time the player enters the
+room, AFTER the screen has faded-in. Suitable for displaying text
+descriptions and so on, that you want the player to see.
+
+</TD>
+<DT> Player leaves screen
+<DD> occurs when the player leaves the screen, just
+before the screen fades out.
+</DL>
+<P>
+
+<HR>
+<A NAME="topic59"></A>
+<H3>Inventory item interactions</H3>
+<DL>
+
+
+</TD>
+<DT> Look at inventory
+<DD> occurs when the player clicks on the inventory item
+while in the "look" mode.
+
+</TD>
+<DT> Interact with inventory
+<DD> currently, because the Interact mode selects the
+inventory item, this interaction can only be triggered by manually calling
+the RunInventoryInteraction text script function.
+
+</TD>
+<DT> Speak to inventory
+<DD> only applies to the Lucasarts-style inventory,
+occurs when the player clicks the Talk icon on the inventory item.
+
+</TD>
+<DT> Use inventory on inv
+<DD> occurs when the player uses another inventory
+object on this one. Add a "Conditional - if inventory item was used" check
+to determine which item they used.
+This event allows the player to combine items, and
+so on. For example, if they had picked up a laptop computer and a battery,
+seperately, then you could use this to allow them to insert the battery into
+the computer.
+
+</TD>
+<DT> Other click on inventory
+<DD> only applies to the Lucasarts-style inventory,
+occurs when the player clicks any other cursor mode (apart from look, talk
+and use_inv) on the item.
+</DL>
+<P>
+
+<HR>
+<A NAME="topic60"></A>
+<H3>Character interactions</H3>
+<DL>
+
+
+</TD>
+<DT> Look at character
+<DD> occurs when the player clicks on a character while in the "look" mode.
+
+</TD>
+<DT> Interact with character
+<DD> occurs when the player clicks on a character while in the "interact" mode.
+
+</TD>
+<DT> Speak to character
+<DD> occurs when the player clicks on a character while in the "talk" mode.
+
+</TD>
+<DT> Use inventory on character
+<DD> occurs when the player uses an inventory
+object on a character.  This event could be used to allow the player to give items to characters.
+
+</TD>
+<DT> Any click on character
+<DD> occurs when the player clicks any other cursor mode (apart from look, talk and use_inv) on the item.
+</DL>
+<P>
+
+
+</BODY></HTML>

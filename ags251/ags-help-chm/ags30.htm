@@ -1,0 +1,313 @@
+<HTML>
+<head><title>Text script global variables</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic61"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic54"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags29.htm#topic55"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags31.htm#topic62"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Text script global variables</H2>
+The following variables are available to your script. <P>
+(For the characters, CHARID is the script ID name as set in the Room Editor).
+Names in <B>bold</B> are <B>read-only variables</B> and should NOT be modified by the script.<P>
+All the following variables are <TT>int</TT> variables, except for character[].name, which is
+a <TT>string</TT>.<P>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].x  </B></TD>
+<TD ALIGN=LEFT>  X co-ordinate of the character (see Note1 below)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].y </B></TD>
+<TD ALIGN=LEFT> Y co-ordinate of the character
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> character[CHARID].name</TD>
+<TD ALIGN=LEFT> The character's full name
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].prevroom</TD>
+<TD ALIGN=LEFT>  The room it was in before this one
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].room  </TD>
+<TD ALIGN=LEFT>    Which room the character is in
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].activeinv</TD>
+<TD ALIGN=LEFT> The currently selected inventory item (or -1)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].inv[x]  </TD>
+<TD ALIGN=LEFT>  Whether the character is carrying inventory X
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].walking </B></TD>
+<TD ALIGN=LEFT>  Whether the character is currently moving
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].animating </B></TD>
+<TD ALIGN=LEFT>Non-zero while an AnimateCharacter animation runs
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].walkspeed </B></TD>
+<TD ALIGN=LEFT>Current movement speed (use SetCharacterSpeed to change)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].animspeed</TD>
+<TD ALIGN=LEFT>  The character's animation speed
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  character[CHARID].talkview</TD>
+<TD ALIGN=LEFT>  The character's talking view number minus 1
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].view    </B></TD>
+<TD ALIGN=LEFT>  Current view of the character graphic (minus 1)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].loop   </B></TD>
+<TD ALIGN=LEFT>   Current loop of the character graphic
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>character[CHARID].frame  </B></TD>
+<TD ALIGN=LEFT>   Current frame of the character's graphic
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.bgspeech_game_speed    </TD>
+<TD ALIGN=LEFT> If 0 (default), background speech stays on the screen
+                           for the same amount of time, no matter what the game speed.
+                           If 1, the amount of time it stays is relative to the game speed. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.bgspeech_stay_on_display    </TD>
+<TD ALIGN=LEFT> If 0 (default), background speech is removed when
+                           a DisplaySpeech happens; if 1, it isn't.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.debug_mode    </TD>
+<TD ALIGN=LEFT>     Whether we are in debug mode or not.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.following_room_timer</TD>
+<TD ALIGN=LEFT> How long to wait before following char emerges in
+                           new room, default 150. (higher is longer).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.inv_activated    </B></TD>
+<TD ALIGN=LEFT> Inventory item that the player last clicked on. Useful for unhandled_event. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.items_per_line   </B></TD>
+<TD ALIGN=LEFT>  Number of inventory items displayed per line (useful
+                           for working out how much to scroll the window down)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.max_dialogoption_width  </TD>
+<TD ALIGN=LEFT> Maximum width of textwindow-based dialog options
+                           box. Default 180. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.no_textbg_when_voice  </TD>
+<TD ALIGN=LEFT>  Normally 0. If 1, and the Sierra-style With Background
+                           speech style is in use, will change to the Sierra-style (No Bg) if
+                           a voice speech line is present. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.num_inv_displayed </B></TD>
+<TD ALIGN=LEFT> Number of inventory items which can be seen in the
+                           inventory window.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.num_inv_items </B></TD>
+<TD ALIGN=LEFT>     Number of different inventory items which the current
+                           player is carrying.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.roomscript_finished </TD>
+<TD ALIGN=LEFT>  The on_call function has completed executing. (See
+<A HREF="ags37.htm#CallRoomScript">CallRoomScript</A>) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.room_height </B></TD>
+<TD ALIGN=LEFT>  Height, in 320x200 co-ordinate system, of current room.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.room_width </B></TD>
+<TD ALIGN=LEFT>  Width, in 320x200 co-ordinate system, of current room.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>game.score          </B></TD>
+<TD ALIGN=LEFT>    The player's score. To modify the score, use the
+  GiveScore text script function.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.sierra_inv_color </TD>
+<TD ALIGN=LEFT>  The background color of the sierra-style inventory.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.skip_display   </TD>
+<TD ALIGN=LEFT>    Setting for how Display() messages are skipped;
+                           valid values are same as for SetSkipSpeech (default 3).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_music_drop </TD>
+<TD ALIGN=LEFT>   How much to drop music volume when speech is played (default 60).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.speech_text_gui </TD>
+<TD ALIGN=LEFT>   The textwindow GUI number used for sierra-style spch.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.swap_portrait   </TD>
+<TD ALIGN=LEFT>   Set to 1 to make sierra-style speech swap the portrait
+                           image from left to right when different people talk.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.talkanim_speed </TD>
+<TD ALIGN=LEFT>    The animation speed for talking views (default 5).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.text_shadow_color</TD>
+<TD ALIGN=LEFT>  Color used for speech text shadow (default 16).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.text_speed    </TD>
+<TD ALIGN=LEFT>     How long speech text stays on the screen. Default 15,
+                           higher number means shorter time.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.top_inv_item  </TD>
+<TD ALIGN=LEFT>     Index of the first inventory item in the window
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.total_score   </TD>
+<TD ALIGN=LEFT>     Maximum possible score, initially set in the editor.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  game.used_mode     </TD>
+<TD ALIGN=LEFT>     Cursor mode used with last click (use with "any click"
+                           events to find out which mode was used)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  gs_globals[50]   </TD>
+<TD ALIGN=LEFT>  Now obsolete, but it's a global array of 50 ints that can be
+                               accessed from global + local scripts, so you might find it useful
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>mouse.x         </B></TD>
+<TD ALIGN=LEFT>       Mouse X co-ordinate when the script was started (0-319)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>mouse.y          </B></TD>
+<TD ALIGN=LEFT>      Mouse Y co-ordinate when the script was started (0-199)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].r </TD>
+<TD ALIGN=LEFT>       The red component (0-63) of palette slot SLOT
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].g  </TD>
+<TD ALIGN=LEFT>      The green component (0-63) of palette slot SLOT 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  palette[SLOT].b  </TD>
+<TD ALIGN=LEFT>      The blue component (0-63) of palette slot SLOT
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  player.[x,y,name,...] </TD>
+<TD ALIGN=LEFT> Alias to character[EGO]. Note: only set at game start,
+                          does not update if you change the player character.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT>  savegameindex[20]  </TD>
+<TD ALIGN=LEFT>    Save game slot order - see the ListBoxSaveGameList
+                          description in text script reference for more info.
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>system.screen_height</B></TD>
+<TD ALIGN=LEFT>   The vertical screen resolution (200,240,400 or 480) see Note2
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>system.screen_width </B></TD>
+<TD ALIGN=LEFT>   The horizontal screen resolution (320 or 640)
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>system.color_depth  </B></TD>
+<TD ALIGN=LEFT>   The color depth (8 or 16).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>system.os          </B></TD>
+<TD ALIGN=LEFT>    Interpreter version (1=AGS-DOS, 2=AGS-WIN).
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <B>system.windowed    </B></TD>
+<TD ALIGN=LEFT>    How game is running: 0=full screen, 1=window
+</TD>
+</TR>
+</TABLE>
+<P>
+Notes:<P>
+(1) The character X&amp;Y co-ordinates may be modified as long as the character
+  is stationary; changing these while the character is moving will cause it
+  to start moving off in the wrong direction.<P>
+(2) The system information is provided in order for your game to behave
+  differently if it needs to; however, do NOT use this information to force
+  the player to use a specific resolution. The AGS engine is designed to allow
+  players with varying speeds of computer to enjoy the game at a playable
+  speed; people with a 486 would rather see blocky graphics at 320x200 than
+  be forced to run very slowly at 640x400.<P>
+
+</BODY></HTML>

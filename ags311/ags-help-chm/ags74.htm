@@ -1,0 +1,475 @@
+<HTML>
+<head><title>String functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic70"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags73.htm#topic69"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags75.htm#topic71"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>String functions</H2>
+
+<A HREF="#String.Append">Append</A><BR>
+<A HREF="#String.AppendChar">AppendChar</A><BR>
+<A HREF="#String.CompareTo">CompareTo</A><BR>
+<A HREF="#String.Copy">Copy</A><BR>
+<A HREF="#String.EndsWith">EndsWith</A><BR>
+<A HREF="#String.Format">Format</A><BR>
+<A HREF="#String.IndexOf">IndexOf</A><BR>
+<A HREF="#String.IsNullOrEmpty">IsNullOrEmpty</A><BR>
+<A HREF="#String.LowerCase">LowerCase</A><BR>
+<A HREF="#String.Replace">Replace</A><BR>
+<A HREF="#String.ReplaceCharAt">ReplaceCharAt</A><BR>
+<A HREF="#String.StartsWith">StartsWith</A><BR>
+<A HREF="#String.Substring">Substring</A><BR>
+<A HREF="#String.Truncate">Truncate</A><BR>
+<A HREF="#String.UpperCase">UpperCase</A><BR>
+<A HREF="#String.AsFloat">AsFloat property</A><BR>
+<A HREF="#String.AsInt">AsInt property</A><BR>
+<A HREF="#String.Chars">Chars property</A><BR>
+<A HREF="#String.Length">Length property</A><BR>
+<P>
+
+<HR>
+<A NAME="String.Append"></A>
+<H3>Append</H3>
+<I>(Formerly known as global function StrCat, which is now obsolete)</I><P>
+<PRE>
+String.Append(string str2)
+</PRE>
+Appends the string STR2 to the end of the specified string, and returns the result.<P>
+<B>IMPORTANT:</B> The result of joining the strings together is returned as a new
+string from this command. The original string will <B>NOT</B> be changed. For
+example, the following script will not do anything: <br> 
+<TT>mytext.Append("World");</TT> <br> 
+what you probably want instead is: <br> 
+<TT>mytext = mytext.Append("World");</TT> <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mytext = "Hello";
+mytext = mytext.Append("World");
+Display(mytext);
+</PRE>
+will display "HelloWorld".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.AppendChar">String.AppendChar</A>,
+<A HREF="ags74.htm#String.Substring">String.Substring</A>, <A HREF="ags74.htm#String.Truncate">String.Truncate</A><P>
+
+
+<HR>
+<A NAME="String.AppendChar"></A>
+<H3>AppendChar</H3>
+<PRE>
+String.AppendChar(char extraChar)
+</PRE>
+Appends a single character to the end of the specified string, and returns the result.<P>
+<B>IMPORTANT:</B> The newly extended text is returned as a new string from this command.
+The original string will <B>NOT</B> be changed. For
+example, the following script will not do anything: <br> 
+<TT>mytext.AppendChar('o');</TT> <br> 
+what you probably want instead is: <br> 
+<TT>mytext = mytext.AppendChar('o');</TT> <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mytext = "Hell";
+mytext = mytext.AppendChar('o');
+Display(mytext);
+</PRE>
+will display "Hello".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.Append">String.Append</A><P>
+
+
+<HR>
+<A NAME="String.CompareTo"></A>
+<H3>CompareTo</H3>
+<I>(Formerly known as global function StrCaseComp, which is now obsolete)</I> <br> 
+<I>(Formerly known as global function StrComp, which is now obsolete)</I><P>
+<PRE>
+String.CompareTo(string str2, optional bool caseSensitive)
+</PRE>
+Compares the specified string to STR2. <I>caseSensitive</I> determines whether "Dog" and "dog"
+are equivalent; case sensitivity is off by default.<P>
+Returns 0 if the strings match, a number less than 0 if this string is earlier in the alphabet than STR2,
+and a number greater than 0 if this string is later in the alphabet than STR2.<P>
+<B>TIP:</B> To do a case-sensitive comparison of two strings, it's easier to just use the == operator.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mytext = "Hello";
+if (mytext.CompareTo("hello") == 0) {
+  Display("Strings match with case sensitivity off!");
+}
+else {
+  Display("Strings don't match with case sensitivity off!");
+}
+
+if (mytext == "hello") {
+  Display("Strings match with case sensitivity on!");
+}
+else {
+  Display("Strings don't match with case sensitivity on!");
+}
+</PRE>
+will display "Strings match with case sensitivity off!", and then "Strings don't match with case sensitivity on!".<P>
+
+
+<HR>
+<A NAME="String.Copy"></A>
+<H3>Copy</H3>
+<I>(Formerly known as global function StrCopy, which is now obsolete)</I><P>
+<PRE>
+String.Copy()
+</PRE>
+Returns a new copy of the specified string. You should not normally need to use this,
+since strings can be assigned using the = operator.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "This is a test string.";
+String newstring = mystring.Copy();
+Display(newstring);
+</PRE>
+will display "This is a test string".<P>
+
+
+<HR>
+<A NAME="String.EndsWith"></A>
+<H3>EndsWith</H3>
+<PRE>
+bool String.EndsWith(string lookForText, optional bool caseSensitive)
+</PRE>
+Returns <I>true</I> if this string ends with <I>lookForText</I>, or <I>false</I> if not.<P>
+<I>caseSensitive</I> is <I>false</I> by default, but you can set it to true so that the
+function will only return <I>true</I> for an exact-case match.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String myString = "Hello from the script!";
+if (myString.EndsWith("script!"))
+{
+  Display("Ends with script!");
+}
+</PRE>
+will display the "Ends with script!" message.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.IndexOf">String.IndexOf</A>,
+<A HREF="ags74.htm#String.StartsWith">String.StartsWith</A><P>
+
+
+<HR>
+<A NAME="String.Format"></A>
+<H3>Format</H3>
+<I>(Formerly known as global function StrFormat, which is now obsolete)</I><P>
+<PRE>
+static String.Format(string fmt, ...)
+</PRE>
+Processes the string FMT in the same way as the Display function does but
+instead of displaying it on the screen, returns the result as a new string.<P>
+You can insert the value of variables into the message. For more information,
+see the <A HREF="ags36.htm#StringFormats">string formatting</A> section.<P>
+<B>NOTE:</B> This function is static, which means you do not call it on
+an existing string variable, but use <TT>String.Format()</TT> instead.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int health=10;
+String text = String.Format("%d", health);
+</PRE>
+will create a text string containing "10".<P>
+<I>See Also:</I> <A HREF="ags76.htm#Display">Display</A><P>
+
+
+<HR>
+<A NAME="String.IndexOf"></A>
+<H3>IndexOf</H3>
+<I>(Formerly known as global function StrContains, which is now obsolete)</I> <br> 
+<I>(Formerly known as String.Contains, which is now obsolete)</I><P>
+<PRE>
+String.IndexOf(string needle)
+</PRE>
+Checks to see if NEEDLE is contained within the specified string. Returns the character position
+of the match if it is, or -1 if it is not.<P>
+This function is not case sensitive; ie. testing "test string" for "sTRiN" would match.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String haystack = "The haystack had a needle in it somewhere.";
+int result = haystack.IndexOf("a needle");
+
+if (result == -1) {
+  Display("The string didn't contain the needle.");
+}
+else {
+  Display("a needle was found starting at character %d in the string.", result);
+}
+</PRE>
+<I>See Also:</I> <A HREF="ags74.htm#String.EndsWith">String.EndsWith</A>,
+<A HREF="ags74.htm#String.StartsWith">String.StartsWith</A><P>
+
+
+<HR>
+<A NAME="String.IsNullOrEmpty"></A>
+<H3>IsNullOrEmpty</H3>
+<PRE>
+static bool String.IsNullOrEmpty(String stringToCheck)
+</PRE>
+Returns whether the supplied string is null or empty. This is simply shorthand for the following:
+<PRE>
+if ((stringToCheck == null) || (stringToCheck == ""))
+</PRE>
+in other words, you can easily use this to check whether a string has any text in it or not.<P>
+<B>NOTE:</B> This function is static, which means you do not call it on an existing
+string variable, but use <TT>String.IsNullOrEmpty()</TT> instead. See the example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String myString;
+if (String.IsNullOrEmpty(myString))
+{
+  myString = "Some text";
+}
+</PRE>
+will set the myString variable to "Some text" if it is null or empty (which it is).<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+
+
+<HR>
+<A NAME="String.LowerCase"></A>
+<H3>LowerCase</H3>
+<I>(Formerly known as global function StrToLowerCase, which is now obsolete)</I><P>
+<PRE>
+String.LowerCase()
+</PRE>
+Returns a lower case version of the specified string.<P>
+<B>NOTE:</B> The new string is returned from this function; it
+does <B>NOT</B> modify the original string.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "THIS is a test string";
+String lowercased = mystring.LowerCase();
+Display("Old: %s, new: %s", mystring, lowercased);
+</PRE>
+will display "Old: THIS is a test string, new: this is a test string".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.UpperCase">String.UpperCase</A><P>
+
+
+<HR>
+<A NAME="String.Replace"></A>
+<H3>Replace</H3>
+<PRE>
+String.Replace(string lookForText, string replaceWithText,
+               optional bool caseSensitive)
+</PRE>
+Creates a copy of this string, with all instances of <I>lookForText</I> replaced
+with the <I>replaceWithText</I>.<P>
+<I>caseSensitive</I> is <I>false</I> by default, but you can set it to true so that only
+case-sensitive matches of the <I>lookForText</I> will be replaced.<P>
+<B>NOTE:</B> The new string is returned from this function; it
+does <B>NOT</B> modify the original string.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String original = "Hello from the script!";
+String changed = original.Replace("hello", "goodbye");
+Display("Old: %s, new: %s", original, changed);
+</PRE>
+will display "Old: Hello from the script!, new: goodbye from the script!".<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.ReplaceCharAt">String.ReplaceCharAt</A><P>
+
+
+<HR>
+<A NAME="String.ReplaceCharAt"></A>
+<H3>ReplaceCharAt</H3>
+<I>(Formerly known as global function StrSetCharAt, which is now obsolete)</I><P>
+<PRE>
+String.ReplaceCharAt(int index, char newChar)
+</PRE>
+Changes the character at INDEX in the string to NEWCHAR.<P>
+INDEX is the character index into the string (where 0 is the first character,
+and the last allowable value is the string's Length minus 1).<P>
+<B>NOTE:</B> The new string is returned from this function; it
+does <B>NOT</B> modify the original string.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "Hello";
+String changed = mystring.ReplaceCharAt(2, 'm');
+Display("Old: %s, new: %s", newstring, changed);
+</PRE>
+will display "Old: Hello, new: Hemlo".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.Chars">String.Chars</A>, 
+<A HREF="ags74.htm#String.Replace">String.Replace</A><P>
+
+
+<HR>
+<A NAME="String.StartsWith"></A>
+<H3>StartsWith</H3>
+<PRE>
+bool String.StartsWith(string lookForText, optional bool caseSensitive)
+</PRE>
+Returns <I>true</I> if this string starts with <I>lookForText</I>, or <I>false</I> if not.<P>
+<I>caseSensitive</I> is <I>false</I> by default, but you can set it to true so that the
+function will only return <I>true</I> for an exact-case match.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String myString = "Hello from the script!";
+if (myString.StartsWith("hello"))
+{
+  Display("Starts with hello!");
+}
+</PRE>
+will display the "Starts with hello!" message.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.EndsWith">String.EndsWith</A>, 
+<A HREF="ags74.htm#String.IndexOf">String.IndexOf</A><P>
+
+
+<HR>
+<A NAME="String.Substring"></A>
+<H3>Substring</H3>
+<PRE>
+String.Substring(int index, int length)
+</PRE>
+Returns part of the string, starting from character <I>index</I> and <I>length</I>
+characters long.<P>
+<I>index</I> is the initial character index, where 0 is the first character and
+(Length - 1) is the last. <I>length</I> specifies how many characters to retrieve.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "Hello World!";
+String substring = mystring.Substring(3, 5);
+Display("Original: %s, Substring: %s", mystring, substring);
+</PRE>
+will display "Original: Hello World!, Substring: lo Wo".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.Append">String.Append</A>, <A HREF="ags74.htm#String.Chars">String.Chars</A><P>
+
+
+<HR>
+<A NAME="String.Truncate"></A>
+<H3>Truncate</H3>
+<PRE>
+String.Truncate(int length)
+</PRE>
+Returns a version of the string that has been truncated down to <I>length</I>
+characters.<P>
+<B>NOTE:</B> The new string is returned from this function; it
+does <B>NOT</B> modify the original string.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "Hello World!";
+String truncated = mystring.Truncate(4);
+Display("Original: %s, Truncated: %s", mystring, truncated);
+</PRE>
+will display "Original: Hello World!, Truncated: Hell".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.Append">String.Append</A>, <A HREF="ags74.htm#String.Substring">String.Substring</A><P>
+
+
+<HR>
+<A NAME="String.UpperCase"></A>
+<H3>UpperCase</H3>
+<I>(Formerly known as global function StrToUpperCase, which is now obsolete)</I><P>
+<PRE>
+String.UpperCase()
+</PRE>
+Returns an upper case version of the specified string.<P>
+<B>NOTE:</B> The new string is returned from this function; it
+does <B>NOT</B> modify the original string.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String mystring = "THIS is a test string";
+String uppercased = mystring.UpperCase();
+Display("Old: %s, new: %s", mystring, uppercased);
+</PRE>
+will display "Old: THIS is a test string, new: THIS IS A TEST STRING".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.LowerCase">String.LowerCase</A><P>
+
+
+<HR>
+<A NAME="String.AsFloat"></A>
+<H3>AsFloat property</H3>
+<PRE>
+readonly float String.AsFloat;
+</PRE>
+Converts the string into a float, and returns that value. Returns
+0.0 if the string does not contain a number.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String text1, text2;
+float number1,number2;
+text1 = "57.362";
+text2 = "Hello";
+number1 = text1.AsFloat;
+number2 = text2.AsFloat;
+</PRE>
+will set number1 value to 57.362 and number2 value to 0.0
+This function is useful for processing strings input from the user.<P>
+<B>NOTE:</B> To convert a float to a string, you can use the <A HREF="ags74.htm#String.Format">String.Format</A>
+command.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Game.InputBox">Game.InputBox</A>,
+<A HREF="ags74.htm#String.AsInt">String.AsInt</A>,
+<A HREF="ags74.htm#String.Format">String.Format</A><P>
+
+
+<HR>
+<A NAME="String.AsInt"></A>
+<H3>AsInt property</H3>
+<I>(Formerly known as global function StringToInt, which is now obsolete)</I><P>
+<PRE>
+readonly int String.AsInt;
+</PRE>
+Converts the string into an integer, and returns that value. Returns
+zero if the string does not contain a number.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String text1, text2;
+int number1,number2;
+text1 = "53";
+text2 = "Hello";
+number1 = text1.AsInt;
+number2 = text2.AsInt;
+</PRE>
+will set number1 value to 53 and number2 value to 0.
+This function is useful for processing strings input from the user.<P>
+<B>NOTE:</B> To convert an integer to a string, you can use the <A HREF="ags74.htm#String.Format">String.Format</A>
+command.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Game.InputBox">Game.InputBox</A>, <A HREF="ags74.htm#String.AsFloat">String.AsFloat</A>,
+<A HREF="ags74.htm#String.Format">String.Format</A><P>
+
+
+<HR>
+<A NAME="String.Chars"></A>
+<H3>Chars property</H3>
+<I>(Formerly known as global function StrGetCharAt, which is now obsolete)</I><P>
+<PRE>
+readonly char String.Chars[position];
+</PRE>
+Returns the character at POSITION within the string.<P>
+POSITION is the character index (where 0 is the first character, and the last
+allowable value is the Length minus 1).<P>
+If POSITION is outside the string, this function returns 0.<P>
+<B>NOTE:</B> The <I>Chars</I> array is read-only. If you want to change one of the characters
+in the string, use <A HREF="ags74.htm#String.ReplaceCharAt">String.ReplaceCharAt</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String text = "This is my string.";
+Display("The 4th character is: %c", text.Chars[3]);
+</PRE>
+will display "The 4th character is: s".<P>
+<I>See Also:</I> <A HREF="ags74.htm#String.Length">String.Length</A>,
+<A HREF="ags74.htm#String.ReplaceCharAt">String.ReplaceCharAt</A><P>
+
+
+<HR>
+<A NAME="String.Length"></A>
+<H3>Length property</H3>
+<I>(Formerly known as global function StrLen, which is now obsolete)</I><P>
+<PRE>
+readonly int String.Length;
+</PRE>
+Returns the length of the string, in characters.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String text = "This is my string.";
+Display("Length: %d", text.Length);
+</PRE>
+will display "Length: 18".<P>
+<P>
+
+</BODY></HTML>

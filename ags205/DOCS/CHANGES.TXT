@@ -1,0 +1,432 @@
+REVISION HISTORY
+================
+VERSION 2.05 SR-2, February 2000
+ - Fixed bug in roomedit with animating backgrounds
+ - Allowed to get back into roomedit if error with dialog script; however,
+   you must fix the error before you can save the game.
+ - Fixed bug with animating background scenes in usergame.exe
+
+VERSION 2.05 SR-1, February 2000
+ - Added Undo feature to roomedit.
+ - Added option to import/export dialogs to roomedit.
+ - Fixed bug with full-screen preview in roomedit at 640x400 resolution.
+
+VERSION 2.05, February 2000
+ - Added animating background support! See section 3.3.5 in the docs.
+ - RoomEdit now uses a crosshair mouse cursor when drawing walk-behinds and
+   hotspots, to enable you to better see what's under the cursor.
+ - Added support for importing a BMP/PCX file as the mask for hotspot/walk-
+   behind/etc. See section 3.3.4 in the manual for information.
+ - Added support for export/import of characters, which allows you to share
+   characters between games and with others on the internet. The end of
+   section 3.2.7 in the manual describes this.
+ - Added support for importing JPGs as background scene.
+ - RoomEdit now allows scrolling up/down the inventory list, so you can have
+   more than 15 inventory items (max 99 now).
+ - Customizable text speech speed - see the  game.text_speed  global variable
+   description (section 6.4 of the docs).
+ - Fixed bug where Sierra-style inventory window messed up in various
+   circumstances.
+ - Improved the room loading speed.
+ - Added text script functions SetObjectPosition and AreObjectsColliding.
+ - Added GetPalette and SetPalette text script functions, to allow you to
+   do things to the entire palette. New variable type "palette", which you
+   use with these functions.
+ - Added Italian translation by Mario.
+ - Removed the room password option: it was a left-over from AC v1, and now
+   that you can build an exe file of your game, it's not really needed.
+ - NOTE: The Windows version has not been updated to 2.05 - the included
+   acwin.exe is still the v2.04 version. This is due to time constraints and
+   pressure to release 2.05 as soon as possible; the Win version still has
+   the room changing bug, so it's not worth including until I work on that.
+
+VERSION 2.04, January 2000
+ - Added Sierra-style close-up-face option for speech display in conversations.
+ - Added object naming, so that moving the mouse over objects in a Lucasarts
+   interface displays a proper name, instead of "OBJECT 0".
+ - Added option to make a character invisible to the hit-testing, so that the
+   main character can't be interacted with (like the Lucasarts games).
+ - Added pixel-perfect click detection option, so that clicking a transparent
+   pixel of an object/character doesn't trigger the interaction.
+ - Added option to use top-left pixel of sprite as transparent colour instead
+   of just colour index 0.
+ - Added support for using a background picture for text windows. To use this,
+   just go to your text-window interface in the Interface Editor, then right-
+   click the background, choose Properties, then click the "COL/PIC" button
+   and type the slot number you want to use. The picture will NOT be tiled
+   or stretched (but it will be clipped to fit the window), so you should make
+   sure it is large enough for the biggest text windows (about 250x100 should
+   be enough).
+ - Added ability to delete sprites in the Sprite Manager.
+ - Added SaveScreenShot text script function.
+ - Added option to treat Walk mode as a normal mode, so that the character
+   isn't automatically moved but instead a normal event is triggered when
+   you click to move.
+ - Modified RoomEdit so that when you click a "Display Message" interaction
+   command, it provides a list of messages in the room to choose from, instead
+   of prompting you for the message number. If there are no messages it will
+   ask for the number, just like before (this means you can still set up the
+   interactions before actually typing the messages in, if you want to).
+ - Fixed bug where the player lost the inventory item when Data 99 was used.
+ - Made some improvements to the beta of the Windows version.
+
+VERSION 2.03, November 1999
+IMPORTANT: Your game, and all your room files, need to be upgraded to use the
+latest version. To upgrade, simply load and save in the Room Editor. You must
+do this for EVERY ROOM in your game. Sorry, but it's to support the upcoming
+Windows version.
+ - Allowed creation of very wide (eg. 700x200) lo-res scrolling rooms.
+ - New text script functions MoveCharacterToHotspot, DisplaySpeech, NewRoomEx.
+ - Lucasarts-style inventory window.
+ - Changed background importing - now, it just asks what resolution the
+   drawing is supposed to be, instead of trying to work it out. This allows
+   scrolling rooms of any size in any resolution.
+ - Changed the way the Room Editor works with games - instead of running it
+   from the directory which the game is in, it creates each game a
+   sub-directory below the main RoomEdit/AGS directory. This makes it much
+   easier to edit the demo game, and should solve problems with files not
+   being found and so on. What this means for you is that if you are working
+   on a game with its files in the RoomEdit directory, create a sub-directory
+   and copy all your game files (*.crm, ac2game.*, etc) into it.
+   Another result of this is that the usergame.exe is now called by the game
+   directory's name, and placed in the main AGS directory.
+ - Non-player objects can now be moved with the animation command "Move to",
+   and also with a new text script command MoveObject.
+ - Added graphical script command "Run dialog" (it's under "Remove object" if
+   you can't find it).
+ - Added "Save room" as well as "Save room as" to Room Editor. This option
+   saves back to the same file you loaded from, which is quicker than having
+   to select the right file to save to every time.
+ - Slightly modified the background scene remapper: it now puts the background
+   colours starting from the end of the palette and working backwards; this
+   makes it easier if you want to increase the number of sprite colours part
+   way through making a game. Otherwise this change is transparent to you.
+ - Added ability to "lock" objects in the Room Editor. While an object is
+   locked, it cannot be moved around the screen. Useful if you keep getting the
+   wrong object when you're trying to move a different one.
+ - Increased a few limits: now 100 views, 200 dialog topic, 900 dialog messages.
+ - Fixed bug where "music0.mp3 not found" flashed on the screen breifly.
+ - Fixed the interface text @overhotspot@ to include object & character names.
+ - Included beta version of Windows port! See AGSWIN.TXT for information.
+
+VERSION 2.02, September 1999
+ - Fixed bug where you were unable to save the game.
+ - Character names can use lower case
+ - New option "Player can't skip speech" prevents the player clicking away
+   conversation text, like the way the Lucasarts games won't let you.
+ - Character walks to the walk-to point of a hotspot in Walk mode (as well
+   as use/speak mode). This makes it more like the Lucasarts interface.
+ - Fixed SCI font importing bug, and added an Auto-Recover feature so that if
+   it does crash in future, then it won't permanently disable the Fonts tab.
+ - Added sprite import support for 640x400-resolution object graphics.
+ - Added crash protection to the StrCat function, so that it won't add text
+   past the maximum string length instead of crashing the system.
+ - New MIDI driver: Software wavetable synth, uses the digital sound driver
+   to play MIDI music using General MIDI patch set. By using this driver, your
+   MIDI music can sound the same on ALL sound cards. See section 2.2.1 in the
+   docs for information.
+ - Changed the way that the mouse cursor hotspot setting works - it's clearer
+   what's going on now.
+ - Added engine debugging options. See the TECHDBG.TXT file for information.
+
+VERSION 2.01, September 1999
+NOTE: You will need to upgrade your game to use the new engine. To do this,
+simply load the game into the Room Editor and then save it again.
+ - Characters can now have a Talking view, which allows animation in dialogs
+ - Fixed bug in dialogs where various messages screwed up
+ - Fixed bug where interface text color was always black
+ - Dialog options can now wrap to more than one line
+ - Hotspot names can be longer and use lowercase
+ - Fixed scaling bug where he sometimes popped up full-size briefly
+ - Fixed crash if you pressed a key while in a conversation
+ - Fixed background importing bug where colour index 0 screwed up
+ - Added custom font support; but currently, you can only import SCI fonts.
+ - Added graphical script command "If inventory %d was used"; allows you to
+   use graphical scripts with Data-99 inventory events.
+ - Documented RunDialog text script function
+ - In View Editor, setting graphic for new frame zooms to previous frame's
+   graphic in sprite list
+ - User-defined gap between display of options in conversations
+ - Interface button properties has "..." button to link to script editor if
+   the left-click action is set to Run Script.
+ - You can export the palette to PCX as well as PAL file.
+ - When saving game, RoomEdit also checks for AC.EXE in the roomedit.exe
+   directory as well as the current directory. So editing the demo by typing
+   ..\roomedit will allow it to compile properly.
+ - Fixed game loading bug where the graphical script timer wasn't restored
+ - Allowed 320-width sprite import in room editor (if you drag the rectangle
+   to screen width, it imports what's under the rectangle border as well as
+   what's inside).
+
+VERSION 2.00, September 1999
+Complete re-write of both the Room Editor and the engine. Some of the new
+features are:
+ - Character scaling: man can get smaller as he walks away from the screen.
+ - Customizable interface: you're not stuck with the Sierra one any more.
+ - Non-player characters supported - this allows you to have other characters
+   roaming the world and keep track of where they are.
+ - Animating mouse cursors supported.
+ - Scrolling rooms.
+ - Conversations, like in Lucasarts games, with easy-to-use Dialog Editor.
+ - Conditions for clicking on player character - you no longer have to display
+   a message.
+ - Much more powerful text script: you can do a lot more with it.
+ - Increased max loops per view to 8 instead of 4.
+ - Customizable walking speed for main character.
+ - Baselines for objects, useful for objects lying flat on the ground, so that
+   the man doesn't walk behind them.
+ - You can change the icon bar graphics.
+ - You can build a single EXE file for your game. This goes one step further
+   than the data file you could build in the last version.
+ - Improved remapping of scenes and sprites, solves most of the palette
+   problems people were having with importing their graphics.
+ - Clarified LICENSE.TXT. You should read the new license agreement.
+
+VERSION 1.14a, May 1999
+ - Fixed bug with Lose Game where the LOSE.PCX wasn't being shown, and it
+   called it an "internal error".
+ - Fixed bug where the engine refused to run if you didn't have a sound card.
+ - Added German and Dutch translations by Erix Designs, Spanish translation by
+   Ernesto Couso Artiles, and French translation by Pierre-Marc Jobin.
+ - The introduction messages are now translated.
+ - Fixed graphical script bug, where the flags weren't always initialized to
+   the CLEAR state.
+ - Fixed "sound2.voc not found" in the Showoff demo game.
+
+VERSION 1.14, April 1999
+NOTE: You will need to re-compile games made with previous versions.
+NOTE: Old save game positions cannot be loaded.
+ - Complete overhaul of the text script system. If you were using text
+   scripts, see section 3.8.5 for how to upgrade. Many new commands and
+   built-ins are available, see section 4.4 in the docs for a complete list.
+ - You can now change the main character's graphics within different areas
+   of the same screen. Section 3.13.1 in the docs describes this.
+ - You can customize the score sound and the red-X sound. See ScoreSoundCustom
+   and ErrorSoundCustom in section 4.1 of the docs.
+ - Added support for customizable borders for the text windows. Section 4.1.1
+   in the docs explains how to use this feature.
+ - Added option to move man as close as possible to destination instead of
+   displaying red X. See "MoveNearest" in section 4.1 of the docs for info.
+ - Added XM music support. See section 3.2 of the docs.
+ - The intro system has been changed. Now, the games starts in INTRO.CRM if
+   it exists rather than displaying PIC1.PCX. See section 3.15 in the docs.
+   The demo game intro now has two screens.
+ - You can now change music volume on a per-room basis. This allows you to
+   have, for example, quieter music outside a building than when the player
+   enters it (like with the shops in the arcade in SQ4).
+ - New graphical script commands: "Start timer", "when timer expires" and "move
+   man to object". See section 4.6 in the docs.
+ - New animation command "place object" allows you to instantly move an object
+   to another position (see section 4.5 in the docs).
+ - Added Swedish translation by Arn.
+ - Fixed bug where man would 'moonwalk' when he reached destination (I think -
+   still waiting for confirmation that this is fixed).
+ - Mod musics are now included in your data file (sorry about that!).
+ - Objects are now drawn behind the status bar if they are that high up.
+ - Fixed bug causing mouse droppings to be left on the screen when the player
+   scored points.
+ - Fixed bug where you had to click twice to make the man walk off the left
+   and bottom of the screen.
+ - Fixed bug in RoomMake where the load/save room dialogs could 'disappear'.
+ - Fixed lsl3-type score ticking (it works now!)
+ - Fixed text colour problem in restore/save/quit dialogs.
+ - Fixed spelling of "perhaps" on the second screen of the demo. At last!
+
+VERSION 1.13, March 1999
+NOTE: You will need to re-compile any games made with previous versions.
+NOTE: You cannot load old save game positions saved before this version.
+ - Added "every time player enters screen" and "repeatedly execute" events. See
+   section 4.3 in the docs for information.
+ - Added "move to, ignoring walls" animation command, allows you to give the
+   effect of the character walking through a door otherwise blocked, etc.
+   Also, you can now set a repeating animation in the Animation Editor. See
+   section 4.5 in the docs for info.
+ - New Sierra-style inventory window! See section 4.1.3 in the docs for how to
+   implement this.
+ - Added graphical script commands "If player has inventory item", "Lose
+   inventory item", "Every x loops" and "Random chance". See section 4.6 in
+   the documentation for more info.
+ - You can now use your own custom mouse cursors. See "Cursor" in section 4.1
+   of the documentation.
+ - Different cursor now used in dialog boxes and the like, allows for a proper
+   walk cursor which isn't used everywhere else.
+ - NEW: Windows version of the Project Manager.
+ - The route-finder is now much quicker at working out whether you can get
+   to the destination, so clicking on walls no longer pauses the game for ages.
+ - New: MOD support for background music. You can now use mod files as well
+   as midi files. See section 3.2 in the docs.
+ - The "Go to screen" command is finally implemented in graphical scripts.
+ - New: Global flags in graphical scripts. The demo game now demonstrates
+   this (the cigarette appears on the bin screen once you've given the key
+   to the man).
+ - Choice of two fonts for the speech text - the original one or now an SQ4
+   type speech font as well. See "SpeechFont" in section 4.1 of the docs.
+ - The status bar is now fully (well, almost!) customizable. Section 4.1.2 in
+   the docs describes how to do this.
+ - You can change the colour and style of the message boxes. See section 4.1.1
+   in the docs for info.
+ - You can set messages to be removed after a time if the player has not
+   clicked the mouse - useful for intros/animations/etc. See the end of
+   section 2.5 in the docs for info.
+ - The Sprite Manager can now scroll up/down if you have more sprites than fit
+   on the screen. The maximum is now 500 imported sprites.
+ - When the character dies, you can now have a "Restore or quit" dialog rather
+   than exiting the game.
+ - You can now draw double-thickness walls in the Room Editor. This saves a lot
+   of time so you don't have to draw walls twice.
+ - Speech text is now centred horizontally on the screen.
+ - The score is not displayed in the status bar if TotalScore is set to 0.
+   This allows for some games where you don't want to use the scoring system.
+ - You can now set the icon bar to display on top of the status bar, instead
+   of below it. See IconBarAbsTop in section 4.1 of the docs for info.
+ - You can change the animation speed of the main character. Useful if you are
+   using custom character graphics. See ManAnimSpeed in sect 4.1 in the docs.
+ - The up/down facing view is now used when the character is going more
+   vertically than horizontally, instead of only when going North or South.
+ - Using foreign characters in save game descriptions no longer crashes.
+ - The icon bar is now not displayed while the status bar is disabled.
+ - Added Green speech text colour option. Oh yes!
+ - In the demo game, once the door is unlocked you can now go through it by
+   using the hand cursor.
+ - A couple of people reported that their graphics cards couldn't do 640x400.
+   Now, if RoomMake can't use 640x400 it will use a 640x480 mode with black
+   borders at the top and bottom.
+ - Added teleport-to-room command in debug mode lets you test things without
+   having to play your whole game through.
+ - The main character's colours have been slightly changed. He doesn't look as
+   good now, but it stops the problems which were happening to some scenes.
+ - The Room Editor can no longer save old format room files :-(  But I don't
+   think you really want to go back to v1.00 now, do you?
+ - Fixed bug causing colours 190 and 191 to be overridden (thanks Arn!).
+ - Fixed bug where changing screen the main character would temporarily change
+   to the standard front view.
+ - Fixed bug where objects positions weren't saved if they were turned off.
+ - Fixed bug in save games with some text scripts.
+ - Fixed room loading bug which showed up occasionally on graphical scripts.
+ - Fixed crash which happened when pressing the down arrow key in the Restore
+   game dialog when there were no save games (yes, arcane but true! try it on
+   an older version and see!)
+
+VERSION 1.12a, February 1999
+NOTE: You cannot load old save game positions saved before this version.
+ - You can now move non-player objects with the "Move object" animation
+   command.
+ - Non-player objects are now drawn correctly when in walk-behind areas.
+ - Fixed the bug where objects sometimes weren't being removed from the screen
+   properly, like the poster in the demo game.
+ - Better screen-changing routine which fades in with the objects on, so you
+   don't get that sudden change effect.
+ - Changing the man's graphics now actually works.
+ - The current MIDI track and position are now saved in the save games. Woohoo!
+
+VERSION 1.12, February 1999
+NOTE: You will need to re-compile any games made with versions before this.
+NOTE: You cannot load old save game positions saved before this version.
+ - Added ability to change main character's graphic. See section 3.10 in the
+   documentation for more information.
+ - Added FLI/FLC animation support
+ - Added simple animation support, so you can have, for example, a door
+   actually opening. See section 3.11 in the documentation for info.
+ - You can use Data column values in graphical script
+ - New response "Turn object on" allows you to put back an object you removed
+   with "Remove object".
+ - You can now disable the main character in a room - this allows you to do
+   things like close-ups of a control panel. This is now demonstrated in the
+   demo game, and described in section 3.12.
+ - You can now set an object to initally off in RoomMake, which you can turn
+   on later using "Turn object on".
+ - Added Finnish translation by Teemu Eramaa and Norwegian translation by
+   Martin Seterstoen.
+ - You can now import a portion of a PCX/BMP for object graphics. This allows
+   you to draw several frames in one file, and then import each frame from the
+   same graphic.
+ - New option in the Sprite Manager allows you to use full 256-colour palette
+   for imports if the graphic will only be used in one room. (This prevents
+   the mapping to greyscale).
+ - The Sprite Manager importer now preserves colour 0 (transparent) pixels in
+   the imported image.
+ - You can change the background music through a command as well as with the
+   room option.
+ - Improved message editor allows you to edit existing messages without having
+   to re-type the whole thing and also allows longer messages.
+ - Tweaked the auto-route finder: removed the bug where he would sometimes
+   walk further than you asked, and shortened the time the routefinder is
+   allowed before giving up. This means that it is quicker realizing that you
+   can't get somewhere, but it may not be able to work out a path round
+   complex obstacles.
+ - Pressing 'N' in object editor now uses Sprite manager to select graphic
+   instead of cycling through all available graphs.
+ - Fixed a silly bug with the Go-to-screen data column value where he would
+   appear on the wrong side.
+ - The walk and hand icons have now been replaced.
+ - Slowed down the animation speed of the main character, so he looks more
+   like he's walking.
+ - F1 now works in the Sprite Manager! Oh yes!
+ - Fixed bug in RoomMake which crashed when you moved the mouse to the bottom
+   of the screen.
+
+VERSION 1.1, January 1999
+NOTE: You will need to re-compile any games made with versions before this
+version. If you do not, you will not be able to run the game with this version.
+NOTE: The files needed to distribute your games have changed. Please see
+section 6.2 of the docs for information.
+ - Added SVGA support. Background scenes can now be up to 640x400 256-colour!
+   Please read section 3.9 in AC.DOC for notes on this new feature.
+ - Added background music support, using MIDI files (see section 3.2 of AC.DOC
+   for information).
+ - Added sound effect support (see section 4.2 in AC.DOC for info).
+ - Character movement by mouse added: click on the destination and he will
+   walk there, as in Sierra's VGA games.
+ - New compression algorithm for room files, leading to smaller files. In fact,
+   the room file is now sometimes smaller than the imported scene's PCX file!
+ - Foreign language support added.
+ - Portuguese translation by Nuno Costa.
+ - You can now import your own PCX/BMP files as graphics for objects.
+ - Support for animating background sprites added. SUPPORT is the key word
+   here, because currently I've only drawn one animating sprite.
+ - The first screen of the demo has been changed to show off SVGA and
+   animating sprites. And it looks better like this.
+ - Expanded text script to make it more powerful. It still doesn't rival AGI
+   for power, but you can now print out variable values and do crude intro
+   sequences. See section 4.4 in the documentation for information.
+ - New, much better icons for the top icon bar.
+ - Slowed down the time-of-day to a fixed rate (on fast systems it was
+   changing from day to night to day far too quickly).
+ - Keypad 5 now stops the character walking properly.
+ - Ported the run-time engine to DJGPP (a 32-bit DOS system).
+ - You can now remove the status bar. Wow!
+
+SERVICE RELEASE 1, December 1998
+NOTE: Save games created by this release are not readable with previous
+versions; and this version cannot load old save games. Sorry. If you try to
+load an old game, you'll get Oops error 600. This is the price of progress :-)
+You CAN, however, still use old rooms (so you haven't lost anything - phew!)
+ - Added graphical script editor to RoomMake. This allows easy advanced
+   scripting without using the .SCR file. See the AC.DOC file for more info.
+ - RoomMake has been ported to DPMI. No more memory problems running RoomMake!
+ - RoomMake now has an improved user interface:
+    * a new file selector which allows changing directory and is easier to use
+    * improved other dialogs, such as the "Are you sure you want to Quit"
+      dialog and the "enter password" dialog.
+    * supports long filenames if run under Windows 95, 98, or LFNDOS.
+    * better palette remapping when reading in a PCX file.
+    * supports importing BMP files as a background scene
+ - The old screen now fades out and the new one in when changing screens.
+ - Corrected the bug which caused a crash if you used an object with certain
+   graphics.
+ - Corrected the crash which occured if the script file was newer than the
+   compiled file (thanks Luke!)
+ - One extra screen has been added to the demo game, and it now ends
+   gracefully instead of with a Load_Room error.
+
+REVISION 10.07.97
+NOTE: You will need to re-compile any games you made with any versions
+before revision 10.07.97.A.
+ - added StartPos option to INI file, to define where the man starts on
+   the first screen. Also fixed the jump which happened when he first moved
+   from the beginning.
+ - removed the 'please register' nag screen, since I've decided that the
+   Adventure Creator is now swap-ware (see LICENSE.TXT for info).
+
+VERSION 1.00, FEBRUARY 1997
+Original release.

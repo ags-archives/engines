@@ -1,0 +1,118 @@
+<HTML>
+<head><title>Custom dialog options rendering</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="CustomDialogOptions"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags43.htm#RepExec"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags45.htm#BuiltInEnums"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Custom dialog options rendering</H2>
+By default, AGS comes with two types of dialog options -- displaying them using the size
+and position of an existing GUI, or creating a text window to display the options in.<P>
+As of AGS 3.1, if neither of these methods suit you (for example, because you want to
+use picture-based dialog options, or you want to add scroll arrows), you can now implement
+the dialog options display yourself in the script.<P>
+<B>NOTE:</B> This topic involves some advanced scripting. If you're just starting out with AGS,
+please just use one of the built-in dialog option styles for now, and come back to this later
+when you're comfortable with scripting.<P>
+To write your custom dialog options code, you need to do the following:
+<UL>
+
+<LI> Add a <TT>dialog_options_get_dimensions</TT> function to your script (an example follows).
+This function is called by AGS to find out which part of the screen you will be drawing onto.
+By setting the width and height to values greater than 0, the custom dialog system is activated.
+<LI> Add a <TT>dialog_options_render</TT> function, which is called by AGS when it needs to
+draw the dialog options. A standard script <A HREF="ags53.htm#DrawingSurfaceFunctions">DrawingSurface</A> is
+supplied, which you can use to draw onto.
+<LI> Add a <TT>dialog_options_get_active</TT> function, which is called by AGS as the player moves
+the mouse around the screen. This needs to work out which option the mouse is currently hovering
+over, so that AGS knows which option to process if the player clicks the mouse button.
+<LI> Optionally, add a <TT>dialog_options_mouse_click</TT> function. This is called by AGS if the
+player clicks the mouse when it is not over one of the options. You might want to use this to
+process clicks on some custom scroll arrows, for example.
+</UL>
+
+These functions don't have to go in the global script; you can put them in any script you like.
+However, beware that if the functions are present in more than one script they could interfere
+with each other and cause problems.<P>
+<B>IMPORTANT:</B> When adding the functions to the script, they all take in a parameter of
+type <A HREF="ags52.htm#DialogOptionsRenderingInfoFunctions">DialogOptionsRenderingInfo</A> and the
+dialog_options_mouse_click function has an extra parameter for the mouse button. See the example below.<P>
+<B>IMPORTANT:</B> The four Custom Dialog functions all run on the non-blocking thread. That means
+that you should not make any blocking calls, such as Character.Say, Wait or Display within them,
+as they may not behave correctly.<P>
+<B>Example</B><P>
+Below is a very simple implementation of a dialog options screen. <P>
+<PRE>
+function dialog_options_get_dimensions(DialogOptionsRenderingInfo *info)
+{
+  // Create a 200x200 dialog options area at (50,100)
+  info.X = 50;
+  info.Y = 100;
+  info.Width = 200;
+  info.Height = 200;
+  // Put the text parser at the bottom (if enabled)
+  info.ParserTextBoxX = 10;
+  info.ParserTextBoxY = 160;
+  info.ParserTextBoxWidth = 180;
+}
+
+function dialog_options_render(DialogOptionsRenderingInfo *info)
+{
+  // Clear the area yellow
+  info.Surface.Clear(14);
+  int i = 1,  ypos = 0;
+  // Render all the options that are enabled
+  while (i &lt;= info.DialogToRender.OptionCount)
+  {
+    if (info.DialogToRender.GetOptionState(i) == eOptionOn)
+    {
+      if (info.ActiveOptionID == i) info.Surface.DrawingColor = 13;
+      else info.Surface.DrawingColor = 4;
+      info.Surface.DrawStringWrapped(5, ypos, info.Width - 10, 
+                         eFontFont0, eAlignLeft, info.DialogToRender.GetOptionText(i));
+      ypos += GetTextHeight(info.DialogToRender.GetOptionText(i), eFontFont0, info.Width - 10);
+    }
+    i++;
+  }
+}
+
+function dialog_options_get_active(DialogOptionsRenderingInfo *info)
+{
+  int i = 1,  ypos = 0;
+  // Find the option that corresponds to where the player clicked
+  while (i &lt;= info.DialogToRender.OptionCount)
+  {
+    if (info.DialogToRender.GetOptionState(i) == eOptionOn)
+    {
+      ypos += GetTextHeight(info.DialogToRender.GetOptionText(i), eFontFont0, info.Width - 10);
+      if ((mouse.y - info.Y) &lt; ypos)
+      {
+        info.ActiveOptionID = i;
+        return;
+      }
+    }
+    i++;
+  }
+}
+
+function dialog_options_mouse_click(DialogOptionsRenderingInfo *info, MouseButton button)
+{
+  // do something here if you want!
+}
+</PRE>
+The example above is slightly naive; in reality you would probably want to track
+the Y position of each option in a variable to save having to continually scan through
+all the options.<P>
+For more detail on the commands used here, see the <A HREF="ags52.htm#DialogOptionsRenderingInfoFunctions">DialogOptionsRenderingInfo</A>
+page.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<P>
+
+</BODY></HTML>

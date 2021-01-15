@@ -1,0 +1,145 @@
+<HTML>
+<head><title>Inventory functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic70"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags33.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags38.htm#topic69"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags40.htm#topic71"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Inventory functions</H2>
+<A HREF="#AddInventory">AddInventory</A><BR>
+<A HREF="#GetInvName">GetInvName</A><BR>
+<A HREF="#InventoryScreen">InventoryScreen</A><BR>
+<A HREF="#LoseInventory">LoseInventory</A><BR>
+<A HREF="#SetActiveInventory">SetActiveInventory</A><BR>
+<A HREF="#SetInvDimensions">SetInvDimensions</A><BR>
+<A HREF="#SetInvItemPic">SetInvItemPic</A><BR>
+<A HREF="#UpdateInventory">UpdateInventory</A><BR>
+<P>
+
+<HR>
+<A NAME="AddInventory"></A>
+<H3>AddInventory</H3>
+<PRE>
+AddInventory (int what)
+</PRE>
+Adds inventory index WHAT to the current player character's inventory. This
+has the same effect as doing  character[EGO].inv[WHAT]+=1;  however, it
+will add the inventory to the current player character and also update
+the inventory window.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AddInventory(10);
+</PRE>
+will give to the player character the inventory item numbered 10. 
+<I>See Also:</I> <A HREF="ags39.htm#LoseInventory">LoseInventory</A><P>
+
+<HR>
+<A NAME="GetInvName"></A>
+<H3>GetInvName</H3>
+<PRE>
+GetInvName (int item, string buffer)
+</PRE>
+Fills in BUFFER with the name of inventory item index ITEM. This is the
+name which the item is given under the Game tab, Inventory mode of the Room
+Editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetInvName (player.activeinv, buffer);
+</PRE>
+will pass the inventory item’s name to the buffer.<P>
+<I>See Also:</I> <A HREF="ags36.htm#GetLocationName">GetLocationName</A><P>
+
+<HR>
+<A NAME="InventoryScreen"></A>
+<H3>InventoryScreen</H3>
+<PRE>
+InventoryScreen ()
+</PRE>
+Brings up the Sierra-style inventory window which allows the player to
+select and manipulate inventory items. If they select one, the cursor mode
+will be set to inventory-use (mode 4), and  character[EGO].activeinv  will
+be set to the inventory item selected.<P>
+NOTE: This function does not actually bring up the window immediately;
+instead, it will show the window when the current script function finishes
+executing.<P>
+NOTE: If the player has no inventory items, global message 996 will be
+displayed.<P>
+
+<HR>
+<A NAME="LoseInventory"></A>
+<H3>LoseInventory</H3>
+<PRE>
+LoseInventory (int what)
+</PRE>
+Removes inventory item WHAT from the current player character's inventory.
+If they do not have the item, nothing happens.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+LoseInventory(10);
+</PRE>
+will make the player character lose the inventory item numbered 10 in the inventory tab<P>
+<I>See Also:</I> <A HREF="ags39.htm#AddInventory">AddInventory</A><P>
+
+<HR>
+<A NAME="SetActiveInventory"></A>
+<H3>SetActiveInventory</H3>
+<PRE>
+SetActiveInventory (int inv_item)
+</PRE>
+Sets the current active inventory item for the current player character
+to INV_ITEM. This function changes the player.activeinv variable, and also
+sets up the mouse cursor as necessary.
+To deselect the current inventory, pass INV_ITEM as -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetActiveInventory(10);
+</PRE>
+will make the inventory item 10 active (before you use it make sure that the player has the inventory item )<P>
+
+<HR>
+<A NAME="SetInvDimensions"></A>
+<H3>SetInvDimensions</H3>
+<PRE>
+SetInvDimensions (int width, int height)
+</PRE>
+Allows you to change the default width and height of the inventory item
+picture slots used by the Lucasarts-style inventory window. By default,
+the LEC inv window is made up of 40x22 pixel cells, but if all your
+inventory item pictures are bigger or smaller than this, you can use this
+function to adjust them.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetInvDimensions(60,30);
+</PRE>
+if your inventory graphics are 60x30 pixels or smaller.<P>
+
+<HR>
+<A NAME="SetInvItemPic"></A>
+<H3>SetInvItemPic</H3>
+<PRE>
+SetInvItemPic (int inv, int sprite_slot)
+</PRE>
+Changes inventory item INV's graphic to be slot number SPRITE_SLOT from
+the Sprite Manager. This allows you to dynamically adjust an item's
+picture in the inventory window during the game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetInvItemPic(10,120);
+</PRE>
+will change the number 10 inventory item’s graphic, to the picture imported in slot 120 (sprite manager’s slot).<P>
+
+<HR>
+<A NAME="UpdateInventory"></A>
+<H3>UpdateInventory</H3>
+<PRE>
+UpdateInventory ()
+</PRE>
+Updates the player's inventory display. If you add or remove inventory
+items manually (ie. by using the character[].inv[] variables rather than
+the AddInventory/LoseInventory functions), the display may not get updated.
+In this case, after making your changes, call this function to update
+what is displayed to the player.<P>
+<I>See Also:</I> <A HREF="ags39.htm#AddInventory">AddInventory</A>, <A HREF="ags39.htm#LoseInventory">LoseInventory</A><P>
+
+</BODY></HTML>

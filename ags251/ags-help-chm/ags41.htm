@@ -1,0 +1,179 @@
+<HTML>
+<head><title>Mouse functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic71"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags40.htm#topic70"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags42.htm#topic72"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Mouse functions</H2>
+<A HREF="#ChangeCursorGraphic">ChangeCursorGraphic</A><BR>
+<A HREF="#ChangeCursorHotspot">ChangeCursorHotspot</A><BR>
+<A HREF="#DisableCursorMode">DisableCursorMode</A><BR>
+<A HREF="#EnableCursorMode">EnableCursorMode</A><BR>
+<A HREF="#GetCursorMode">GetCursorMode</A><BR>
+<A HREF="#SetCursorMode">SetCursorMode</A><BR>
+<A HREF="#SetDefaultCursor">SetDefaultCursor</A><BR>
+<A HREF="#SetMouseBounds">SetMouseBounds</A><BR>
+<A HREF="#SetMouseCursor">SetMouseCursor</A><BR>
+<A HREF="#SetNextCursorMode">SetNextCursorMode</A><BR>
+<P>
+
+<HR>
+<A NAME="ChangeCursorGraphic"></A>
+<H3>ChangeCursorGraphic</H3>
+<PRE>
+ChangeCursorGraphic (int mode, int slot)
+</PRE>
+Changes mouse cursor mode MODE's cursor graphic to SLOT.
+This permenantely changes the specified mode's cursor graphic. This function
+may be useful if you need more than the maximum number of mouse cursors.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCursorGraphic(MODE_LOOK,120);
+</PRE>
+will change the cursor’s graphic for look mode to the image that’s imported in the sprite’s manager slot 120.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ChangeCursorHotspot">ChangeCursorHotspot</A>, <A HREF="ags41.htm#SetCursorMode">SetCursorMode</A><P>
+
+<HR>
+<A NAME="ChangeCursorHotspot"></A>
+<H3>ChangeCursorHotspot</H3>
+<PRE>
+ChangeCursorHotspot (int mode, int x, int y)
+</PRE>
+Permanently changes mouse cursor MODE's hotspot on the cursor graphic
+to (X,Y). This is the offset into the graphic where the click takes effect.
+(0,0) is the upper left corner of the cursor graphic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ChangeCursorHotspot(MODE_WALK,10,10);
+</PRE>
+will change the cursor’s hotspot for walk mode to coordinates 10,10.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ChangeCursorGraphic">ChangeCursorGraphic</A><P>
+
+<HR>
+<A NAME="DisableCursorMode"></A>
+<H3>DisableCursorMode</H3>
+<PRE>
+DisableCursorMode (int mode)
+</PRE>
+Disables the mouse cursor MODE. Any attempts to set the cursor to this mode
+while it is disabled (like using SetMouseCursor) will fail. This function
+also greys out and disables any interface buttons whose left-click command
+is set as "Set mode X", where X is equal to MODE.<P>
+If the current cursor mode is MODE, then the engine will change it to the
+next enabled standard cursor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisableCursorMode(MODE_WALK);
+</PRE>
+will make unaivalable the walk mode until it’s enabled again.
+ 
+<I>See Also:</I> <A HREF="ags41.htm#EnableCursorMode">EnableCursorMode</A><P>
+
+<HR>
+<A NAME="EnableCursorMode"></A>
+<H3>EnableCursorMode</H3>
+<PRE>
+EnableCursorMode (int mode)
+</PRE>
+Re-enables the mouse cursor mode MODE. This function also enables any
+interface buttons which were disabled by the DisableCursorMode command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+EnableCursorMode(MODE_WALK);
+</PRE>
+will enable cursor mode walk which was disabled before.<P>
+<I>See Also:</I> <A HREF="ags41.htm#DisableCursorMode">DisableCursorMode</A><P>
+
+<HR>
+<A NAME="GetCursorMode"></A>
+<H3>GetCursorMode</H3>
+<PRE>
+GetCursorMode()
+</PRE>
+Returns the value of the current mode of the cursor. This is either
+MODE_LOOK, MODE_USE, MODE_TALK or any custom modes you have created.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetCursorMode()==0);
+   {code here}
+</PRE>
+will execute the code only if the current cursor mode is MODE 0 (WALK).<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetCursorMode">SetCursorMode</A><P>
+
+<HR>
+<A NAME="SetCursorMode"></A>
+<H3>SetCursorMode</H3>
+<PRE>
+SetCursorMode(int new_mode)
+</PRE>
+Changes the mouse cursor mode to NEW_MODE. The number you pass can be
+obtained from the CURSORS tab of the Room Editor. This function
+changes both the appearance of the cursor and the mode used if the player
+clicks on a hotspot.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetCursorMode(MODE_USE);
+</PRE>
+will change the cursor mode to USE MODE.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GetCursorMode">GetCursorMode</A>, <A HREF="ags41.htm#SetMouseCursor">SetMouseCursor</A>, <A HREF="ags41.htm#SetNextCursorMode">SetNextCursorMode</A><P>
+
+<HR>
+<A NAME="SetDefaultCursor"></A>
+<H3>SetDefaultCursor</H3>
+<PRE>
+SetDefaultCursor()
+</PRE>
+Changes the appearance of the mouse cursor to the default for the current
+cursor mode. Use this to restore the cursor picture after you changed it
+with the SetMouseCursor function.<P>
+
+<HR>
+<A NAME="SetMouseBounds"></A>
+<H3>SetMouseBounds</H3>
+<PRE>
+SetMouseBounds(int left, int top, int right, int bottom)
+</PRE>
+Restricts the area where the mouse can move on screen. The four parameters are
+the relevant pixel co-ordinates of that edge of the bounding rectangle. They are
+in the usual range (0,0) - (320,200).<P>
+You can pass (0,0,0,0) to disable the bounding rectangle and allow the mouse to move
+everywhere, as usual.<P>
+<I>NOTE:</I> The effect of this function only lasts until the player leaves the screen,
+at which point the cursor bounds will be reset.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMouseBounds(160, 100, 320, 200);
+</PRE>
+will restrict the mouse cursor to the bottom-right quarter of the screen.<P>
+
+<HR>
+<A NAME="SetMouseCursor"></A>
+<H3>SetMouseCursor</H3>
+<PRE>
+SetMouseCursor(int new_cursor)
+</PRE>
+Changes the appearance of the mouse cursor to NEW_CURSOR. Unlike
+the SetCursorMode function (see above), this does not change the mode
+used if the user clicks on a hotspot. This is useful for displaying a "wait"
+cursor temporarily.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMouseCursor(8);
+</PRE>
+will change the mouse cursor to the cursor number 8 specified in the cursor’s tab .<P>
+<I>See Also:</I> <A HREF="ags41.htm#ChangeCursorGraphic">ChangeCursorGraphic</A>, <A HREF="ags41.htm#SetCursorMode">SetCursorMode</A>, <A HREF="ags41.htm#SetDefaultCursor">SetDefaultCursor</A><P>
+
+<HR>
+<A NAME="SetNextCursorMode"></A>
+<H3>SetNextCursorMode</H3>
+<PRE>
+SetNextCursorMode()
+</PRE>
+Selects the next enabled mouse cursor mode. This is useful for Sierra-style right-click
+cycling through modes. This function will choose the next mode marked as a Standard Mode, and
+will also use the Use Inventory mode if the player has an active inventory item.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetCursorMode">SetCursorMode</A><P>
+
+
+</BODY></HTML>

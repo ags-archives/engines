@@ -1,0 +1,93 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Getting Started with AGS - Part 6</b></h2>
+      <p>&nbsp;</p>
+      <h3>Using your own graphics</h3>
+      <p>When you were choosing the graphics for the object earlier in this
+      tutorial, you probably noticed that the graphics available didn't look up
+      to much. This is no problem, because you can import your own graphics
+      using the Sprite Manager.</p>
+      <p>Select the <i>&quot;Sprite manager&quot;</i> in the left-hand tree.
+      Here you will see the complete sprite set for the game.</p>
+      <p>AGS uses sprites for all game graphics, except room backgrounds. The
+      Sprite Manager is the central place where you do all your graphics
+      importing. Whenever you want to use images in the game (eg. for mouse
+      cursors, characters, objects, and so forth), you select an image to use
+      from here.</p>
+      <p>There are two ways to import your graphics - either overwrite an
+      existing slot with your graphic, or create a new slot for it. To overwrite
+      an existing sprite, right-click the sprite and select <i>&quot;Import over
+      this sprite&quot;</i>. To import a new slot, right-click on the background
+      to the window and choose <i>&quot;Import new sprite&quot;</i>.</p>
+      <p align="center"><i><img border="0" src="images/intro6_1.jpg" width="479" height="316"><br>
+      I'm about to overwrite sprite slot 3</i></p>
+      <p>When you select this menu option, the <i>Import Image</i> window will
+      pop up:<p align="center"><i><img border="0" src="images/intro6_2.jpg" width="400" height="200"><br>
+      The &quot;Import Image&quot; window</i><p>The first thing to do is to set
+      what resolution the image is drawn for. Basically, if you are making a
+      640x480 game, you need to check the &quot;Import for 640x400
+      resolution&quot; box <b>before</b> going any further. If you are making a
+      320x200 game, leave it unchecked.<p>Now, you can either:
+      <ul>
+        <li>click the <i>&quot;Import from file...&quot;</i> button, and the
+          file selector will pop up. Find the image file you want to import, and
+          it will appear in the window.</li>
+        <li>click the <i>&quot;Paste from clipboard&quot;</i> button. The
+          current clipboard image will appear in the window.<br>
+          (<b>NOTE:</b> The <i>&quot;Paste from clipboard&quot;</i> button is not
+          available in 256-colour games)</li>
+      </ul>
+      <p>The sprite graphics you import must be the same colour depth as your
+      backgrounds - ie. if you have a 256-colour game, you must import
+      256-colour sprites.</p>
+      <p align="center"><i><img border="0" src="images/intro6_3.jpg" width="400" height="375"><br>
+      Ok, so I didn't have any decent sprite graphics on my disk.</i><p>Now, the
+      image should be displayed. You may get scroll bars if it's larger than the
+      window can handle. You'll notice that a new button, <i>&quot;Grab entire
+      image&quot;</i> has appeared.<br>
+      <br>
+      <table border="0">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td><i><b>NOTE</b> (256-colour only): </i>You may well find that the
+            colours on your graphic look slightly strange in the Room Editor.
+            This is because the sprites are only allocated, by default, the
+            first 41 of the palette colours, so your graphic will be remapped to
+            this much smaller palette. If you find that many of your imported
+            sprites look strange, you can increase the number of colours
+            assigned to sprites, at the expense of background colours (see the
+            earlier part of the tutorial for palette setup).</td>
+        </tr>
+      </table>
+      <p>Move the mouse cursor over the image, and you'll see a rectangle
+      following the cursor around. This is the selection rectangle that
+      determines what portion of the image will be imported. Click and drag the <b>right
+      </b>mouse button to resize it.<p>If you just want to import the entire
+      image as your sprite, simply click the <i>&quot;Grab entire image&quot;</i>
+      button. Otherwise, move and size the selection rectangle so that it covers
+      what you want to import, and click the <b>left </b>mouse button. The
+      &quot;Zoom out&quot; and &quot;Zoom in&quot; buttons allow you to zoom in
+      on the sprite to see more detail if you need to precisely align your
+      import rectangle.
+      <h4>Tiled sprite import</h4>
+      <p>This feature allows you to import a grid of sprites into seperate slots
+      - for example, if you have several frames of a character animation side by
+      side in the source bitmap. To do this, simply check the &quot;Tiled sprite
+      import&quot; box, and align your rectangle on the top left sprite. When
+      you click the left mouse button, you will get an extra step which allows
+      you to size the grid:<p align="center"><i><img border="0" src="images/intro6_4.jpg" width="400" height="375"><br>
+      I've sized a 3x1 grid, to import each traffic light seperately</i>&nbsp;&nbsp;&nbsp;
+      <p>Click the left button again once you are happy with the grid. Each of
+      the cells will be imported as a seperate sprite.<p>For full details on
+      importing sprites, see the manual <i>&quot;Importing your own sprite
+      graphics&quot;</i> section.
+      <p>&nbsp;
+      <p><b>Go to part 7:</b>  &nbsp;<a href="acintro7.htm">Animations</a>
+      <p><font size="2">Tutorial last updated 20 December 2002. Copyright (c) 2001-2002
+      Chris Jones.</font>        
+      </td>
+    </body></html>

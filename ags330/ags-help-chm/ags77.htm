@@ -1,0 +1,256 @@
+<HTML>
+<head><title>Speech functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="SpeechCommands"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags76.htm#topic67"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags78.htm#topic68"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Speech functions and properties</H2>
+<A HREF="#Speech.AnimationStopTimeMargin">AnimationStopTimeMargin</A><BR>
+<A HREF="#Speech.CustomPortraitPlacement">CustomPortraitPlacement</A><BR>
+<A HREF="#Speech.DisplayPostTimeMs">DisplayPostTimeMs</A><BR>
+<A HREF="#Speech.GlobalSpeechAnimationDelay">GlobalSpeechAnimationDelay</A><BR>
+<A HREF="#Speech.PortraitXOffset">PortraitXOffset</A><BR>
+<A HREF="#Speech.PortraitY">PortraitY</A><BR>
+<A HREF="#Speech.SkipKey">SkipKey</A><BR>
+<A HREF="#Speech.SkipStyle">SkipStyle</A><BR>
+<A HREF="#Speech.Style">Style</A><BR>
+<A HREF="#Speech.TextAlignment">TextAlignment</A><BR>
+<A HREF="#Speech.UseGlobalSpeechAnimationDelay">UseGlobalSpeechAnimationDelay</A><BR>
+<A HREF="#Speech.VoiceMode">VoiceMode</A><BR>
+<P>
+
+<HR>
+<A NAME="Speech.AnimationStopTimeMargin"></A>
+<H3>AnimationStopTimeMargin</H3>
+<I>(Formerly known as game.close_mouth_end_speech_time, which is now obsolete)</I><P>
+<PRE>
+static int Speech.AnimationStopTimeMargin
+</PRE>
+Gets/sets the time margin at which the character talking animation should stop before before speech time ends.
+This property is specified in <B>game loops</B> and is set to 10 by default.<P>
+<B>NOTE:</B> This property only affects the animation if voice mode is disabled.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.AnimationStopTimeMargin = 40;
+</PRE>
+will stop talking animation 40 game loops (1 second with the default game speed) before speech time ends.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.DisplayPostTimeMs">Speech.DisplayPostTimeMs</A><P>
+
+
+<HR>
+<A NAME="Speech.CustomPortraitPlacement"></A>
+<H3>CustomPortraitPlacement</H3>
+<PRE>
+static bool Speech.CustomPortraitPlacement
+</PRE>
+Enables/disables the custom speech portrait placement. When set to <B>true</B> the character portraits are positioned at screen coordinates defined by <A HREF="ags77.htm#Speech.PortraitXOffset">Speech.PortraitXOffset</A> and <A HREF="ags77.htm#Speech.PortraitY">Speech.PortraitY</A>. When set to <B>false</B> the portraits will be automatically aligned again.<P>
+<B>NOTE:</B> This property has no effect if the Lucas-Arts speech style is used.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.3.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.PortraitXOffset">Speech.PortraitXOffset</A>,
+<A HREF="ags77.htm#Speech.PortraitY">Speech.PortraitY</A><P>
+
+
+<HR>
+<A NAME="Speech.DisplayPostTimeMs"></A>
+<H3>DisplayPostTimeMs</H3>
+<PRE>
+static int Speech.DisplayPostTimeMs
+</PRE>
+Gets/sets the extra time the speech will stay on screen after its base time runs out.
+Commonly the time the speech lines and portrait stay on screen is calculated based on the text length - if the text mode is on, or voice clip length - if the voice mode is on. This property prolongs the time the speech text and/or portrait is displayed.
+This property does not interfere with speech skipping by key or mouse click: players will still be able to skip speech any time they want (if appropriate skip mode is enabled).
+This property is specified in <B>milliseconds</B> and is set to zero by default.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.3.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.AnimationStopTimeMargin">Speech.AnimationStopTimeMargin</A><P>
+
+
+<HR>
+<A NAME="Speech.GlobalSpeechAnimationDelay"></A>
+<H3>GlobalSpeechAnimationDelay</H3>
+<I>(Formerly known as game.talkanim_speed, which is now obsolete)</I><P>
+<PRE>
+static int Speech.GlobalSpeechAnimationDelay
+</PRE>
+Gets/sets global speech animation delay which affects every character in game.
+This property is specified in <B>game loops</B> and is set to 5 by default.<P>
+<B>NOTE:</B> This property is ignored if lip sync is enabled.<P>
+<B>NOTE:</B> The property is only used when the <B>Speech.UseGlobalSpeechAnimationDelay</B> is set to <B>true</B>. This property <B>cannot</B> be used if the global speech animation delay is disabled. In that case, the individual character's animation delay is used instead.<P>
+<I>See Also:</I> <A HREF="ags49.htm#Character.SpeechAnimationDelay">Character.SpeechAnimationDelay</A>,
+<A HREF="ags77.htm#Speech.UseGlobalSpeechAnimationDelay">Speech.UseGlobalSpeechAnimationDelay</A><P>
+
+
+<HR>
+<A NAME="Speech.PortraitXOffset"></A>
+<H3>PortraitXOffset</H3>
+<PRE>
+static int Speech.PortraitXOffset
+</PRE>
+Gets/sets the character's speech portrait <B>horizontal</B> offset relative to screen side.
+The actual x coordinate of the portrait is calculated based on whether portrait is to be displayed at the left or right side of the screen. This property specifies the distance between the screen side and respected portrait's border.<P>
+<B>NOTE:</B>The property is only used when the <B>Speech.CustomPortraitPlacement</B> is set to <B>true</B>.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.3.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.CustomPortraitPlacement">Speech.CustomPortraitPlacement</A>,
+<A HREF="ags77.htm#Speech.PortraitY">Speech.PortraitY</A><P>
+
+
+<HR>
+<A NAME="Speech.PortraitY"></A>
+<H3>PortraitY</H3>
+<PRE>
+static int Speech.PortraitY
+</PRE>
+Gets/sets the character's speech portrait <B>y</B> coordinate on screen.<P>
+<B>NOTE:</B>The property is only used when the <B>Speech.CustomPortraitPlacement</B> is set to <B>true</B>.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.3.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.CustomPortraitPlacement">Speech.CustomPortraitPlacement</A>,
+<A HREF="ags77.htm#Speech.PortraitXOffset">Speech.PortraitXOffset</A><P>
+
+
+<HR>
+<A NAME="Speech.SkipKey"></A>
+<H3>SkipKey</H3>
+<I>(Formerly known as game.skip_speech_specific_key, which is now obsolete)</I><P>
+<PRE>
+static eKeyCode Speech.SkipKey
+</PRE>
+Gets/sets special key which can skip speech text. This makes all other keys ignored when speech is displayed on screen, unless eKeyNone is assigned, in which case any key can be used again.<P>
+<B>NOTE:</B>The specified key will only skip speech if the appropriate speech skip style is enabled.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.SkipKey = eKeySpace;
+</PRE>
+will assign the "space" key to skip the speech.<P>
+<I>See Also:</I> <A HREF="ags77.htm#Speech.SkipStyle">Speech.SkipStyle</A><P>
+
+
+<HR>
+<A NAME="Speech.SkipStyle"></A>
+<H3>SkipStyle</H3>
+<I>(Formerly known as SetSkipSpeech, which is now obsolete)</I> <br> <P>
+<PRE>
+static SkipSpeechStyle Speech.SkipStyle
+</PRE>
+Gets/sets how the player can skip speech lines.<P>
+The accepted values are
+<PRE>
+eSkipKeyMouseTime  player can skip text by clicking mouse or pressing key
+eSkipKeyTime       player can skip text by pressing key only, not by clicking mouse
+eSkipTime          player cannot skip text with mouse or keyboard
+eSkipKeyMouse      text does not time-out; player must click mouse or press key each time
+eSkipMouseTime     player can skip text by clicking mouse only, not by pressing key
+eSkipKey           text does not time-out; player can skip text by pressing key only
+eSkipMouse         text does not time-out; player can skip text by clicking mouse only
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.SkipStyle = eSkipTime;
+</PRE>
+will make the player unable to skip the text by pressing a mouse button or a key.<P>
+<I>See Also:</I> <A HREF="ags56.htm#Game.IgnoreUserInputAfterTextTimeoutMs">Game.IgnoreUserInputAfterTextTimeoutMs</A>,
+<A HREF="ags56.htm#Game.TextReadingSpeed">Game.TextReadingSpeed</A>,
+<A HREF="ags77.htm#Speech.SkipKey">Game.Speech.SkipKey</A><P>
+
+
+<HR>
+<A NAME="Speech.Style"></A>
+<H3>Style</H3>
+<I>(Formerly known as SetSpeechStyle, which is now obsolete)</I> <br> <P>
+<PRE>
+static eSpeechStyle Speech.Style
+</PRE>
+Gets/sets theway in which speech text is displayed. This modifies the setting
+originally set in the editor. SpeechStyle can be:
+<PRE>
+eSpeechLucasarts
+  speech text over character's head
+eSpeechSierra
+  close-up portrait of character
+eSpeechSierraWithBackground
+  close-up portrait + background window for text
+eSpeechFullScreen
+  QFG4-style full screen dialog pictures
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.Style = eSpeechSierra;
+</PRE>
+will change the speech style to a close up portrait of the character.<P>
+
+
+<HR>
+<A NAME="Speech.TextAlignment"></A>
+<H3>TextAlignment</H3>
+<I>(Formerly known as game.speech_text_align, which is now obsolete)</I><P>
+<PRE>
+static Alignment Speech.TextAlignment
+</PRE>
+Sets how text in Lucasarts-style speech is aligned.<P>
+The accepted values are
+<PRE>
+eAlignLeft
+eAlignCentre
+eAlignRight
+</PRE>
+The default is eAlignCentre.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.TextAlignment = eAlignRight;
+</PRE>
+will align the speech text at the right side.<P>
+
+
+<HR>
+<A NAME="Speech.UseGlobalSpeechAnimationDelay"></A>
+<H3>UseGlobalSpeechAnimationDelay</H3>
+<PRE>
+static bool Speech.UseGlobalSpeechAnimationDelay
+</PRE>
+Gets/sets whether speech animation delay should use global setting, as opposed to individual character's setting.
+The actual global delay value is specified with <B>Speech.GlobalSpeechAnimationDelay</B>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Speech.UseGlobalSpeechAnimationDelay = true;
+</PRE>
+will make the game use global speech animation delay.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.3.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags49.htm#Character.SpeechAnimationDelay">Character.SpeechAnimationDelay</A>,
+<A HREF="ags77.htm#Speech.GlobalSpeechAnimationDelay">Speech.GlobalSpeechAnimationDelay</A><P>
+
+
+<HR>
+<A NAME="Speech.VoiceMode"></A>
+<H3>VoiceMode</H3>
+<I>(Formerly known as SetVoiceMode, which is now obsolete)</I><P>
+<PRE>
+static eVoiceMode Speech.VoiceMode
+</PRE>
+Gets/sets whether voice and/or text captions are used in the game.<P>
+Valid values for VoiceMode are:
+<PRE>
+eSpeechTextOnly      no voice, text only
+eSpeechVoiceAndText  both voice and text
+eSpeechVoiceOnly     voice only, no text
+</PRE>
+The default is <I>eSpeechVoiceAndText</I> if in-game speech is enabled, and <I>eSpeechTextOnly</I> if it
+is not. Changing this setting changes the behaviour of all <A HREF="ags49.htm#Character.Say">Say</A> and
+<A HREF="ags80.htm#Display">Display</A> commands which have a speech file assigned to them.<P>
+<B>WARNING:</B> you should only ever use <I>eSpeechVoiceOnly</I> at the player's request to
+do so, because there is no guarantee that they even have a sound card and so may
+not understand what is going on.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsSpeechVoxAvailable()==1)
+    SetVoiceMode(eSpeechVoiceAndText); 
+</PRE>
+will set the voice mode to voice and text if the voice pack is available.<P>
+<P>
+
+</BODY></HTML>

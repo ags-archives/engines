@@ -1,0 +1,86 @@
+<HTML>
+<head><title>Palette functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic64"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags65.htm#topic63"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags67.htm#topic65"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Palette functions</H2>
+<A HREF="#CyclePalette">CyclePalette</A><BR>
+<A HREF="#SetPalRGB">SetPalRGB</A><BR>
+<A HREF="#UpdatePalette">UpdatePalette</A><BR>
+<P>
+
+<HR>
+<A NAME="CyclePalette"></A>
+<H3>CyclePalette</H3>
+<PRE>
+CyclePalette (int start, int end)
+</PRE>
+This is used for special effects, like the flowing colours on the Space
+Quest 4 title screen, and the Sierra logo of the later Sierra games.
+The palette indexes from START to END are cycled around one slot. Using
+this call in a repeatedly_execute function gives the effect of animation.<P>
+By default, the colours rotate leftwards through the palette. If you pass
+the arguments the other way round (ie. START being larger than END) then
+the colours will rotate in the opposite direction.<P>
+<B>NOTE:</B> This command only works in 256-colour games.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CyclePalette(10,200);
+</PRE>
+will cause the palette indexes from 10 to 200 cycle around one slot and give a color effect.<P>
+<I>See Also:</I> <A HREF="ags70.htm#FadeIn">FadeIn</A>, <A HREF="ags70.htm#FadeOut">FadeOut</A>, <A HREF="ags66.htm#SetPalRGB">SetPalRGB</A><P>
+
+
+<HR>
+<A NAME="SetPalRGB"></A>
+<H3>SetPalRGB</H3>
+<PRE>
+SetPalRGB (int slot, int red, int green, int blue)
+</PRE>
+Changes the RGB components of one of the palette slots. The palette is
+initially set up in the Palette Editor, but you can override it during the game using
+this function for special effects. The RED, GREEN and BLUE parameters each
+range from 0 to 63 (as used in the Palette Editor).<P>
+If SLOT is a background slot, then this function's effect will last until
+the player changes screen, when the palette is changed to the new room's
+palette. If SLOT is not a background slot, the effect of this function is
+permanent.<P>
+NOTE: This function will allow you to change the colours which are "locked"
+in the AGS Editor. However, you should not normally do this as it can
+cause strange colours in the game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetPalRGB(10,63,63,21);
+</PRE>
+will change palette slot number 10 from light green to yellow<P>
+<I>See Also:</I> <A HREF="ags66.htm#CyclePalette">CyclePalette</A>, <A HREF="ags70.htm#FadeIn">FadeIn</A>, <A HREF="ags70.htm#FadeOut">FadeOut</A>, <A HREF="ags66.htm#UpdatePalette">UpdatePalette</A><P>
+
+<HR>
+<A NAME="UpdatePalette"></A>
+<H3>UpdatePalette</H3>
+<PRE>
+UpdatePalette()
+</PRE>
+Commits the changes you made to the game palette.
+The script global variable  palette[]  stores the state of all the
+colours of the palette. You can access the red, green and blue components
+with .r, .g and .b. The values range from 0 to 63.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+palette[16].r = 60;
+UpdatePalette();
+</PRE>
+will make the black colour turn bright red. When you actually change the variable, nothing happens. Call this function to update the screen.<P>
+<I>See Also:</I> <A HREF="ags66.htm#SetPalRGB">SetPalRGB</A><P>
+
+
+</BODY></HTML>

@@ -1,0 +1,192 @@
+<HTML>
+<head><title>Hotspot functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic65"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags38.htm#topic58"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags43.htm#topic64"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags45.htm#topic66"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Hotspot functions</H2>
+<A HREF="#DisableHotspot">DisableHotspot</A><BR>
+<A HREF="#EnableHotspot">EnableHotspot</A><BR>
+<A HREF="#GetHotspotAt">GetHotspotAt</A><BR>
+<A HREF="#GetHotspotName">GetHotspotName</A><BR>
+<A HREF="#GetHotspotPointX">GetHotspotPointX</A><BR>
+<A HREF="#GetHotspotPointY">GetHotspotPointY</A><BR>
+<A HREF="#GetHotspotProperty">GetHotspotProperty</A><BR>
+<A HREF="#GetHotspotPropertyText">GetHotspotPropertyText</A><BR>
+<A HREF="#RunHotspotInteraction">RunHotspotInteraction</A><BR>
+<P>
+
+<HR>
+<A NAME="DisableHotspot"></A>
+<H3>DisableHotspot</H3>
+<PRE>
+DisableHotspot (int hsnum)
+</PRE>
+Disables hotspot number HSNUM in the current room. All areas of the screen
+that were previously HSNUM now act as type 0 (no hotspot). You can turn it
+back on later with the EnableHotspot command.<P>
+This command permanently disables the hotspot - that is, it will not be
+reset when the player re-enters the room. The only way of turning the
+hotspot back on is to use the EnableHotspot command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisableHotspot(3);
+</PRE>
+will disable the hotspot number 3.<P>
+<I>See Also:</I> <A HREF="ags44.htm#EnableHotspot">EnableHotspot</A>, <A HREF="ags53.htm#RemoveWalkableArea">RemoveWalkableArea</A><P>
+
+<HR>
+<A NAME="EnableHotspot"></A>
+<H3>EnableHotspot</H3>
+<PRE>
+EnableHotspot (int hsnum)
+</PRE>
+Turns hotspot HSNUM back on. Use this to re-enable a hotspot which you
+turned off earlier with the DisableHotspot command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+EnableHotspot(3);
+</PRE>
+will enable hotspot number 3 that was disabled by the DisableHotspot command.<P>
+<I>See Also:</I> <A HREF="ags44.htm#DisableHotspot">DisableHotspot</A>, <A HREF="ags53.htm#RestoreWalkableArea">RestoreWalkableArea</A><P>
+
+
+<HR>
+<A NAME="GetHotspotAt"></A>
+<H3>GetHotspotAt</H3>
+<PRE>
+GetHotspotAt (int x, int y)
+</PRE>
+Returns the number of the hotspot at SCREEN co-ordinates (X,Y).
+If there is no hotspot there, or if invalid co-ordinates are specified,
+returns 0.<P>
+NOTE: The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetHotspotAt(mouse.x,mouse.y)==2)
+    Display ("Door");
+</PRE>
+will display a message "Door" when the cursor is over the hotspot number 2.<P>
+<I>See Also:</I> <A HREF="ags42.htm#GetLocationName">GetLocationName</A>, <A HREF="ags42.htm#GetLocationType">GetLocationType</A><P>
+
+
+<HR>
+<A NAME="GetHotspotName"></A>
+<H3>GetHotspotName</H3>
+<PRE>
+GetHotspotName(int hotspot, string buffer)
+</PRE>
+Copies the name of HOTSPOT in the current room into BUFFER.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetHotspotName(3, buffer);
+Display("Hotspot 3's name is %s.", buffer);
+</PRE>
+will retrieve and then display hotspot 3's name.<P>
+<I>See Also:</I> <A HREF="ags42.htm#GetLocationName">GetLocationName</A><P>
+
+
+<HR>
+<A NAME="GetHotspotPointX"></A>
+<H3>GetHotspotPointX</H3>
+<PRE>
+GetHotspotPointX (int hotspot)
+</PRE>
+Returns the X room co-ordinate of HOTSPOT's walk-to point. If the specified hotspot
+does not have a walk-to point, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterBlocking (EGO, GetHotspotPointX (4), GetHotspotPointY (4), 0);
+</PRE>
+will move the character to hotspot 4's walk-to point.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GetHotspotPointY">GetHotspotPointY</A>, <A HREF="ags40.htm#MoveCharacterToHotspot">MoveCharacterToHotspot</A><P>
+
+
+<HR>
+<A NAME="GetHotspotPointY"></A>
+<H3>GetHotspotPointY</H3>
+<PRE>
+GetHotspotPointY (int hotspot)
+</PRE>
+Returns the Y room co-ordinate of HOTSPOT's walk-to point. If the specified hotspot
+does not have a walk-to point, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+MoveCharacterBlocking (EGO, GetHotspotPointX (4), GetHotspotPointY (4), 0);
+</PRE>
+will move the character to hotspot 4's walk-to point.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GetHotspotPointX">GetHotspotPointX</A>, <A HREF="ags40.htm#MoveCharacterToHotspot">MoveCharacterToHotspot</A><P>
+<P>
+
+<HR>
+<A NAME="GetHotspotProperty"></A>
+<H3>GetHotspotProperty</H3>
+<PRE>
+GetHotspotProperty (int hotspot, string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for HOTSPOT.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent GetPropertyText function to get a text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetHotspotProperty(1, "Value") &gt; 200)
+  Display("Hotspot 1's value is over 200!");
+</PRE>
+will print the message if hotspot 1 has its "Value" property set to more than 200.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GetHotspotPropertyText">GetHotspotPropertyText</A><P>
+
+
+<HR>
+<A NAME="GetHotspotPropertyText"></A>
+<H3>GetHotspotPropertyText</H3>
+<PRE>
+GetHotspotPropertyText (int hotspot, string property, string buffer)
+</PRE>
+Returns the custom property setting of the PROPERTY for HOTSPOT.<P>
+This command works with Text properties only. The property's text will be
+copied into the BUFFER that you pass to this command.<P>
+Use the equivalent GetProperty function to get a non-text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetHotspotPropertyText(2, "Description", buffer);
+Display("Hotspot 2's description: %s", buffer);
+</PRE>
+will retrieve hotspot 2's "description" property into the buffer, then display it.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GetHotspotProperty">GetHotspotProperty</A><P>
+<P>
+
+<HR>
+<A NAME="RunHotspotInteraction"></A>
+<H3>RunHotspotInteraction</H3>
+<PRE>
+RunHotspotInteraction (int hotspot, int mode)
+</PRE>
+Processes the interaction list as if the player had clicked the mouse
+on hotspot number HOTSPOT in the current room, using cursor mode MODE.
+MODE is one of the MODE_* constants listed in the ProcessClick description.
+May be useful with the text parser for simulating a mouse click if they
+type specific words in.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunHotspotInteraction(4,MODE_LOOK);
+</PRE>
+will run the code defined in the "LOOK AT HOTSPOT" interaction for hotspot number 4.<P>
+<I>See Also:</I> <A HREF="ags42.htm#ProcessClick">ProcessClick</A>, <A HREF="ags40.htm#RunCharacterInteraction">RunCharacterInteraction</A>, <A HREF="ags48.htm#RunObjectInteraction">RunObjectInteraction</A><P>
+
+
+</BODY></HTML>

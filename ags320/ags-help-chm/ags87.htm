@@ -1,0 +1,55 @@
+<HTML>
+<head><title>Frequently Asked Questions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic83"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags.htm"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags86.htm#ASCIIcodes"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags88.htm#UpgradeTo30"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Frequently Asked Questions</H2>
+This section of the manual is very rarely updated. Please consult
+the AGS Forums on the website -- in particular, the Beginners Technical
+Forum has an excellent Beginners FAQ (the "BFAQ") which is much more
+extensive and is updated regularly with all sorts of Q&amp;A's.<P>
+<B>Q. What's the deal with the license? What does it mean in plain English?</B><P>
+A. Adventure Game Studio is pretty much freeware. That means you may use
+   it freely for non-commerical games, and you don't have to send me anything
+   in return.
+   There is one requirement - if you want to SELL a game you make, for profit,
+   then you must contact me beforehand as there are some licensing issues
+   which you may need to be aware of.
+   When you finish your game, please do post it on the Announcements
+   Forum and the Games Database so that everyone can give it a go.<P>
+<B>Q. Why the swapware license? Why aren't you charging for it?</B><P>
+A. Because I don't want to. There's no need to be suspicious, the fact that it's
+   free doesn't necessarily mean that it's rubbish.<P>
+<B>Q. On my screen, I can't move the main character. Wherever I click to move him,
+   he just stands there.</B><P>
+A. If the main character isn't on a walkable area, he will not be able to move.
+   Load the room in the editor, and check that the location where the
+   character starts is on a walkable area.<P>
+<B>Q. When I enter a certain room, I just get a black screen.</B><P>
+A. Make sure that you haven't used a Display Message command in the "Enters
+   room before fade-in" event for that room. Remember that this event happens BEFORE
+   the screen fades in.<P>
+   To make sure, when you get the black screen, try pressing enter, or clicking
+   the left mouse button. If nothing happens then something more serious may
+   have happened. If this is the case, press Alt+X, which should exit the
+   program and allow you to trace which line of script it has stopped on.<P>
+<B>Q. The character isn't drawn behind my walk-behind areas!</B><P>
+A. You need to define the base line for the area, or he will always be drawn
+   in front. See the tutorial for more information.<P>
+<B>Q. My game EXE file seems to have disappeared.</B><P>
+A. Because this file is your entire game, including the room files, when you
+   save a room in the Room Editor it will delete the exe file (because the
+   room contained in the exe is out of date). To get it back, simply build the
+   game again by using the "Build EXE" command on the Build menu.<P>
+<P>
+
+</BODY></HTML>

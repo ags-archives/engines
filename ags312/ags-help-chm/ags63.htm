@@ -1,0 +1,230 @@
+<HTML>
+<head><title>Inventory item functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic59"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags62.htm#topic58"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags64.htm#topic60"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Inventory item functions and properties</H2>
+
+<A HREF="#InventoryItem.GetAtScreenXY">GetAtScreenXY (inventory)</A><BR>
+<A HREF="#InventoryItem.GetProperty">GetProperty (inventory)</A><BR>
+<A HREF="#InventoryItem.GetTextProperty">GetTextProperty (inventory)</A><BR>
+<A HREF="#InventoryItem.IsInteractionAvailable">IsInteractionAvailable (inventory)</A><BR>
+<A HREF="#InventoryItem.RunInteraction">RunInteraction (inventory)</A><BR>
+<A HREF="#InventoryItem.CursorGraphic">CursorGraphic property (inventory)</A><BR>
+<A HREF="#InventoryItem.Graphic">Graphic property (inventory)</A><BR>
+<A HREF="#InventoryItem.ID">ID property (inventory)</A><BR>
+<A HREF="#InventoryItem.Name">Name property (inventory)</A><BR>
+<P>
+
+<HR>
+<A NAME="InventoryItem.GetAtScreenXY"></A>
+<H3>GetAtScreenXY (inventory)</H3>
+<I>(Formerly known as global function GetInvAt, which is now obsolete)</I><P>
+<PRE>
+static InventoryItem* InventoryItem.GetAtScreenXY(int x, int y)
+</PRE>
+Returns the inventory item at SCREEN co-ordinates (X,Y). Note that this
+only detects inventory items on custom Inventory windows (that are switched on when
+this function is called), and is intended to allow you to do Verb Coin style GUIs and so on.<P>
+If there is no inventory item there, or if invalid co-ordinates are specified,
+returns null.<P>
+<B>NOTE:</B> The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+InventoryItem *item = InventoryItem.GetAtScreenXY(mouse.x, mouse.y);
+if (item == null) {
+  Display("No inventory item at the mouse co-ordinates");
+}
+else {
+  Display("Inventory item number %d at the mouse.", item.ID);
+}
+</PRE>
+will display the number of the inv item that the mouse is over<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.Name">InventoryItem.Name</A>,
+<A HREF="ags53.htm#Game.GetLocationName">Game.GetLocationName</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.GetProperty"></A>
+<H3>GetProperty (inventory)</H3>
+<I>(Formerly known as GetInvProperty, which is now obsolete)</I><P>
+<PRE>
+InventoryItem.GetProperty(string property)
+</PRE>
+Returns the custom property setting PROPERTY for the inventory item.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent GetTextProperty function to get a text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (inventory[1].GetProperty("Value") &gt; 200)
+  Display("Inventory item 1's value is over 200!");
+</PRE>
+will print the message if inventory item 1 has its "Value" property set to more than 200.<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.GetTextProperty">InventoryItem.GetTextProperty</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.GetTextProperty"></A>
+<H3>GetTextProperty (inventory)</H3>
+<I>(Formerly known as GetInvPropertyText, which is now obsolete)</I> <br> 
+<I>(Formerly known as InventoryItem.GetPropertyText, which is now obsolete)</I><P>
+<PRE>
+String InventoryItem.GetTextProperty(string property)
+</PRE>
+Returns the custom property setting PROPERTY for the inventory item.<P>
+This command works with Text properties only. The property's text will be
+returned from this function.<P>
+Use the equivalent GetProperty function to get a non-text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String description = inventory[2].GetTextProperty("Description");
+Display("Inv item 2's description: %s", description);
+</PRE>
+will retrieve inv item 2's "description" property and display it.<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.GetProperty">InventoryItem.GetProperty</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.IsInteractionAvailable"></A>
+<H3>IsInteractionAvailable (inventory)</H3>
+<I>(Formerly known as IsInventoryInteractionAvailable, which is now obsolete)</I><P>
+<PRE>
+InventoryItem.IsInteractionAvailable(CursorMode)
+</PRE>
+Checks whether there is an event handler defined for activating the inventory item
+in cursor mode MODE.<P>
+This function is very similar to RunInteraction, except that rather than run the event
+handler script function, it simply returns <I>true</I> if something would have happened,
+or <I>false</I> if unhandled_event would have been run.<P>
+This is useful for enabling options on a verb-coin style GUI, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (iKeyring.IsInteractionAvailable(eModeLookat) == 0)
+  Display("looking at this item would not do anything.");
+</PRE>
+<I>See Also:</I> <A HREF="ags53.htm#IsInteractionAvailable">IsInteractionAvailable</A>,
+<A HREF="ags63.htm#InventoryItem.RunInteraction">InventoryItem.RunInteraction</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.RunInteraction"></A>
+<H3>RunInteraction (inventory)</H3>
+<I>(Formerly known as RunInventoryInteraction, which is now obsolete)</I><P>
+<PRE>
+InventoryItem.RunInteraction(CursorMode)
+</PRE>
+Runs the event handler as if the player had clicked the mouse
+on the inventory item, using the specified cursor mode.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (button == eMouseLeftInv)
+  inventory[game.inv_activated].RunInteraction(mouse.Mode);
+</PRE>
+will run the inventory event handler for the current cursor mode when the player clicks
+on the item (Handle Inv Clicks needs to be enabled for this to work)<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.IsInteractionAvailable">InventoryItem.IsInteractionAvailable</A>,
+<A HREF="ags53.htm#ProcessClick">ProcessClick</A>, <A HREF="ags46.htm#Character.RunInteraction">Character.RunInteraction</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.CursorGraphic"></A>
+<H3>CursorGraphic property (inventory)</H3>
+<PRE>
+int InventoryItem.CursorGraphic
+</PRE>
+Gets/sets the sprite slot number of the inventory item's mouse cursor. This is
+the sprite used as the mouse cursor when this inventory item is selected.<P>
+<B>NOTE:</B> This property is only used if the "Use selected inventory graphic for cursor"
+setting in General Settings is turned on.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The key's cursor graphic is %d", iKey.CursorGraphic);
+</PRE>
+will display inventory item <I>iKey</I>'s cursor graphic.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.2</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.Graphic">InventoryItem.Graphic</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.Graphic"></A>
+<H3>Graphic property (inventory)</H3>
+<I>(Formerly known as GetInvGraphic, which is now obsolete)</I><br> 
+<I>(Formerly known as SetInvItemPic, which is now obsolete)</I><P>
+<PRE>
+int InventoryItem.Graphic
+</PRE>
+Gets/sets the sprite slot number of the inventory item. You could use this
+with the Object.Graphic property as a means of the player 'dropping' an inventory item, or
+it may be useful if you want to do a Raw Drawn inventory window.<P>
+<B>NOTE:</B> For backwards compatibility, if you change this property and the CursorGraphic
+currently has the same sprite as the main Graphic, then the CursorGraphic will be changed
+too.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int slot = player.ActiveInventory.Graphic;
+</PRE>
+will place the sprite number of the player's current inventory item into slot.<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.CursorGraphic">InventoryItem.CursorGraphic</A>,
+<A HREF="ags63.htm#InventoryItem.GetAtScreenXY">InventoryItem.GetAtScreenXY</A>,
+<A HREF="ags63.htm#InventoryItem.Name">InventoryItem.Name</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.ID"></A>
+<H3>ID property (inventory)</H3>
+<PRE>
+readonly int InventoryItem.ID
+</PRE>
+Gets the inventory item's ID number. This is the item's number from the editor, and is
+useful with commands such as Character.AddInventory which require an inventory number
+to add.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AddInventory(EGO, iShovel.ID);
+</PRE>
+uses the obsolete AddInventory command to add the shovel to EGO's inventory<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.AddInventory">Character.AddInventory</A>,
+<A HREF="ags46.htm#Character.LoseInventory">Character.LoseInventory</A><P>
+
+
+<HR>
+<A NAME="InventoryItem.Name"></A>
+<H3>Name property (inventory)</H3>
+<I>(Formerly known as GetInvName, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetInvItemName, which is now obsolete)</I> <br> 
+<I>(Formerly known as InventoryItem.GetName, which is now obsolete)</I> <br> 
+<I>(Formerly known as InventoryItem.SetName, which is now obsolete)</I><P>
+<PRE>
+String InventoryItem.Name;
+</PRE>
+Gets/sets the name of the inventory item. This is the name which is
+initially set under the Game tab, Inventory mode of the AGS Editor.<P>
+You can change this property if for example you want to change a 'bowl'
+to a 'bowl with water in' but want to use the same inventory item for it.<P>
+Note that the maximum length for the name of an inventory item is 24 characters - if the
+name you set is longer than this, it will be truncated.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Active inventory: %s", player.ActiveInventory.Name);
+</PRE>
+will display the name of the player's current inventory item.<P>
+<I>See Also:</I> <A HREF="ags63.htm#InventoryItem.GetAtScreenXY">InventoryItem.GetAtScreenXY</A>,
+<A HREF="ags63.htm#InventoryItem.Graphic">InventoryItem.Graphic</A>,
+<A HREF="ags53.htm#Game.GetLocationName">Game.GetLocationName</A><P>
+<P>
+
+</BODY></HTML>

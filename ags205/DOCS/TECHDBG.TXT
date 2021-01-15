@@ -1,0 +1,57 @@
+Debugging the AGS engine
+------------------------
+ADVANCED USERS ONLY
+
+This file explains how you can debug the actual AGS engine when you find a
+problem which you think is a bug in the engine, and not in your game.
+
+Only follow the steps below after Chris Jones has recommended doing so.
+You should contact the author for help before trying any of the debug switches.
+
+
+USING THE DEBUGGING FEATURES
+
+From v2.02 onwards, the AGS engine supports engine debugging.
+Do NOT confuse this with the "Debug mode" which you can set in the Room Editor.
+The "Debug Mode" is for helping out with testing the game you are making by
+allowing you to cheat in various ways. However, engine debugging is for finding
+problems with the actual AGS code.
+
+To run the engine in Engine Debugging mode, you can use the following switches
+on the command line (ie. type  AC [switches]   or  USERGAME [switches] ).
+
+ -noiface    Does not draw interfaces
+ -nosprdisp  Does not draw any objects/characters on the screen
+ -nospr      Does not calculate or draw any objects or characters
+ -noupdate   Does not do any game logic updates (animations, movements, etc)
+ -noscript   Does not run any room (local) text scripts
+ -nosound    Disables all sound effects
+ -nomusic    Disables all background music
+
+You can use any combination of the switches above and try a few different
+combinations until you find one that works (or don't find any).
+For example, if the game is crashing immediately every time you try and load
+it, you can try running it with each of the switches above, and if it doesn't
+crash with a certain switch, then you have found the area of the code which
+the problem lies in. Report this to Chris Jones and it will help greatly in
+finding a solution for the problem.
+
+First of all, try typing
+  AC -noiface -nospr
+and see if that fixes the problem. If it does, then try
+  AC -noiface
+and
+  AC -nospr
+seperately, and see if one of them solves the problem.
+
+Failing that, try combinations of all the other switches.
+
+Problems you will notice include:
+ * using the NOUPDATE switch will cause the timers not to advance, so the
+   game will not progress beyond the first intro screen. You may want to
+   change the starting room to room 1 to avoid this.
+ * using the NOIFACE switch will mean that the "Skip intro" dialog box will
+   not be displayed, so you must watch the whole thing
+
+Remember, if using these switches means you cannot quit the game, you can
+use  Ctrl-Break  to abort at any time.

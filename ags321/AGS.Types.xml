@@ -1,0 +1,829 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AGS.Types</name>
+    </assembly>
+    <members>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumDescription(System.Enum)">
+            <summary>
+            Gets Enum Value's Description Attribute
+            </summary>
+            <param name="value">The value you want the description attribute for</param>
+            <returns>The description, if any, else it's .ToString()</returns>
+        </member>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumDescription(System.Type,System.String)">
+            <summary>
+            Gets the description for certaing named value in an Enumeration
+            </summary>
+            <param name="value">The type of the Enumeration</param>
+            <param name="name">The name of the Enumeration value</param>
+            <returns>The description, if any, else the passed name</returns>
+        </member>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumValue(System.Type,System.String)">
+            <summary>
+            Gets the value of an Enum, based on it's Description Attribute or named value
+            </summary>
+            <param name="value">The Enum type</param>
+            <param name="description">The description or name of the element</param>
+            <returns>The value, or the passed in description, if it was not found</returns>
+        </member>
+        <member name="P:AGS.Types.ILoadedRoom.Number">
+            <summary>
+            Gets the room number of this room.
+            RequiredAGSVersion: 3.2.0.95
+            </summary>
+        </member>
+        <member name="T:AGS.Types.BaseFolderCollection`2">
+            <summary>
+            Base class for items which are maintained in a folder structure,
+            like Views and AudioClips.
+            </summary>
+            <typeparam name="T">type of the item, eg. View</typeparam>
+            <typeparam name="U">type of the folder, eg. ViewFolder</typeparam>
+        </member>
+        <member name="M:AGS.Types.IViewFolder.FindViewByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the View object for the specified view number.
+            Returns null if the view is not found.
+            </summary>
+            <param name="viewNumber">View number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="P:AGS.Types.IViewFolder.SubFolders">
+            <summary>
+            Sub folders containing their own views.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IViewFolder.Views">
+            <summary>
+            The views contained in this folder.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ViewFolder.FindViewByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the View object for the specified view number.
+            Returns null if the view is not found.
+            </summary>
+            <param name="viewNumber">View number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="T:AGS.Types.ISourceControlIntegration">
+            <summary>
+            Operations to handle files under Source Control. If the current game
+            is not under Source Control, these operations will all work on the
+            local file system only.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISourceControlIntegration.AttemptToGetWriteAccess(System.String)">
+            <summary>
+            Attempt to get write access to the specified file, checking out
+            the file if necessary. If this fails, a dialog will be displayed
+            to the user and false will be returned.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISourceControlIntegration.AttemptToGetWriteAccess(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Attempt to get write access to all of the specified files, checking
+            them out if necessary. If one of them fails, a dialog will be
+            displayed to the user and false will be returned.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISourceControlIntegration.DeleteFileOnDiskAndSourceControl(System.String[])">
+            <summary>
+            Deletes the specified files from the disk. If they are under
+            source control, prompts the user and asks them whether they also
+            want to delete the files from source control.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISourceControlIntegration.RenameFileOnDiskAndSourceControl(System.String,System.String)">
+            <summary>
+            Renames the specified file on the disk and in the source control
+            repository, if applicable.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISourceControlIntegration.RegisterFileIconAssociation(System.String,System.String)">
+            <summary>
+            Links the specified file extension with the specified icon key. The
+            Pending Checkins window will use this to determine what icon to
+            display for the files.
+            </summary>
+            <param name="fileExtension">The file extension to register. Should start with a period.</param>
+            <param name="iconKey">The icon key, previously registered with the GUIController's RegisterIcon method.</param>
+        </member>
+        <member name="E:AGS.Types.ISourceControlIntegration.GetSourceControlFileList">
+            <summary>
+            Fired by the Pending Checkins window to get a list of files that
+            comprise the game source code. All source-controllable files should
+            be returned, and the Pending Checkins window will then display
+            any that are not currently checked in.
+            </summary>
+        </member>
+        <member name="T:AGS.Types.IPersistUserData">
+            <summary>
+            Interface to persist user-specific data to/from disk. This data
+            will not be checked into source control.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.OnPanelClosing(System.Boolean,System.Boolean@)">
+            <summary>
+            This pane is about to be closed. If canCancel is true, then
+            the user is attempting to close and it can be aborted. If it's
+            false, then the editor is exiting and you can't abort the close.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.HandleKeyPress(System.Windows.Forms.Keys)">
+            <summary>
+            Attempts to handle a key press, and returns true if it has done.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.OnKeyPressed(System.Windows.Forms.Keys)">
+            <summary>
+            Process a key press, but cannot mark it as handled.
+            </summary>
+            <param name="keyData"></param>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.WindowActivated">
+            <summary>
+            This panel has just become the active one
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.OnGetHelpKeyword">
+            <summary>
+            Gets the help keyword that will be used to bring up the help
+            file when the user presses F1 in this pane.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.AutoComplete.ScriptFunction.HideOnMainFunctionList">
+            <summary>
+            If this function should be hidden from the main autocomplete list.
+            This applies to member function definitions, since the import statement
+            will be used instead.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.AddComponent(AGS.Types.IEditorComponent)">
+            <summary>
+            Adds a new component to the editor. Once added, it cannot be removed
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.RebuildAutocompleteCache(AGS.Types.Script)">
+            <summary>
+            Re-constructs the autocomplete data for the specified script.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.GetAllScriptHeaders">
+            <summary>
+            Retrieves a list of all the script headers that will be passed
+            to the compiler, in the correct order.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.GetSpriteImage(System.Int32)">
+            <summary>
+            Gets the image for the specified sprite number.
+            RequiredAGSVersion: 3.0.1.31.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.ChangeSpriteImage(System.Int32,System.Drawing.Bitmap,AGS.Types.SpriteImportTransparency,System.Boolean)">
+            <summary>
+            Replaces the specified sprite with a new image.
+            RequiredAGSVersion: 3.0.2.38
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.CreateNewSprite(AGS.Types.ISpriteFolder,System.Drawing.Bitmap,AGS.Types.SpriteImportTransparency,System.Boolean)">
+            <summary>
+            Creates a new sprite in the specified folder, using the
+            supplied image, and returns it.
+            RequiredAGSVersion: 3.0.2.38
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.DeleteSprite(System.Int32)">
+            <summary>
+            Deletes the specified sprite from the game.
+            RequiredAGSVersion: 3.0.2.40
+            </summary>
+            <exception cref="T:AGS.Types.SpriteInUseException"/>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.GetSpriteUsageReport(System.Int32)">
+            <summary>
+            Gets a text report of places where the sprite is in use. This 
+            cannot automatically detect uses of the sprite in scripts.
+            Returns null if no uses of the sprite could be detected.
+            RequiredAGSVersion: 3.0.2.40
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.GUIController">
+            <summary>
+            Returns the GUI controller, which provides access to various
+            aspects of the editor GUI.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.CurrentGame">
+            <summary>
+            Returns the game which is loaded into the editor
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.Version">
+            <summary>
+            Editor version number
+            </summary>
+        </member>
+        <member name="E:AGS.Types.IAGSEditor.GetScriptHeaderList">
+            <summary>
+            Allows you to add extra built-in script headers to the compiler.
+            You can't add extra functions because your plugin will not be
+            loaded at run-time, but you can add enums and #defines.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.SourceControl">
+            <summary>
+            Gets the Source Control Integration object, which allows you
+            to perform source control-related operations.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.RoomController">
+            <summary>
+            Gets the RoomController, which provides methods to manipulate
+            the currently loaded room file.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="M:AGS.Types.GUIControl.GetSpritesUsed">
+            <summary>
+            Gets a list of all sprites used by this control. Useful for
+            exporting the control.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.GUIControl.UpdateSpritesWithMapping(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Updates sprite numbers on the control using the supplied mapping.
+            Usually used after this control has just been imported from an external
+            source, to link up its imported sprites.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.AddTreeRoot(AGS.Types.IEditorComponent,System.String,System.String,System.String)">
+            <summary>
+            Adds a new root to the project tree.
+            </summary>
+            <param name="component">The owning component</param>
+            <param name="id">Unique ID for this tree node</param>
+            <param name="name">User-friendly name to display</param>
+            <param name="iconKey">The icon to display, registered earlier with RegisterIcon</param>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.StartFromNode(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Sets the project tree's internal marker to the specified node.
+            Any AddTreeLeaf commands will add them as children of this node.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.AddTreeLeaf(AGS.Types.IEditorComponent,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a new child node to the project tree.
+            </summary>
+            <param name="component">The owning component</param>
+            <param name="id">Unique ID for this tree node</param>
+            <param name="name">User-friendly name to display</param>
+            <param name="iconKey">The icon to display, registered earlier with RegisterIcon</param>
+            <param name="greyedOut">Whether this item should be greyed out (normally false)</param>
+            <returns></returns>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.SelectNode(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Sets the project tree to display this node as selected.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.RemoveAllChildNodes(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Removes all child nodes of the specified node. This allows you
+            to refresh your list of child nodes by adding them all back
+            again.
+            </summary>
+        </member>
+        <member name="E:AGS.Types.IProjectTree.BeforeShowContextMenu">
+            <summary>
+            Fired just before a context menu is displayed in the project tree.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RegisterIcon(System.String,System.Drawing.Icon)">
+            <summary>
+            Registers an icon with the AGS Editor. Supply a unique ID which
+            you use later to refer to this icon.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddOrShowPane(AGS.Types.ContentDocument)">
+            <summary>
+            Makes the specified pane into the active pane in the editor,
+            or adds it if it doesn't already exist.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RemovePaneIfExists(AGS.Types.ContentDocument)">
+            <summary>
+            Removes the pane from the main tabbed window area. If it doesn't
+            exist there, nothing happens.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.ShowMessage(System.String,AGS.Types.MessageBoxIconType)">
+            <summary>
+            Shows a message box with the specified message and icon
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddMenu(AGS.Types.IEditorComponent,System.String,System.String,System.String)">
+            <summary>
+            Adds a new main menu to the editor. The ID will be used
+            to identify it in code, and Title is the user friendly name.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddMenuItems(AGS.Types.IEditorComponent,AGS.Types.MenuCommands)">
+            <summary>
+            Adds a set of new commands to the editor main menus
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.CreateMenuCommand(AGS.Types.IEditorComponent,System.String,System.String)">
+            <summary>
+            Creates a MenuCommand for the specified component
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RemoveMenuItems(AGS.Types.MenuCommands)">
+            <summary>
+            Removes a set of previously added commands from the editor main menus
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.CreateScriptEditor(System.Drawing.Point,System.Drawing.Size)">
+            <summary>
+            Creates a script editor control at the specified position and size.
+            This allows you to embed a script editor onto your pane.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.OpenEditorForScript(System.String,System.Int32)">
+            <summary>
+            Opens the script editor for the specified script file and positions
+            the cursor on the specified line number.
+            RequiredAGSVersion: 3.0.1.24.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.ShowHelpFile(System.String)">
+            <summary>
+            Launches the AGS Help File and attempts to display the specified keyword.
+            RequiredAGSVersion: 3.0.1.26.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.DrawSprite(System.Drawing.Graphics,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Renders the specified sprite to the Graphics context, resized to fit within
+            the specified width/height and with aspect ratio maintained.
+            RequiredAGSVersion: 3.0.1.34
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.SetStatusBarText(System.String)">
+            <summary>
+            Displays the supplied text on the editor status bar.
+            RequiredAGSVersion: 3.0.2.38
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.ShowSpriteSelector(System.Int32)">
+            <summary>
+            Displays a pop-up dialog asking the user to select a sprite.
+            Returns the selected sprite, or null if they cancel.
+            RequiredAGSVersion: 3.0.2.38
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGUIController.ProjectTree">
+            <summary>
+            Gets the Project Tree controller which provides access to
+            adding and removing nodes from the main tree.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGUIController.FileMenuID">
+            <summary>
+            The menu ID of the File menu
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGUIController.ActivePane">
+            <summary>
+            Retrieves the pane that is currently selected. This could be null if
+            no tabs are open.
+            RequiredAGSVersion: 3.2.0.94
+            </summary>
+        </member>
+        <member name="T:AGS.Types.AudioClipPriority">
+            <summary>
+            This needs to match the enum definition in agsdefns.sh
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Sprite.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Basic constructor when you just want to pass simple sprite details
+            around and use this as an entity.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.ReplaceSelectedText(System.String)">
+            <summary>
+            Replaces the selected text with the supplied text.
+            RequiredAGSVersion: 3.2.1.104
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.GetTokenReferenceForCurrentState">
+            <summary>
+            Gets information on the current selection in the editor
+            RequiredAGSVersion: 3.2.1.104
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.FindNextOccurrence(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Finds the next occurrence of the specified text, and returns a reference to its location
+            RequiredAGSVersion: 3.2.1.104
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.ResetSelection">
+            <summary>
+            Clears any selection and resets the cursor to the start of the script.
+            RequiredAGSVersion: 3.2.1.104
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.GetLineNumberForPosition(System.Int32)">
+            <summary>
+            Gets the line number that the specified position is on.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.GetTextForLine(System.Int32)">
+            <summary>
+            Gets the text on the specified line.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.GetTypeNameAtCursor">
+            <summary>
+            Returns the full variable/function name for the text under the
+            cursor. If it cannot be resolved, the word under the cursor is
+            returned.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IScriptEditorControl.SetSelection(System.Int32,System.Int32)">
+            <summary>
+            Sets the selection, gets the start position of the cursor
+            and the length of the selection.
+            RequiredAGSVersion: 3.2.1.106
+            </summary>        
+        </member>
+        <member name="P:AGS.Types.IScriptEditorControl.SelectionStart">
+            <summary>
+            The start offset of the current selection.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IScriptEditorControl.SelectionEnd">
+            <summary>
+            The end offset of the current selection.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IScriptEditorControl.SelectedText">
+            <summary>
+            The currently selected text.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IScriptEditorControl.CursorPosition">
+            <summary>
+            The current offset of the cursor.
+            RequiredAGSVersion: 3.1.0.48
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IRoomController.LoadRoom(AGS.Types.IRoom)">
+            <summary>
+            Loads the specified room (from the Game.Rooms collection) into memory.
+            If another room is currently loaded, the user will be prompted to
+            save it. Returns true if the room was loaded.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IRoomController.GetAreaMaskPixel(AGS.Types.RoomAreaMaskType,System.Int32,System.Int32)">
+            <summary>
+            Gets the area number on the specified room mask at (x,y)
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IRoomController.DrawRoomBackground(System.Drawing.Graphics,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Draws the room background to the specified graphics context.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IRoomController.DrawRoomBackground(System.Drawing.Graphics,System.Int32,System.Int32,System.Int32,System.Int32,AGS.Types.RoomAreaMaskType,System.Int32,System.Int32)">
+            <summary>
+            Draws the room background to the specified graphics context,
+            and overlays one of the room masks onto it.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IRoomController.CurrentRoom">
+            <summary>
+            Returns the currently loaded room, or null if none is loaded.
+            RequiredAGSVersion: 3.0.1.35
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IRoomController.GreyOutNonSelectedMasks">
+            <summary>
+            Sets whether or not to grey out non-selected masks when drawing the background.
+            </summary>
+        </member>
+        <member name="E:AGS.Types.IRoomController.PreSaveRoom">
+            <summary>
+            Occurs when a room is about to be saved to disk. You can add a new CompileError
+            to the errors collection if you want to prevent the save going ahead.
+            RequiredAGSVersion: 3.2.0.95
+            </summary>
+        </member>
+        <member name="M:AGS.Types.View.NotifyClientsOfUpdate">
+            <summary>
+            Causes the ViewUpdated event to be fired. You should call this
+            if you modify the view and need any currently open editor View
+            windows to update to reflect the changes.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGame.CreateNewView(AGS.Types.IViewFolder)">
+            <summary>
+            Creates a new view in the specified folder, refreshes the project
+            tree and returns the new view.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGame.Views">
+            <summary>
+            Accesses the root view folder, which contains all views
+            at the top level as well as sub folders.
+            RequiredAGSVersion: 3.0.1.33
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGame.Sprites">
+            <summary>
+            Accesses the root sprite folder, which contains all
+            sprites at the top level, and subfolders.
+            RequiredAGSVersion: 3.0.2.38
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Script.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a new Script which can be compiled with the AGS Script Compiler.
+            </summary>
+            <param name="fileName">The script filename. If the script is internally
+            generated and not stored on disk, make up a name and prefix it with
+            an underscore.</param>
+            <param name="text">The script itself.</param>
+            <param name="isHeader">Is this a script header or an actual script?</param>
+        </member>
+        <member name="T:AGS.Types.RequiredAGSVersionAttribute">
+            <summary>
+            The minimum version of AGS that this plugin will work with.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.RequiredAGSVersionAttribute.#ctor(System.String)">
+            <summary>
+            Specifies the minimum AGS version required by this plugin
+            </summary>
+            <param name="requiredVersion">Minimum version number, in format a.b.c.d (eg. 3.0.0.0)</param>
+        </member>
+        <member name="T:AGS.Types.ISpriteFolder">
+            <summary>
+            Provides access to sprites and their folders.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ISpriteFolder.FindSpriteByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the Sprite object for the specified sprite number.
+            Returns null if the sprite is not found.
+            </summary>
+            <param name="spriteNumber">Sprite number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="M:AGS.Types.ISpriteFolder.FindFolderThatContainsSprite(System.Int32)">
+            <summary>
+            Finds the SpriteFolder object for the folder that contains the sprite.
+            Returns null if the sprite is not found.
+            </summary>
+            <param name="spriteNumber">Sprite number to look for</param>
+        </member>
+        <member name="P:AGS.Types.ISpriteFolder.Name">
+            <summary>
+            The name of this sprite folder.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.ISpriteFolder.SubFolders">
+            <summary>
+            Sub-folders contained within this folder.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.ISpriteFolder.Sprites">
+            <summary>
+            Sprites in this folder.
+            </summary>
+        </member>
+        <member name="T:AGS.Types.IEditorComponent">
+            <summary>
+            NOTE: This interface is used by plugins, do not modify it or existing
+            plugins will break!
+            </summary>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new MenuCommands collection
+            </summary>
+            <param name="menuName">The Menu ID to add the commands to</param>
+            <param name="insertAfterMenu">For pane-specific menus, where to insert the extra menu</param>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.String,System.Int32)">
+            <summary>
+            Creates a new MenuCommands collection
+            </summary>
+            <param name="menuName">The Menu ID to add the commands to</param>
+            <param name="priority">The relative position of this set of commands on the menu</param>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.Collections.Generic.IList{AGS.Types.MenuCommand})">
+            <summary>
+            Creates a new MenuCommands collection to wrap an existing list of commands
+            </summary>
+            <param name="commands"></param>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.String)">
+            <summary>
+            Creates a new MenuCommands collection
+            </summary>
+            <param name="menuName">The Menu ID to add the commands to</param>
+        </member>
+        <member name="P:AGS.Types.ScriptAutoCompleteData.Populated">
+            <summary>
+            Whether this autocomplete data has been populated
+            </summary>
+        </member>
+        <member name="T:AGS.Types.AudioClipFileType">
+            <summary>
+            This needs to match the enum definition in agsdefns.sh
+            </summary>
+        </member>
+        <member name="M:AGS.Types.SpriteFolder.FindSpriteByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the Sprite object for the specified sprite number.
+            Returns null if the sprite is not found.
+            </summary>
+            <param name="spriteNumber">Sprite number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="M:AGS.Types.SpriteFolder.FindFolderThatContainsSprite(System.Int32)">
+            <summary>
+            Finds the SpriteFolder object for the folder that contains the sprite.
+            Returns null if the sprite is not found.
+            </summary>
+            <param name="spriteNumber">Sprite number to look for</param>
+        </member>
+        <member name="M:AGS.Types.SpriteFolder.NotifyClientsOfUpdate">
+            <summary>
+            Causes the SpritesUpdated event to be fired. You should call this
+            if you modify the sprites and need the Sprite Manager window
+            to update to reflect the changes.
+            Only call this on the Root sprite folder.
+            </summary>
+        </member>
+        <member name="E:AGS.Types.SpriteFolder.SpritesUpdated">
+            <summary>
+            Fired when an external client makes changes to the sprites
+            (root sprite folder only)
+            </summary>
+        </member>
+        <member name="M:AGS.Types.SerializeUtils.GetElementString(System.Xml.XmlNode,System.String)">
+            <summary>
+            Wrapper function for SelectSingleNode that throws an exception
+            mentioning the node name if it is not found. Returns the node text
+            if successful.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.SerializeUtils.GetElementStringOrDefault(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            Wrapper function for SelectSingleNode that returns the node text
+            or some default text if it does not exist.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.SerializeUtils.GetChildNodes(System.Xml.XmlNode,System.String)">
+            <summary>
+            Wrapper function for SelectSingleNode that throws an exception
+            mentioning the node name if it is not found. Returns the node's
+            children if successful.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.NotifyClientsViewsUpdated">
+            <summary>
+            Causes the ViewListUpdated event to be fired. You should call this
+            if you add/remove views and need the views component to update
+            to reflect the changes.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.ViewDeleted(System.Int32)">
+            <summary>
+            Marks the view as deleted and available for re-creation
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.FindAndAllocateAvailableViewID">
+            <summary>
+            Returns an unused View ID and allocates it as in use
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.FindViewByID(System.Int32)">
+            <summary>
+            Returns the View object associated with the supplied ID
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.ConvertCoordinatesToNativeResolution">
+            <summary>
+            WARNING: Only call this if an old game has just been loaded
+            in, otherwise all sizes will get doubled!!!
+            </summary>
+        </member>
+        <member name="E:AGS.Types.Game.ViewListUpdated">
+            <summary>
+            Fired when an external client adds/removes views
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.SavedXmlVersion">
+            <summary>
+            The version of the Game.agf file that was loaded from disk.
+            This is null if the game has not yet been saved.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.SavedXmlEditorVersion">
+            <summary>
+            The editor version read from the Game.agf file that was loaded from disk.
+            This is null if the game has not yet been saved or is an older version.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.SavedXmlVersionIndex">
+            <summary>
+            The version-index of the Game.agf file that was loaded from disk.
+            This is null if the game has not yet been saved.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.DirectoryPath">
+            <summary>
+            Full path to the directory where the game is located
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.FilesAddedOrRemoved">
+            <summary>
+            If this is set, then the editor is more forceful about making
+            the user save the game on exit.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.MinRoomHeight">
+            <summary>
+            Returns the minimum height of the room background
+            for the current game resolution.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.MinRoomWidth">
+            <summary>
+            Returns the minimum width of the room background
+            for the current game resolution.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.ViewCount">
+            <summary>
+            Returns the highest numbered View in the game
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.IsHighResolution">
+            <summary>
+            Returns whether the game is "high resolution" (ie. 640x400 or more)
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.Component">
+            <summary>
+            The component that created the activated node.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.MenuCommands">
+            <summary>
+            The context menu commands that have been created by the
+            owning component.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.SelectedNodeID">
+            <summary>
+            The ID of the tree node that was right-clicked.
+            </summary>
+        </member>
+        <member name="T:AGS.Types.SpriteInUseException">
+            <summary>
+            Thrown if you attempt to delete a sprite that is still in use.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.GetAboutDialogTextEventArgs.Text">
+            <summary>
+            The text to be displayed.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.ViewLoop.Full">
+            <summary>
+            This is pretty much obsolete now, it used to be Full if the
+            Max Frames Per Loop was reached, but now there isn't one.
+            </summary>
+        </member>
+    </members>
+</doc>

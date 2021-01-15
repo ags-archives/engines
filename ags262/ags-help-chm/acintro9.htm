@@ -1,0 +1,141 @@
+<html><head><style>
+body         { font-family: Verdana; font-size: 12pt }
+a            { font-weight: bold }
+</style>
+</head><body>
+      <h2 align="center"><b><br>
+      Getting Started with AGS - Part 9</b></h2>
+      <h3>&nbsp;</h3>
+      <h3>Cursors</h3>
+      <p>It's easy to overlook mouse cursors, but they provide the essential 
+		interface between the player and the game world. In AGS, each mouse 
+		cursor provides a different <i>mode</i> of interaction to the player.</p>
+		<p align="center">
+		<img border="0" src="images/intro9_1.jpg" width="420" height="252"><br>
+		<i>The Cursors pane</i></p>
+		<p>Unlike most of AGS, mouse cursors modes are not generic - that is, 
+		AGS has special coded behaviour for some of the cursors. This means that 
+		you are unable to customize what some of the cursor modes do - let's 
+		list these ones briefly:</p>
+		<ul>
+			<li><b>Mode 0 (Walk to)</b> - this will always move the player 
+			character to the co-ordinates at which the mouse was clicked</li>
+			<li><b>Mode 4 (Use inventory)</b> - AGS will only allow this mode to 
+			be selected if the player character has an active inventory item, 
+			and it will always invoke the &quot;Use inventory&quot; interaction.</li>
+			<li><b>Mode 6 (Pointer)</b> - this is used whenever a normal 
+			Windows-style mouse pointer is required. For example, when the user 
+			is prompted to select a dialog option; when a popup GUI is 
+			displayed, and so forth.</li>
+			<li><b>Mode 7 (Wait)</b> - this cursor is shown whenever the player 
+			cannot interact with the game world (ie. during a cutscene). It is 
+			automatically shown during blocking script functions.</li>
+		</ul>
+		<p>All the other cursors are 'normal' cursors, in that you can use them 
+		for whatever purposes you want.</p>
+      <table border="0" id="table2">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>If you want to create a Lucasarts-style game where the mouse 
+			cursor disappears during cutscenes, the easiest way to do it is 
+			simply to import a blank image over the Wait mouse cursor.</td>
+        </tr>
+      </table>
+      <p>The Cursors editor pane is fairly self-explanatory. Click the &quot;Change 
+		image&quot; button to set a graphic for the cursor; and click inside the 
+		graphic to set the cursor's hotspot. (The <i>hotspot</i> sets which spot 
+		under the cursor will be activated when you click with it).</p>
+		<p>There are a couple of other options you can set for cursors, let's 
+		cover them briefly:</p>
+		<ul>
+			<li><b>Standard Mode</b> tells AGS that this is a normal 
+			user-selectable cursor. It is used when cycling through mouse 
+			cursors, to determine whether to use the cursor or skip over it. For 
+			example, if during the game you disable the current cursor, AGS will 
+			change to the next available Standard Mode.</li>
+			<li><b>Animate</b> allows you to make an animated mouse cursor. If 
+			you check the box, additional options appear allowing you to choose 
+			which view to use (loop 0 of the view will be cycled continuously). 
+			You can also select &quot;Only when over hotspot or object&quot; to make the 
+			cursor only animate while it is over something that the player can 
+			interact with; and &quot;Only when the mouse is moving&quot; to do a 
+			QFG4-style cursor which only animates while the player is moving it 
+			around.</li>
+		</ul>
+      <table border="0" id="table1">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>You can use the &quot;New Cursor&quot; button to create additional cursors 
+			to the standard 10. If you do so however, any extra cursors you 
+			create will not have interaction events created for them, so you 
+			will have to handle their clicks using the &quot;Any Click&quot; events.</td>
+        </tr>
+      </table>
+      <p>&nbsp;<h3>Fonts</h3>
+		<p>The default blank game comes with a couple of basic fonts, but you 
+		don't have to use them - you can import your own.<p align="center">
+		<img border="0" src="images/intro9_2.jpg" width="420" height="264"><br>
+		<i>The Font Editor</i><p>By default, you'll see three fonts are 
+		available. Font 0 is the standard font used in message boxes. Font 1 is 
+		the speech font, used with lucasarts-style speech; and font 2 is an 
+		outline font for the speech font.<p>Outlines are pretty much essential 
+		for lucasarts-style speech. Since the text is drawn directly onto the 
+		screen and not onto a message box, without an outline it could be very 
+		hard to read the text, depending on what colour the screen happened to 
+		be behind it.<p>There are two ways to do outlines - AGS can do an 
+		automatic outline, or you can import a special outline font. They both 
+		have advantages:<ul>
+		<li>Automatic outlining is easy to use - just check the option, and it 
+		works with any font.</li>
+		<li>Using an outline font is faster in the game, since it is just drawn 
+		once (whereas automatic outlining has to redraw the line of text 8 
+		times).</li>
+		</ul>
+		<p><b>Importing fonts</b><p>AGS supports both TrueType (TTF) and SCI 
+		(Sierra's format) fonts. To overwrite an existing font, simply select it 
+		and click the &quot;Import font&quot; button. To create a new font slot, click the 
+		&quot;New font&quot; button, then &quot;Import font&quot;.<p>You should use SCI fonts 
+		wherever possible, since they are significantly faster to render than 
+		TTF fonts. Using TTF fonts can slow your game down, so only use them if 
+		you really need to.<p>Where can you get a SCI font? Well, there are 
+		three ways:<ul>
+			<li>Create your own font and save it in SCI Font format, using the
+			<a href="http://scigraphicstudio.cjb.net">SCI Graphic Studio program</a>.
+			</li>
+			<li>Extract the font from a Sierra game, using the SCI Decoder 
+			program available on the internet (note however that this will have 
+			copyright implications for your game).</li>
+			<li>You can get a Sierra SCI Font Pack on the
+			<a href="http://www.adventuregamestudio.co.uk/fonts">AGS website</a>.</li>
+		</ul>
+      <table border="0" id="table3">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>If you go to your Windows Fonts folder to try and import a TTF 
+			font, you will not be able to do so (double-clicking them will open 
+			them up in the Windows Font Viewer). Unfortunately there is nothing 
+			I can do about this - you must either type the filename in manually, 
+			or copy the font to another folder and import it from there.</td>
+        </tr>
+      </table>
+      <table border="0" id="table4">
+        <tr>
+          <td valign="top"><img border="0" src="images/icon_info.gif" width="32" height="32"></td>
+          <td>By default, font 0 is used as the normal text font, and font 1 is 
+			used as the speech font. To use any additional fonts, the text 
+			script functions SetNormalFont and SetSpeechFont can be used to 
+			change the active fonts.</td>
+        </tr>
+      </table>
+      	<p>&nbsp;<h3>Conclusion</h3>
+		<p>That's it for the &quot;Getting Started&quot; tutorials. I hope they've helped 
+		you to get a grasp of the AGS basics. If there's anything you didn't 
+		really understand or that you think should be covered but wasn't, please 
+		let us know on the Beginners Technical Forum, so that the tutorials can 
+		be improved to explain it better.<p><a href="acintro.htm">Return to 
+		tutorials index</a><br>
+&nbsp;<p><font size="2">Tutorial last updated 
+		15 February 2004. Copyright (c) 2004
+      Chris Jones.</font>        
+      </td>
+    </body></html>

@@ -1,0 +1,140 @@
+<HTML>
+<head><title>Advanced room features</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic15"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags8.htm#topic6"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags10.htm#Settingupthegame"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags12.htm#topic21"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Advanced room features</H2>
+This section describes slightly more advanced things you can do with the
+rooms.<P>
+<A HREF="#topic16">Character scaling</A><BR>
+<A HREF="#topic17">Scrolling</A><BR>
+<A HREF="#topic18">Importing a file as the walkable area mask</A><BR>
+<A HREF="#topic19">Animating background scenes</A><BR>
+<A HREF="#topic20">Lighting effects</A><BR>
+<P>
+
+<HR>
+<A NAME="topic16"></A>
+<H3>Character scaling</H3>
+AGS supports scaling of characters, where the character can appear to get
+smaller as he walks away from the screen. Character scaling is supported as
+part of the walkable areas in a room.<P>
+The reason why you have multiple colours available for the walkable areas is
+because you can set a zoom level for each colour, which defines how large
+the character will be while he is in that area. The default for all walkable
+areas is <TT>100%</TT>, ie. full size. However, you can adjust it using the "Walkable
+Areas" mode to anywhere from <TT>10%</TT> (one-tenth size) to <TT>200%</TT> (double size).<P>
+The scaling settings can effect all characters and objects in the game. For characters,
+it is on by default but you can disable the scaling for an individual character by
+setting the "UseRoomAreaScaling" option in that character's properties.<P>
+For objects, it is off by default but you can make a specific object obey scaling
+levels by setting its "UseRoomAreaScaling" option.<P>
+If you set the "UseContinuousScaling" option, then rather than just specifying a
+zoom level for the whole walkable area, you specify a min and max zoom level. These
+specify the scaling at the top and bottom of the walkable area. When the game is run,
+AGS will interpolate these values to make the character smoothly scale down from 
+one value to another as he walks towards the back or front of the screen.<P>
+
+<HR>
+<A NAME="topic17"></A>
+<H3>Scrolling</H3>
+It's easy to create scrolling rooms like the ones used in Lucasarts games
+like Monkey Island (tm) and Day of the Tentacle.<P>
+To do this, just import a background scene that is larger than your game resolution.
+For example, in a 320x200 game, 500x200 is a good size for Lucasarts-type rooms.<P>
+That's all you have to do. Draw on the walkable areas, hotspots and so on, as
+normal, and then save the room. The screen will scroll to follow the main character
+around.<P>
+The script command <A HREF="ags75.htm#SetViewport">SetViewport</A> allows you to manually scroll
+the room around if you don't want it to follow the character.<P>
+
+
+<HR>
+<A NAME="topic18"></A>
+<H3>Importing a file as the walkable area mask</H3>
+AGS has the ability to import an external BMP or PNG file to use as the
+walkable-area, hotspot or walk-behind area mask. If you don't like the way
+you have to draw these in the editor itself, you can draw them in another
+program and then import them. This is also useful if you are converting a
+game you were making with another game-creation system into AGS.<P>
+To use the feature, click the "Import Mask" button (in the toolbar) in the
+relevant mode of the Areas editor. There are some restrictions to how this
+file must be drawn: it must be the exact same size as the background scene,
+and it must be in 16-colour (4-bit) or 256-colour (8-bit). Then, colour 0
+on the bitmap signifies transparency and colours 1-15 are used as the
+respective hotspot/walk-behind/walkable area numbers. <P>
+<B>IMPORTANT:</B> Do NOT use any colour numbers above 15 on the mask bitmap. Use only
+palette indexes 0 to 15.<P>
+
+
+<HR>
+<A NAME="topic19"></A>
+<H3>Animating background scenes</H3>
+If you want to have a lot of animation on the screen, you will come across
+two problems if you try to do it using objects:
+<UL>
+
+<LI> There is a limit on the number of objects per screen, so you may not be able to
+animate everything that you want to that way.
+<LI> Objects slow down the game - the more objects on the screen, the slower
+the game runs.
+</UL>
+
+The solution to these problems is to use an animating background scene.<P>
+How it works is this: Each room can have from 1 to 5 backgrounds. Normally,
+each room just has one background. However, you can import up to four extra
+backgrounds in each room, and if you do so then the game will cycle through
+them, giving the effect of animation.<P>
+This gives two main advantages - you can animate the entire screen, and due
+to the way the engine works, it doesn't slow down the game at all.<P>
+To import a second background for a room, load the room into the editor, pull
+down the "Main background" list box, and choose the "Import new background" option.
+Choose the file that's storing the background and you're done.<P>
+To delete a background, select it then click the "Delete" button. <P>
+You define the speed at which the backgrounds will animate by setting the 
+"BackgroundAnimationDelay" option in the property grid for the room. The default
+is 5, which cycles background every 5 frames.<P>
+<I>NOTE: All the background scenes must be the same size.<P>
+NOTE: (256-colour only) The backgrounds frames each have their own palette (unless
+you select "Share palette with main background" before importing). This means
+that when the current frame switches in-game, the palette will get reset - therefore
+you can't use special palette effects such as CyclePalette or SetPalRGB on screens
+with animating backgrounds.</I><P>
+
+
+<HR>
+<A NAME="topic20"></A>
+<H3>Lighting effects</H3>
+You can control the brightness of your characters, courtesy of the "LightLevel" setting
+for room Regions.<P>
+By default this is <TT>100%</TT>, but you can change it from <TT>0% to 200%</TT>.
+This number is the light level in the current walkable area. Smaller
+numbers are darker, so that <TT>0%</TT> is pitch black and <TT>200%</TT> is very bright.<P>
+This feature could be useful if, for example, you have a street lamp on your scene so
+when the character walks under it they get brighter, or if a wall is shading
+the character from the light they can get darker.<P>
+You can alternatively use a colour tint for the region. If you select this, then you
+can enter Red, Green and Blue values as numbers from 0-255, which reflect the colour
+you want the area to be tinted to. The Amount setting determines to what extent
+characters will be tinted, and is from 0-100.<P>
+<B>NOTE:</B> Light levels only work when the character's graphic is at the same
+colour depth as the background (ie. a 256-colour character in a hi-colour
+game won't get lightened).<P>
+<B>NOTE:</B> In a 256-colour game, only darkening areas (light level &lt; <TT>100%</TT>) will work.
+Also, depending on the room palette the quality of the darkening will vary
+in 256-colour games.<P>
+<B>NOTE:</B> Light levels affect characters and objects, depending on
+the "UseRoomAreaLighting" setting for each one.
+They do not affect overlays or the background scene.<P>
+
+
+</BODY></HTML>

@@ -1,0 +1,37 @@
+<HTML>
+<head><title>Lip sync</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic39"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic24"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags20.htm#topic38"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags22.htm#topic40"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Lip sync</H2>
+If you want, AGS can pretend to 'read' out speech text. Go to the 'Lip Sync' pane
+in the editor.<P>
+Normally when a character is talking, AGS simply cycles through the speech animation
+from start to finish, and then loops back round. However, lip syncing allows you to be
+cleverer by specifying a particular frame to go with various letters and sounds. Then,
+as the character talks, AGS plays appropriate frames to simulate the character actually
+saying those words.<P>
+In the Lip Sync Editor, you have 20 text boxes, one for each possible frame of the
+talking loop. In each box, you can enter all the letters which will cause that frame of
+the loop to be played. Letter combinations such as 'th' and 'ch' can be used too - AGS
+will match each part of the spoken text to the longest possible phrase in the lip sync
+editor.<P>
+Seperate the letters by forward slashes. For example,<P>
+<PRE>
+3  R/S/Th/G
+</PRE>
+will mean that frame 3 of the character's talking animation is shown whenever the
+letter R, S, Th or G is spoken.<P>
+The "Default frame for unlisted characters" box allows you to set which frame is used
+when a character not listed in any of the text boxes is encountered.<P>
+<P>
+
+</BODY></HTML>

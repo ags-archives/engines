@@ -1,0 +1,1471 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="tex2rtf">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+ <param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Local" value="ags.htm">
+<param name="Name" value="Contents">
+</OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags1.htm#topic0">
+  <param name="Name" value="Copyright and terms of use">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags2.htm#topic1">
+  <param name="Name" value="Introduction">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags3.htm#topic2">
+  <param name="Name" value="System Requirements">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags4.htm#topic3">
+  <param name="Name" value="The run-time engine">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags5.htm#topic4">
+  <param name="Name" value="The demo game">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags6.htm#topic5">
+  <param name="Name" value="Run-time engine setup">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags7.htm#topic6">
+  <param name="Name" value="The Wavetable Synth MIDI driver">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags8.htm#topic7">
+  <param name="Name" value="Tutorial">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags9.htm#topic8">
+  <param name="Name" value="Starting off">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#Settingupthegame">
+  <param name="Name" value="Setting up the game">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#PalSetup">
+  <param name="Name" value="Palette setup">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic9">
+  <param name="Name" value="Inventory">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic10">
+  <param name="Name" value="Importing your own sprite graphics">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#GlobMessages">
+  <param name="Name" value="Global Messages">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic11">
+  <param name="Name" value="Introduction sequences">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#Views">
+  <param name="Name" value="Animations">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic12">
+  <param name="Name" value="Characters">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic13">
+  <param name="Name" value="Conversations">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic14">
+  <param name="Name" value="Game options">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic15">
+  <param name="Name" value="Cursors">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags10.htm#topic16">
+  <param name="Name" value="Fonts">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic17">
+  <param name="Name" value="Advanced room features">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic18">
+  <param name="Name" value="Character scaling">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic19">
+  <param name="Name" value="Scrolling">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic20">
+  <param name="Name" value="Importing a file as the walkable area mask">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic21">
+  <param name="Name" value="Animating background scenes">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic22">
+  <param name="Name" value="Lighting effects">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags11.htm#topic23">
+  <param name="Name" value="Exact palette import">
+  </OBJECT>
+</UL></UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags12.htm#topic24">
+  <param name="Name" value="Other Features">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags13.htm#MusAndSound">
+  <param name="Name" value="Music and sound">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags13.htm#topic25">
+  <param name="Name" value="Voice speech">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic26">
+  <param name="Name" value="Editing the GUIs">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic27">
+  <param name="Name" value="GUI buttons">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic28">
+  <param name="Name" value="Interface text">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#TextWin">
+  <param name="Name" value="Customized Text Windows">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic29">
+  <param name="Name" value="Lucasarts-style inventory">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic30">
+  <param name="Name" value="Sliders">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic31">
+  <param name="Name" value="Text Boxes">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags14.htm#topic32">
+  <param name="Name" value="List Boxes">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags15.htm#DistGame">
+  <param name="Name" value="Distributing your game">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags15.htm#topic33">
+  <param name="Name" value="Custom icon">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags15.htm#SplitRes">
+  <param name="Name" value="Splitting resource files">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags15.htm#topic34">
+  <param name="Name" value="Advanced information for game distribution">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags16.htm#topic35">
+  <param name="Name" value="Backing up your game">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags17.htm#topic36">
+  <param name="Name" value="Dumping text to file">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags18.htm#TextParser">
+  <param name="Name" value="The text parser">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags19.htm#topic37">
+  <param name="Name" value="Translations">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags20.htm#topic38">
+  <param name="Name" value="Plugins">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags21.htm#topic39">
+  <param name="Name" value="Lip sync">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags22.htm#topic40">
+  <param name="Name" value="Text scripting">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags23.htm#topic41">
+  <param name="Name" value="Scripting tutorial part 1">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags24.htm#topic42">
+  <param name="Name" value="Scripting tutorial part 2">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags25.htm#topic43">
+  <param name="Name" value="Calling global functions from local scripts">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags26.htm#topic44">
+  <param name="Name" value="The script header">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags27.htm#topic45">
+  <param name="Name" value="Other scripting notes">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags28.htm#topic46">
+  <param name="Name" value="Reference">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic47">
+  <param name="Name" value="Interaction events">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic48">
+  <param name="Name" value="Hotspot interactions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic49">
+  <param name="Name" value="Object interactions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic50">
+  <param name="Name" value="Room interactions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic51">
+  <param name="Name" value="Inventory item interactions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags29.htm#topic52">
+  <param name="Name" value="Character interactions">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags30.htm#Globalvariables">
+  <param name="Name" value="Text script global variables">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags31.htm#topic53">
+  <param name="Name" value="Text script event reference">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags32.htm#topic54">
+  <param name="Name" value="System limits">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags33.htm#ASCIIcodes">
+  <param name="Name" value="ASCII code table">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags34.htm#topic55">
+  <param name="Name" value="Text script functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#topic56">
+  <param name="Name" value="Character functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#AnimateCharacter">
+  <param name="Name" value="AnimateCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#AnimateCharacterEx">
+  <param name="Name" value="AnimateCharacterEx">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#AreCharactersColliding">
+  <param name="Name" value="AreCharactersColliding">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#AreCharObjColliding">
+  <param name="Name" value="AreCharObjColliding">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#ChangeCharacterView">
+  <param name="Name" value="ChangeCharacterView">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#FaceCharacter">
+  <param name="Name" value="FaceCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#FaceLocation">
+  <param name="Name" value="FaceLocation">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#FollowCharacter">
+  <param name="Name" value="FollowCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#FollowCharacterEx">
+  <param name="Name" value="FollowCharacterEx">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#GetCharacterAt">
+  <param name="Name" value="GetCharacterAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#GetPlayerCharacter">
+  <param name="Name" value="GetPlayerCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacter">
+  <param name="Name" value="MoveCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterBlocking">
+  <param name="Name" value="MoveCharacterBlocking">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterDirect">
+  <param name="Name" value="MoveCharacterDirect">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterPath">
+  <param name="Name" value="MoveCharacterPath">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterStraight">
+  <param name="Name" value="MoveCharacterStraight">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterToHotspot">
+  <param name="Name" value="MoveCharacterToHotspot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#MoveCharacterToObject">
+  <param name="Name" value="MoveCharacterToObject">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#ReleaseCharacterView">
+  <param name="Name" value="ReleaseCharacterView">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#RunCharacterInteraction">
+  <param name="Name" value="RunCharacterInteraction">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterBaseline">
+  <param name="Name" value="SetCharacterBaseline">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterClickable">
+  <param name="Name" value="SetCharacterClickable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterIdle">
+  <param name="Name" value="SetCharacterIdle">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterIgnoreLight">
+  <param name="Name" value="SetCharacterIgnoreLight">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterIgnoreWalkbehinds">
+  <param name="Name" value="SetCharacterIgnoreWalkbehinds">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterProperty">
+  <param name="Name" value="SetCharacterProperty">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterSpeechView">
+  <param name="Name" value="SetCharacterSpeechView">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterSpeed">
+  <param name="Name" value="SetCharacterSpeed">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterTransparency">
+  <param name="Name" value="SetCharacterTransparency">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetCharacterView">
+  <param name="Name" value="SetCharacterView">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetPlayerCharacter">
+  <param name="Name" value="SetPlayerCharacter">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#SetTalkingColor">
+  <param name="Name" value="SetTalkingColor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags35.htm#StopMoving">
+  <param name="Name" value="StopMoving">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#topic57">
+  <param name="Name" value="File I/O functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileClose">
+  <param name="Name" value="FileClose">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileIsEOF">
+  <param name="Name" value="FileIsEOF">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileOpen">
+  <param name="Name" value="FileOpen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileRead">
+  <param name="Name" value="FileRead">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileReadInt">
+  <param name="Name" value="FileReadInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileReadRawChar">
+  <param name="Name" value="FileReadRawChar">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileReadRawInt">
+  <param name="Name" value="FileReadRawInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileWrite">
+  <param name="Name" value="FileWrite">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileWriteInt">
+  <param name="Name" value="FileWriteInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags36.htm#FileWriteRawLine">
+  <param name="Name" value="FileWriteRawLine">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#topic58">
+  <param name="Name" value="Game / Global functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#CallRoomScript">
+  <param name="Name" value="CallRoomScript">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#Debug">
+  <param name="Name" value="Debug">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#DeleteSaveSlot">
+  <param name="Name" value="DeleteSaveSlot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#DisableInterface">
+  <param name="Name" value="DisableInterface">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#EnableInterface">
+  <param name="Name" value="EnableInterface">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#EndCutscene">
+  <param name="Name" value="EndCutscene">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetGameSpeed">
+  <param name="Name" value="GetGameSpeed">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetGlobalInt">
+  <param name="Name" value="GetGlobalInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetGlobalString">
+  <param name="Name" value="GetGlobalString">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetGraphicalVariable">
+  <param name="Name" value="GetGraphicalVariable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetLocationName">
+  <param name="Name" value="GetLocationName">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetLocationType">
+  <param name="Name" value="GetLocationType">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetRawTime">
+  <param name="Name" value="GetRawTime">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetSaveSlotDescription">
+  <param name="Name" value="GetSaveSlotDescription">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetTime">
+  <param name="Name" value="GetTime">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetTranslation">
+  <param name="Name" value="GetTranslation">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GetTranslationName">
+  <param name="Name" value="GetTranslationName">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#GiveScore">
+  <param name="Name" value="GiveScore">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsButtonDown">
+  <param name="Name" value="IsButtonDown">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsGamePaused">
+  <param name="Name" value="IsGamePaused">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsInterfaceEnabled">
+  <param name="Name" value="IsInterfaceEnabled">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsInteractionAvailable">
+  <param name="Name" value="IsInteractionAvailable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsKeyPressed">
+  <param name="Name" value="IsKeyPressed">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsTimerExpired">
+  <param name="Name" value="IsTimerExpired">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#IsTranslationAvailable">
+  <param name="Name" value="IsTranslationAvailable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#PauseGame">
+  <param name="Name" value="PauseGame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#ProcessClick">
+  <param name="Name" value="ProcessClick">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#QuitGame">
+  <param name="Name" value="QuitGame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#Random">
+  <param name="Name" value="Random">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#RestartGame">
+  <param name="Name" value="RestartGame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#RestoreGameDialog">
+  <param name="Name" value="RestoreGameDialog">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#RestoreGameSlot">
+  <param name="Name" value="RestoreGameSlot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#RunAGSGame">
+  <param name="Name" value="RunAGSGame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SaveGameDialog">
+  <param name="Name" value="SaveGameDialog">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SaveGameSlot">
+  <param name="Name" value="SaveGameSlot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SaveScreenShot">
+  <param name="Name" value="SaveScreenShot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetGameOption">
+  <param name="Name" value="SetGameOption">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetGameSpeed">
+  <param name="Name" value="SetGameSpeed">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetGlobalInt">
+  <param name="Name" value="SetGlobalInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetGlobalString">
+  <param name="Name" value="SetGlobalString">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetMultitaskingMode">
+  <param name="Name" value="SetMultitaskingMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetNormalFont">
+  <param name="Name" value="SetNormalFont">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetRestartPoint">
+  <param name="Name" value="SetRestartPoint">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#SetTimer">
+  <param name="Name" value="SetTimer">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#StartCutscene">
+  <param name="Name" value="StartCutscene">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#UnPauseGame">
+  <param name="Name" value="UnPauseGame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#Wait">
+  <param name="Name" value="Wait">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#WaitKey">
+  <param name="Name" value="WaitKey">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags37.htm#WaitMouseKey">
+  <param name="Name" value="WaitMouseKey">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#topic59">
+  <param name="Name" value="GUI functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#CentreGUI">
+  <param name="Name" value="CentreGUI">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GetGUIAt">
+  <param name="Name" value="GetGUIAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GetGUIObjectAt">
+  <param name="Name" value="GetGUIObjectAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GetSliderValue">
+  <param name="Name" value="GetSliderValue">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GetTextBoxText">
+  <param name="Name" value="GetTextBoxText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#InputBox">
+  <param name="Name" value="InputBox">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GUIOff">
+  <param name="Name" value="GUIOff">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#GUIOn">
+  <param name="Name" value="GUIOn">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#IsGUIOn">
+  <param name="Name" value="IsGUIOn">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxAdd">
+  <param name="Name" value="ListBoxAdd">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxClear">
+  <param name="Name" value="ListBoxClear">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxDirList">
+  <param name="Name" value="ListBoxDirList">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxGetItemText">
+  <param name="Name" value="ListBoxGetItemText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxGetNumItems">
+  <param name="Name" value="ListBoxGetNumItems">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxGetSelected">
+  <param name="Name" value="ListBoxGetSelected">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxSaveGameList">
+  <param name="Name" value="ListBoxSaveGameList">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxSetSelected">
+  <param name="Name" value="ListBoxSetSelected">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#ListBoxSetTopItem">
+  <param name="Name" value="ListBoxSetTopItem">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetButtonPic">
+  <param name="Name" value="SetButtonPic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetButtonText">
+  <param name="Name" value="SetButtonText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetGUIBackgroundPic">
+  <param name="Name" value="SetGUIBackgroundPic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetGUIPosition">
+  <param name="Name" value="SetGUIPosition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetGUITransparency">
+  <param name="Name" value="SetGUITransparency">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetLabelColor">
+  <param name="Name" value="SetLabelColor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetLabelFont">
+  <param name="Name" value="SetLabelFont">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetLabelText">
+  <param name="Name" value="SetLabelText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetSliderValue">
+  <param name="Name" value="SetSliderValue">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetTextBoxText">
+  <param name="Name" value="SetTextBoxText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags38.htm#SetTextWindowGUI">
+  <param name="Name" value="SetTextWindowGUI">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#topic60">
+  <param name="Name" value="Hotspot functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#DisableHotspot">
+  <param name="Name" value="DisableHotspot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#EnableHotspot">
+  <param name="Name" value="EnableHotspot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#GetHotspotAt">
+  <param name="Name" value="GetHotspotAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#GetHotspotPointX">
+  <param name="Name" value="GetHotspotPointX">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#GetHotspotPointY">
+  <param name="Name" value="GetHotspotPointY">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags39.htm#RunHotspotInteraction">
+  <param name="Name" value="RunHotspotInteraction">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#topic61">
+  <param name="Name" value="Inventory functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#AddInventory">
+  <param name="Name" value="AddInventory">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#GetInvAt">
+  <param name="Name" value="GetInvAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#GetInvName">
+  <param name="Name" value="GetInvName">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#InventoryScreen">
+  <param name="Name" value="InventoryScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#LoseInventory">
+  <param name="Name" value="LoseInventory">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#RunInventoryInteraction">
+  <param name="Name" value="RunInventoryInteraction">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#SetActiveInventory">
+  <param name="Name" value="SetActiveInventory">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#SetInvDimensions">
+  <param name="Name" value="SetInvDimensions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#SetInvItemPic">
+  <param name="Name" value="SetInvItemPic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags40.htm#UpdateInventory">
+  <param name="Name" value="UpdateInventory">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#topic62">
+  <param name="Name" value="Mouse functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#ChangeCursorGraphic">
+  <param name="Name" value="ChangeCursorGraphic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#ChangeCursorHotspot">
+  <param name="Name" value="ChangeCursorHotspot">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#DisableCursorMode">
+  <param name="Name" value="DisableCursorMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#EnableCursorMode">
+  <param name="Name" value="EnableCursorMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#GetCursorMode">
+  <param name="Name" value="GetCursorMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#HideMouseCursor">
+  <param name="Name" value="HideMouseCursor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#RefreshMouse">
+  <param name="Name" value="RefreshMouse">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetCursorMode">
+  <param name="Name" value="SetCursorMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetDefaultCursor">
+  <param name="Name" value="SetDefaultCursor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetMouseBounds">
+  <param name="Name" value="SetMouseBounds">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetMouseCursor">
+  <param name="Name" value="SetMouseCursor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetMousePosition">
+  <param name="Name" value="SetMousePosition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#SetNextCursorMode">
+  <param name="Name" value="SetNextCursorMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags41.htm#ShowMouseCursor">
+  <param name="Name" value="ShowMouseCursor">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#topic63">
+  <param name="Name" value="Multimedia functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#CDAudio">
+  <param name="Name" value="CDAudio">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#GetCurrentMusic">
+  <param name="Name" value="GetCurrentMusic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#GetMIDIPosition">
+  <param name="Name" value="GetMIDIPosition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#GetMP3PosMillis">
+  <param name="Name" value="GetMP3PosMillis">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#IsChannelPlaying">
+  <param name="Name" value="IsChannelPlaying">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#IsMusicPlaying">
+  <param name="Name" value="IsMusicPlaying">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#IsMusicVoxAvailable">
+  <param name="Name" value="IsMusicVoxAvailable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#IsSoundPlaying">
+  <param name="Name" value="IsSoundPlaying">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#IsSpeechVoxAvailable">
+  <param name="Name" value="IsSpeechVoxAvailable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlayAmbientSound">
+  <param name="Name" value="PlayAmbientSound">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlayFlic">
+  <param name="Name" value="PlayFlic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlayMP3File">
+  <param name="Name" value="PlayMP3File">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlayMusic">
+  <param name="Name" value="PlayMusic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlaySound">
+  <param name="Name" value="PlaySound">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlaySoundEx">
+  <param name="Name" value="PlaySoundEx">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#PlayVideo">
+  <param name="Name" value="PlayVideo">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SeekMIDIPosition">
+  <param name="Name" value="SeekMIDIPosition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SeekMODPattern">
+  <param name="Name" value="SeekMODPattern">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SeekMP3PosMillis">
+  <param name="Name" value="SeekMP3PosMillis">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetChannelVolume">
+  <param name="Name" value="SetChannelVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetDigitalMasterVolume">
+  <param name="Name" value="SetDigitalMasterVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetFrameSound">
+  <param name="Name" value="SetFrameSound">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetMusicMasterVolume">
+  <param name="Name" value="SetMusicMasterVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetMusicRepeat">
+  <param name="Name" value="SetMusicRepeat">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetMusicVolume">
+  <param name="Name" value="SetMusicVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetSoundVolume">
+  <param name="Name" value="SetSoundVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetSpeechVolume">
+  <param name="Name" value="SetSpeechVolume">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#SetVoiceMode">
+  <param name="Name" value="SetVoiceMode">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#StopAmbientSound">
+  <param name="Name" value="StopAmbientSound">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#StopChannel">
+  <param name="Name" value="StopChannel">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags42.htm#StopMusic">
+  <param name="Name" value="StopMusic">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#topic64">
+  <param name="Name" value="Object functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#AnimateObject">
+  <param name="Name" value="AnimateObject">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#AnimateObjectEx">
+  <param name="Name" value="AnimateObjectEx">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#AreObjectsColliding">
+  <param name="Name" value="AreObjectsColliding">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#GetObjectAt">
+  <param name="Name" value="GetObjectAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#GetObjectGraphic">
+  <param name="Name" value="GetObjectGraphic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#GetObjectX">
+  <param name="Name" value="GetObjectX">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#GetObjectY">
+  <param name="Name" value="GetObjectY">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#IsObjectAnimating">
+  <param name="Name" value="IsObjectAnimating">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#IsObjectMoving">
+  <param name="Name" value="IsObjectMoving">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#IsObjectOn">
+  <param name="Name" value="IsObjectOn">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#MergeObject">
+  <param name="Name" value="MergeObject">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#MoveObject">
+  <param name="Name" value="MoveObject">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#MoveObjectDirect">
+  <param name="Name" value="MoveObjectDirect">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#ObjectOff">
+  <param name="Name" value="ObjectOff">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#ObjectOn">
+  <param name="Name" value="ObjectOn">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#RunObjectInteraction">
+  <param name="Name" value="RunObjectInteraction">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectBaseline">
+  <param name="Name" value="SetObjectBaseline">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectClickable">
+  <param name="Name" value="SetObjectClickable">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectFrame">
+  <param name="Name" value="SetObjectFrame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectGraphic">
+  <param name="Name" value="SetObjectGraphic">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectIgnoreWalkbehinds">
+  <param name="Name" value="SetObjectIgnoreWalkbehinds">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectPosition">
+  <param name="Name" value="SetObjectPosition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectTransparency">
+  <param name="Name" value="SetObjectTransparency">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags43.htm#SetObjectView">
+  <param name="Name" value="SetObjectView">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#topic65">
+  <param name="Name" value="Overlay functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#CreateGraphicOverlay">
+  <param name="Name" value="CreateGraphicOverlay">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#CreateTextOverlay">
+  <param name="Name" value="CreateTextOverlay">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#IsOverlayValid">
+  <param name="Name" value="IsOverlayValid">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#MoveOverlay">
+  <param name="Name" value="MoveOverlay">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#RemoveOverlay">
+  <param name="Name" value="RemoveOverlay">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags44.htm#SetTextOverlay">
+  <param name="Name" value="SetTextOverlay">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags45.htm#topic66">
+  <param name="Name" value="Palette functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags45.htm#CyclePalette">
+  <param name="Name" value="CyclePalette">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags45.htm#SetPalRGB">
+  <param name="Name" value="SetPalRGB">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags45.htm#UpdatePalette">
+  <param name="Name" value="UpdatePalette">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags46.htm#topic67">
+  <param name="Name" value="Parser functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags46.htm#ParseText">
+  <param name="Name" value="ParseText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags46.htm#Said">
+  <param name="Name" value="Said">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags46.htm#SaidUnknownWord">
+  <param name="Name" value="SaidUnknownWord">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#topic68">
+  <param name="Name" value="Room / Screen functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#FadeIn">
+  <param name="Name" value="FadeIn">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#FadeOut">
+  <param name="Name" value="FadeOut">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#FlipScreen">
+  <param name="Name" value="FlipScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#GetBackgroundFrame">
+  <param name="Name" value="GetBackgroundFrame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#GetViewportX">
+  <param name="Name" value="GetViewportX">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#GetViewportY">
+  <param name="Name" value="GetViewportY">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#GetWalkableAreaAt">
+  <param name="Name" value="GetWalkableAreaAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#MoveToWalkableArea">
+  <param name="Name" value="MoveToWalkableArea">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#NewRoom">
+  <param name="Name" value="NewRoom">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#NewRoomEx">
+  <param name="Name" value="NewRoomEx">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawClearScreen">
+  <param name="Name" value="RawClearScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawDrawCircle">
+  <param name="Name" value="RawDrawCircle">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawDrawImage">
+  <param name="Name" value="RawDrawImage">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawDrawLine">
+  <param name="Name" value="RawDrawLine">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawDrawTriangle">
+  <param name="Name" value="RawDrawTriangle">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawPrint">
+  <param name="Name" value="RawPrint">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawPrintMessageWrapped">
+  <param name="Name" value="RawPrintMessageWrapped">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawRestoreScreen">
+  <param name="Name" value="RawRestoreScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawSaveScreen">
+  <param name="Name" value="RawSaveScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RawSetColor">
+  <param name="Name" value="RawSetColor">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#ReleaseViewport">
+  <param name="Name" value="ReleaseViewport">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RemoveWalkableArea">
+  <param name="Name" value="RemoveWalkableArea">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#ResetRoom">
+  <param name="Name" value="ResetRoom">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#RestoreWalkableArea">
+  <param name="Name" value="RestoreWalkableArea">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#SetAreaLightLevel">
+  <param name="Name" value="SetAreaLightLevel">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#SetBackgroundFrame">
+  <param name="Name" value="SetBackgroundFrame">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#SetScreenTransition">
+  <param name="Name" value="SetScreenTransition">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#SetViewport">
+  <param name="Name" value="SetViewport">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#SetWalkBehindBase">
+  <param name="Name" value="SetWalkBehindBase">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#ShakeScreen">
+  <param name="Name" value="ShakeScreen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags47.htm#TintScreen">
+  <param name="Name" value="TintScreen">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#topic69">
+  <param name="Name" value="String functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#GetMessageText">
+  <param name="Name" value="GetMessageText">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrCat">
+  <param name="Name" value="StrCat">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrCaseComp">
+  <param name="Name" value="StrCaseComp">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrComp">
+  <param name="Name" value="StrComp">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrCopy">
+  <param name="Name" value="StrCopy">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrFormat">
+  <param name="Name" value="StrFormat">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrGetCharAt">
+  <param name="Name" value="StrGetCharAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StringToInt">
+  <param name="Name" value="StringToInt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrLen">
+  <param name="Name" value="StrLen">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrSetCharAt">
+  <param name="Name" value="StrSetCharAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrToLowerCase">
+  <param name="Name" value="StrToLowerCase">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags48.htm#StrToUpperCase">
+  <param name="Name" value="StrToUpperCase">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#topic70">
+  <param name="Name" value="Text display / Speech functions">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#Display">
+  <param name="Name" value="Display">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplayAt">
+  <param name="Name" value="DisplayAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplayAtY">
+  <param name="Name" value="DisplayAtY">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplayMessage">
+  <param name="Name" value="DisplayMessage">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplayMessageAtY">
+  <param name="Name" value="DisplayMessageAtY">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplaySpeech">
+  <param name="Name" value="DisplaySpeech">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplaySpeechAt">
+  <param name="Name" value="DisplaySpeechAt">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#DisplaySpeechBackground">
+  <param name="Name" value="DisplaySpeechBackground">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#GetDialogOption">
+  <param name="Name" value="GetDialogOption">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#RunDialog">
+  <param name="Name" value="RunDialog">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#SetDialogOption">
+  <param name="Name" value="SetDialogOption">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#SetSkipSpeech">
+  <param name="Name" value="SetSkipSpeech">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#SetSpeechFont">
+  <param name="Name" value="SetSpeechFont">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#SetSpeechStyle">
+  <param name="Name" value="SetSpeechStyle">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags49.htm#StopDialog">
+  <param name="Name" value="StopDialog">
+  </OBJECT>
+</UL></UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags50.htm#topic71">
+  <param name="Name" value="FAQ and Troubleshooting">
+  </OBJECT>
+<UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags51.htm#topic72">
+  <param name="Name" value="Frequently Asked Questions">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags52.htm#topic73">
+  <param name="Name" value="Interpreter issues">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags53.htm#topic74">
+  <param name="Name" value="Game creation problems">
+  </OBJECT>
+</UL> <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags54.htm#topic75">
+  <param name="Name" value="Contacting the author">
+  </OBJECT>
+ <LI> <OBJECT type="text/sitemap">
+  <param name="Local" value="ags55.htm#Credits">
+  <param name="Name" value="Credits">
+  </OBJECT>
+</UL>

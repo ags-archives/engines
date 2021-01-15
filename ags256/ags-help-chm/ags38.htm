@@ -1,0 +1,157 @@
+<HTML>
+<head><title>Script language keywords</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic59"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags37.htm#topic58"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags37.htm#topic58"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags39.htm#topic60"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Script language keywords</H2>
+<P>
+<A HREF="#Datatypes">Data types</A><BR>
+<A HREF="#ifelsestatements">if, else statements</A><BR>
+<A HREF="#whilestatement">while</A><BR>
+<A HREF="#importkeyword">import</A><BR>
+<A HREF="#exportkeyword">export</A><BR>
+<P>
+
+<HR>
+<A NAME="Datatypes"></A>
+<H3>Data types</H3>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B> Type </B></TD>
+<TD ALIGN=LEFT><B> Description </B>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> char </TD>
+<TD ALIGN=LEFT> Single byte data type, can store a single character or number -128 to 127 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> short </TD>
+<TD ALIGN=LEFT> 16-bit integer, can store numbers from –32,768 to 32,767 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> int </TD>
+<TD ALIGN=LEFT> 32-bit integer, can store from –2,147,483,648 to 2,147,483,647 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> string </TD>
+<TD ALIGN=LEFT> Stores a string of up to 200 characters 
+</TD>
+</TR>
+</TABLE>
+<P>
+You will normally only need to use the <B>int</B> and <B>string</B> data types. The smaller types
+are only useful for conserving memory if you are creating a very large number of variables.<P>
+To declare a variable, write the type followed by the variable name, then a semicolon.
+For example:<P>
+<TT>int my_variable;</TT><P>
+declares a new 32-bit integer called  my_variable  <P>
+
+
+<HR>
+<A NAME="ifelsestatements"></A>
+<H3>if, else statements</H3>
+<B>if (</B> <I>expression</I> <B>)</B>  <TT>{</TT> <br> 
+  <I>statements1</I> <br> 
+<TT>}</TT> <br> 
+[ <B>else</B>  <TT>{</TT> <br> 
+  <I>statements2</I> <br> 
+<TT>}</TT> ]<P>
+If <I>expression</I> is true, then <I>statements1</I> are run.<P>
+If <I>expression</I> is not true, and there is an <B>else</B> clause present, then
+<I>statements2</I> are run instead.<P>
+For example:<P>
+<PRE>
+if (GetGlobalInt(5) == 10) {
+  Display("Globalint 5 is 10.");
+}
+else {
+  Display("Globalint 5 is not 10.");
+}
+</PRE>
+In this example, the first message will be displayed if the return value from
+<TT>GetGlobalInt(5)</TT> is 10, and the second message will be displayed if it is not.<P>
+<B>if</B> statements can be nested inside <B>else</B> statements to produce an "else if"
+effect. For example:<P>
+<PRE>
+if (GetGlobalInt(5) == 1) {
+  Display("Globalint 5 is 1.");
+}
+else if (GetGlobalInt(5) == 2) {
+  Display("Globalint 5 is 2.");
+}
+else {
+  Display("Globalint 5 is not 1 or 2.");
+}
+</PRE>
+
+
+<HR>
+<A NAME="whilestatement"></A>
+<H3>while</H3>
+<B>while (</B> <I>expression</I> <B>)</B>  <TT>{</TT> <br> 
+  <I>statements</I> <br> 
+<TT>}</TT><P>
+Runs <I>statements</I> continuously, while <I>expression</I> is true.<P>
+For example:<P>
+<PRE>
+while (character[EGO].walking != 0) {
+  Wait(1);
+}
+</PRE>
+will run the script <TT>Wait(1);</TT> repeatedly, as long as <TT>character[EGO].walking</TT> is
+not zero. Once it is zero, the <B>while</B> statement will exit at the end of the loop.<P>
+
+
+<HR>
+<A NAME="importkeyword"></A>
+<H3>import</H3>
+<B>import</B> <I>declaration</I> ;<P>
+Declares <I>declaration</I> as a variable or function which is external to the current
+script, but that the script needs access to it. You use this to provide your room scripts
+with access to parts of your global script.<P>
+For example:<P>
+<PRE>
+import int counter;
+import function add_numbers (int, int);
+</PRE>
+This imports an integer variable <TT>counter</TT> and the function <TT>add_numbers</TT> from
+the global script to enable the current script to call them. You normally place import
+statements into the script header so that all rooms can benefit from them.<P>
+In order to import the variable, it must have been exported from the global script
+with the <A HREF="ags38.htm#exportkeyword">export keyword</A>.<P>
+<B>NOTE:</B> You <B>MUST</B> import external variables with the correct type. If <TT>counter</TT>
+was declared as a <B>short</B> in the global script, you MUST import it as a short, otherwise
+your game may crash.<P>
+<B>NOTE:</B> You cannot currently import string variables. Instead, you should use a
+<A HREF="ags41.htm#SetGlobalString">global string</A>.<P>
+
+
+<HR>
+<A NAME="exportkeyword"></A>
+<H3>export</H3>
+<B>export</B> <I>variable</I> [, <I>variable</I> ... ] ;<P>
+Declares that <I>variable</I> can be exported and accessed by other scripts. You must place
+this at the <B>end</B> of your global script. You can export many variables with one export
+line.<P>
+For example:<P>
+<PRE>
+export my_variable;
+export counter, strength;
+</PRE>
+This exports three variables - my_variable, counter and strength.<P>
+<P>
+
+</BODY></HTML>

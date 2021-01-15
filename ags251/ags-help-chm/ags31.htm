@@ -1,0 +1,134 @@
+<HTML>
+<head><title>Text script event reference</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic62"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic54"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags30.htm#topic61"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags32.htm#topic63"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Text script event reference</H2>
+In your main global script file, there are some functions which are
+automatically added when you create the game. These are "events", and the
+function is called when a particular event happens. There are also some
+other events which you can add if you want to.<P>
+The available event functions are:
+<DL>
+
+
+</TD>
+<DT> dialog_request (int parameter)
+<DD>
+  Called when a dialog script line "run-script" is processed. PARAMETER is
+  the value of the number following the "run-script" on that line of the
+  dialog script.
+
+</TD>
+<DT> game_start ()
+<DD>
+  Called at the start of the game, before the first room is loaded. You can
+  use this to set up the initial positions of characters, and to turn
+  interfaces on and off.
+
+</TD>
+<DT> interface_click (int interface, int button)
+<DD>
+  Called when the player clicks on a button on an interface which has its
+  action set as "Run script". INTERFACE is the number of the GUI which they
+  clicked on. BUTTON is the object number of the button within this GUI.
+
+</TD>
+<DT> on_event (int event, int data)
+<DD>
+  Called whenever certain game events happen. The value of DATA depends on
+  which event has occured. This allows you to perform checks or update things
+  every time the player does something, regardless of which room it is in.
+  The possible values of event are:<PRE>
+
+ENTER_ROOM    called just before room Player Enters Screen event is run.
+              DATA = new room number
+LEAVE_ROOM    called just after room Player Leaves Screen event is run.
+              DATA = room number they are leaving
+GOT_SCORE     called whenever the player's score changes
+              DATA = number of points they got
+GUI_MDOWN     mouse button pressed over a gui
+              DATA = GUI number
+GUI_MUP       mouse button released
+              DATA = GUI number it was pressed down over
+ADD_INVENTORY the player just got a new inventory item
+              DATA = inventory item number that was added
+LOSE_INVENTORY the player just lost an inventory item
+              DATA = inventory item number that was lost</PRE>
+
+
+</TD>
+<DT> on_key_press (int keycode)
+<DD>
+  Called whenever a key is pressed on the keyboard. KEYCODE holds the ASCII
+  value of the key. A list of these values is in <A HREF="ags33.htm#ASCIIcodes">this section</A>.
+
+</TD>
+<DT> on_mouse_click (int button)
+<DD>
+  Called when the player clicks a mouse button. BUTTON is either LEFT,
+  RIGHT or MIDDLE, depending on which button was clicked. The "mouse.x" and "mouse.y"
+  global variables contain the mouse's position.<P>
+  If 'Handle inventory clicks in script' is enabled in the game options, this
+  function can also be called with LEFTINV or RIGHTINV, which indicate a left or
+  right click on an inventory item, respectively.
+  
+  If 'Enable mouse wheel support' is enabled, this function can also be called with
+  WHEELNORTH or WHEELSOUTH, which indicate the user moving the mouse wheel north or
+  south, respectively.
+
+</TD>
+<DT> repeatedly_execute ()
+<DD>
+  Called every game cycle (normally 40 times per second).
+
+</TD>
+<DT> unhandled_event (int what, int type)
+<DD>
+  Called when an interaction is run, but no events are listed in the
+  interaction window. This could be used to display a default "I can't do
+  that" type of message. The values of WHAT and TYPE tell you what the
+  player did.
+  
+  The possible values are listed below:<PRE>
+
+WHAT TYPE Description
+ 1    1   Look at hotspot
+ 1    2   Interact with hotspot
+ 1    3   Use inventory on hotspot
+ 1    4   Talk to hotspot
+ 1    7   Pick up hotspot
+ 1    8   Cursor Mode 8 on hotspot
+ 1    9   Cursor Mode 9 on hotspot
+ 2    0   Look at object
+ 2    1   Interact with object
+ 2    2   Talk to object
+ 2    3   Use inventory on object
+ 2    5   Pick up object
+ 2    6   Cursor Mode 8 on object
+ 2    7   Cursor Mode 9 on object
+ 3    0   Look at character
+ 3    1   Interact with character
+ 3    2   Speak to character
+ 3    3   Use inventory on character
+ 3    5   Pick up character
+ 3    6   Cursor Mode 8 on character
+ 3    7   Cursor Mode 9 on character
+ 4    1   Look at nothing (ie. no hotspot)
+ 4    2   Interact with nothing
+ 4    3   Use inventory with nothing
+ 4    4   Talk to nothing
+ 5    0   Look at inventory
+ 5    1   Interact with inventory (currently not possible)
+ 5    2   Speak to inventory
+ 5    3   Use an inventory item on another
+ 5    4   Other click on inventory</PRE>
+
+  Note that the "Character stands on hotspot", and all "Any click" events
+  do not trigger this function.
+</DL>
+<P>
+
+</BODY></HTML>

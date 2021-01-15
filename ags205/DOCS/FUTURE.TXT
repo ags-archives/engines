@@ -1,0 +1,60 @@
+The following features are planned for future versions of AGS.
+Features that people ask for will be implemented faster than things I think
+people want - so if you like the look of a suggestion below, mail me and
+tell me!
+
+ - optional 320x240 letterbox view
+ - multiple language support in game
+ - customizable save/restore dialogs
+ - TUTORIAL ON CUT SCENES
+ - assign object numbers to character, to allow Animatrion Editor
+ - fix bug when importing global func into room script
+ - importing tiled animation sprites
+ - support for naming global flags in grahpical script
+ - flipv command to enable upside-down characters
+ - more topics per dialog
+ - dark effect - eg. for turning off the lights and just having torch
+ - select character for global mesages
+ - transparent interface if bg col 0.
+ - fix hit-testing on scaled characters
+ - manual scrolling commands, for intros, etc
+ - add Wait text script command
+ - diagonal base lines
+ - scroll down charactrr list
+ - ability to display speech text that doesn't pause game
+ - walk faster when scaled up, slower when scaled down
+ - fix character animation where it stands still for first frame of walking
+ - add speech bubble option for speech display
+ - option to disable walking to walk-to spots on Interact & Talk
+ - walk-lines, to help pathfinder with narrow areas
+ - script access to iface button gfx
+ - ability to export sprites, views, cursors, etc
+ - delete folders in sprite mgr
+ - different screen transitions (not only fading)
+ - inventory option for full-screne (like sam&max)
+ - customizable invnetory window
+ - custom fonts
+ - hi-color or true-color support
+ - text buttons in interface
+ - overlay-sprite function
+ - interface previewer - preview pushed and mouseover pictures
+ - built-in text editor instead of spawning DOS EDIT
+ - sliding scrollbars (ie. you can drag the main bit up and down)
+ - more than 10 objects per screen allowed
+ - resizing fonts to screen resolution (text looks v.small at 960x600)
+ - QFG-type battle system
+ - improve the route finder
+ - "beginner" mode in RoomEdit, to hide advanced features for beginners
+ - support AVI/MPG video
+ - support ASCII chars >=128
+ - link a script to a view frame
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - sub-rooms, like drawer/locker/etc in sierra games
+ - optional text parser
+ - map editor, to link rooms together
+ - lip-sync animations
+ - keyboard/joystick support for moving character
+ - reduce save game size
+ - Windows port of the main engine

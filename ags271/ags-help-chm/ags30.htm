@@ -1,0 +1,166 @@
+<HTML>
+<head><title>Pointers in AGS</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="Pointers"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic42"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags29.htm#UpgradingTo27"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags31.htm#UpgradingTo271"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Pointers in AGS</H2>
+Various commands in the new scripting language will require you to use pointers.
+This section has been split into three separate topics to introduce you
+to pointers depending on your previous programming experience -- select one of the
+links below:<P>
+<A HREF="#PointersForNewbies">Pointers for programming newbies</A><BR>
+<A HREF="#PointersForJavaCSharp">Pointers for people who know Java or C<TT>#</TT></A><BR>
+<A HREF="#PointersForC">Pointers for people who know C or C++</A><BR>
+<P>
+
+<HR>
+<A NAME="PointersForNewbies"></A>
+<H3>Pointers for programming newbies</H3>
+Pointers can be quite a daunting prospect, and in languages like C and C++ they certainly
+are; but AGS tries to make things as simple as possible.<P>
+Basically, a pointer is a variable that <I>points</I> to something of a particular type.
+For example, a <I>Character</I> pointer would point to characters. What's the point of
+all this, I hear you ask?<P>
+Well, let's look back at AGS 2.62. If you wanted to reference a particular hotspot,
+you'd need to remember its number. If you wanted to switch on an object, you'd need to
+remember what number it was too. And because you could accidentally use an object
+number where you wanted a hotspot number, mistakes could easily happen and it all got
+rather messy.<P>
+That's where pointers step in -- basically, they allow you to do away with identifying
+things by number, and in the process provide <I>type checking</I>, so you can't accidentally
+use a hotspot where you meant to use an object.<P>
+Let's look at an example. If you wanted to write a string to a file in 2.62, you'd do this:
+<PRE>
+int handle = FileOpen("temp.txt", FILE_WRITE);
+FileWrite(handle, "Test!");
+FileClose(handle);
+</PRE>
+That's simple enough; but what if you wanted to open the file in one place, and write
+to it somewhere else? You'd have to make <I>handle</I> a global variable, and then make
+sure you remembered that it was a file handle and not a hotspot number or anything else.
+Now, with 2.7 the same code would be:
+<PRE>
+File *file = File.Open("temp.txt", eFileWrite);
+file.WriteString("Test!");
+file.Close();
+</PRE>
+Looks fairly simple, doesn't it. The only slightly confusing part is getting used
+to declaring the variable as <TT>File*</TT> rather than <TT>int</TT>; but that's something
+you'll get used to quite quickly, and all the examples in the manual should point
+you in the right direction.<P>
+Let's look at another example. Suppose you want a variable that contains the current
+hotspot that the mouse is over. In 2.62, you might have something like this:
+<PRE>
+// top of global script
+int mouseOverHotspot;
+
+// repeatedly_execute
+mouseOverHotspot = GetHotspotAt(mouse.x, mouse.y);
+</PRE>
+How would you do this in 2.7? Well, quite simply:
+<PRE>
+// top of global script
+Hotspot *mouseOverHotspot;
+
+// repeatedly_execute
+mouseOverHotspot = Hotspot.GetAtScreenXY(mouse.x, mouse.y);
+</PRE>
+But hold on, what if you want to know whether the mouse is over your Door hotspot (say
+it's hotspot 2). In 2.62, you'd have done:
+<PRE>
+if (mouseOverHotspot == 2) {
+  Display("Mouse over the door");
+}
+</PRE>
+but that's rather messy, because what if you change the door's hotspot number? You'd
+have to remember to go back and change all the 2's to 3, or whatever. In 2.7, you now just
+do this (assuming you gave the hotspot a script name of hDoor):
+<PRE>
+if (mouseOverHotspot == hDoor) {
+  Display("Mouse over the door");
+}
+</PRE>
+If you're a fan of numbers for some strange reason, you can still use them like this:
+<PRE>
+if (mouseOverHotspot == hotspot[2]) {
+  Display("Mouse over the door");
+}
+</PRE>
+So, that concludes our introduction to pointers. Hopefully you've got an understanding of
+what they are and what they do; if there's anything you can't work out, feel free to ask
+on the Technical forums.<P>
+
+
+<HR>
+<A NAME="PointersForJavaCSharp"></A>
+<H3>Pointers for people who know Java or C<TT>#</TT></H3>
+AGS pointers work in a very similar way to object variables in Java and C<TT>#</TT>. The main
+difference is that AGS pointers are declared in the C-style manner with an asterisk t
+represent the pointer. So:
+<PRE>
+Hotspot *hs;
+</PRE>
+would declare a variable <I>hs</I> which points to a Hotspot. This would be equivalent to
+the following in Java or C<TT>#</TT>:
+<PRE>
+Hotspot hs;
+</PRE>
+In AGS, pointers are used to point to various built-in types, such as Hotspots, Inventory Items,
+Characters and so on. Because AGS does not have a <I>new</I> keyword, you cannot create pointers
+to custom struct types.<P>
+You use pointers in the same way as you would in Java and C<TT>#</TT>. Various built-in AGS static
+methods return a pointer to an instance (for example, <A HREF="ags41.htm#File.Open">File.Open</A>,
+<A HREF="ags51.htm#Hotspot.GetAtScreenXY">Hotspot.GetAtScreenXY</A>, and so on). You can save this
+pointer into a pointer variable, and then call its methods as you would in Java or C<TT>#</TT>.
+The following examples are all valid:
+<PRE>
+File *theFile = File.Open("test.dat", eFileWrite);
+if (theFile == null) Display("It's null!");
+File *file2 = theFile;
+if (theFile == file2) Display("They're the same file!");
+theFile = null;
+file2.WriteInt(10);
+file2.Close();
+</PRE>
+If you attempt to call a method on a null pointer, an error will occur (just like you'd
+get an exception in Java or C<TT>#</TT>).<P>
+Pointer memory management in AGS is all automatic -- the memory is freed when there are
+no longer any variables pointing to the instance. Thus, if you have global pointer variables
+in your global script, it's a good idea to set them to <I>null</I> when you're no longer
+using them, to allow the memory to be freed.<P>
+
+
+<HR>
+<A NAME="PointersForC"></A>
+<H3>Pointers for people who know C or C++</H3>
+Pointers in AGS are based on the C/C++ syntax, so they are declared with an asterisk.
+However, in AGS you can only create pointers to built-in AGS types, and not to any
+custom structs declared in your script.<P>
+Pointer members are accessed with the dot operator, and not the <TT>-&gt;</TT> C-style operator.
+Because AGS doesn't support features such as pointers-to-pointers and so forth, there
+is no need for a separate operator.<P>
+In AGS, pointer memory management is done automatically based on reference counting (similar
+to the way COM works), so there is no <I>new</I> or <I>delete</I> keyword. When an object
+is no longer referenced by any pointer variables, it will be freed. For this reason,
+if you have any global pointer variables it's advisable to set them to <I>null</I> if
+you are done with them.<P>
+AGS pointers are strongly typed, and you cannot cast between types at will like you
+can in C and C++. AGS will only allow you to compare and assign pointers of the same
+type, or of the same base type. There is a special keyword <I>null</I> which all pointers
+can be set to and compared with, which indicates that they are unassigned.<P>
+Because there is no <I>new</I> keyword, you cannot create object instances; rather, they
+are returned by static member functions in AGS, such as <A HREF="ags41.htm#File.Open">File.Open</A>
+and <A HREF="ags51.htm#Hotspot.GetAtScreenXY">Hotspot.GetAtScreenXY</A>. See the examples for the
+functions to get an idea of how to use them.<P>
+
+
+</BODY></HTML>

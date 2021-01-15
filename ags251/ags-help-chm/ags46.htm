@@ -1,0 +1,77 @@
+<HTML>
+<head><title>Parser functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic76"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags45.htm#topic75"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags47.htm#topic77"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Parser functions</H2>
+<A HREF="#ParseText">ParseText</A><BR>
+<A HREF="#Said">Said</A><BR>
+<A HREF="#SaidUnknownWord">SaidUnknownWord</A><BR>
+<P>
+
+<HR>
+<A NAME="ParseText"></A>
+<H3>ParseText</H3>
+<PRE>
+ParseText (string text)
+</PRE>
+Stores the supplied user text string for later use by Said.
+You need to call this command first with the user's input before using
+the Said command. You probably want to call this inside the interface_click
+function when your text box control is activated.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ string command;
+ GetTextBoxText(0,0,command);
+ ParseText(command);
+</PRE>
+will get the players input and store it in string "command" for use with the said command.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Said">Said</A><P>
+
+<HR>
+<A NAME="Said"></A>
+<H3>Said</H3>
+<PRE>
+Said (string text)
+</PRE>
+Checks whether the player typed in TEXT in their input passed to ParseText.
+Returns 1 if it matches, 0 otherwise.<P>
+See <A HREF="ags19.htm#TextParser">the text parser documentation</A> for a more detailed description.<P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ string input;
+GetTextBoxText(0,0,input);
+ParseText(input);
+if (Said("load")) {
+  SetTextBoxText(0,0,""); 
+  RestoreGameDialog();
+}
+</PRE>
+will bring up the restore game dialogue if the player types "load" in the text parser.<P>
+<I>See Also:</I> <A HREF="ags46.htm#ParseText">ParseText</A>, <A HREF="ags46.htm#SaidUnknownWord">SaidUnknownWord</A><P>
+
+<HR>
+<A NAME="SaidUnknownWord"></A>
+<H3>SaidUnknownWord</H3>
+<PRE>
+SaidUnknownWord (string buffer)
+</PRE>
+If a word not in the game dictionary was submitted to the last ParseText
+call, then BUFFER is filled with the word. This allows you to display a
+message like "Sorry, this game doesn't recognise 'XXXX'."<P>
+Returns 1 if the player typed an unknown word, or 0 if all words were
+recognised.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+if (SaidUnknownWord (buffer)) 
+   Display("You can't use '%s' in this game.", buffer);
+</PRE>
+will display the message if the player types a word that’s not in the vocabulary.<P>
+<I>See Also:</I> <A HREF="ags46.htm#ParseText">ParseText</A>, <A HREF="ags46.htm#Said">Said</A><P>
+
+
+</BODY></HTML>

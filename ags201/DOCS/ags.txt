@@ -1,0 +1,2303 @@
+Adventure Game Studio v2.01 (c) 1999 Chris Jones
+
+The Adventure Game Studio (or AGS for short) allows you to create your own
+point-and-click adventure games, like the older Sierra games (Space Quest 4,
+King's Quest 5-6, etc). It includes an easy-to-use Integrated Development
+Environment, and you do not need any programming experience to make a game
+using it.
+For more advanced users, the Creator supports scripting, where you can write
+a sort of program which allows you to have great control over the game.
+By default, AGS will create Sierra-style adventure games, with the pop-up icon
+bar, and right-click cycles through the modes (walk, look, use, speak).
+However, you can change the interface completely using the Interface Editor to
+make Lucasarts-style or any other type of interface you want.
+The Creator handles many parts of the system for you, like load/save game,
+character movement and object animations.
+
+(You may have known this program previously as the Adventure Creator: the last
+version was Adventure Creator v1.14. The reasons for the name change are
+described in the "Upgrading from v1" section of this document).
+
+AGS system requirements:
+ - 486 or higher processor (DX4/100 or better recommended)
+ - VGA display (SVGA optional)
+ - MS-DOS 5.00 or higher (or Windows 95/98).
+ - About 10 Mb free disk space (may need more or less, depending on the game)
+ - Sound card optional (supports Adlib, Sound Blaster and General MIDI for
+    music; Sound Blaster and ESS Audiodrive for digital sound).
+
+This is the text version of the manual. An MS-Word formatted version is
+also available.
+This document is set up with a quick-search facility, as long as you are using
+the VIEW program to read it. Press F7 now for a list of sections.
+
+1. Contents
+-----------
+This document contains the following sections:
+ 1. Contents (this is it)
+ 2. Using the run-time engine
+ 3. Tutorial - introduction to how to make a simple game
+ 4. Other features - not covered in the tutorial
+ 5. Upgrading from AC v1
+ 6. Reference - interaction events & commands, text script commands
+ 7. Troubleshooting
+ 8. Contacting the Author
+ 9. Credits
+
+2. Using the run-time engine
+----------------------------
+The engine (also called the "interpreter") is what runs your game and is what
+the end player will use. To run the interpreter, type AC and press return.
+If you are using the default interface, then you use the right mouse button to
+cycle between the available 'modes', and the left button to use the current
+mode on the mouse position. You can also move the mouse to the top of the
+screen to bring up the icon bar where you can directly select a mode.
+To exit the engine, press Ctrl-Q. You can save your game position using F5
+and restore with F7.
+The controls described above work with the default setup; however, you can
+customize your game to use a different interface and shortcut keys.
+
+2.1 THE DEMO GAME
+The first thing you'll probably want to do is to run the demo game. This
+short game (made up of 9 screens) will show you some of what AGS can do. It
+doesn't demonstrate all the features, though - you'll find about them for
+yourself. To run the demo, type DEMO and press return.
+
+2.2 RUN-TIME ENGINE SETUP
+By default, the engine will automatically detect the player's sound card, and
+use the low-resolution 320x200 display mode. However, the player can override
+the autodetection if it cannot detect their sound card. To run the setup
+program, type SETUP and press return.
+In the Setup program, the user can choose their sound effect card (used for
+sound effects like WAVs, and also for MOD and XM music) and their MIDI music
+card (used for MIDI music only).
+They can also choose what screen resolution they would like to run the engine
+using. The available choices are 320x200, 640x400 and 960x600. The higher
+resolution gives a better quality picture in the game, but slows the game down.
+Generally, use the 320x200 mode for computers which are Pentium-100 or slower.
+The 640x400 mode is the best choice and will work with Pentium-120 or higher
+computers. The 960x600 mode should only be used with very high-spec machines
+(ie. Pentium-II and better machines).
+Note however, that the picture quality is only as good as it was drawn, so if
+all the scenes in your game are drawn at 640x400, then using the 960x600
+resolution will not help - it will just slow the game down.
+
+3. Tutorial
+-----------
+This section will introduce you to the AGS by leading you through how to
+create a simple game.
+
+3.1 CREATING YOUR FIRST ROOM
+In adventure games, the character moves from one screen to another, and each
+screen consists of a pre-rendered background drawing with objects  and
+characters on top of it to give interaction. A screen is also called a "room".
+First, you need to draw a background scene for the first room. You do this in
+your favourite paint program. The size must be either 320x200 or 640x400, and
+you must make sure that the colour depth is set to 256-colour (8-bit). Save it
+as a BMP or PCX file (TIP: a PCX will give smaller file sizes since PCXs are
+compressed, whereas BMPs are not).
+Load the AGS editor (type ROOMEDIT and press return), then choose the "ROOM"
+tab if it is not already displayed (The tabs are the three buttons along the
+bottom of the screen). On the left hand side of the screen, there are five
+other buttons, called "Setup screen" down to "Objects". By clicking one of
+these, you choose which sub-mode the editor is in.
+NOTE: Don't let the name "RoomEdit" fool you - it is, in fact, your integrated
+environment for development of the whole game, not just the rooms.
+
+First of all we need to import a background scene for the room. Click on
+"Setup screen" and then choose the "Load scene..." button on the main panel.
+You will see a file selector where you should now find the background scene
+graphic which you drew. Click OK, and it will be imported.
+(If you get a message asking you whether you want a hi-res or a scrolling
+scene, just click the "Hi-res" button. I will explain this later).
+You will see the top half of the picture, on the screen, along with two scroll
+bars which you can use to see the rest of it.
+NOTE: The Editor always runs in the 320x200 graphics mode. If you have drawn
+a high-resolution picture at 640x400 it will seem to have been reduced. This
+is only in the editor and you will see the proper picture in the actual game.
+You can check that it was imported properly by clicking the "Full screen"
+button which gives you a preview at the proper resolution.
+NOTE: The Room Editor has on-line context sensitive help (and now with a new
+graphical help reader!) Press F1 at any time.
+
+3.1.1 WALKABLE AREAS
+Now that you have the background scene, you need to tell the game where the
+player character is allowed to walk. You do this using walkable areas. Choose
+the "Walkable areas" mode from the left-hand button list.
+Everywhere that the character's feet are allowed to walk, you must make
+walkable. Adding walkable areas works in a similar way to most paint programs:
+you use three tools (line, fill and freehand) to draw them.
+You will probably want to start off with the "Line" tool - click the button
+in the main panel. Now, draw round the outline of the walkable areas on the
+screen. To draw a line, click the left mouse button where you want to start it,
+then hold down the button and drag the mouse to the finish of the line, where
+you should release the button. Once you are sure that the area is completely
+enclosed by blue lines, choose the "Fill" button and click inside the area -
+it should be filled in. If the entire screen is filled blue, you didn't contain
+the area properly. To remove the area, choose the "Wipe colour" mode and then
+click on the area. Now, start over again.
+
+3.1.2 WALK-BEHIND AREAS
+The next job you need to do is to define the walk-behind areas. These areas,
+also called "priorities", tell the game where the character needs to be drawn
+behind the background. For example, in the three bottom screens of the demo
+game, the player can walk behind the fence.
+Choose the "Walk-behind" mode from the left-hand list. You add walk-behind
+areas in a very similar way to the walkable areas - in fact, you have the same
+three drawing tools.
+Once you have finished, you need to define the base-line for the area. This
+is a horizontal line which tells the game at what level the character must be
+in order to be drawn behind the area. For example, when the man is standing
+in front of the street lamp he must be drawn in front; when he is behind it,
+he must be drawn behind. Click the "Base-line" button, then click the mouse
+on the scene at the base of the walk-behind area. When the character's feet
+are below this line, he will be drawn in front of the area; when his feet are
+above the line, he will be drawn behind the area.
+You may have noticed a window on the screen titled "Editing colour". By
+default, you have been drawing blue walk-behind areas onto the screen. This
+is fine for one area, but what if you have two different walk-behind areas on
+the screen? They'll need different base-lines, won't they. You can change the
+colour you are drawing by clicking the up and down arrows in the "Editing
+colour" window. Each colour has its own base-line, which effects the areas
+drawn in that colour.
+
+3.1.3 TRYING OUT YOUR GAME
+Now that you have a semi-complete first room, it would be a good time to test
+it out. Go back to the "Setup screen" mode and click "Save room...". This
+will save your work to disk. In the file selector, click near the top on the
+line which displays the current directory, then type in the name you want to
+give the room file. The game uses files called ROOMx.CRM, where x is the room
+number, and the player starts in room 1, so type ROOM1 and press the OK
+button.
+Now, go to the "Game" tab (bottom of the screen), and click the "Save game"
+button. This will create all the files necessary to run the game. Click
+the "Quit" button to exit the editor, then type AC to run the game engine.
+You should see your first screen, with the man on it. Walk around the screen,
+checking out any walk-behind areas you added. If the man won't move anywhere,
+he probably hasn't started on a walkable area and therefore can't move.
+Press Ctrl-Q to exit the engine, then load up the Room Editor again. Choose
+the "Load room..." button and load in the ROOM1 you saved earlier.
+(If you need to change where the man starts, choose the "Visual" tab, then
+the "Characters" sub-mode, then click on the "AT 260,190" button on the right
+hand side of the screen. Here you can type in the co-ordinates for where you
+want the man to start. To get the co-ordinates, use the "Ask position"
+function in the Rooms, Setup screen mode).
+Whenever you want to test your game, ALWAYS save the room you were working on,
+and then save the game before exiting the editor.
+
+3.1.4 HOTSPOTS
+Your room is now almost complete - except for one thing, interactivity. As it
+is, the player can't look at anything, talk to anything, or do anything.
+A hotspot is an area of the screen where the game will react if the player
+clicks the mouse there. For example, a wall could be a hotspot, a fence could
+be a hotspot, and so on - in fact, every part of the screen can be one hotspot
+or another.
+Choose the "Hotspots" sub-mode from the Rooms tab. As with the walkable areas
+and walk-behind areas, you draw hotspots using the standard three drawing
+modes. The different colours this time represent the different game reactions:
+the player clicking on a hotspot 1 area will cause a certain response;
+clicking on a hotspot 2 area will cause a different response.
+Once you have drawn the hotspots on, you need to define what happens when the
+player interacts with them. You do this one hotspot at a time. Use the up and
+down arrow buttons to make sure that colour 1 (dark blue) is the current
+hotspot. Now, click the "Interaction" button.
+3.1.4.1 INTERACTIONS
+The interaction window is split up into two parts: the bottom part lists all
+the available events on the hotspot which you can add a reaction for. The top
+part shows the reactions you have added. To start with, the top window is
+empty. To respond to an event, click on the event's name in the bottom window.
+For example, we want to display a message when the player LOOKs at our
+hotspot 1. So, click "Look at hotspot" on the bottom list. It will be added
+to the top list, along with three other columns - Score, Command and Data.
+The Score column allows you to give the player points when the event occurs,
+and note that this will only happen the first time they do it, so they can't
+keep getting more and more points. We don't want to give our player a score
+for just looking though, so we'll leave it as 0.
+The Data column is used to provide additional information to certain commands;
+otherwise you can just leave it as 0.
+The Command column defines what happens when the event occurs (in this case,
+when the player looks at our hotspot). Click on the "(Do nothing)" and a menu
+appears, with all the possible responses to the event. What these all mean
+is listed in section 6.2. We just want to display a message though, so
+click the "Display message %d" option. The "%d" simply means that you will
+have to type in a number to replace it - in this case, the message number.
+On clicking, a window pops up asking you for the message number you want to
+display. (We can't just type the message in there and then; we'll do it in a
+second). Since this will be our first message, and since message numbering
+starts at 0, type in 0 and press return.
+3.1.4.2 MESSAGES
+Each room has its own set of messages. These are the strings that can be
+displayed during the game. Choose the "Message editor" button at the bottom
+of the interaction window. The screen will switch to text-mode and you will
+see displayed "No messages". To create one, press A. Now, press enter to
+edit it. Type in a message appropriate to your hotspot, for example,
+This is a brick wall. Nothing more exciting than that.
+and press return.
+Note that pressing F2 toggles "Display next message" on and off. When this
+is on, the next message will be displayed after the player has clicked to
+remove this one. This feature is useful for conversations and long
+descriptions. We won't use it now, however, so leave it set to "No".
+Now hit ESC to leave the message editor. Click OK to exit the interaction
+window.
+3.1.4.3 WALK-TO SPOTS
+You may have noticed on the Hotspots screen, a button called "Walk-to". This
+allows you to set a position for each hotspot where the character will walk to
+whenever the player interacts with the hotspot. This is like the way the
+Lucasarts games like Monkey Island (tm) work. If you set a walk-to point, then
+whenever the player clicks interact or talk on the hotspot, the main character
+will first walk to that point before the relevant event is triggered.
+If you want, the man can also walk there when the LOOK mode is used - this
+option is configurable in the Game tab, "Main" sub-mode.
+
+3.1.5 SCREEN EDGES
+Each room has four "edges". The edges define how near to the side of the
+screen the player needs to go for him to be considered to have left the
+screen. More precisely, when the man passes an edge he triggers the related
+event in the room interaction screen.
+Edges are the usual way that room changes take place - when the man walks off
+an edge, the game responds with a "Go to screen" command to send him to a new
+location.
+To view the edges, go to the Room tab, "Setup screen" sub-mode, then click
+the "Edges" button. The four edges will be displayed as yellow lines on top
+of the background. To move an edge, click the left button on it and drag the
+mouse.
+To set what happens when the character walks off an edge, click the
+"Interaction" button on the "Setup screen" tab. This contains four events,
+called "Walk off top", "Walk off bottom", and so on, which are triggered when
+the man passes the relevant edge. This interaction window also contains some
+other useful room events.
+
+3.1.6 OBJECTS
+Objects, also known as "sprites", are images on the screen which, unlike the
+screen background, can move, change and disappear. You use objects for things
+which the player can take (so they disappear) and for things on the screen
+which you want to animate.
+As as example, let's say you want to have a key on the floor of your room
+which the player can take. Go to the Rooms tab, "Objects" sub-mode. Now, click
+the "New object" button. You now click onto the screen where you want the
+object to be added. Don't worry if you don't get its position right, you can
+move it later. The object will be added as a blue cup.
+The first thing we want to do is change the look of the object - obviously, we
+want a picture of a key. Click on the picture of the cup near the bottom-right
+corner of the screen. When you do, you will be presented with a screen which
+shows all the sprite graphics available. There is a picture of a key on the
+top row, so click on that. (You can add your own graphics to this list; we
+will describe how to do that later).
+If you want to move the object, click the "Move objects" button. Then, click
+and drag the left button on the object to move it.
+Lastly, we need to define what happens when the player interacts with the
+object. Click the "Interaction" button. This is almost identical to the way
+it worked with the hotspots (see section 3.1.4.1).
+You may have noticed a couple of other buttons on the Objects screen, called
+"Base-line" and "Object is on". Normally, the base-line for an object is at
+the base of the object (the baseline is used for front-to-back ordered drawing
+of the graphics). However, in some cases you may want to override this - for
+example, if a poster is lying flat on the ground, you wouldn't want the man to
+walk behind it. You can override the baseline for an object by clicking the
+"base-line" button and clicking on where you want the base to be (near the top
+of the screen would solve our poster problem).
+Normally, you want the objects to be visible on the screen to begin with.
+However, in some situations you may not want the object to appear until later
+on in the game. To have the object start the game "off", click the "Object is
+on" button to toggle it. You can switch the object on in the game using the
+"Turn on object" command.
+NOTE: The game's speed is directly related to the number of objects on the
+screen. Although you probably won't notice it on a Pentium, a room with 10
+objects will noticeably slow down on a 486.
+
+Now, we have a fully-working first room. Follow the procedures we did in
+section 3.1.3 to try it out.
+
+3.1.7 ROOM OPTIONS
+In the "Setup screen" mode, you can set a few room options by clicking the
+"Options" button. This screen allows you to configure some room-specific
+things. To change an option, left-click it.
+ * Play music on room load - if set, then the background music will be
+   changed to the music you specify here. See section 4.1 for information
+   on the music and sound support in AGS.
+ * Main character visible - normally TRUE, if you set this to FALSE then
+   the main character will not be visible on this screen. This is useful for
+   close-up control panels, and cutscenes which the main character is not
+   part of.
+ * Main character view - allows you to change the main character's view
+   number for this screen only. This is useful if you want, for example, an
+   overhead map screen, so the character should have a birdseye-type view.
+   The character's view is set back to normal when they leave the screen.
+ * Music volume - allows you to change the volume of the background music
+   for this screen. For example, as the player approaches a bar, on successive
+   screens the music could get louder.
+
+3.2 EDITING GAME SETTINGS
+Now that you know how to create a room, it's time to set up the game-wide
+settings. These include inventory objects, global messages, palette setup
+and other things which do not depend on individual rooms.
+
+3.2.1 PALETTE SETUP
+The first thing you need to do when you create a new game is to set up the
+palette. This is because all sprite and background scene imports rely on the
+palette setup to be the same.
+Choose the Game tab, "Palette" sub-mode. Here you will see the 256-colour
+palette displayed in a grid. Most of the slots are marked "X" - these are the
+slots reserved for the background pictures, and will be different in each
+room. The other colours will be as they look here for the entire game. These
+fixed colours allow things like the main character graphics, which must be
+displayed on more than one screen, to work.
+If you want, you can assign more or less colours to the backgrounds. To toggle
+the background assignment on/off, click on the slot, then click the button
+"background" (or "un-background") to swap the slot's status.
+IMPORTANT NOTE: You must set up the palette as you want it before you start
+making your game - if you change it later, you will have to re-import all the
+sprites and background scenes.
+You can select multiple colour slots by clicking on the first slot, then
+shift-clicking on the last slot in the range you want to select. You can then
+toggle the background status of all the selected slots at once.
+The "Export pal" button exports the entire palette to a .PAL or PCX file which
+you can then use to read back into the Editor in a different game. If you
+choose to export to a pcx file, then a screen shot of the Palette Editor will
+be saved as the picture. This way you can see all the game-wide colours in
+the file.
+The "Import pal" button replaces the selected palette entries with those
+entries from the PAL or PCX file you choose.
+
+3.2.2 INVENTORY
+Most adventure games allow the player to carry a set of objects, which he can
+then use to solve puzzles. Adventure Game Studio makes this inventory easy
+for you to manage.
+Every inventory item which the player may carry during the game at one time
+or another is listed under the Game tab, "Inventory" sub-mode. Here, each item
+also has a number which you use in interactions to identify the object.
+The left hand side of the screen lists all the items in the game.  On the
+right is the graphic used for the object in the inventory window. To change
+this, left-click the picture, then select the new graphic from the dialog
+which appears.
+To change the object's name, click the button marked "Name" in the bottom part
+of the screen. If you want the player to start the game with this item in his
+inventory, check the "Player starts with this item" check-box.
+To create a new item, click the "New item..." button. You will be asked for
+the new item's name, and then it will be assigned the next available number.
+The last thing to do with the inventory items is to define their interactions:
+what happens when the player manipulates them in the inventory window. Click
+the "Interaction" button, which brings up a window which works identically
+to the hotspot interactions (section 3.1.4.1). The available events are
+described in the reference section 6.1.4.
+NOTE: Several limitations apply to the commands you can use in the Inventory
+interactions. This is because they must run from all rooms, and so cannot
+have any room-specific commands. In particular, you cannot use the "Run
+animation" or "Run graphical script" commands, and if you use a "Display
+message" command, then it must display a global message (see section 3.2.4,
+below).
+To give the item to the player during the game, you use the "Add inventory"
+or "Remove obj, add inv" commands. The inventory number required by these
+commands is the item number from the list described above.
+NOTE: Each character in the game carries their own set of inventory items.
+This means, if you want to create a game like Day of the Tentacle, where the
+player can control three different characters, each character will have a
+seperate inventory. All inventory commands always operate on the CURRENT
+PLAYER CHARACTER.
+NOTE: Unfortunately, the actual inventory window displayed to the player is
+not customizable. This means you are stuck with the Sierra-style one which is
+the default. You can change the button graphics by changing them in the
+Sprite Manager though (see below).
+
+3.2.3 USING YOUR OWN SPRITE GRAPHICS
+When you were choosing the graphics for the object earlier in this tutorial,
+you probably noticed that most of the graphics available didn't look up to
+much. This is no problem, because you can import your own graphics using
+the Sprite Manager.
+Go to the Visual tab, "Sprite mgr" sub-mode. Here, you will see the complete
+sprite set for the game. There are two ways to import your graphics - either
+overwrite an existing slot with your graphic, or create a new slot for it.
+The "import" button overwrites the currently selected slot; the "import new"
+button will create a new slot for the graphic.
+When you click either of these buttons, the file selector appears, where you
+can choose a BMP, PCX or GIF file to import. It must be in no more than 256
+colours (8-bit colour depth). The picture is displayed on-screen. The mouse
+cursor changes to a rectangle, in which you should enclose the portion of the
+graphic which you want to import. You can change the size of the rectangle
+by clicking the right mouse button and dragging the mouse. When the rectangle
+is correctly positioned, left-click. You can also import the entire picture
+by pressing Enter.
+You may well find that the colours on your graphic look slightly strange in
+the Room Editor. This is because the sprites are only allocated, by default,
+the first 41 of the palette colours (see the palette section 3.2.1 above), so
+your graphic will be remapped to this much smaller palette. If you find that
+many of your imported sprites look strange, you can increase the number of
+colours assigned to sprites, at the expense of background colours (again see
+the section above for information on how to do this).
+If your sprite will only be used in one room then alternatively you can
+use the "use background palette" option, which will remap your graphic to
+the palette of the room currently loaded, giving much better results. Note,
+however, that if you do this, and then try and use the sprite on another
+screen, its colours will most likely be screwed up. To use the room palette,
+check the "use bkgrnd pal" check-box. Make sure to un-check this box before
+you import any other sprites.
+NOTE: The transparent colour used by AGS is palette index 0. Any pixels you
+draw on imported sprites in slot 0 will be transparent.
+
+You can group imported sprites into folders. This prevents the main sprite
+list from becoming very long (and you can only have 120 sprites per folder
+anyway). By default, the Sprite Manager displays the Main folder, which
+contains some graphics and a sub-folder called "Defaults". Folders work the
+same way as Windows folders (or DOS directories) - they can be nested inside
+each other, and in every folder except the main one there is a "parent" link
+which will take you back to the folder above.
+Note, however, that at present you cannot move sprites between folders so
+they are stuck in the folder in which you create them. (Imported sprites
+are placed into the currently displayed folder). Also, you cannot delete
+sprites or folders.
+
+3.2.4 GLOBAL MESSAGES
+While each room has its own set of messages ("local messages"), in some
+situations you need to be able to display a message from more than one room,
+or in a global game interaction which is not related to a room. For this
+purpose global messages are provided.
+Choose the Game tab, "Gl. messages" sub-mode. Here you are presented with
+a list of the 500 available global message slots. By default, they are all
+empty except messages 997-999 which contain the default messages for actions
+on the player character. Global messages are numbered between 500 and 999 so
+that they are not confused with local room messages.
+To display a global message, simply use its number in any "Display message"
+command.
+
+3.2.5 INTRODUCTION SEQUENCES
+You can easily add intro, outro and cutscene sequences to your game. There
+is no specific function to do these, but using the provided animation and
+script commands you can create almost anything you might need.
+Normally, the game will start in room 1. However, you can change this to any
+room you want. Go to the Visual tab, "Characters" mode. Make sure that the
+main character is selected in the list on the left. You will see on the right
+hand side "Start in room:" followed by "Room 1". This is the starting room
+for the player character, and it is this entry that decides which is the first
+room loaded. If you set it to room 0, then a file named INTRO.CRM will be
+used (not ROOM0.CRM as you might think). This is for backward compatibility
+with AC 1, but it is also good practice and it is suggested that you use this
+feature.
+Set the starting room to room 0. Now, when you run the game, the intro will
+be the first room loaded. In this room, you will probably want to disable
+the main character (if you want a logo graphic up first). Remember, you do
+this through  Setup Screen -> Options -> Main character visible.
+TIP: The starting room facility is also useful when testing your game - you
+can make the game start in any room, at the point where you are testing it,
+rather than having to keep playing the game through to get there.
+As an example, let's make your logo stay for 5 seconds and then go on to the
+next screen. The graphical script's timer functions would be ideal here.
+(You may want to read the graphical script documentation, section 3.3.3,
+before continuing here).
+Choose  Setup Screen -> Interaction. Now, add the "Player enters screen"
+event, and set the command to "Run graphical script". Click the "..." to edit
+the script, and add a single command, "Set timer to %d loops". There are
+about 40 loops per second, so replace the %d with 200.
+Now, press ESC to exit the graphical script editor. You are back at the
+interaction screen. Add the "Repeatedly execute" event. Again, set this to
+run a graphical script, and click the "..." button. For this script, we will
+need the "If timer expired" command, so drag it in from the left. Remove
+the "Display message" commands which it gives you, and add a "Go to screen"
+command under the IF statement. Choose whatever screen number you want. You
+could go to screen 1 to start the game, or to another screen to have a longer
+introduction sequence. It's up to you.
+
+3.2.6 ANIMATIONS
+In most games you will use some sort of animation during the game, whether
+it be a flag waving in the breeze or the man bending over to pick something
+up. The term "animation" refers to the ability to change the look of, and
+move, objects.
+Animations in AGS are managed using Views. A "view" is a set of one or more
+"loops". A loop is a set of frames which, when put together, give the effect
+of movement. Each frame in the view can be set a graphic and a speed.
+Go to the Visual tab, "Views" sub-mode. This is the View Editor. Here you will
+see the main character's walking view.
+Click the "New view" button to create us a new, empty view. Now, click the
+down arrow button until the currently displayed view shows our newly created
+one.
+Each loop is displayed horizontally with its number at the left hand side,
+frames going out to the right. To add a frame, click the grey "New frame"
+button. To delete a frame, right-click it.
+To change a frame's graphic, double-left-click it. The sprite list screen
+will be displayed (you may remember this from the Object graphic selection)
+where you can choose the graphic you want to use for this frame.
+Above each frame you will see "SPD:0". This is the frame's *relative* speed,
+which you can change by clicking on the word "SPD:". The larger the number,
+the longer the frame stays (ie. the slower it is). When the animation is run,
+an overall animation speed will be set, so the actual speed of the frame
+will be:  overall_speed + frame_speed  . Note that you can use negative
+numbers for the frame speed to make it particularly fast, for example setting
+it to -3 means that the frame will stay for hardly any time at all.
+You run an animation by using the "Run animation" interaction command or the
+text script animation commands. If you use the "Run animation" interaction
+command, you then click the "..." button to edit the animation. The animation
+editor is very similar to the graphical script editor (see section 3.3.3),
+but it has different commands available.
+To animate an object, you first of all need to set the object's view to the
+correct view number (use the "Set object view" animation command or the
+SetObjectView text script command), and then use the "Animate using loop"
+animation command or the AnimateObject text script command to actually start
+the animation. The Animation Editor commands are described in section 6.8.
+
+3.2.7 CHARACTERS
+Adventure Game Studio makes it easy to add your own non-player characters
+into the game. A character is similar to an object, except that it can change
+rooms, maintain its own inventory, and take part in conversations (more on
+these later). It can also have its own custom animation speed and movement
+speed.
+Go to the "Visual" tab, "Characters" mode. You will see on the left of the
+screen a list of all the characters in the game, with "NEW CHARACTER" at the
+end of it. To create a new character, select "NEW CHARACTER" from the list,
+then click the "NAME" button in the bottom part of the screen to change its
+name to whatever you want to call your character. By doing this, a new
+character slot is created.
+You will see that there are a lot of options which you can set for each
+character. First of all, the "This is the player character" check-box allows
+you to change which character the player will control at the start of the
+game. When the game starts, the first room loaded will be this character's
+starting room. By checking this box for one character, it will be de-selected
+for any other character which was previously set.
+Secondly, the "Ignore scaling" check-box allows you to specify that this
+character will not be stretched or shrunk in scaling areas of the screen. This
+could be useful if you have a character who always stands still in the same
+place, and you want the graphics on-screen to be the same size as you drew
+them, even though he is standing on a scaling area.
+To set which room this character starts in, click the "Room 1" button on the
+right hand side of the screen, and type in the new room you want him to start
+in. If you set this to room 0 for the player character, he will start in the
+intro screen, INTRO.CRM (see section 3.2.5 for information). You can set the
+character's location within this room by clicking the "AT 160,160" box and
+typing in the X,Y co-ordinates you want him to start at. These co-ordinates
+should be the middle of his feet. (You can find out the co-ordinates of a
+screen point using the "Ask position" option in the Rooms, Setup Screen tab).
+The "Default view" is where you set what the character looks like. You must
+create a view in the View Editor (described in section 3.2.6, above), and this
+view must have 4 loops. Each loop is used for the character walking in one
+direction, as follows:
+ Loop 0 - walking down (towards screen)
+ Loop 1 - walking left
+ Loop 2 - walking right
+ Loop 3 - walking up (away from screen)
+Once you set this option, you should see a preview of the character walking
+around in the top part of the screen.
+To change the rate at which the character animates, click the "Anim spd"
+option. Here, a smaller number means faster animation. Note that this does NOT
+effect the speed at which the character actually moves when walking.
+The "Move spd" option allows you to control how fast the character moves when
+walking. Here, a larger number means he walks faster.
+The "Talk clr" option on the right of the screen specifies which colour is
+used for the text when this character is talking. It effects both messages
+displayed with "Display message" commands which are set to that character,
+and also conversations. You can find out the colour for each number by going
+to the Game tab, "Palette" mode.
+In the very bottom-right of the screen is a button called "Script Name". This
+sets the name which the character will be referred to by in text scripts and
+in conversation scripting. The difference from the main Name of the character
+is that the script name may only contain letters A-Z.
+To set what happens when the player interacts with the character, click the
+"Interaction" button. You will be presented with the (by now familiar)
+interaction window. NOTE that, as with Inventory interactions, you may NOT
+use the "Run animation" or "Run graphical script" commands, or display a local
+message. Basically, you need to display global messages or use text scripts
+to handle character interactions.
+New in v2.01 is the ability to set a talking view for the character. To set
+one, click the button beside where it says "Talking view:". If you set a
+talking view, then that view will be used to animate the character while they
+are speaking. You should generally have about 2-3 frames in each loop (the
+loops are used for the same directions as in the main view).
+
+3.2.8 CONVERSATIONS
+While the old Sierra games were mainly based on action and not talking, the
+Lucasarts games took the opposite approach.
+If you want to create a game with conversations where the player can choose
+from a list of optional topics to talk about, you can now with the new Dialog
+Editor. Go to the "Advanced" tab, Dialog mode.
+Conversations are made up of Topics. A "topic" is a list of choices from
+which the player can choose. You may have up to 14 choices in a topic.
+However, not all of them need be available to the player at the start of the
+game - you can enable various options for conversation once the player has
+said or done other things. For example, when you talk to the man in the demo
+game, the first option is just "Hi". Once he has said this, however, a new
+option becomes available.
+The Dialog Editor is quite self-explanitory - you view one topic at a time,
+using the up/down arrow buttons to choose the current topic. Then, you see
+the list of options for the topic in the top part of the screen. Each option
+has a "Yes" or "No" on the right hand side, which specifies whether that
+option is available to the player at the start of the game.
+You control what happens when the player chooses an option by clicking the
+"Edit script" button. This is NOT the same script language as the main text
+scripts use - it is a much simplified and easier to understand language
+specific to dialogs.
+Each topic has its own script file. When you click "Edit script" for the
+first time on a topic, all you will see is a number of lines starting with
+an '@' symbol. In the dialog script, these signify the starting points of
+the script for each option. For example, when the player clicks on option 3,
+the script will begin on the line following "@3". There is also a special
+starting point, called "@S". This is run when the conversation starts, before
+any choices are given to the player. This could be used to display a "Hello"
+message or something similar.
+To display some speech, you begin the line with the character's SCRIPT NAME
+(not full name), followed by a colon, then a space, and then what you want
+them to say. For example, if my main character's script name is EGO, I would
+write
+ego: "I am very happy today because it's my birthday."
+The character name is used by the system to choose the correct colour for
+the text. You can have as many lines of speech like this as you like within
+the script.
+To signal the end of the script for this option, place a "return" command on
+the last line of it. For example,
+@1
+ego: "Hello. How are you?"
+otherman: "I'm fine."
+return
+This tells the program to go back and display the choices again to the player.
+If you use "stop" instead of return, then the conversation is ended. You use
+this after the player saying "Goodbye" or something similar.
+The dialog commands available are:
+goto-dialog X
+  Switches the current topic to Topic X, and displays the current list of
+  choices for that topic.
+option-off X
+  Turns option X for the current topic off, meaning it won't be displayed in
+  the list of choices next time.
+option-off-forever X
+  Turns option X off permanently. It will never again be displayed, not even
+  if an "option-on" command is used.
+option-on X
+  Turns option X for the current topic on, including it in the list of choices
+  to the player next time they are displayed.
+return
+  Stops the script and returns to the list of choices.
+run-script X
+  Runs global text script function "dialog_request", with X passed as the
+  single parameter. This allows you to do more advanced things in a dialog,
+  such as adding an inventory item and so on. The "dialog_request" function
+  should be placed in your game's global script file, as follows:
+    function dialog_request (int xvalue) {
+      // your code here
+      }
+stop
+  Stops the conversation and returns the player to the game.
+For an example of a dialog script, load the demo game into RoomEdit and
+look at the script for its topic 0.
+
+3.2.9 GAME OPTIONS
+On the Game, Misc tab you may have noticed some check-boxes in the top half
+of the screen. These set gamewide options, and mean the following:
+ * Debug Mode - whether the debug keys are active. When debug mode is on,
+   you can press Ctrl-X to teleport to any room, Ctrl-S to give all inventory
+   items, Ctrl-V to display the engine version, and Ctrl-A to display walls on
+   the screen. When debug mode is off, these do nothing. (More specifically,
+   the text script Debug() function is disabled).
+ * Play sound on score - controls whether a sound effect is played when
+   the player scores points. If so, you can set the sound number, which will
+   play SOUNDx.WAV (or SOUNDx.VOC), where X is the number you set.
+ * Walk to hotspot in Look mode - controls whether the player will walk
+   to "walk-to" spots when the player looks at the hotspot. Normally he only
+   walks on use, speak and use-inv. See section 3.1.4.3 for information.
+ * Conversation on interface - controls where the player's options for
+   dialog are displayed. If this option is not checked, then in a conversation,
+   the options will be displayed at the bottom of the screen. If you check
+   this box, then instead the options will be displayed on the interface you
+   specify.
+ * Use "anti-glide" mode - you may notice that, as the character walks, it
+   can seem as if he is gliding, especially if you have a slow animation speed
+   setting. When anti-glide mode is on, the man's position is only updated
+   when the frame of animation changes. You will need to increase each
+   character's walking speed if you use this option.
+ * Text windows use interface - allows you to customize the standard text
+   window appearance in the game, using the specified interface element. See
+   section 4.2.3 for more information.
+ * Pixel gap between options - defines the gap between the options displayed
+   to the player in a conversation. Normally this is 0, which means the
+   options are right below each other. Changing it to 1 or 2 can make the
+   option display look less cluttered; it's a matter of personal preference.
+
+3.2.10 FONTS
+Adventure Game Studio allows you to replace the default font and to add your
+own. This feature is new in v2.01, and is currently very limited in that you
+can only import SCI fonts (Sierra's font format). These can be created in
+two ways:
+ (a) Extract the font from a Sierra game, using the SCI Decoder program
+     available on the internet.
+ (b) Create your own font and save it in SCI Font format, using the SCI
+     Graphic Studio program  (http://scigraphicstudio.cjb.net).
+Go to the "Visual" tab, "Fonts" mode. Here you can see all the current fonts
+by using the arrow buttons to cycle through them. You can create a new font
+slot by clicking the "New font" button. To import your SCI Font into the
+current slot, click the "Import SCI font" button.
+IMPORTANT: The fonts which will be used for speech should generally also have
+an outline font. You can see this with the default fonts, font 1 is the speech
+font, which is drawn in the character's colour, and font 2 is the outline font,
+which is drawn in black behind the speech in the game. This helps avoid any
+colour clashes between the font and the background.
+To set a font to have an outline font, select the main (coloured) font as the
+current font, then click the "No outline" button. You will be prompted for
+the font number of the outline font, so type it in.
+
+3.3 OTHER ROOM FEATURES
+This section describes slightly more advanced things you can do with the
+rooms.
+3.3.1 CHARACTER SCALING
+AGS supports scaling of characters, where the character can appear to get
+smaller as he walks away from the screen. Character scaling is supported as
+part of the walkable areas in a room.
+The reason why you have multiple colours available for the walkable areas is
+because you can set a zoom level for each colour, which defines how large
+the character will be while he is in that area. The default for all walkable
+areas is 100%, ie. full size. However, you can adjust it using the "Walkable
+Areas" mode to anywhere from 10% (one-tenth size) to 200% (double size).
+The scaling settings effect all CHARACTERS in the game, but not objects. You
+can disable the scaling for an individual character by checking the "ignore
+scaling" box in that character's properties.
+
+3.3.2 SCROLLING
+If you've been wondering, I'll tell you now: Yes, you can create scrolling
+rooms, like the ones used in Lucasarts games like Monkey Island (tm) and Day
+of the Tentacle.
+To create a scrolling room, just import a scene that is larger than 320x200.
+For example, 500x200 is a good size for Lucasarts-type rooms.
+When you import the scene, a message box will appear asking you whether it
+is a high-resolution image or a low-res scrolling image. The reason for this
+is that your 500x200 picture could be meant to be a single non-scrolling
+screen to be shown in the high-resolution (640x400) mode. Since we want a
+scrolling room, click the "scrolling" button.
+That's all you have to do. Draw on the walkable areas, hotspots and so on, as
+normal, and then save the room. The screen will follow the main character
+around.
+TIP: You can also have scrolling hi-res rooms. Just import a scene which is
+larger than 640x400.
+
+3.3.3 GRAPHICAL SCRIPTS
+While AGS provides a comprehensive text scripting system, there are some
+occasions when it is easier and neater to use a graphical script. Also, if
+you are new to scripting, the graphical script is the best way to learn.
+A graphical script is the easiest way to add several responses to an event.
+Normally, when an event occurs, you can only set one reaction using the
+Interaction window, which limits your possibilities. But, by using a graphical
+script, you can do much more complex things.
+At its simplest, a graphical script is just a list of commands which are
+carried out from top to bottom. For example, a "Display message" command
+followed by a "Remove object" command. But the graphical script's main power
+is in conditional statements - that is, commands which may or may not be
+executed, depending on other factors.
+To support conditional statements, the graphical script uses flags. Each flag
+is either "Set" or "Clear". All the flags start off clear, and you can set
+a flag to the "Set" state to signal that some sort of event has occured.
+There are two types of flags - Local flags and Global flags. Local flags are
+specific to each room, and you can give the flag a name when you create it.
+Global flags are available to every room in the game. They are named GLOBAL1
+to GLOBAL50, and changing one of these flags from one room's graphical script
+will also change it for all other rooms.
+The graphical script editor displays the current script on the left hand
+side of the screen, and the list of available commands on the right. When you
+start a new script, you will have a single "Display message" command on the
+script to the left. To add a new command, drag it from the list on the right
+to below the "display message" on the left. You will be asked to type in the
+number to replace the %d if the command requires it; this is the same way as
+it works in the Interaction windows. To delete a command, drag it over to the
+right. You can modify a command's properties by right-clicking it.
+When you add conditional ("if") statements, an indented "display message"
+command will be added below it. The indented commands will only be carried out
+if the condition is true. For example, consider this script:
+ Display Message 1              <-- "You turn around to face the key"
+ If flag GOTKEY is set
+   Display Message 2            <-- "But it's gone. You've already taken it"
+   Stop Script
+ Set flag GOTKEY
+ Display Message 3              <-- "You pick up the key"
+ Add Inventory 2
+ Give Score 5
+You can create this yourself by dragging the commands over from the right.
+The first time the script is run, GOTKEY will be Clear (remember, all flags
+start "Clear"), the player will get the key and 5 points, and GOTKEY will
+be "Set". The next time the script is run, instead of getting another key,
+the player will be told they already have it, and the script is aborted.
+(The "Stop Script" command tells the game not to carry out the rest of the
+script).
+Commands like "Give score" WILL be carried out every time they are encountered
+(in the Interaction windows, the score is only given once), so you must make
+sure to use conditional statements so that the player can't keep repeating
+the action if you don't want them to.
+Descriptions of the special graphical script commands are available in
+section 6.7, below.
+
+
+4. Other features
+-----------------
+4.1 MUSIC AND SOUND
+All good games use sound to involve and immerse the player in the game. AGS
+allows you to play a background music track, and also to play sound effects
+at appropriate times.
+The DOS version of AGS supports Adlib, Sound Blaster and General MIDI for
+background music, and it supports the Sound Blaster and ESS Audiodrive for
+sound effects.
+For background music, AGS can use MIDI, MOD, XM and MP3 music files. For
+sound effects, you can use WAV and VOC files.
+When AGS needs to play music number X, it will search for the files in the
+following order. The first file it finds, it plays: MUSICx.MID, MUSICx.MP3,
+MUSICx.MOD, MUSICx.XM .
+
+WARNING: A warning about MP3 - because mp3s are compressed it places a massive
+load on your computer's processor playing them back, since it has to decode
+all the data as well as playing it. For that reason, it is not recommended to
+use MP3s at all with AGS, even though they are supported.
+For example, my Pentium-233 system can quite happily manage 50 fps in SVGA
+hi-res mode normally, but in a room with an MP3 background music the frame
+rate drops in half to about 20 fps. If the engine detects a 386 or 486
+processor it will automatically disable MP3 music. If you want to have a
+digital soundtrack, use XM or MOD instead, as these cause hardly any overhead
+for the CPU.
+
+When the game loads, music 0 will be played if it exists in the game directory.
+You can change the music later by setting "Play music on room load" in a room
+(see section 3.1.7 for information), by using the PlayMusic text script
+command, or by using the "Play sound" interaction command. If you use the
+interaction command, you must add 1000 to the music number so that AGS
+recognises it as music and not a sound effect. For example, to play music 23,
+use "Play sound 1023".
+To play a sound effect during the game, you can use the PlaySound text script
+command, or the "Play sound" interaction command. The game will search for
+SOUNDx.WAV and SOUNDx.VOC, where X is the sound number.
+Note: The Adlib sound card only supports MIDI music. It cannot play sound
+effects, or MOD, XM or MP3 music.
+NOTE: Currently, any MP3 music you have will NOT be included in the file
+built when you distribute your game. You will have to distribute MP3 files
+seperately along with the main game file. Section 4.3 describes game
+distribution.
+
+4.2 EDITING THE INTERFACE
+AGS now supports customizable interfaces. By default, the game interface is
+set up to act like Sierra's point-and-click interface of its 1990-93 games.
+To change the interface (recommended for advanced users only), go to the Game
+tab, "Interface" mode.
+The game interface is split up into interface "elements". Each element is a
+rectangular region on the screen which is drawn on top of the background
+scene. Each element can be set to either:
+ * be always displayed (for example the Sierra status-line)
+ * pop-up when the mouse moves to a certain position (eg. Sierra icon-bar)
+ * pop-up on script command only
+The default interface is made up of two elements - the status line, and the
+icon bar.
+In the Interface Editor, you will see several buttons. The "Export iface"
+button exports the entire interface (ie. all the elements) to a file, which
+you can then import later into a different game using "Import iface". This
+allows you to design your interface and then use it in all your games.
+The "New interface" button creates a new element; the "Del interface" button
+deletes the currently displayed element. You can change which element you
+are editing by clicking the up and down arrow buttons.
+The "Preview" button previews the entire interface, by displaying permanent
+elements in their positions, and allowing you to test pop-up elements by
+moving the mouse to where they pop up. Press Escape to leave the preview
+mode.
+At the top of the screen the current interface element is displayed. You can
+change the size of the rectangle by dragging the lower-right hand corner of
+it with the mouse. To change the colour and text of the element, right-click
+the background and then choose "Properties" (or "Bg properties" if you clicked
+on a button). Here you can set the background, foreground and border colour,
+and also set the text to be displayed in the element. You can use a background
+graphic by clicking the "PIC/COL" button.
+You can set where on the screen the element will be displayed by clicking the
+"Location" button. You are then prompted for the X, followed by the Y
+co-ordinate of the top-left hand corner of the element. You can test out what
+this looks like by using the Preview mode (co-ordinates range from 0-310 for
+the X direction, and 0-190 for the Y direction).
+To change when the element is displayed, click the "Toggle disply" button.
+This cycles between the three modes available: "Always displayed", "Show when
+mouse Y < %d" and "On script command". When it cycles to the "when Y <" mode,
+you will be prompted for the Y co-ordinate. If you are skipping the mode to
+get to the next one, just press enter.
+
+4.2.1 INTERFACE BUTTONS
+To provide interactivity with the interface, you use buttons. You can have
+up to 15 buttons per interface element.
+To add a button, click in the "Store room" area and drag out with the left
+button. This will place a cup on the interface. You can move the button later
+by dragging it with the mouse. To set the button's properties, right-click it,
+then choose "Properties".
+Here you can change the graphic for the button's normal appearance, and also
+set a different graphic for when the mouse moves over the button, and when
+the button is pushed (ie. mouse button held down on the button). You set what
+happens when the player clicks on the buttons by clicking the "On left-click"
+and "on right-click" options. The available options are "do nothing" (obvious),
+"set mode %d" (changes the cursor mode to %d) and "run script" (runs the text
+script function (see section 4.4.1 below), which allows more advanced reactions
+to the clicks).
+NOTE: At present, the Preview mode does not preview the mouse-over or pushed
+graphics - you must run the game to test these.
+
+4.2.2 INTERFACE TEXT
+You may have noticed on the Properties for the interface element, a text box
+where you can type in text to be displayed there. Although you can just write
+any normal text here, there are some special markers you can add to control
+how the text is displayed. The following tokens will be replaced with the
+relevant values in the game:
+ @GAMENAME@    The game's name, specified on the Game, Misc tab
+ @OVERHOTSPOT@ Name of the hotspot which the cursor is over
+ @SCORE@       The player's current score
+ @SCORETEXT@   The text "Score: X of XX" with the relevant numbers filled
+                in. This string will be in the user's chosen language.
+ @TOTALSCORE@  The maximum possible score, specified on Game, Misc tab
+You can control the output by using Control Codes. At present the
+following are supported:
+ $c    Centre the text which follows
+ $l    Left-align the text which follows (default)
+ $r    Right-align the text which follows
+The default status bar Format is  @SCORETEXT@$r@GAMENAME@
+Example: You have @SCORE@ out of @TOTALSCORE@ points.
+Example (if you don't use the scoring system): $c@GAMENAME@
+
+4.2.3 TEXT WINDOWS
+If you want to add a personal touch to the standard white text-boxes which
+display all the messages during the game, you can create a border using the
+Interface Editor. Create a new interface element, and check the "text window"
+box for it. The element will be resized to about 1/4 of the screen, and you
+will see 8 pictures - one in each corner and one on each side. These are the
+border graphics. You change the graphic for a corner by right-clicking and
+then choosing "Properties".
+In the game, the corner graphics will be placed in the respective corners of
+the text window, and the side graphics will be repeated along the edge of
+the window. To tell the game to use your custom text window style, go to the
+Game tab, "Misc" mode, and check the "Text windows use interface" box in the
+top part of the screen. When prompted, enter the number of the interface
+element which you used.
+
+4.3 DISTRIBUTING YOUR GAME
+When you choose the "Save game..." button in the Room Editor, as well as
+creating data files which it needs for itsself, the program will create a file
+called "USERGAME.EXE" in the current directory. This single file contains all
+of the program code and data for your game, and is the file you should
+distribute. You may remember that AC v1.14 included the ability to make a data
+file so that you only needed to distribute it and the exe file - well this
+goes one step further! Copy the USERGAME.EXE file to another directory or
+drive, or even another computer, and there you have your game, contained in a
+single file! Note, though, that you should also include the SETUP.BAT file to
+allow the user to run the Setup program. And I recommend renaming the exe file
+to something resembling your game's name.
+NOTE: It is not possible to load the exe file back into the Room Editor. This
+means two things when only the EXE file is available: (1) other people can't
+edit your game's data, and (2) you can't either. Always keep a backup of the
+other files produced (*.CRM, AC2GAME.DTA, etc) as they are what the Editor
+needs to be able to load your game for editing.
+NOTE: You may need to edit the SETUP.BAT file to replace the "AC" line with
+whatever you called your exe file.
+NOTE: Read the LICENSE.TXT file included for information on what you may, and
+may not, distribute with your game.
+NOTE: MP3 music files are not included in the exe. You must include them
+seperately in your game's distribution.
+
+4.4 TEXT SCRIPTING
+Version 2 of the Creator includes a radically overhauled text scripting system
+which is now much more powerful and allows you much greater control of the
+game through the scripts, if that is what you want to do.
+The script language is based on the 'C' programming language, and anyone
+familiar with C should be able to pick it up very quickly. If not, I will
+introduce it now:
+Basically, the script consists of FUNCTIONS. Each function (think of it as
+an event handler) is run when a particular event occurs. For example, the
+"on_key_press" function is run whenever the user presses a key on the keyboard.
+The code within the function is executed in procedural fashion - ie. from the
+top downwards, one statement at a time. The function outlines look as follows:
+function name_of_function() {
+  // your code here
+  }
+The keyword FUNCTION identifies this as the start of the function. Next is
+the function's name. This can consist of any letters A-Z, plus underscores.
+Note that spaces and numerical digits are NOT allowed in the name. After the
+name are the brackets (). These define what parameters will be passed to the
+function. In this case, there are none. Next comes the  {  symbol. This
+signifies the start of the code block. Execution of the function starts after
+this symbol and finishes at the  }  symbol, which signifies the end of the
+function.
+To store information, you use variables. A VARIABLE is a block of memory which
+holds a number or string of text. You define a variable as follows:
+int  my_counter ;
+The "int" is the type of variable you want to create. Available types are
+"char", which stores a 1-byte character, "int" which stores a 32-bit integer,
+and also "string" which stores up to a 200-byte text string.
+The "my_counter" is the name of the variable. You then use this name in the
+script to refer to the variable.  The semicolon marks the end of the statement.
+The scripting language requires every statement to end with a semicolon. If
+you get a "Parse error" when your script is compiled, this is the first thing
+to check.
+You declare variables at the top of the script, BEFORE any functions.
+To assign a value to a variable, use the  =  operator. For example,
+ my_counter = 1;
+will set the "my_counter" variable to 1. Notice again the semicolon - they are
+required after every statement. You can also add variables together, and do
+simple maths with the assignments. For example,
+ my_counter = other_counter - 5;
+will set "my_counter" to the value of "other_counter" minus 5.
+I think it's time for an example script function. So:
+function on_key_press(int key_code) {
+  my_counter = my_counter + 1;
+  }
+The above script will increment the "my_counter" variable every time a key is
+pressed.
+NOTE: If you are simply adding a value to a variable, shortcuts are available.
+These are the  +=  and  -=  operators. For example,  "my_counter += 1;"  is
+equivalent to   "my_counter = my_counter + 1;".
+To compare variables, you use the IF keyword with the following operators:
+==   is equal to
+>    is greater than
+<    is less than
+!=   is not equal to
+For example,
+  if ( my_counter < 5 ) {
+    my_counter = my_counter + 1;
+    }
+will increment "my_counter" if it is less than 5. Note the use of the curly
+brackets again - these define what code will be executed depending on the
+result of the comparison.
+NOTE: You will notice that the "is-equal-to" operator == is different from
+the assignment operator = . Do not get these mixed up, because using a single
+equals in an "if" statement can cause major bugs in your script.
+IMPORTANT NOTE: Do NOT use the = or == operators with string variables, or
+you will get strange results. You must use the provided functions (whose
+names begin with "Str") to compare and assign strings. This is VERY IMPORTANT.
+IMPORTANT NOTE: The script system is case-sensitive. That means, that the
+variable names "my_counter", "My_Counter" and "MY_COUNTER" are all different.
+
+NOTE: If you are an experienced programmer, please NOTE THE FOLLOWING: The
+compiler will allow you to use 'C'-type pointers in your code, for example
+using int*, char* and so on. However, DO NOT DO THIS as the data will be
+corrupted when the user does a Save/Load game position.
+
+Adventure Game Studio has two types of script files - "global" scripts and
+"local" scripts. There is one global script in a game, and it is always
+loaded in memory. This is the script which contains instructions for game-wide
+events, like the key_press event.
+Each room file also has its own local script. Both types of script use the
+same syntax and have the same functions available to them. The local script
+for a room is only in memory while that room is loaded, in order to save
+memory. So although you could put all your code into the global script, using
+the local scripts for functions which you only need in that particular room
+will save memory and help speed up the game.
+To edit a room's local script, load the room into the Room Editor, and then
+choose the "Edit scripts" button from the ROOM, Setup Screen tab.
+To edit the game's global script, click the "Edit script" button on the GAME,
+Misc tab.
+
+If you want to write a script function which you want various different
+room scripts to be able to use, then you can do it by writing the function
+into the main game script file.
+To make it accessible by the room scripts, in each room you want to call it
+from, add a line:
+import function my_function();
+to the top of the room script (where "my_function" is the name of the
+function). If the function takes any parameters, you must specify their type
+in the import definition. For example, if you had this function in your main
+game script file:
+function Add (int r, int s) {
+  return r + s;
+  }
+then in each room file that uses it you would need:
+import function Add (int, int);
+NOTE: You cannot access a local script from other local scripts, since only
+one local script is in memory at any one time.
+
+All co-ordinates used with functions in the script system are from 0 to 319
+for X and from 0 to 199 for Y, where (0,0) is the top-left corner of the
+screen, and (319, 199) is the bottom-right corner. This is independant of the
+screen resolution the user is using - all co-ordinates are converted to the
+320x200 scheme for scripting.
+NOTE: In a scrolling room, the maximum co-ordinates are larger than this. To
+find out, go to the Rooms, Setup Screen tab, and load in your scrolling room.
+Under the "Options" button is a line which says: "Size: 320 x 200" (or
+whatever the size of your room is). The co-ordinates you can use range from
+0 to the width/height minus 1. Remember that you can use the "Ask Position"
+button to find out the co-ordinates of a point on the room.
+
+A complete list of all the functions and variables available in the text
+script system is in section 6.3, below.
+
+4.4.1 TEXT SCRIPT EVENTS
+In your main global script file, there are some functions which are
+automatically added when you create the game. These are "events", and the
+function is called when a particular event happens. There are also some
+other events which you can add if you want to.
+The available event functions are:
+dialog_request (int parameter)
+  Called when a dialog script line "run-script" is processed. PARAMETER is
+  the value of the number following the "run-script" on that line of the
+  dialog script.
+game_start ()
+  Called at the start of the game, before the first room is loaded. You can
+  use this to set up the initial positions of characters, and to turn
+  interfaces on and off.
+interface_click (int interface, int button)
+  Called when the player clicks on a button on an interface which has its
+  action set as "Run script". INTERFACE is the number of the interface which
+  they clicked on. BUTTON is the number of the button within this interface.
+on_key_press (int keycode)
+  Called whenever a key is pressed on the keyboard. KEYCODE holds the ASCII
+  value of the key. A list of these values is in section 6.6, below.
+on_mouse_click (int button)
+  Called when the player clicks a mouse button. BUTTON is either LEFT or
+  RIGHT, depending on which button was clicked. The "mouse.x" and "mouse.y"
+  global variables contain the mouse's position.
+repeatedly_execute ()
+  Called every game cycle (normally 40 times per second).
+
+4.4.2 OTHER SCRIPT NOTES
+Only one text script can be executing at any one time. A script is considered
+to be "executing" if there is still code left in a script function that needs
+to be executed.
+What this means is that if you call a function like MoveCharacterToObject,
+which is BLOCKING - that is, it waits until the character finishes moving
+before continuing the script - then while the character is moving no other
+scripts will be run (for example, repeatedly_execute scripts).
+
+5. Upgrading from AC v1
+-----------------------
+If you have used AC version 1.xx, and you want to continue with a game you
+were making using this new version, this section describes the major changes
+and what to do about them.
+Of course, first of all you will need to get to know the new Room Editor. I'd
+recommend reading through the tutorial in this file, as it will introduce you.
+Instead of the old Condition List, the conditions are now split up into the
+individual events. Where there are conditions now, an "Interaction" button is
+available on those tabs. Clicking this gives a window where you can set the
+responses you want to implement for those events.
+
+5.1 CHANGES FROM v1
+MAJOR CHANGES
+ * The walls system has been completely changed. Now, instead of defining the
+   walls on the screen, you instead define where the character CAN walk, by
+   using walkable areas. This is to stop the problem where the player could
+   wriggle through the walls. The shadow screen (Special menu of old RoomMake)
+   has been incorporated into the walls screen - you can colour-code the
+   walkable areas, and each colour can be assigned a view number.
+ * When importing old rooms, all misc conditions are lost. You must check each
+   room, and if it uses misc conditions, replace them with either a graphical
+   script or text script. The Room Editor will warn you if you load an old room
+   file which uses misc conditions.
+ * There is no longer just one text script file which you edit and then compile.
+   Now, text scripts are built into the room files (local text scripts) and
+   into the main game file (global text scripts).
+
+OTHER CHANGES
+ * The X,Y co-ordinate positions of the characters are now the bottom-middle
+   of the character (in AC 1 it was the bottom-left). This makes the pathfinding
+   much better than before because the man won't walk over the walls on the
+   right. Note that the objects are still bottom-left.
+ * In the text script, the player's inventory now has a different variable name:
+   it is now  "character[EGO].inv[X]"  rather than just  "inv[X]". This is
+   because v2 supports different characters each carrying their own inventory.
+ * The "runcondition" text script command has been removed. It was confusing
+   and everything which it could do is now done seperately by different
+   commands.
+ * In fact, the whole text script system has been changed, once again.
+   Sorry. I promise to keep it this way from now on :-)  But you'll be glad
+   to know that the language is still the same, just the commands are different.
+   I'd recommend reading sections 4.4 (intro to text scripting) and more
+   importantly 6.3 (text script command reference) to introduce yourself.
+
+5.2 STEP-BY-STEP: CONVERTING v1 GAMES
+Converting a game from version 1 is made easier by the "Import old" feature
+of the new Room Editor. Load the Room Editor, then on the Game, Main tab click
+the "Import old" button. This brings up the file selector where you should find
+the INI file for your old game. All the relevant settings will then be
+imported. This function also imports the old sprite set and views from your
+game, but ONLY if the required files (USERSPR.SPR and ACVIEWS.DAT) are in the
+current directory.
+NOTE: Any old text scripts you had in v1 will not be imported; since the text
+script system has changed radically for this version they probably won't work
+anyway. See the section above for information on some of the differences.
+
+Next, you must upgrade each room. Load each room, one by one, into RoomEdit.
+Go to the "Walkable areas" tab and draw on the room's walkable areas (the old
+walls will be displayed there for you to see how the room was set up).
+If the room used any misc conditions, you must replace these by writing a
+graphical or text script instead to perform the same function.
+
+5.3 WHATEVER HAPPENED TO...
+This section lists every menu command from the old RoomMake, and its equivalent
+in the new Room Editor.
+File | Load Room    -->   Rooms, Setup Screen, Load Room
+File | Save Room    -->   Rooms, Setup Screen, Save Room
+File | Load Scene   -->   Rooms, Setup Screen, Load Scene
+File | Quit         -->   Game, Misc, Quit
+Walk-behind         -->   Rooms, Walk-behind
+Walls               -->   Rooms, Walkable Areas  (see section 5.1).
+Condition | Change  -->   various Interaction windows
+Condition | Edges   -->   Rooms, Setup Screen, Edges
+Condition | Messages ->   any Interaction window, click "Message editor"
+Condition | [others] ->   Rooms, Hotspots
+Misc | Objects      -->   Rooms, Objects
+Misc | Password     -->   Rooms, Setup Screen, Password  (not recommended)
+Misc | Options      -->   Rooms, Setup Screen, Options
+Misc | Sprite Mgr   -->   Visual, Sprite Mgr
+Misc | View Manager -->   Visual, Views
+Misc | Ask Position -->   Rooms, Setup Screen, Ask Position
+Misc | Spr pal imp  -->   Game, Palette  (incorporated into palette setup)
+Misc | Help Contens -->   press F1 at any time, then choose "Contents"
+Special             -->   Rooms, Walkable areas   (incorporated into this)
+
+5.4 WHY THE NAME CHANGE?
+This program was originally called the Adventure Creator. It started off life
+that way in 1996 as AC v1.00, and finally evolved into the last release, v1.14.
+However, recently people have suggested, and I have agreed, that a name change
+is probably in order. There are several reasons for this:
+ * There is another system, also called Adventure Creator, for the Macintosh.
+   This caused some confusion, and if at any point in the future I wanted to
+   do a Mac port of AC, it would make the situation very difficult.
+ * I have re-written the entire program from scratch for v2. Although a few
+   parts of old code remain, to enable loading old room files and the like, I
+   wanted to change the name to emphasise that this new version is (hopefully)
+   a lot different and improved over the last one.
+ * A few people mentioned that the name "Adventure Creator" implied that the
+   program would only create adventure games, and not be able to run them (eg.
+   they thought it created games for Sierra's interpreter). The new name
+   implies a full range of features for creating and playing the games.
+
+
+6. Command reference
+--------------------
+This section contains a complete reference for the room "interaction" events
+and commands, and a comprehensive description of all the text script functions
+available.
+
+6.1 INTERACTION EVENTS
+The following events are available in Interaction windows:
+6.1.1 HOTSPOT INTERACTIONS
+ * Character stands on hotspot - occurs repeatedly while the player character
+   is standing on the hotspot.
+ * Look at hotspot - occurs when the player clicks on the hotspot while in
+   the "Look" mode (cursor mode 1).
+ * Interact with hotspot - occurs when the player clicks on the hotspot while
+   in the "Interact" mode (cursor mode 2).
+ * Use inventory on hotspot - occurs when the player clicks on the hotspot
+   while in the "Use inventory" mode (cursor mode 4), but ONLY if the player
+   is using the inventory item number which the Data column is set to. For
+   example, if you want to respond when the player is using a key (inventory
+   item 2), then set Data to 2. You can also set Data to 99, in which case the
+   event will trigger for any inventory item - in this case, you can use the
+   "If inventory %d was used" graphical script command (see section 6.7), or the
+   text script variable character[x].activeinv (see section 6.4) to find out
+   what was used.
+   IMPORTANT: When this event is triggered, and if Data is not 99, then the
+   player will lose the inventory item.
+   NOTE: Because the Data column is used for the event, you cannot use a
+   response which also requires a Data value. You must use a text script or
+   graphical script to respond in this case.
+ * Speak to hotspot - occurs when the player clicks on the hotspot while in
+   the "Talk" mode (cursor mode 3).
+ * Any click on hotspot - occurs when the player clicks on the hotspot in
+   any cursor mode (except Walk). This allows you to add extra modes like
+   smell, taste, push, pull, and so on. This event also occurs as well as
+   the other event for the Look, Interact and Talk modes.
+ * Mouse moves over hotspot - occurs repeatedly while the mouse cursor is
+   over the hotspot. You can use this to highlight the cursor, and for other
+   various effects.
+
+6.1.2 OBJECT INTERACTIONS
+ * Look at object - occurs when the player clicks on the object while in
+   the "Look" mode (cursor mode 1).
+ * Interact with object - occurs when the player clicks on the object in
+   the "Interact" mode (cursor mode 2).
+ * Speak to object - occurs when the player clicks on the object in the
+   "Talk" mode (cursor mode 3).
+ * Use inventory on object - works like "Use inventory on hotspot" - see
+   that desccription (section 6.1.1 above) for more information.
+
+6.1.3 ROOM INTERACTIONS
+ * Walk off left - occurs when the player character walks off the left edge
+   of the screen.
+ * Walk off right - occurs when the player walks off the right edge of the
+   screen.
+ * Walk off bottom - occurs when the player character walks off the bottom
+   edge of the screen.
+ * Walk off top - occurs when the player character walks off the top edge
+   of the screen.
+ * First time enters screen - occurs the first time the player enters the
+   room. This event occurs AFTER the screen has faded in, so it allows you to
+   display a message describing the scene.
+ * Player enters screen - occurs just after the room is loaded into memory.
+   This event occurs every time the player enters the screen, and it happens
+   BEFORE the screen has faded in, which allows you to change object graphics
+   and do other things to the screen which the player won't notice.
+   NOTE: Do NOT use a "Display message" command with this event, since the
+   screen hasn't faded in, the message will not be visible.
+ * Repeatedly execute - occurs repeatedly on every interpreter cycle. The
+   normal game speed is 40 cycles per second, so this event occurs about
+   every 25 milliseconds.
+
+6.1.4 INVENTORY ITEM INTERACTIONS
+ * Look at inventory - occurs when the player clicks on the inventory item
+   while in the "look" mode.
+ * Interact with inventory - (not yet implemented).
+ * Speak to inventory - (not yet implemented).
+ * Use inventory on inv - occurs when the player uses another inventory
+   object on this one. You set the Data column to the number of the other item
+   which needs to be used on this item (see section 6.1.1 above for details
+   on the way this works). This event allows the player to combine items, and
+   so on. For example, if they had picked up a laptop computer and a battery,
+   seperately, then you could use this to allow them to insert the battery into
+   the computer.
+
+6.2 INTERACTION COMMANDS
+The following commands are available in response to events in Interaction
+windows:
+ * Go to screen %d - changes the player character's current room to the %d.
+   If this is in response to one of the screen edge events, the character will
+   be placed on the opposite side of the screen. Otherwise, you must use the Data
+   column to specify where on the new screen the man is placed. You specify which
+   edge by using these numbers: 1000=left, 2000=right, 3000=bottom, 4000=top.
+   He will be placed in the middle of that side, unless you add the pixel offset
+   along the edge, which you can get from the "Ask Position" function in the
+   Setup Screen mode. For example, Data=2150 would place him near the bottom of
+   the right-hand side.
+ * (Do nothing) - nothing happens.
+ * Stop man walking - the player character stops moving if he is currently
+   moving.
+ * Character dies - this command is not currently supported, and using it
+   will generate an error.
+ * Run animation %d - runs an animation. Each room has animations numbered
+   from 1 to 9, so you can have up to 9 animations per room. Click the "..."
+   button to edit the animation.
+ * Display message %d - displays a message. If the number is below 40, then
+   the room message of that number will be displayed. If the number is above
+   500, then the relevant global message is displayed.
+ * Remove object %d - turns the specified object off. It will no longer
+   appear on this screen, until it is turned back on by the "Turn object on"
+   command.
+ * Remv obj %d, add inv - turns the specified object off, and adds the
+   inventory number in the Data column to the player's inventory.
+ * Add inventory %d - Adds the specified inventory item to the player's
+   inventory.
+ * Run script - Runs a text script. Click the "..." button to edit the
+   script. Section 4.4, above, introduces the text script system.
+ * Run graphical script - Runs a graphical script. Click the "..." button
+   to create the script. Section 3.3.3 describes the graphical script.
+ * Play sound %d - plays the sound effect SOUNDx.WAV or SOUNDx.VOC, where X
+   is the number you supply. If the number is >=1000, then this command will
+   instead change the background music to MUSICx.MID/MOD/XM, where X is the
+   number you supply minus 1000.
+ * Play FLI/FLC %d - plays either FLIC%d.FLC or FLIC%d.FLI. If you set the
+   Data column to 1 then the player can skip the animation by pressing ESC.
+   Otherwise, they must watch the whole thing. For information on converting
+   AVI files to FLC, see section 7.1 .
+ * Turn object %d on - turns the specified object on. Either it was
+   previously turned off using the "Remove object" command, or it was set
+   to initially Off in the Room Editor.
+ * Run dialog topic %d - starts a conversation, using topic number "%d" from
+   the Dialog Editor.
+
+6.3 TEXT SCRIPT FUNCTIONS
+NOTE: This script reference is also available in Windows Help format: run
+the SCRPTREF.HLP file in the distribution. It contains identical information
+to what is included here, but is easier to navigate due to the use of links
+and searching.
+PLEASE NOTE: Most of the script functions are non-blocking: that is, they
+return control immediately to the script, and then the function will be
+performed while the game continues. However, a few of the functions, such
+as "Display", are blocking. In this case, the script does not continue until
+the function has finished (in this example, the user has removed the message
+box). Blocking functions are documented as such below.
+The following functions are available in the text script system. In
+alphabetical order:
+AddInventory (int what)
+  Adds inventory index WHAT to the current player character's inventory. This
+  is the same as doing  character[EGO].inv[WHAT]+=1;   It is possibly useful
+  in a game where the player can control more than one character, since it
+  will add the inventory to the current player character.
+AnimateCharacter (int charid, int loop, int speed, int repeat)
+  Starts character CHARID animating. See the description for AnimateObject for
+  more details, as this command is identical to AnimateObject except it works
+  with characters. If the character is moving it will be stopped.
+  SeeAlso: AnimateObject, SetCharacterView
+AnimateObject (int object, int loop, int speed, int repeat)
+  Starts the object number OBJECT animating, using loop number LOOP of its
+  current view. The overall speed of the animation is set with SPEED,
+  where 0 is the fastest, and increasing numbers mean slower. The delay for
+  each frame is worked out as SPEED + FRAME SPD, so the individual frame
+  speeds are relative to this overall speed.
+  The REPEAT parameter sets whether the animation will continuously repeat
+  the cycling through the frames. If REPEAT is zero, the animation will start
+  from the first frame of LOOP, and go through each frame in turn until the
+  last frame, where it will stop. If REPEAT is 1, when the last frame is
+  reached, it will go back to the first frame and start over again with the
+  animation. If REPEAT is 2, it will do the animation once, but then return
+  the graphic to the first frame and stop (whereas repeat=0 will leave the
+  graphic on the last frame).
+  SeeAlso: AnimateCharacter, SetObjectView
+CapturedPrint (int x, int y, string text, ...)
+  This command is similar to the "Display" command except that it only works
+  while the screen is captured, and it does not wrap the text. The specified
+  text is printed at co-ordinates (X,Y). Unlike the Display command, the text
+  remains on-screen and does not wait for a keypress to remove it. This allows
+  you to display multiple messages at once while the screen is captured.
+  SeeAlso: CaptureScreen, Display
+CaptureScreen (int colour)
+  Sets up the screen so that the script has complete control over what is
+  displayed. This is useful for screens like the QFG series statistics screen,
+  where you want to display information to the player. COLOUR is the colour
+  index with which the screen will be cleared. You can find out the colour of
+  the various colours by using the Palette Manager in the Room Editor.
+  While the screen is captured, all interfaces are disabled. You can use
+  the "on_mouse_click" and "on_key_press" functions to call EndCapture to
+  release the screen.
+  SeeAlso: CapturedPrint, EndCapture
+CDAudio (int command, int param)
+  This function allows you to play and control an audio CD in your game.
+  Different tasks are performed, depending on the value of the COMMAND
+  parameter. If there is no CD-ROM drive on the system, the function does
+  nothing.
+  The PARAM parameter is used by some of the functions for various reasons; if
+  it is not needed for the particular function you are calling, pass zero
+  instead.
+  The tasks performed are as follows depending on the COMMAND parameter:
+     0  Query CD-ROM support - checks if there is a CD-ROM drive available on
+        the system. Returns 1 if there is, and 0 if there is not.
+     1  Get playing status - checks whether the CD drive is currently playing
+        an audio track. Returns 1 if it is, and 0 if it is not.
+     2  Play track - starts playback from track PARAM on the CD. If the track
+        does not exist, or if it is a data track, nothing happens.
+     3  Pause playback - pauses the currently playing audio track.
+     4  Resume playback - continues from where the track was paused.
+     5  Get number of tracks - returns the number of tracks on the CD
+        currently in the drive. If the drive is empty, returns 0.
+     6  Eject - ejects the drive tray if the drive has the ability. This is
+        a feature you'll play with to start off because it's neat, and then
+        realize that it has no real use in your game.
+        Your script does not continue until the drive is fully ejected.
+     7  Close tray - the reverse of Eject. This will pull the drive tray back
+        in again. Your script does not continue until the drive has been
+        fully closed.
+     8  Get number of CD-ROM drives - returns the number of CD drives in the
+        system, normally 1.
+     9  Select current CD-ROM drive - changes the current CD drive to PARAM,
+        where PARAM ranges from 1 to (number of CD drives). All the other
+        CD Audio functions operate on the current CD drive.
+  NOTE: These CD Audio functions are slow compared to all the other script
+  functions. This will not be noticeable if you call them from most scripts,
+  but using CDAudio in a repeatedly_execute script will noticeably slow down
+  the game.
+  NOTE: If the game is run under plain MS-DOS, the user's CD-ROM driver will
+  need to be loaded in memory for these functions to work. If it is not, the
+  game assumes that there is no CD-ROM drive on the system. 
+CyclePalette (int start, int end)
+  This is used for special effects, like the flowing colours on the Space
+  Quest 4 title screen, and the Sierra logo of the later Sierra games.
+  The palette indexes from START to END are cycled around one slot. Using
+  this call in a repeatedly_execute function gives the effect of animation.
+  SeeAlso: FadeIn, FadeOut, SetPalRGB
+Debug (int command, int reserved)
+  This function provides all the debug services in the system. It performs
+  various different tasks, depending on the value of the COMMAND parameter.
+  If debug mode is off, then this function does nothing. This allows you to
+  leave your script unaltered when you distribute your game, so you just have
+  to turn off debug mode in the Room Editor.
+  The RESERVED parameter is currently unused and you should always pass 0.
+  All the valid values for the COMMAND parameter are listed below along with
+  what they do:
+    0   All inventory - gives the current player character one of every
+        inventory item. This is useful for testing so that you don't have to
+        go and pick up items every time you test part of the game where they
+        are required.
+    1   Display interpreter version - the engine will display its version
+        number and build date.
+    2   Walkable from here - fills in the parts of the screen where the player
+        can walk from their current location. This is useful if you think the
+        path-finder is not working properly. Yellow areas are where the man
+        can walk. Blue areas are defined as walkable in the Room Editor, but
+        he cannot get to them from his current position. The unaltered parts
+        of the screen are not walkable.
+    3   Teleport - displays a dialog box asking for what room you want to go
+        to, and then calls NewRoom to teleport you there. Useful for skipping
+        parts of the game or going to a specific point to test something.
+DisableCursorMode (int mode)
+  Disables the mouse cursor MODE. Any attempts to set the cursor to this mode
+  while it is disabled (like using SetMouseCursor) will fail. This function
+  also greys out and disables any interface buttons whose left-click command
+  is set as "Set mode X", where X is equal to MODE.
+  If the current cursor mode is MODE, then the engine will change it to the
+  next enabled standard cursor.
+  SeeAlso: EnableCursorMode
+Display (string message, ...)
+  Displays a message to the screen. It will be displayed in the standard
+  message box, and centred in the middle of the screen. You can insert the
+  values of variables using "%d" and "%s" in the message. To insert the value
+  of an integer variable, use %d, to insert a string use %s. For example,
+  Display ("The counter is currently set to %d.", my_counter);
+  This will replace the '%d' with the value of the variable "my_counter".
+  Note: Display is a blocking function - that is, control will not return
+  to the script until the player has removed the text window (by pressing a
+  key or clicking the mouse). While the window is displayed, all other
+  processing, like animations and interface display, are disabled. This is
+  usually used for responses to the player LOOKing at things.
+  SeeAlso: DisplayAt, DisplayMessage
+DisplayAt(int x, int y, int width, string message, ...)
+  Identical to the "Display" function, only this allows you to define the
+  position and size of the window where the text is displayed. The X and Y
+  variables define the co-ordinates of the upper-left corner of the window.
+  The WIDTH variable defines the width of the window. The height is then
+  automatically calculated so that the message fits into the window.
+  Note: This is a blocking call. See the "Display" help for more information.
+  SeeAlso: Display
+DisplayMessage (int message_number)
+  Identical to the Display function, but this uses a message text defined in
+  the Room Editor rather than in the script. It will either use a message
+  from the current room, or a global message (if message_number >= 500).
+  SeeAlso: Display
+EnableCursorMode (int mode)
+  Re-enables the mouse cursor mode MODE. This function also enables any
+  interface buttons which were disabled by the DisableCursorMode command.
+  SeeAlso: DisableCursorMode
+EndCapture()
+  Ends the script's control over the screen and restores what was there
+  previously.
+  SeeAlso: CaptureScreen
+FaceCharacter (int charid, int tofaceid)
+  Turns the graphic of character CHARID so that it looks like he is facing
+  character TOFACEID. This involves changing the current loop of CHARID
+  to the appropriate loop number, and setting the frame number to 0 (standing).
+  SeeAlso: FaceLocation, MoveCharacter
+FaceLocation (int charid, int x, int y)
+  Similar to the FaceCharacter function, except that this faces the character
+  to screen location (X,Y). This allows him to face not only other characters,
+  but also objects and hotspots as well (you can get their co-ordinates from
+  the Ask Position feature in the Room Editor).
+  SeeAlso: FaceCharacter
+FadeIn (int speed)
+  Fades in from a black screen to the current palette. This is used to restore
+  the screen after a FadeOut call. SPEED is from 1 (slowest) to 64 (fastest).
+  Note: This is a blocking function.
+  SeeAlso: CyclePalette, FadeOut
+FadeOut (int speed)
+  Fades the screen out to black. SPEED is the speed of the fade, from 1
+  (slowest) to 64 (instant). You can restore the screen with FadeIn.
+  Note: This is a blocking function.
+  SeeAlso: CyclePalette, FadeIn
+FileClose (int handle)
+  Closes the file with handle HANDLE, and commits all changes to disk.
+  You MUST close the file after you have finished with it.
+  SeeAlso: FileOpen
+FileOpen (string filename, int mode)
+  Opens a disk file for reading or writing. These disk I/O functions are only
+  intended for simple tasks like the way the QFG series export the character
+  when you complete it. MODE is either FILE_READ or FILE_WRITE, depending on
+  whether you want to write to or read from the file. If you pass FILE_WRITE
+  and a file called FILENAME already exists, it will be overwritten.
+  This function returns a file handle, which you use in future calls to
+  file functions, or returns 0 if there was a problem (eg. file not existing
+  when MODE is FILE_READ).
+  Example (of writing a file):
+    int handle = FileOpen ("temp.tmp", FILE_WRITE);
+    if (handle == 0) Display("Error opening file.");
+    else {
+      FileWrite (handle, "test string");
+      FileClose (handle);
+      }
+  IMPORTANT: If you want to include a path as well as filename, you MUST use
+  forward slashes '/' and NOT back-slashes '\'. Using back-slashes may cause
+  the program to crash when it tries to compile your script. For example,
+  use this: "c:/temp/myfile.tmp" instead of this: "c:\temp\myfile.tmp".
+  SeeAlso: FileClose, FileRead, FileWrite
+FileRead (int handle, string buffer)
+  Reads a string into BUFFER, from a file previously opened with FileOpen
+  which returned HANDLE. You should only use this with files which you
+  previously wrote out with FileWrite. Do NOT use this function with any
+  other files, even text files.
+  SeeAlso: FileOpen, FileWrite
+FileWrite (int handle, string text)
+  Writes TEXT to the file HANDLE, which must have been previously opened
+  with FileOpen for writing. The string is written using a custom format to
+  the file, which can only be read back by using FileRead.
+  SeeAlso: FileRead, FileOpen
+GetCursorMode()
+  Returns the value of the current mode of the cursor. This is either
+  MODE_LOOK, MODE_USE, MODE_TALK or any custom modes you have created.
+  SeeAlso: SetCursorMode
+GetLanguageString (int index, string buffer)
+  Reads the language text string INDEX into BUFFER. The AGS language
+  definition files consist of a collection of numbered strings with various
+  system text in a particular language. Whenever possible, you should use
+  this function rather than putting text directly into your script file, as
+  it gives flexibility and multilingual support.
+  For example, if you wanted to display a message "Do you want to see the
+  intro?", you should check the message file, and find that message 300
+  reads "Do you want to watch the introduction?". In this case, you should
+  then use GetLanguageString(300,buffer) rather than using your text directly.
+  You can add your own custom strings to the message files by using message
+  numbers of 500 and above.
+GetLocationName (int x, int y, string buffer)
+  Fills in BUFFER with the name of whatever is on the screen at (X,Y). This
+  allows you to create the Lucasarts-style status lines reading "Look at xxx"
+  as the player moves the cursor over them.
+  NOTE: The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+  means that with a scrolling room, the co-ordinates you pass are relative to
+  the screen's current position, and NOT absolute room co-ordinates. This
+  means that this function is suitable for use with the mouse cursor position
+  variables.
+  For example,  GetLocationName(mouse.x, mouse.y, buffer);
+GetPlayerCharacter()
+  Returns the current character which the player is controlling.
+  SeeAlso: SetPlayerCharacter
+GiveScore (int score)
+  Adds SCORE to the player's score. This is preferable to directly modifying
+  the variable since it will play the score sound and make sure that the
+  status line is updated. Note that SCORE can be negative, in which case the
+  score sound is NOT played.
+InterfaceOff (int interface)
+  Turns interface element number INTERFACE off. It will no longer appear on
+  the screen (or, if it is a pop-up interface, it cannot be popped up).
+  SeeAlso: InterfaceOn
+InterfaceOn (int interface)
+  Turns interface element number INTERFACE on and displays it on the screen.
+  This can be used to display a previously turned off interface, or to bring
+  up a special interface like an inventory window.
+  If the specified interface is a script-only interface (set to "On script
+  command" in the Room Editor), then the game will be paused while the
+  interface is displayed, and you should use InterfaceOff as a reaction to
+  a button click in the interface to remove it.
+  SeeAlso: InterfaceOff, IsGamePaused
+InventoryScreen ()
+  Brings up the inventory window which allows the player to select and
+  manipulate inventory items. If they select one, the cursor mode will be
+  set to inventory-use (mode 4), and  character[EGO].activeinv  will be set
+  to the inventory item selected.
+  NOTE: This function does not actually bring up the window immediately;
+  instead, it will show the window when the current script function finishes
+  executing.
+IsGamePaused ()
+  Returns 1 if the game is currently paused, or 0 otherwise.
+  The game is paused when either the icon bar interface has been popped up,
+  or a "script-only" interface has been displayed with InterfaceOn. While
+  the game is paused, no animations or other updates take place.
+  SeeAlso: InterfaceOn
+MoveCharacter (int charid, int x, int y)
+  Moves the character CHARID from its current location to X,Y. CHARID can
+  be either the character's number (as GetPlayerCharacter returns) or its ID
+  set in the Room Editor. If the character cannot get to X,Y it will be moved
+  as close as possible.
+  Note: this function only works with characters which are on the current
+  screen.
+  Note: if you need to find out when the character has reached its destination,
+  use the  character[charid].walking  variable. See the variables section below
+  for more information.
+  SeeAlso: FaceCharacter, MoveCharacterToObject, StopMoving
+MoveCharacterToObject (int charid, int object)
+  Moves the character CHARID from its current location to a position just below
+  the object OBJECT. This is useful for example, if you want the man to pick
+  up an object. Example:
+    MoveCharacterToObject (EGO, 0);
+    ObjectOff (0);
+    AddInventory (3);
+  This is a blocking call - control is not returned to the script until the
+  character has reached its destination.
+  SeeAlso: MoveCharacter
+NewRoom (int room_number)
+  Changes the room the player is in. This command unloads the current room
+  from memory and loads instead ROOMx.CRM, where X is room_number.
+  IMPORTANT: This command does not change the room immediately; instead, it
+  will perform the actual room change once your script function has finished
+  (This is to avoid problems with unloading the script while it is still
+  running). This means that you should not use any other commands which rely
+  on the new room (object positionings, and so on) after this command within
+  the same function.
+ObjectOff (int object)
+  Turns object number OBJECT off. It will no longer be displayed in this room
+  until you use an ObjectOn command.
+ObjectOn (int object)
+  Turns object number OBJECT on. It may have been turned off previously with
+  ObjectOff or may have been set initially off in RoomEdit.
+PlayFlic (int flic_number, int can_skip_flag)
+  Plays a FLI or FLC animation. The game checks for FLICx.FLC and FLICx.FLI
+  (where X is FLIC_NUMBER) and if it finds one, plays it. If CAN_SKIP_FLAG
+  is 1, the player can press ESC to skip the animation. Otherwise, they must
+  watch the whole thing. This is identical to the room interaction command
+  "Play FLI/FLC %d". The game is paused while the animation plays.
+PlayMusic (int music_number)
+  Changes the currently playing background music to MUSICx.MID, MUSICx.MOD
+  or MUSICx.XM (where X is MUSIC_NUMBER). The game will search for the files
+  in that order until it finds one to play.
+  SeeAlso: PlaySound
+PlaySound (int sound_number)
+  Plays a WAV or VOC sound effect. The game will search for SOUNDx.VOC
+  and SOUNDx.WAV (where x is SOUND_NUMBER) and play it. This is identical to
+  the room interaction command "Play sound %d".
+  SeeAlso: PlayMusic
+ProcessClick (int x, int y, int mode)
+  Simulates clicking the mouse on the location (X,Y) on the screen, in the
+  cursor mode MODE. Any conditions attached will be executed. For example,
+  ProcessClick (100, 50, MODE_LOOK);
+  will simulate clicking the mouse on co-ordinates (100,50) in the Look mode.
+  NOTE: This function ignores all interfaces and acts as though the point is
+  directly visible. In other words, if the co-ordinates you pass happen to
+  lie on a button on an interface, what actually happens will be as if the
+  user clicked behind the interface onto the actual screen.
+QuitGame(int ask_first)
+  Exits the game and returns to the operating system (DOS, Windows, etc).
+  If ASK_FIRST is zero, it will exit immediately. If ASK_FIRST is not zero,
+  it will first display a message box asking the user if they are sure they
+  want to quit.
+Random (int max)
+  Returns a random number between 0 and MAX. This function is provided in
+  the hope that someone might find it useful - I can't think of anything to
+  use it for.
+RefreshMouse ()
+  Updates the global variables "mouse.x" and "mouse.y" with the current
+  position of the mouse. Normally, these variables are set just before each
+  script function is executed. However, if you have a very long script where
+  the mouse may have moved since the start of the function, and you need the
+  exact current location, then RefreshMouse will update the variables.
+ReleaseCharacterView (int charid)
+  Allows the engine to automatically control the character's view, as normal.
+  Use this once you have finished doing the animation which you started with
+  the SetCharacterView command.
+  SeeAlso: SetCharacterView
+RestoreGameDialog ()
+  Displays the restore game dialog, where the player can select a previously
+  saved game position to restore.
+  The dialog is not displayed immediately; instead, it will be displayed when
+  the script function finishes executing.
+  SeeAlso: SaveGameDialog
+RunDialog (int topic)
+  Starts a conversation using topic number TOPIC. This is identical to the
+  "Run dialog topic %d" room interaction command.
+  Note: The conversation will not start immediately; instead, it will be run
+  when the current script function finishes executing.
+  SeeAlso: SetDialogOption
+SaveGameDialog ()
+  Displays the save game dialog, where the player can save their current
+  game position. If they select to save, then the game position will be saved.
+  SeeAlso: RestoreGameDialog
+SetCharacterView (int charid, int view)
+  Sets character CHARID's view to VIEW. This can be used to perform animations
+  with charaters, for example bending down to pick something up, which don't
+  use the default view.
+  NOTE: This function locks the character's view to the specified view, so
+  that it can only be changed by other script commands (ie. it won't
+  automatically be changed by the program on shadow areas, screen changes,
+  etc). When you are done with the animation, call ReleaseCharacterView to
+  allow the program to take control back.
+  SeeAlso: AnimateCharacter, ReleaseCharacterView
+SetCursorMode(int new_mode)
+  Changes the mouse cursor mode to NEW_MODE. The number you pass can be
+  obtained from the VISUAL>CURSORS tab of the Room Editor. This function
+  changes both the appearance of the cursor and the mode used if the player
+  clicks on a hotspot.
+  SeeAlso: GetCursorMode, SetMouseCursor
+SetDefaultCursor()
+  Changes the appearance of the mouse cursor to the default for the current
+  cursor mode. Use this to restore the cursor picture after you changed it
+  with the SetMouseCursor function.
+SetDialogOption (int topic, int option, int new_state)
+  Changes whether an option in a conversation is available to the player or
+  not. This allows you to add extra options to a conversation once the player
+  has done certain things.
+  TOPIC is the topic number, from 0 to the number of topics - 1. Find this
+  out in the Room Editor.
+  OPTION is the option number within that topic, from 1 to whatever the
+  highest option is for that topic.
+  NEW_STATE controls what happens to this option. It can have the following
+  values:
+    0   The option is disabled - the player will not see it
+    1   The option is enabled - the player can now see and use it
+    2   The option is permanently disabled - no other command can ever turn
+        it back on again.
+  These are equivalent to the option-off, option-on, and option-off-forever
+  dialog commands.
+  SeeAlso: RunDialog
+SetGameSpeed (int new_speed)
+  Sets the game speed to NEW_SPEED frames per second, or as near as possible
+  to that speed. The default frame rate is 40 fps, but you can speed up or
+  slow down the game by using this function. Note that this speed is also the
+  rate at which the Repeatedly_Execute functions are triggered.
+  The NEW_SPEED must lie between 10 and 100. If it does not, it will be rounded
+  to 10 or 100. Note that if you set a speed which the player's computer cannot
+  handle (for example, a 486 will not be able to manage 80 fps), then it will
+  go as fast as possible.
+  NOTE: Because the mouse cursor is repainted at the game frame rate, at very
+  low speeds, like 10 to 20 fps, the mouse will appear to be jumpy and not
+  very responsive.
+SetMouseCursor(int new_cursor)
+  Changes the appearance of the mouse cursor to NEW_CURSOR. Unlike
+  the SetCursorMode function (see above), this does not change the mode
+  used if the user clicks on a hotspot. This is useful for displaying a "wait"
+  cursor temporarily.
+  SeeAlso: SetCursorMode, SetDefaultCursor
+SetObjectFrame (int object, int view, int loop, int frame)
+  Sets object number OBJECT's graphic to frame FRAME of loop LOOP of view
+  number VIEW. This is useful if you want the object to use the second loop
+  in a view for an animation, because using the SetObjectView function in
+  room startup code will cause loop 0 to breifly flash on the screen first.
+  SeeAlso: SetObjectView
+SetObjectGraphic (int object, int slot)
+  Sets the graphic for object number OBJECT to slot number SLOT. You can get
+  the slot number from the Sprite Manager in RoomEdit. If the object is
+  currently animating (from an AnimateObject command) then the animation will
+  be stopped.
+  SeeAlso: SetObjectFrame, SetObjectView
+SetObjectView (int object, int view)
+  Sets object number OBJECT's view to VIEW. The graphic is set to the first
+  frame of loop 0 of the view.
+  SeeAlso: AnimateObject, SetObjectFrame
+SetPalRGB (int slot, int red, int green, int blue)
+  Changes the RGB components of one of the palette slots. The palette is
+  initially set up in RoomEdit, but you can override it during the game using
+  this function for special effects. The RED, GREEN and BLUE parameters each
+  range from 0 to 63 (as used in the Palette Editor).
+  If SLOT is a background slot, then this function's effect will last until
+  the player changes screen, when the palette is changed to the new room's
+  palette. If SLOT is not a background slot, the effect of this function is
+  permanent.
+  Note: This function will allow you to change the colours which are "locked"
+  in the Room Editor. However, you should not normally do this as it can
+  cause strange colours in the game.
+  SeeAlso: CyclePalette, FadeIn, FadeOut
+SetPlayerCharacter (int char_id)
+  Changes the character which the player controls to CHAR_ID. You can either
+  use the character's number, or the ID string set in the Room Editor.
+  This function will also cause the room to change to the room which the
+  chosen character is currently in. (It calls NewRoom with the character's
+  room, so the change won't happen until the end of the script).
+  Note: The "player" global variable is not updated with the new character;
+  so using "player.x", "player.name" and so on will change the original
+  character, not the current player character.
+  SeeAlso: GetPlayerCharacter, NewRoom
+StopMoving (int charid)
+  Stops the character CHARID moving and sets its graphic to the standing frame
+  of the current loop.
+  SeeAlso: MoveCharacter
+StrCat (string str1, string str2)
+  Appends STR2 to the end of STR1. For example, if STR1 contains "Hello"
+  and STR2 contains "world", then after this function has been called, STR1
+  will contain "Helloworld".
+StrComp (string str1, string str2)
+  Compares the strings STR1 and STR2. Returns zero if they are identical, and
+  non-zero if they are not.
+StrCopy (string str1, string str2)
+  Copies the contents of STR2 into STR1, overwriting STR1's original contents.
+  Use this instead of the assignment STR1=STR2 .
+StrLen (string str1)
+  Returns the length, in characters, of the string STR1.
+
+
+6.4 TEXT SCRIPT GLOBAL VARIABLES
+The following variables are available to your script. Those marked with
+an asterisk * are read-only and should NOT be modified by your script.
+ (For the characters, CHARID is the script ID name as set in the Room Editor).
+*character[CHARID].x         X co-ordinate of the character (see Note1 below)
+*character[CHARID].y         Y co-ordinate of the character
+ character[CHARID].name      The character's full name
+ character[CHARID].prevroom  The room it was in before this one
+ character[CHARID].room      Which room the character is in
+ character[CHARID].activeinv The currently selected inventory item (or -1)
+ character[CHARID].inv[x]    Whether the character is carrying inventory X
+*character[CHARID].walking   Whether the character is currently moving
+ game.debug_mode             Whether we are in debug mode or not.
+*game.score                  The player's score.  (see Note3 below)
+ game.used_mode         Cursor mode used with last click (use with "any click"
+                          events to find out which mode was used)
+ interface[xx].vtext    Text caption for interface
+ interface[xx].vtextxp  X-offset into interface of text position
+ interface[xx].vtextyp  Y-offset into interface of text position
+*mouse.x                Mouse X co-ordinate when the script was started (0-319)
+*mouse.y                Mouse Y co-ordinate when the script was started (0-199)
+ player.[x,y,name,...]  Alias to character[EGO]. Note: only set at game start,
+                          does not update if you change the player character.
+*system.screen_height   The vertical screen resolution (200 or 400) see Note2
+*system.screen_width    The horizontal screen resolution (320 or 640)
+*system.color_depth     The color depth (currently always 8).
+*system.os              Operating system (currently always 1:DOS).
+Notes:
+(1) The character X & Y co-ordinates may be modified as long as the character
+  is stationary; changing these while the character is moving will cause it
+  to start moving off in the wrong direction.
+(2) The system information is provided in order for your game to behave
+  differently if it needs to; however, do NOT use this information to force
+  the player to use a specific resolution. The AC engine is designed to allow
+  players with varying speeds of computer to enjoy the game at a playable
+  speed; people with a 486 would rather see blocky graphics at 320x200 than
+  be forced to run very slowly at 640x400.
+(3) To modify the score, use the GiveScore function.
+
+6.5 SYSTEM LIMITS
+This section tells you the maximums for various parts of the system. If you
+have been wondering "How many rooms can I have?" or something similar,
+chances are this section will answer it.
+There are maximum...
+  10  objects per room
+  40  messages per room
+ 500  global messages
+  10  commands per animation
+  10  commands per 'if' block of graphical script
+ 299  rooms per game
+  98  inventory items
+1900  imported sprites
+ 120  sprites per folder
+  50  views
+   8  loops per view
+  10  frames in each loop
+  50  characters
+  10  interface elements
+ 100  dialog topics
+ 500  dialog-script messages
+  14  options per topic
+
+If you think any of these limits is a serious problem, contact me and I can
+probably increase it.
+
+6.6 ASCII CODE TABLE
+This section lists the key codes which can be passed to  on_key_press  and
+which keys they represent:
+ 1..26     Ctrl-A .. Ctrl-Z
+ 13        Enter (Ctrl-M is also Enter)
+ 32        Space
+ 48..57    '0' key .. '9' key
+ 65..90    'A' .. 'Z'  (letters are always passed as uppercase)
+ 316..325  Alt-Q/W/E/R/T/Y/U/I/O/P
+ 330..338  Alt-A/S/D/F/G/H/J/K/L
+ 344..350  Alt-Z/X/C/V/B/N/M
+ 359..368  F1 .. F10
+ 372       Up arrow
+ 375       Left arrow
+ 377       Right arrow
+ 380       Down arrow
+ 433..434  F11 .. F12
+
+6.7 GRAPHICAL SCRIPT COMMAND REFERENCE
+While many of the graphical script commands mirror the behavior of the
+standard Interaction commands with the same name, there are some extra
+commands special to the graphical script:
+ * Clear flag FLAGNAME
+   Sets the flag's state to "Clear".
+ * Every XX loops
+   The indented commands are carried out once every XX game loops. There are
+   approximately 50 game loops per second, so specifing '50' will mean that
+   the commands will be carried out once a second. This is only useful with
+   the "repeatedly execute" room event.
+ * If flag FLAGNAME is set
+   The indented commands are only carried out if the specified flag is
+   in its "Set" state.
+ * If flag FLAGNAME is clear
+   The indented commands are only carried out if the flag is in its "Clear"
+   state.
+ * If inventory XX was used
+   The indented commands are carried out if the player used inventory item XX
+   to cause the event. You use this with the ability to set Data column to 99
+   on a "Use inv" event (see section 6.1.1 for information).
+ * If player has inv XX
+   The indented commands are only carried out if the player has the specified
+   inventory item.
+ * If timer expired
+   The indented commands are carried out if XX loops have passed since
+   the "Set timer" command was executed. (See "set timer").
+   NOTE: There is only one timer, and it is global. That is, starting the
+   timer on one screen can trigger an "if expired" event on another screen
+   if the player changes screens before the timer expires.
+ * Move man to object XX
+   Walks the main character to the object number specified. This is a
+   shortcut for having to create an animation just to move the man up to
+   the object he is interacting with.
+   The character is moved to 5 pixels below the bottom of the object.
+ * Random chance 1 in XX
+   Probably only useful with the "repeatedly execute" event, the indented
+   commands will be carried out if a random number selection by the game
+   turns out. For example, if XX is 3, the command will probably be carried
+   out about once every three times the script is executed, but this isn't
+   gauranteed. This is useful for things like adding a flying bird to the
+   screen which would appear at random intervals while the player was on the
+   screen.
+ * Set flag FLAGNAME
+   Sets the specified flag's state to "Set".
+ * Set timer to XX loops
+   Starts the user timer counting down from XX - that is, the timer will
+   expire after XX loops. (See "If timer expired"). This is similar to the
+   "Every XX loops" command, except that the timer will expire XX loops FROM
+   WHEN THIS SET TIMER COMMAND IS EXECUTED. This means that you can set another
+   event to happen an exact time after this.
+   NOTE: Using this command with XX as 0 will deactivate the timer.
+   NOTE: The timer will be deactivated if the player leaves the room where it
+   was activated.
+
+6.8 ANIMATION EDITOR COMMANDS
+This section describes all the commands available in the Animation Editor.
+The editor is explained in section 3.2.6.
+For all of the commands, you set the Object number to the number of the
+object you want the command to operate on (from 0 to number_of_objects), or
+you can set it to 99, in which case the command refers to the player
+character.
+
+þ Set object view to %d
+    Changes the view assigned to the object. The '%d' is the number of the
+    view, from the status bar in the View Editor. This command also resets
+    the object's graphic to the first frame of loop 0 in the chosen view.
+    You can use a special view number 0, which is the main character's default
+    view. This is useful to put back the main character if you changed his
+    graphics during the game.
+þ Animate using loop %d
+    Starts the object animating using loop number '%d' of its current view.
+    The object will cycle through all the frames in the loop and then stop.
+    If the Wait column is set, the next command will not be executed until
+    the animation has finished.
+    If you set the "second value" number to 1 then the animation will repeat
+    continuosly. If it is 0 (default) the animation will run once then stop.
+    NOTE: Don't set the Wait column AND set "second value" to 1, or you will
+    be waiting a LONG time!
+þ Move to %d,%d
+    Starts the object moving to the specified co-ordinates. You can find out
+    the co-ordinates of a point by using the  Misc | Ask Position  feature
+    in RoomMake. If the Wait column is set, the next command will not be
+    executed until the object has reached its destination.
+    NOTE: If you specify a target point which cannot be reached, there will
+    be a short delay and then the next command will be executed immediately.
+þ Move to %d,%d no walls
+    Identical to "Move to %d,%d", except that the object will move in a direct
+    path straight to the destination, ignoring all the walls on the screen.
+    This is useful if you want to have the man, for instance, walking into a
+    door once it's open (which would mean crossing the base of the door,
+    presumably a wall to the player). It can also be used to simulate flying
+    objects.
+þ Place at %d,%d
+    Moves the object's position to the location immediately. Note that this
+    will only work if the object is turned OFF. Useful with the "player enters
+    screen" event to move objects around or to place the main character
+    somewhere which isn't on a screen edge.
+    Note that the position specified is the BOTTOM LEFT of the object graphic.
+
+
+7. FAQ & Troubleshooting
+------------------------
+This section is split up into three parts:
+ * frequently asked questions, which answers questions people have about
+   the system, rather than problems using it.
+ * run-time engine problems, which deals with problems getting the engine
+   to run, sound card issues, crashes, and other game-independant problems.
+ * game creation problems, which deals with common problems you are having
+   with your specific game.
+ * known bugs, which lists problems known to exist with AGS and what to
+   do about them.
+
+7.1 FREQUENTLY ASKED QUESTIONS
+
+Q. Can I play an AVI file?
+A. No, not directly. However, you can convert an AVI file for use with the
+   program. You've probably noticed that AGS supports WAV files for sound
+   effects and FLI/FLC for animations. By using a "Play sound" command straight
+   before a "Play FLC" command the sound should be in sync with the animation.
+   To split an AVI file into WAV and FLC components, I recommend the excellent
+   Smacker tools (www.smacker.com) which are free to download and also do
+   a VERY good job of reducing true-color AVIs down to 256-colours.
+
+Q. What is the "Fonts" tab for in the Room Editor?
+A. It will be used when custom font support is added in a future version.
+   For now, it does nothing.
+
+Q. Are you going to do a Windows port of the engine?
+A. I'd love to, but I don't have a Windows compiler, and I can't afford one
+   either. If you'd like to buy me MS Visual C++, I think a Windows port would
+   probably come pretty quickly.
+
+Q. It's a bit cheap, the way you use MS-DOS EDIT to edit the text scripts.
+   Why not have an integrated editor?
+A. An integrated text editor will probably come soon, but in order to release
+   the program as quickly as possible, I felt it best to leave a well-tested,
+   reliable editor there instead of delaying the release while I write my own
+   text editor. Also, this way you can use your favorite text editor instead by
+   copying it to EDIT.EXE in the RoomEdit directory.
+
+Q. What's the deal with the license? What does it mean in plain English?
+A. Adventure Game Studio is swap-ware. That means, that if you use and like
+   the program, you should send me something in return. This could be a game
+   you have made using it, some new graphics, a new translation for the system
+   messages, or even money! You don't HAVE to do this though, if you're really
+   mean, and I won't hold it against you :-)
+   There is one requirement - if you want to SELL a game you make, for profit,
+   then you must EITHER (a) send me a copy, or (b) tell me about it, giving me
+   a location where I can download the full game.
+   Even if you're not selling it, I'd appreciate you telling me about the game
+   when you finish it, so that I can add it to the main AGS website Links page.
+   In exceptional circumstances, I may even agree to host your game on the AC
+   site, but you should really get a web page of your own. It's not hard :-)
+
+Q. Why the swapware license? Why aren't you charging for it?
+A. Because I want to. Mainly because if you see a program claiming to create
+   adventure games, but charging you a registration of $100 if you want to
+   distribute a game, you're not likely even to try it. A few people are doing
+   this, for example Twilight Software with their system, but at $40 for a
+   single user registration, just to make freeware games with it, that's a sure
+   way to make it unpopular. Remember "Klik'n'play"? Hmmm.....
+
+Q. Why are you now distributing AGS with an Install program, instead of just
+   letting us unzip it directly?
+A. Because the distribution now contains sub-directories, like the "Demo"
+   directory, and people are always forgetting to use the "-d" option with
+   PKUNZIP. This way it's all created for you.
+
+7.2 RUN-TIME ENGINE PROBLEMS
+
+Q. The engine quits with "Aborting due to signal SIGxxxx, Shutting down
+   allegro" and a load of numbers. What's going on?
+A. You may have found a bug in the engine. First of all, check that you
+   haven't done anything silly, like assigning a view number to an object
+   where the view doesn't exist.
+   Otherwise, try and work out when the problem happens - does it always
+   happen at the same time (like whenever you turn an object on).
+   Write down the list of numbers (each begins with "0x") and mail me with
+   the problem.
+
+Q. When I choose the 960x600 mode in Setup, the game appears in a box in the
+   middle of the screen surrounded by black borders. What's wrong?
+A. Nothing, that's just how it is. The reason: a monitor can only use certain
+   specific resolutions, like 320x200, 640x400, 640x480, 1024x768, and so on.
+   So, to get the 960x600 mode, AGS tells the monitor to use its 1024x768 mode,
+   and place the game window in the centre.
+
+Q. Then why doesn't AGS support a 1024x768 mode?
+A. For compatibility. The lowest resolution supported is 320x200, and all
+   other supported resolutions are multiples of this. This gives 640x400 and
+   960x600. Without this, AGS would be stuck in 1024x768 and would not allow
+   different video modes. Whether you think that would be a good thing or
+   not isn't the issue :-)
+
+Q. I don't get sound from my SB Live! soundcard.
+A. That's not a question.
+
+Q. Ok, how do I get sound from my SB Live! soundcard?
+A. To get any sound at all, you need to have the SB16 emulation enabled. (The
+   SB Live install program should have done this for you).
+   First of all, run AC Setup and change the MIDI music card to the "General
+   MIDI" option. This gives much better sounding MIDI music than the Sound
+   Blaster midi driver which is autodetected.
+   Secondly, digital sound. This appears to be an incompatibility between
+   the SB16 emulator which comes with the SB Live, and AC's sound driver. As
+   far as I've tried it, you can get digital sound if you run AC from a Windows
+   DOS-prompt, but not if you restart in MS-DOS mode. If you have more luck
+   in MS-DOS mode, I'd like to hear about it. You can try setting the digital
+   sound driver to "Sound Blaster Pro" in Setup, as this is more compatible
+   than the SB16 driver.
+   Want to sort this problem out? Well, mail Creative Labs and tell them to
+   release some specs for the SB Live soundcard. The reason there is no proper
+   driver and you have to use SB16-emulation is because Creative are keeping
+   how the card works secret. That's not my fault.
+
+Q. Where can I get a "DOS mouse driver"?
+A. If you have Windows installed, it comes with a DOS mouse driver, so just
+   try typing MOUSE and press return. If not, try typing C:\WINDOWS\MOUSE and
+   press return (change the directory if Windows is installed elsewhere).
+   If you don't have one, you can download the Microsoft DOS mouse driver
+   from Microsoft's web site.
+   Then try AC again.
+
+7.3 GAME CREATION PROBLEMS
+
+Q. On my screen, I can't move the main character. Wherever I click to move him,
+   he just stands there.
+A. If the main character isn't on a walkable area, he will not be able to move.
+   Load the screen into the Room Editor, and check that the location where the
+   man is has a walkable area there.
+   If you are upgrading from AC v1, you need to upgrade the room - see
+   section 5 for information.
+
+Q. When I enter a certain room, I just get a black screen.
+A. Make sure that you haven't used a Display Message command in the "Player
+   enters screen" event for that room. Remember that this event happens BEFORE
+   the screen fades in.
+   To make sure, when you get the black screen, try pressing enter, or clicking
+   the left mouse button. If nothing happens then something more serious may
+   have happened. If this is the case, press Ctrl-Break, which should exit the
+   program and give you a list of numbers which you can send to me to
+   investigate.
+
+Q. The character isn't drawn behind my walk-behind areas!
+A. You need to define the base line for the area, or he will always be drawn
+   in front. See section 3.1.2 for information.
+
+Q. My USERGAME.EXE file seems to have disappeared.
+A. Because this file is your entire game, including the room files, when you
+   save a room in the Room Editor it will delete the exe file (because the
+   room contained in the exe is out of date). To get it back, simply save the
+   game again by going to the Game, Main tab and choosing the "Save game"
+   button.
+
+Q. I get a message "Exiting due to signal SIGxxxx, Shutting down Allegro"
+   and it says it "exited without requesting it".
+A. If you see a list of numbers, each starting with "0x", please write them
+   down and contact me. Check that you haven't done anything silly, like used
+   a sprite or view number which doesn't exist.
+
+7.4 KNOWN BUGS
+
+ * Currently, the Animation command "Move object to %d,%d" only works with
+   object number 99 (the player character). Attempting to move any of the room
+   objects results in an error.
+
+If you think you've found a different bug, tell me about it - see section 8
+below for more information.
+
+
+8. Contacting the author
+------------------------
+If you have any comments/suggestions, mail me at the address below.
+If you think you've found a bug, if you need help or can't get it to work,
+please check the following:
+ * That your question is not already answered in this file. AGS has been
+   painstakingly documented, so PLEASE read this file through before asking
+   me a question.
+ * That you are using the most recent version of AGS. You can find out the
+   most recent version by checking the website (address below).
+   You can find out your version by typing  AC /?  and noting the line that
+   reads "Adventure Creator vx.xx" (x.xx = version number).
+ * If you are receiving an error message, please write down the EXACT message
+   and any other information which you think is appropriate. PLEASE WRITE THE
+   EXACT ERROR MESSAGE TEXT, don't just say "I get a message about it not being
+   able to find a file".
+ * If you are getting lock-ups or techno-garbage printouts, please try to
+   give a situation which causes the problem. For instance, if you notice that
+   it only happens on certain screens, or only if there is an object, etc then
+   please state that - it makes replying a lot easier and faster.
+If you have a general query about the system which you think any other user
+would be able to answer, the best place is probably the Creator messageboard
+(link through website, address below). If you have a bug report or suggestions,
+it's probably better to e-mail me directly.
+NOTE: If you want to mail me an attachment to demonstrate a problem you are
+having, PLEASE COMPRESS IT using WinZip, PKZIP, etc and send it to me as a
+zip file. I don't have the time or money to download massive 500 k BMP files
+which compress to 20 k when zipped - if you send me an uncompressed BMP then
+I will not respond to your mail.
+Please note: I usually check my e-mail two or three times a week, so give me
+about a week to reply before assuming your message didn't get through. The
+same applies to the message board.
+Mail me:  dosuser@hotmail.com
+The AC website:  http://members.xoom.com/dosuser/ac.htm
+
+
+9. Credits
+----------
+The Adventure Game Studio v2 was programmed by Chris Jones.
+It uses DJGPP, a free 32-bit C/C++ compiler by DJ Delorie, which you can
+  get from http://www.delorie.com/djgpp
+Graphics and sound are courtesy of the Allegro graphics library by Shawn
+  Hargreaves and many others. You can get it at
+  http://www.talula.demon.co.uk/allegro
+The script compiler used is SeeR 0.92a, by Przemyslaw Podsiadly. You can find
+  it at http://home.elka.pw.edu.pl/~ppodsiad/seer/
+Uses JGMOD mod player by Guan Foo Wah. You can find it at
+  http://surf.to/jgmod
+Uses libamp MP3 player by Tomislav Uzelac and Ove Kaaven.
+The demo game backgrounds and main character were drawn by D281@aol.com.
+The icon bar graphics and Finnish translation were done by Teemu Eramaa
+  (teemue@nic.fi)
+The German and Dutch translations, and the website logo were done by Erix
+  Designs (erixdesigns@hotmail.com).
+The Portugese translation was done by Nuno Costa (ncosta@mail.telepac.pt).
+The Norwegian translation was done by Martin Seterstoen (martin-s@online.no).
+The Spanish translation was done by Ernesto Couso Artiles
+  (cousostudios@usa.net).
+The French translation was done by Pierre-Marc Jobin
+  (djobin1@globetrotter.qc.ca).
+The Lithuanian translation was done by Tomas J. (tomjak@takas.lt)
+The Swedish translation was done by Arn.
+Includes CWSDPMI DPMI host (c) 1994-1997 by Charles W. Sandmann
+Executables compressed with DJP v1.07 (c) 1996-1998 by Laszlo Molnar
+
+LEGAL STUFF
+-----------
+Pentium is a trademark of Intel corporation.
+Windows is a trademark or registered trademark of Microsoft corp.
+
+THIS SOFTWARE IS PROVIDED WITHOUT ABSOLUTELY NO WARRANTY, NOT EVEN THE IMPLIED
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+USE THIS SOFTWARE AT YOUR OWN RISK. CHRIS JONES IS NOT RESPONSIBLE IF YOUR
+COMPUTER STARTS BURPING, CATCHES FIRE, GETS A SENSE OF HUMOUR OR ANYTHING
+ELSE WHICH HAPPENS DUE TO THE USE OF THIS SOFTWARE.
+
+SEE THE ACCOMPANYING LICENSE.TXT FILE FOR INFORMATION ON GAME DISTRIBUTION.

@@ -1,0 +1,84 @@
+<HTML>
+<head><title>Music and sound</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="MusAndSound"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags12.htm#topic24"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags12.htm#topic24"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags14.htm#topic26"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Music and sound</H2>
+All good games use sound to involve and immerse the player in the game. AGS
+allows you to play a background music track, and also to play sound effects
+at appropriate times.<P>
+The Windows version of AGS supports all DirectX-compatible sound cards.
+The DOS version of AGS supports Adlib, Sound Blaster and General MIDI for
+background music, and it supports the Sound Blaster and ESS Audiodrive for
+sound effects.<P>
+For background music, AGS can use OGG, MP3, MIDI, WAV, MOD, XM, IT and S3M music files. For
+sound effects, you can use OGG, MP3, WAV and VOC files.<P>
+When AGS needs to play music number X, it will search for the files in the
+following order. The first file it finds, it plays: MUSICx.OGG, MUSICx.MP3, MUSICx.WAV,
+MUSICx,MID, MUSICx.MOD, MUSICx.XM, MUSICx.S3M, MUSICx.IT<P>
+<I>TIP: What is ogg?</I> OGG is a digital music format, similar to MP3, but achieving
+better compression and higher quality. More importantly, it is a totally free format
+so no royalty payments or licenses are required to use it. For more information and
+programs to encode your music to OGG, see http://www.vorbis.org/<P>
+When the game loads, music 0 will be played if it exists in the game directory.
+You can change the music later by setting "Play music on room load" in a room,
+by using the PlayMusic script command, or by using the "Play music" interaction
+command.<P>
+To play a sound effect during the game, you can use the PlaySound script
+command, or the "Play sound" interaction command. The game will search for
+SOUNDx.OGG, SOUNDx.MP3, SOUNDx.WAV and SOUNDx.VOC, where X is the sound number.<P>
+<I><B>NOTE</B>: WAV, MP3 and OGG music files are not included in the game EXE, but 
+are instead bundled into a seperate file called MUSIC.VOX. Whenever you add any new
+music files of those types to your game folder, you need to choose "Rebuild VOX Files"
+from the Game menu in order to update the store and make them work in-game.</I><P>
+<I>NOTE: The Adlib sound card only supports MIDI music. It cannot play sound
+effects, or MOD, XM, OGG or MP3 music.</I><P>
+<A HREF="#topic25">Voice speech</A><BR>
+<P>
+
+<HR>
+<A NAME="topic25"></A>
+<H3>Voice speech</H3>
+With AGS you can link a line of dialog to a speech file, to enable "talkie"-
+style games. Suppose you have a dialog script with the following:
+<PRE>
+ego: "Hi! How are you?"
+david: "I'm fine."
+</PRE>
+Normally this would display the words in the speech text above the characters
+heads. However, you can add the special character '&amp;' to symbolise that a
+voice file should also be played. The file name is made up of the <B>first four
+letters</B> of the character's <B>script name</B>, then an ID number. For example,
+<PRE>
+ego: &10 "Hi! How are you?"
+david: &7 "I'm fine."
+</PRE>
+This would play EGO10.WAV with the first line, and DAVI7.WAV with the second.
+When a line of text has a voice linked to it, the text on the screen will not
+be removed until the voice file has finished playing. If the player interrupts
+it by clicking the mouse or pressing a key, the text and voice will be stopped.<P>
+You can also use speech with Say script function.
+<PRE>
+character[EGO].Say("&10 Hi! How are you?");
+character[DAVID].Say("&7 I'm fine.");
+</PRE>
+<I>NOTE: WAV, OGG and MP3 format files can be used for speech.</I><P>
+<B>IMPORTANT:</B> If you add or update any voice files, you need to click the "Rebuild VOX files"
+option on the Game menu of the AGS Editor, which will combine them into the
+speech file used in the game. This file is called SPEECH.VOX and is seperate
+from the rest of your game data so that you can offer it as an optional extra
+download to the player. The game will function correctly if the file is not
+present.<P>
+<I>SeeAlso:</I> <A HREF="ags54.htm#SetVoiceMode">SetVoiceMode</A> script function.<P>
+
+
+</BODY></HTML>

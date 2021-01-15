@@ -1,0 +1,500 @@
+<HTML>
+<head><title>DrawingSurface functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="DrawingSurfaceFunctions"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags46.htm#topic47"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags48.htm#topic48"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>DrawingSurface functions and properties</H2>
+The DrawingSurface family of functions allow you to directly draw onto dynamic sprites
+and room backgrounds in the game. You get a drawing surface by calling
+<A HREF="ags48.htm#DynamicSprite.GetDrawingSurface">DynamicSprite.GetDrawingSurface</A> or
+<A HREF="ags69.htm#Room.GetDrawingSurfaceForBackground">Room.GetDrawingSurfaceForBackground</A>,
+and you can then use the following methods to draw onto the surface.<P>
+<B>IMPORTANT:</B> You <B>MUST</B> call the <A HREF="ags47.htm#DrawingSurface.Release">Release</A> method
+when you have finished drawing onto the surface. This allows AGS to update its cached
+copies of the image and upload it to video memory if appropriate.<P>
+
+<A HREF="#DrawingSurface.Clear">Clear (drawing surface)</A><BR>
+<A HREF="#DrawingSurface.CreateCopy">CreateCopy</A><BR>
+<A HREF="#DrawingSurface.DrawCircle">DrawCircle</A><BR>
+<A HREF="#DrawingSurface.DrawImage">DrawImage</A><BR>
+<A HREF="#DrawingSurface.DrawLine">DrawLine</A><BR>
+<A HREF="#DrawingSurface.DrawMessageWrapped">DrawMessageWrapped</A><BR>
+<A HREF="#DrawingSurface.DrawPixel">DrawPixel</A><BR>
+<A HREF="#DrawingSurface.DrawRectangle">DrawRectangle</A><BR>
+<A HREF="#DrawingSurface.DrawString">DrawString</A><BR>
+<A HREF="#DrawingSurface.DrawStringWrapped">DrawStringWrapped</A><BR>
+<A HREF="#DrawingSurface.DrawSurface">DrawSurface</A><BR>
+<A HREF="#DrawingSurface.DrawTriangle">DrawTriangle</A><BR>
+<A HREF="#DrawingSurface.Release">Release (drawing surface)</A><BR>
+<A HREF="#DrawingSurface.DrawingColor">DrawingColor property</A><BR>
+<A HREF="#DrawingSurface.GetPixel">GetPixel</A><BR>
+<A HREF="#DrawingSurface.Height">Height property (drawing surface)</A><BR>
+<A HREF="#DrawingSurface.UseHighResCoordinates">UseHighResCoordinates property</A><BR>
+<A HREF="#DrawingSurface.Width">Width property (drawing surface)</A><BR>
+<P>
+
+<HR>
+<A NAME="DrawingSurface.Clear"></A>
+<H3>Clear (drawing surface)</H3>
+<I>(Formerly known as RawClearScreen, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.Clear(optional int colour)
+</PRE>
+Clears the surface to the specified COLOUR (this is a number you can find in 
+the Colours pane of the editor). The current contents of the surface will be lost.<P>
+If you do not supply the COLOUR parameter, or use COLOR_TRANSPARENT, the surface
+will be cleared to be fully transparent.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.Clear(14);
+surface.DrawingColor = 13;
+surface.DrawCircle(160,100,50); 
+surface.Release();
+</PRE>
+clears the room background to be fully yellow, then draws a pink circle in the middle of it.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.CreateCopy"></A>
+<H3>CreateCopy</H3>
+<I>(Formerly known as RawSaveScreen, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface* DrawingSurface.CreateCopy()
+</PRE>
+Makes a backup copy of the current surface, in order that it can be
+restored later. This could be useful to back up a background scene before
+writing over it, or to save a certain state of your drawing to restore
+later. <P>
+Unlike the obsolete RawSaveScreen command in previous versions of AGS, backup
+surfaces created with this command are not lost when the player changes room or
+restores a game. However, surfaces containing a copy of room backgrounds can
+be <B>very large</B>, using up a large amount of memory and can increase the
+save game sizes significantly. Therefore, it is <B>strongly recommended</B> that
+you Release any backup copy surfaces as soon as you are done with them.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+DrawingSurface *backup = surface.CreateCopy();
+surface.DrawTriangle(0,0,160,100,0,200);
+Wait(80);
+surface.DrawSurface(backup);
+backup.Release();
+surface.Release();
+</PRE>
+will save a copy of the room background, draw a triangle onto it, wait for
+a while and then restore the original background.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawSurface">DrawingSurface.DrawSurface</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawCircle"></A>
+<H3>DrawCircle</H3>
+<I>(Formerly known as RawDrawCircle, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawCircle(int x, int y, int radius)
+</PRE>
+Draws a filled circle of radius RADIUS with its centre at (X,Y) in the current drawing colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawCircle(160,100,50); 
+surface.Release();
+</PRE>
+will draw a circle in the centre of the screen, of 50 pixels radius.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawImage"></A>
+<H3>DrawImage</H3>
+<I>(Formerly known as RawDrawImage, which is now obsolete)</I> <br> 
+<I>(Formerly known as RawDrawImageResized, which is now obsolete)</I> <br> 
+<I>(Formerly known as RawDrawImageTransparent, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawImage(int x, int y, int slot, optional int transparency,
+                         optional int width, optional int height)
+</PRE>
+Draws image SLOT from the sprite manager onto the surface at location (X,Y).<P>
+Optionally, you can also specify the transparency of the image. This is a number
+from 0-100; using a <I>transparency</I> of 50 will draw the image semi-transparent;
+using 0 means it will not be transparent.<P>
+You can also resize the image as you draw it. In order to do this, simply specify
+a <I>width</I> and <I>height</I> that you wish to resize the image to when it is drawn.<P>
+<B>NOTE:</B> This command only works if the image to be drawn is the same colour
+depth as the surface that you are drawing onto.<P>
+<B>NOTE:</B> Transparency does not work in 256-colour games, or with 256-colour sprites.<P>
+<B>NOTE:</B> The X and Y co-ordinates given are ROOM co-ordinates, not SCREEN co-ordinates.
+This means that in a scrolling room you can draw outside the current visible area.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawImage(100, 100, oDoor.Graphic, 40);
+surface.Release();
+</PRE>
+will draw the <I>oDoor</I> object's graphic onto the room background at (100, 100), at <TT>40%</TT>
+transparency.<P>
+<I>See Also:</I> 
+<A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawString">DrawingSurface.DrawString</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawSurface">DrawingSurface.DrawSurface</A>,
+<A HREF="ags69.htm#Room.ColorDepth">Room.ColorDepth</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawLine"></A>
+<H3>DrawLine</H3>
+<I>(Formerly known as RawDrawLine, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawLine(int from_x, int from_y, int to_x, int to_y,
+                        optional int thickness) 
+</PRE>
+Draws a line from (FROM_X, FROM_Y) to (TO_X, TO_Y) in the surface's current drawing colour.<P>
+The <I>thickness</I> parameter allows you to specify how thick the line is, the default being 1 pixel.<P>
+<B>NOTE:</B> The X and Y co-ordinates given are ROOM co-ordinates, not SCREEN co-ordinates.
+This means that in a scrolling room you can draw outside the current visible area.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawLine(0, 0, 160, 100);
+surface.Release();
+</PRE>
+will draw a line from the left top of the screen (0,0) to the middle of the screen (160,100);<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawCircle">DrawingSurface.DrawCircle</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawRectangle">DrawingSurface.DrawRectangle</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawTriangle">DrawingSurface.DrawTriangle</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawMessageWrapped"></A>
+<H3>DrawMessageWrapped</H3>
+<I>(Formerly known as RawPrintMessageWrapped, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawMessageWrapped(int x, int y, int width,
+                                  FontType font, int message_number)
+</PRE>
+Draws the room message MESSAGE_NUMBER onto the surface at (x,y), using the
+specified FONT.<P>
+WIDTH is the width of the virtual textbox enclosing the text, and is the point that
+the text will wrap at. This command is designed for writing a long message to the
+screen with it wrapping normally like a standard label would do.<P>
+The text will be printed using the current drawing colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawMessageWrapped(80, 40, 160, Game.NormalFont, 10); 
+surface.Release();
+</PRE>
+will display message 10 in the centre of the screen, starting from Y = 40.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawString">DrawingSurface.DrawString</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawStringWrapped">DrawingSurface.DrawStringWrapped</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawPixel"></A>
+<H3>DrawPixel</H3>
+<PRE>
+DrawingSurface.DrawPixel(int x, int y) 
+</PRE>
+Draws a single pixel onto the surface at (X,Y) in the current colour. The pixel
+thickness respects the <A HREF="ags47.htm#DrawingSurface.UseHighResCoordinates">UseHighResCoordinates</A>
+property.<P>
+<B>NOTE:</B> This command is not fast enough to use repeatedly to build up an image. Only
+use it for single pixel adjustments.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawPixel(50, 50);
+surface.Release();
+</PRE>
+draws a yellow pixel in the top left of the room background<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>, 
+<A HREF="ags47.htm#DrawingSurface.GetPixel">DrawingSurface.GetPixel</A>,
+<A HREF="ags47.htm#DrawingSurface.UseHighResCoordinates">DrawingSurface.UseHighResCoordinates</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawRectangle"></A>
+<H3>DrawRectangle</H3>
+<I>(Formerly known as RawDrawRectangle, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawRectangle(int x1, int y1, int x2, int y2)
+</PRE>
+Draws a filled rectangle in the current colour with its top-left corner
+at (x1,y1) and its bottom right corner at (x2, y2)<P>
+<B>NOTE:</B> The X and Y co-ordinates given are ROOM co-ordinates, not SCREEN co-ordinates.
+This means that in a scrolling room you can draw outside the current visible area.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawRectangle(0, 0, 160, 100);
+surface.Release();
+</PRE>
+will draw a rectangle over the top left hand quarter of the screen.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawImage">DrawingSurface.DrawImage</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawString"></A>
+<H3>DrawString</H3>
+<I>(Formerly known as RawPrint, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawString(int x, int y, FontType font, string text, ...)
+</PRE>
+Draws the <I>text</I> onto the surface at (x, y), using the supplied font number.
+The text will be drawn in the current drawing colour.<P>
+You can insert the value of variables into the message. For more information,
+see the <A HREF="ags36.htm#StringFormats">string formatting</A> section.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawString(0, 100, Game.NormalFont, "Text written into the background!");
+surface.Release();
+</PRE>
+will write some text onto the middle-left of the room background<P>
+<I>See Also:</I> <A HREF="ags50.htm#GetTextWidth">GetTextWidth</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawStringWrapped">DrawingSurface.DrawStringWrapped</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawStringWrapped"></A>
+<H3>DrawStringWrapped</H3>
+<PRE>
+DrawingSurface.DrawStringWrapped(int x, int y, int width,
+                                 FontType font, Alignment,
+                                 const string text)
+</PRE>
+Draws the <I>text</I> onto the surface at (x,y), using the specified FONT.<P>
+<I>width</I> is the width of the virtual textbox enclosing the text, and is the point
+that the text will wrap at. You can use the <I>alignment</I> parameter to determine
+how the text is horizontally aligned.<P>
+The text will be printed using the current drawing colour.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawStringWrapped(80, 40, 160, Game.NormalFont, eAlignCentre, "Hello, my name is Bob."); 
+surface.Release();
+</PRE>
+will display the text in the centre of the screen, starting from Y = 40.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawString">DrawingSurface.DrawString</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawMessageWrapped">DrawingSurface.DrawMessageWrapped</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawSurface"></A>
+<H3>DrawSurface</H3>
+<I>(Formerly known as RawDrawFrameTransparent, which is now obsolete)</I> <br> 
+<I>(Formerly known as RawRestoreScreen, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawSurface(DrawingSurface *source, optional int transparency)
+</PRE>
+Draws the specified surface on top of this surface, optionally using <I>transparency</I>
+percent transparency.<P>
+This allows you to perform day-to-night fading and other special effects.<P>
+<B>NOTE:</B> You cannot use the <I>transparency</I> parameter with 256-colour surfaces.<P>
+<B>NOTE:</B> This command can be a bit on the slow side, so don't call it from repeatedly_execute.<P>
+<B>TIP:</B> If you want to gradually fade in a second background, create a copy of
+the original surface and then restore it after each iteration, otherwise the backgrounds
+will converge too quickly.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *mainBackground = Room.GetDrawingSurfaceForBackground(0);
+DrawingSurface *nightBackground = Room.GetDrawingSurfaceForBackground(1);
+mainBackground.DrawSurface(nightBackground, 50);
+mainBackground.Release();
+nightBackground.Release();
+</PRE>
+this will draw background frame 1 onto frame 0 at 50<TT>%</TT> opacity.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawImage">DrawingSurface.DrawImage</A>,
+<A HREF="ags50.htm#SetAmbientTint">SetAmbientTint</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawTriangle"></A>
+<H3>DrawTriangle</H3>
+<I>(Formerly known as RawDrawTriangle, which is now obsolete)</I><P>
+<PRE>
+DrawingSurface.DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3)
+</PRE>
+Draws a filled triangle in the current colour with corners at the points
+(x1,y1), (x2,y2) and (x3,y3).<P>
+Well, don't look at me, you might find it useful for something :-)<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawTriangle(0,0,160,100,0,200); 
+surface.Release();
+</PRE>
+will draw a triangle with corners at the points (0,0),(160,100),(0,200).<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawImage">DrawingSurface.DrawImage</A>,
+ <A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawRectangle">DrawingSurface.DrawRectangle</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.Release"></A>
+<H3>Release (drawing surface)</H3>
+<PRE>
+DrawingSurface.Release()
+</PRE>
+Tells AGS that you have finished drawing onto this surface, and that AGS can now upload
+the changed image into video memory.<P>
+After calling this method, you can no longer use the DrawingSurface instance. To do
+any further drawing, you need to get the surface again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawLine(0, 0, 50, 50);
+surface.Release();
+</PRE>
+draws a yellow diagonal line across the top-left of the current room background,
+then releases the image.<P>
+<I>See Also:</I> <A HREF="ags48.htm#DynamicSprite.GetDrawingSurface">DynamicSprite.GetDrawingSurface</A>,
+<A HREF="ags69.htm#Room.GetDrawingSurfaceForBackground">Room.GetDrawingSurfaceForBackground</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.DrawingColor"></A>
+<H3>DrawingColor property</H3>
+<I>(Formerly known as RawSetColor, which is now obsolete)</I><P>
+<PRE>
+int DrawingSurface.DrawingColor
+</PRE>
+Gets/sets the current drawing colour on this surface. Set this before using commands
+like <A HREF="ags47.htm#DrawingSurface.DrawLine">DrawLine</A>, which use this colour for
+their drawing.<P>
+You can set this either to an AGS Colour Number (as you'd get from the Colours pane
+in the editor) or to the special constant COLOR_TRANSPARENT, which allows you
+to draw transparent areas onto the surface.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawLine(0, 0, 160, 100);
+surface.DrawingColor = Game.GetColorFromRGB(255, 255, 255);
+surface.DrawLine(0, 199, 160, 100);
+surface.Release();
+</PRE>
+will draw a yellow line from the left top of the screen (0,0) to the middle of the screen (160,100),
+and a white line from the bottom left to the middle.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawCircle">DrawingSurface.DrawCircle</A>, 
+<A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawRectangle">DrawingSurface.DrawRectangle</A>,
+<A HREF="ags50.htm#Game.GetColorFromRGB">Game.GetColorFromRGB</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.GetPixel"></A>
+<H3>GetPixel</H3>
+<PRE>
+int DrawingSurface.GetPixel(int x, int y) 
+</PRE>
+Returns the AGS Colour Number of the pixel at (X,Y) on the surface.<P>
+<B>NOTE:</B> This command is relatively slow. Don't use it to try and process an entire image.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+Display("The colour of the middle pixel is %d.", surface.GetPixel(160, 100));
+surface.Release();
+</PRE>
+displays the pixel colour of the centre pixel on the screen.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawingColor">DrawingSurface.DrawingColor</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawPixel">DrawingSurface.DrawPixel</A>, 
+<A HREF="ags47.htm#DrawingSurface.UseHighResCoordinates">DrawingSurface.UseHighResCoordinates</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.Height"></A>
+<H3>Height property (drawing surface)</H3>
+<PRE>
+readonly int DrawingSurface.Height
+</PRE>
+Gets the height of the surface.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+Display("The background is %d x %d!", surface.Width, surface.Height);
+surface.Release();
+</PRE>
+displays the size of the surface to the player<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.UseHighResCoordinates">DrawingSurface.UseHighResCoordinates</A>,
+<A HREF="ags47.htm#DrawingSurface.Width">DrawingSurface.Width</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.UseHighResCoordinates"></A>
+<H3>UseHighResCoordinates property</H3>
+<PRE>
+bool DrawingSurface.UseHighResCoordinates
+</PRE>
+Gets/sets whether you want to use high-resolution co-ordinates with this surface.<P>
+By default, drawing surfaces use 320x200-resolution co-ordinates, which is standard
+behaviour in AGS. However, if you're making a 640x480 or 800x600 game, this may
+not be very convenient when trying to do pixel-accurate drawing. Set this
+property to true in order to specify high-resolution co-ordinates instead.<P>
+Setting this property affects <B>ALL</B> other commands performed on this drawing
+surface, including the <A HREF="ags47.htm#DrawingSurface.Width">Width</A> and <A HREF="ags47.htm#DrawingSurface.Height">Height</A>
+properties.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.UseHighResCoordinates = true;
+surface.DrawingColor = 14;
+surface.DrawLine(0, 0, 320, 200);
+surface.Release();
+</PRE>
+draws a yellow line from the top left of the screen to the middle of the screen. If we
+hadn't set <I>UseHighResCoordinates</I> to true, this would draw a line from the top left
+to the bottom right of the screen.<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.DrawCircle">DrawingSurface.DrawCircle</A>, <A HREF="ags47.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawRectangle">DrawingSurface.DrawRectangle</A>,
+<A HREF="ags47.htm#DrawingSurface.DrawTriangle">DrawingSurface.DrawTriangle</A><P>
+
+
+<HR>
+<A NAME="DrawingSurface.Width"></A>
+<H3>Width property (drawing surface)</H3>
+<PRE>
+readonly int DrawingSurface.Width
+</PRE>
+Gets the width of the surface.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+Display("The background is %d x %d!", surface.Width, surface.Height);
+surface.Release();
+</PRE>
+displays the size of the surface to the player<P>
+<I>See Also:</I> <A HREF="ags47.htm#DrawingSurface.Height">DrawingSurface.Height</A>,
+<A HREF="ags47.htm#DrawingSurface.UseHighResCoordinates">DrawingSurface.UseHighResCoordinates</A><P>
+<P>
+
+</BODY></HTML>

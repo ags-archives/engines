@@ -1,0 +1,50 @@
+<HTML>
+<head><title>Calling global functions from local scripts</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic45"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic42"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags31.htm#UpgradingTo271"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags33.htm#topic46"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Calling global functions from local scripts</H2>
+You can now call your global script functions directly from your rooms. This
+means that if you have a common script that you want to use in response to
+various different events during the game, you can call it from your room
+scripts rather than duplicating code.<P>
+To use a global function, open up the main script header (the "Edit script header"
+option on the Game menu), and add a line similar to the following:
+<PRE>
+import function my_function_name (parameters);
+</PRE>
+Where <I>my_function_name</I> is the name of the global script function, and
+<I>parameters</I> is a list of the TYPES ONLY of the parameters it takes. For example,
+if you had in your global script:
+<PRE>
+function do_animation (int anim_number) {
+</PRE>
+then you would write:
+<PRE>
+import function do_animation (int);
+</PRE>
+To use the function, you just call it normally in your script, eg:
+<PRE>
+do_animation (3);
+</PRE>
+You can also return a value to the caller by using the "return" statement,
+and the local script picks this up the same way it does with built-in
+functions. For example, the end of your global script function could be:
+<PRE>
+return 51;
+</PRE>
+then the local script just does:
+<PRE>
+int value = do_animation(3);
+</PRE>
+
+</BODY></HTML>

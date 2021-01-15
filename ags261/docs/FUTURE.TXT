@@ -1,0 +1,807 @@
+The following features have been requested for future versions of AGS. Generally
+speaking, suggestions at the top of the list are higher priority than those at the
+bottom of the list.
+
+ * - Roger - trivia2, Add !addquote, !randomquote
+   random responses a|b|c
+   !agstrivia with seperate set of questions
+ * Forum - display date joined under user title on all posts
+
+ * tutorials on:
+    - basic LEC GUI - in particular, how to make 'Give X to Y' mode
+    - custm save/load window
+    - keyboard walking 
+    - save game screenshots
+ * games page - add e-mail addresses, register username to link games together
+ * online manual allowing user comments on manual pages
+ * games page Keywords to allow a 'similar games' feature
+   games page release dates for games
+   games page link to forums - each game should have list of contributors as forum names
+                               allowing "view my games" link in peoples profiles
+ * Add link to Plugins category page to the Resources page
+
+ * editor Script menu, repeatedly_Execute goes to _always because it doesn't check for (
+ * more hotspots (30);
+   display current hotspot in red and all others in grey
+ * 256-col animated backgrounds - ticking both Use Exacy Palette and Share Palette doesn't
+   seem to use exact palette
+ * dialog_options_x & y should work with text-window dialog options (should enlarge window)
+ * rename "No interaction" checkbox to "Invisible to clicks"
+ * only display dynamic sprite warning if game exits normally
+ * strange effect if while importing an image while right dragging you select off
+   the bottom of the image while zoomed in - the selection rectangle suddenly jumps
+   down
+ * with crossfading enabled, if you go from one room to another with a higher volume
+   setting, the volume increases while it is fading out
+ * int result = lists[letter[1].list].entries[letter[1].position];
+   doens't work - the second subscript is wrong
+ * freehand tool should plot a single pixel if you don't move the mouse
+ * view preview window should remember X/Y co-ords of where it last was
+ * strgetcharat returns negative numbers for chars > 127
+ * at runtime, if a script function cannot be found (eg. missing plugin), link it to a
+   stub that quits the game - this would allow conditional use of plugins depending on OS
+   Also, add a IsPluginLoaded scirpt function
+ * changing a object name needs to mark room as dirty
+ * settextboxfocus to decide which text box gets input; also disabled text boxes
+   should not receive input
+ * listboxsetitemtext, getnumguis, getnumobjects, getnumcharacters, filewriterawchar
+ * settextboxcolor, setbuttontextcolor
+ * sqrt
+ * allow saving	game anyway when script errors - but don't create the exe
+ * room.edge_left, edge_right, edge_top, edge_bottom
+ * CreateGraphicOverlay support alpha blended sprites
+ * multi-byte TTF support
+ * SetFrameSpeed, like setframesound
+ * GetScalingAt problem when the character skirts around the edge of walkable areas
+   solution to have a GetCharactreScaling?
+ * plugin API:
+   QueueRunScriptFunction to run as soon as possible
+   NotifySpriteUpdated - use with dynamic sprites to tell it to refresh 
+     object/character image cache if they currently use that sprite
+   SetSpriteAlphaBlended - to allow plugin to specify whether dynamic sprites it
+     creates are alpha blended or not
+ * COM plugin API: access to script header, or a seperate 'plugin header' for each
+   plugin that's compiled into the game at compile-time (allow plugin to add #defines)
+   get current game dir; SaveGame; LoadGame; QUitEditor, etc
+   GameSettings with game name, totalscore, options
+   Characters[] with access to characters; GetCharByScriptName
+ * RawDrawViewFrame(view,loop,frame)
+ * alT+enter toggle full-screen in-game
+ * tip of the day on editor startup, using strazer's tips from teh forums
+ * SaveScreenShotFull option to save mouse cursor & GUIs
+ * GetNumObjects() to return number of objectsin room
+ * GetOverlayX, GetOverlayY
+ * Copy GUI command in editor
+ * strings >200 chars
+ * hi-col palette pane colour should be text box to allow copy & paste
+ * allow arrays to be initialized at declaration, eg.  int x[5]={1,2,3,4,5};
+ * DisplaySpeechBackgroundQueued to allow a conversation to be set up in one go
+ * switch, for, arrays of strings
+ * Recompile All Rooms should tell you the room number if there is a compile error
+ * void as function parameter should give compile error
+ * initialize variables to zero (automatically in the ADD_STACK opcode, perhaps?)
+ * changing a setting in the Sprite import window should prompt to re-import graphic
+ * Adjust Volume with Scaling option for character footstep sounds
+ * export room area masks
+ * GUI Drop Down List control, GUI Frame control
+ * If a single word is wider than the label width, it should display as much as poss
+ * game.max_speech_width to set max width of lec-style speech
+ * try out the new multi-byte TTF support
+ * allow manual 1-pixel shifts of GUI objects and room objects with arrow keys
+ * stop allowing room messages from inv & char interactions
+ * game.ignore_extended_chars to blank out >127 in SCI fonts rather than error out
+   (and print warning message)
+ * bug with:
+   run-script 1
+   ego: some text
+   run-script 2
+   second script doesn't run
+ * support up to 256 chars in SCI fonts
+ * GUI text windows should have a Font property in the gui editor
+ * SetCursorAnimationEnabled  to allow them to disable the animating mouse cursor
+ * Display() should support a tab character '\t' to tab to next N pixels
+ * NoTranslate function which does nothing but allows to wrap text you don't want
+   translated (editor ignores it as with GetxxxProperty)
+ * character collisions - make the non-walkable area to the proper width of the character
+   (blocking characters blocking width should include width/2 of the walking character)
+ * operator precedence witih "a = 5 - 2 - 3" for example - should be L-R
+ * SetCharacterSpeed (EGO, 0) should work, but stop the character from moving
+ * some way of checking number of args passed to Display/StrFormat, and check that there 
+   aren't too many '%' in format string
+ * AddInventoryToCharacter; keep track of inventory item order for all chars
+ * set z-order of overlays, to allow them to be interspersed with GUIs (and for speech
+   to appear on top of an existing GUI)
+   Set default z-order of speech (so that it can always be displayed on top of guis
+   if they want)
+ * startup-off  for dialog, to stop the startup script from running
+ * sprite import window should move import rect even wheen mouse is above the area
+ * check out al2xsai scaling proggie for antialiasing stuff at hi-res
+ * option to leave global script open while testing game, for debugging purposes
+ * "locations" like walk-to points but more generic, identified by name not number
+ * plugin interface to sound system, eg allow creation of custom drivers
+ * revamped areas editor, fullscreen, zooming, etc
+ * per-object option to make them obey scaling, lighting, etc
+ * SetObjectViewOffset
+ * allow to import 24-bit images for masks, and editor then finds the closest colour
+   to dark blue for area 1, closest to green for area 2, etc
+ * SetFrameGraphic to change a view frame pic
+ * GetThisID function to return char/hotspot/obj number that this func was called for
+ * increase sfx sound channels from 3 to 7; more ambient sound channels
+ * import/export single gui
+ * preload pic in 640x480 is squashed to 640x400
+ * "if globalint 5 == 10" support for conditionals in dialog scripts
+ * allow music/sound files to be named  music001.mid, sound002.wav, etc, to help with
+   sorting files in explorer
+ * hotkeys for area editor (eg. for +/- area number, Interactions, Properties etc)
+ * script names for dialogs, fonts and rooms
+ * background image for top bar in displaytopbar
+ * better document what happens when right-click on GUI (ie. on_event)
+ * display X/Y co-ordinates of objects in the editor
+ * problem with GetTextExtent returning wrong height of some ttf fonts
+ * Autocomplete of #defined names
+ * InteractionSummary - presents a table similar to:
+   Hotspot   0 | 1 | 2 | ...
+   Look at   - | X |   | ...
+   Interact  X |   | X | ...
+   where X would be Run Script, double-click to edit; - would be Other Interactions
+   and blank means nothing set, double-click to add run script
+ * encrypt string segment in text scripts, to avoid player cheating
+ * option to run the game at 320x200, but stretch to 640x400 window
+ * SetPreviousCursorMode (opposite of SetNextCursorMode)
+ * option for displayspeechbackground to play talking anim, and support voice speech
+ * mittens easter egg -> jellyfish photo
+ * preview graphic of room background in Rooms list in editor
+ * drag-and-drop of interaction commands
+ * add UpdateResource support for 2000/XP to set the icon to any colour depth
+ * have both LECTalkView and SierraTalkView for a character, to enable both to animate
+   at the same time - and also, to use sierra-style message boxes but with lec-style
+   character animations
+ * set_mod_speed (SetMODTempo)
+   pause_mod, resume_mod;  GetMODPattern, SeekMODLine(pattern, pos)
+   MOD music doesn't save speed & tempo (Seek To Pattern doesn't check previous
+   patterns - we need to save current speed & tempo manually)
+ * CreateNewObject(x,y,pic,interaction_func) to add objects to the room
+   or alternatively specify a inventory item to link its interaction to
+ * way to customize the X,Y,Width for sierra-style speech - basically, set a default
+   rather than having to use DisplaySpeechAt all the time
+   * and the same for normal Displays
+ * allow colouring within a Display statement using special control characters to
+   mark a colour change
+ * DisableHotspot/Object/CharInteraction(hotspot, mode) to make IsInteractionAvailable
+   return false for that hotspot. Could be made redundant by settable custom properties
+ * delete dialog topics, views, characters (maybe just blank out and not display in list)
+ * GUIObjectOff/GUIObjectOn to temporarily remove GUI controls from their GUI
+ * option for dialog options GUI not to appear during first speech lines before options
+   are presented to player
+ * new interface for plugin to implement, which includes:
+    plugin hook for _display_at to override text/speech display (or just log it)
+    plugin interface to sound system, eg allow creation of custom drivers
+    plugin API way to take over drawing of fonts
+ * dialog_request_ex(int topic, int parameter)  pass in the topic number, to simplify
+   checking it
+ * option to set width of auto font outline
+ * AddInvToNPC/LoseInvFromNPC function
+ * allow dialog_request to be handled by rooms, like on_key_press
+ * "show objects" option in areas editor to show location of objects while drawing areas
+ * AnimateButton should support Flipped view frames
+ * music glitch after restarting game in QFG2
+ * editor interface to name and set initial value of globalints (maybe combine it
+   with a revamped global message editor?)
+ * allow specify sprite number to start importing multiple sprites to
+ * importing alpha image with pixel RGBA(x,x,x,0) should be replaced with (255,0,255,0)
+   because some paint programs use alpha=0 for the transparent colour
+ * allow setting of pixel-perfect click detection on a per-object basis
+ * check wrong extension being assigned to some run script interactions? eg. room_a
+   is created by AGS but doesn't work; but room_b works instead?
+ * check bottom of some fonts getting cut off (eg HollyWierd 28pt)
+   seems to be alfont reporting wrong height for text
+ * add game.sierra_speech_xmargin & ymargin, to customize offset of speech from edge
+ * game.dialog_options_highlight_colour
+ * allow customization of angles used for various loops (specify each loop as x/y ratio)
+ * GetDialogOptionText(topic,option,buffer) ; GetNumDialogOptions(topic)
+ * Frame Speed -> Frame Duration/Time; Animation Speed -> Anim Delay  to reflect higher number is slower
+ * shake screen option to do left-right as well as up-down
+ * SetObjectViewEx, similar to the Char one
+ * way to export animated background frames from editor
+ * pixel-perfect click detection on scaled sprites
+ * DelayedProcessClick function to enable easy non-blocking walk-to interactions
+ * option to display walkalbe/walk-behind areas semi-transparent in editor
+ * DisplaySpeechBackground support voice speech
+ * option to choose vertical alignment of text in GUI buttons
+ * option to use speech bubbles for speech as well as thoughts
+ * option to anti-alias resizing of screenshots
+ * GetMouseCursor to complement SetMouseCursor
+ * SetListBoxColor and SetListboxHighlightColor
+ * Go To Function option inside script editor
+ * enable re-ordering of views in view editor list
+ * SetCharacterScaling to manually set scaling level
+ * add game. variable to customize margin given to text inside text windows
+ * centre the text window background graphic in the window
+ * different Room Properties schema from everything else
+ * Set custom properties at run-time
+ * simple command parser to allow running specific command in debug
+ * patch system - or at least a "comapre versions" of the game to show differences
+ * SetCharacterSize/SetObjectSize(obj, width%, height%) to set manual scaling level
+ * DisplaySpeechBackgroundAt
+ * option to set a sprite as the drawing surface for the Raw commands
+ * Popup Gamewide GUI type, to stop all clicks on other GUIs while it's active
+ * on_event CHAR_STOPPED_MOVING
+ * allow sprites in sprite editor to be marked "dynamic", so they will persist in memory
+   and can be drawn on - RawDraw functions should work on dynamic sprites
+   CreateBlankSprite(width,height,hires)
+ * ProcessClickWait to enable easy non-blocking interactions
+ * allow scroll down in sprite importer while stretching selection area;
+   or allow them to manually enter X, Y, Width, Height of selection
+ * enlarge max size of sprite import window
+ * export/import single GUI
+ * script names for rooms
+ * click on GUI backgorund should run interface_click with -1 as button number
+ * option to see room areas semi-transparent in editor
+ * option to only display current area in Room AReas editor,
+   and to display all other areas in grey
+ * when importing functions, remember number of parameters
+ * allow specify "workingdir" in acsetup.cfg to put save games, temp files, etc in
+ * allow  set-speech-view-loop VIEW LOOP  for use with sierra-style speech
+ * suggestions on bug tracker
+ * customize script editor font
+ * ScrollScreenTo(x,y,speed,blocking)
+ * per-character setting of anti-glide mode
+ * MathSqrt and MathRaiseToPower functions
+ * ability to set x,y,width for all text boxes (eg. so that they always appear at
+   the bottom of the screen)
+ * AddNewObjectToRoom(x,y,pic) to add a new object with no interactions
+ * track type of exported variables & functions, to check when they're imported
+ * GetKeycodeDescription(key, buffer)  to get name of key for display
+ * dialog editor update @ lines in script with comment of option name
+ * allow insertion/deletion of dialog options
+ * display dialog options as a tree
+ * way to delete dialog options (and associated dialog script)
+ * "zoom to script function" editor option to list all functions in script
+ * allow different X and Y movement speeds
+ * option to make Dialog Options GUI remain on screen (but blank) while characters
+   talk
+ * SetMusicLoop(int ms_start, int ms_end) or PlayMusicLooped(ms_start,ms_end)
+ * RunDialogOption(topic,option) to manually run an option
+ * way of allowing dialog scripts to respond to parser input
+   eg. extra entry points @("apple")  as an entry point for saying 'apple'
+ * option to define dialog options upside-down (ie. "Goodbye" first)
+ * check type/args of imported variables/functions match those of the export
+ * pivot point X co-ordinate for animation frames, so they don't have to line up
+   at the left hand side
+   function is in progress
+ * text parser option to automatically check names of all objects in room
+   and match cursor modes against the text the user typed in, for auto
+   interaction parsing
+ * allow continuous scaling in 4 directions (down, up, left, right) to scale
+   the appropriate way
+ * per-inventory option as to whether to display multiple times or not
+ * inventory items should be able to have a special mouse cursor image as well as normal image
+ * game.left_edge, right_edge, etc to find out room edges
+ * button to toggle display of walkable areas in Room Settings pane
+ * interaction command "Move NPC to other room (specific co-ordinates)"
+ * SetHotspotName
+ * DisableWalkableArea/EnableWalkableArea as interaction command
+ * dump all graphics option, to SPR0052.BMP, SPR0021.BMP, etc
+ * per-character option to disable lip-sync
+ * beta versions should warn if loading an old game into them
+ * "No transparency" sprite import option
+ * SetCharacterIgnoreWalkbehind(CHARID, int walkbehind_to_ignore)
+ * option to disable diagonal walking, BASS-style
+ * type in more characters into parser than width of box, should scroll across windows-style
+ * graphical tree representation of dialog structure
+   eg.  Topic 1 -> Option1, option2 (-> topic2.1, 2.2 ), option 3
+ * some sort of "\x14" thing for scripts to display special characters in messages
+ * proper z-order support for overlays
+ * name sprites in sprite manager - default name would be import filename
+ * add SetScreenTransition as interaction editor command
+ * Print option in script editor
+ * Scroll when more than X dialog options
+ * allow game to run windowed, but expanded (eg. running 320x200 game in a 960x600 window)
+ * two overlapping GUI objects, click twice should alternate between them
+ * have "RoomS", "Sounds", "Music" subfolders
+ * GUI objects should have "x", "y" settings to place exactly
+ * add a "no transparency" option to sprite imports
+ * "Any Character Stands on Region" event
+ * check playing flcs in hi-color games
+ * script compiler should detect errors like:  string result = StrGetCharAt ();
+ * mark static strings area in script, to catch  StrCopy("constant", buffer);  mistakes
+ * script 'modules'
+ * more obvious way to select "No sprite" in sprite selector than using the blue cup
+ * option to space outline font characters by the spacing of the main font, to
+   allow the shadows to 'meld' together (ie. font kerning option)
+ * allow switching font mid-sentence for a particular word, eg. to do italics
+ * make all the normal sound channels use Ambient Sound structure to allow maximum
+   freedom in looping etc, eg.  PlaySoundChannel (snd, vol, x, y, loop)
+ * sound panning option to set left-rightness of a sound (eg SetChannelPan)
+ * add a way to display the first 32 characters of a font, eg. a "\x14" type script extension
+ * mention * and / operators in the manual or scripting tut
+ * SetCharacterZoom to override walkable area settings
+ * SetThoughtStyle, to avoid having to rely on the speech style
+ * set X 'axis' for view frames, to be used as an automatic offset to move the frames around
+ * Sierra-style speechw ith character name as text window title
+ * allow assign each character a specific speech font
+ * increase from 30 to 60 gui objects per gui
+ * option for if multiple of an inventory item, display it twice - useful for RPG's
+ * Allow set Inventory control's background colour, and set it to display a specific
+   character's inventory
+ * SetHotspotWalkToPoint (X, y)   to enable it to be disabled
+ * movement issues with speed - make some way the speed can be dynamically altered
+   while movement is in progress
+   Also seperate X and Y speeds for characters
+ * GUI Sliders - Read-Only setting for displaying info
+ * SetHotspotName & SetObjectName to change names in script
+ * coloured light tint for regions
+ * text box control should allow cursor movement with left & right arrows optionally
+ * button to cycle through GUI Objects on a GUI
+ * dialog options as images (and so dialog option would be slot number)
+ * right-click "Edit sprite" for sprite manager, which would launch eg. PSP
+ * "modules", to allow easy sharing of scripts/GUIs/etc
+ * drag and drop commands to move them around in interaction editor
+ * ProgressBar GUI control - for stuff like health bars, etc
+ * allow having a secondary walkable area mask and switching between the active one
+   eg. to give two different player characters different walkable areas
+ * enable close debug console during conversation; option to output console to file
+ * import/export individual GUIs
+ * quick tutorial on making a custom save window
+ * Set directory for save games (including option for My Docuemnts)
+ * allow frame-sound offset for different walkable areas, to play different sound on diff surface
+ * option to allow speech on top of GUIs
+ * room 'locations', to save having to use co-ordinates
+ * hotkey to make room areas semi-transparent to see their placement
+ * script editor pop-up listing room names for each number and object and hotspot names
+ * multi-select in sprite manager
+ * allow == for strings, with new opcode for script system
+ * name views (like chars/GUIs)
+ * seperate horizontal and vertical zoom level for walkable areas; or just a text
+   script SetCharZoomLevel(x,y) function
+ * head on collision between two chars should be handled better - at the moment
+   one stops and the other walks through it
+ * check 'Clear all actions from this event' crashing if a Run Script is involved
+- make ctrl-A an overlay on top of bg but underneath characters and objs, and allow game to continue running.
+- make ctrl-A cycle none, walkable, walk-behind, hotspots, none.
+- allow to start drawing areas outside of the drawing area
+- center drawing area within pane, in order to allow start drawing areas on top and left as well
+- add room transition type: cross-fade
+- allow tab between all the options in different areas of the editor
+- an option for SetMouseBounds to NOT reset after leaving the screen
+- add CTRL key in GUI making, to select multiple gui buttons.  then when you drag, it drags them all.
+ * if there is a DisplaySpeech in First Time Enters Sceen, then Enters Screen AFter Fadein
+   doesn't get run
+ * SetGuiOBjectStyle(font,color)
+ * characters_in_room array updated once per loop for speed optimization
+ * text annotations/notes for views, fonts, etc
+ * DialogOptionFont, to allow it to be different to normal
+ * MOveObjectBlocking
+ * Patch system, to allow patching of finished games AND to incorporate other team members 
+   changes into the editor
+ * background colours and borders for GUI labels
+ * align text vertically option for GUI buttons - top, bottom, centre
+ * check neole's problem of it trying to allocate 47 MB of memory in one go - same as exe file size
+ * #include for scripts
+ * talking idle-anim - eg. blinking/flexing muscles. should be overlaid on top of
+   normal talking anim occasionally
+ * manual setting of character zoom level (eg. for effects like character shrinking)
+ * copy & paste interactions in interaction editor
+ * changing hotspot/object names does not prompt to save game in editor
+ * room option to walk character in from off-screen on left, bottom & right sides
+ * x/y property for GUI objects in editor
+ * automatically face characters before talking option
+ * wipe colour-with colour areas option (to convert eg. all hotspot 1 to hotspot 2)
+ * all edges should be checked so that if the bottom edge has no interactions
+   but the left edge does, being below and to the left will trigger the left one
+ * queueModSeek to jump pattern after the current one finishes
+ * option for shadow fonts rather than outline - so the font is printed twice, 1 pixel down-right
+ * Tracker feature requests - annotations, naming views, etc
+ * put game name & id into speech.vox file, much like replays
+ * option to make character movement perpendicular (north/east/south/west) only (Helm)
+ * unhandled_event with Use Inventory - check for "If inv used" responses - if root level
+   only has "If inv used" conditionals then run unhandled_event
+ * memory leak in RunAGSGame
+ * write an "Error.log" with the illegal exception message when it crashes
+ * ObjectOn/OffInRoom to turn objects on/off in other rooms
+ * sethotspotname
+ * topic-option-off (topic_num) (option_num) & -on & -off-forever
+ * mouse sensitivity setting in Setup
+ * ChangeDialogOptionName
+ * interaction editor right-click "add new 'Run Script' action & Edit" menu option
+ * export/import individual GUI
+ * "plugins" sub-folder to put plugins in for editor
+ * check hit-testing z-order when SetObjectIgnoreWalkbehinds is used
+ * game setting to emulate behaviour of letterbox mode selected in setup
+ * SetGUIOBjectTransparency
+ * SetSaveGameDirectory to allow a "Change Dir" button on save gui
+ * check generation of translation source for messages with  \"  in them
+ * 'Character - Set Location' function for setting npc x/y
+ * check all room edges (ie. char could be outside right and bototm edge)
+ * unchecking "remove message after time" doesn't play speech anim
+ * Notes area, for typing text notes about fonts, views, etc into the editor
+ * checkbox to automatically walk character in off edge
+ * Default dialog option, to use if they are all off
+ * usermodes for interaction on inventory items
+ * export and reset (delete) views
+ * save current line number in script editor when exiting editor and returning
+ * enable creation of patches
+ * password protect rooms
+ * MOUSE_ENTER, MOUSE_LEAVE on_events for hotspots/objects/etc
+ * DisplayMessageBox for always-speech games
+ * option to save script within editor, without exiting it
+ * allow read-only access to the rest of agsedit while script editor is open
+ * Reset button for GUIs/characters/inventory (rather than delete)
+ * coloured light levels for walkable areas
+ * custom checkboxes/textboxes for objects/hotspots/characters to allow user options for them
+ * if another application pops up while playing the game, it will freeze
+ * per-inventory item option to say "cannot be selected" - if you click it,
+   it automatically uses it in Interact mode rather than select
+ * check bug tracker for latest bugs/requests
+ * 'active' text box, to allow more than one at a time
+   import; and of Game Setup config
+ * nice way of start/stopping recording and playback of replays
+ * max cursors
+ * import series of bitmap files (eg. image1.pcx .. image25.pcx or whatever)
+ * ability to draw single dot on room masks
+ * clean up general settings tab (order stuff/etc)
+ * should run unhandled_event if inv not handled
+ * SetDialogOptionsFont (?? uses Normal font atm)
+ * occasional crash on Paste From Clipboard (20x20 24-bit)
+ * allow GUI text boxes to have ascii chars > 128 if ttf font
+ * automatically add a "If inv was used" when creating a Use Inventory interaction
+ * Text dumper should put divider between each dialog topic
+ * Copy To Clipboard option for Text Script Equivalent code, and for number in hi-col palette editor
+ * allow zoom in when editing areas, important for hi-res walkbehinds
+ * problem with interactions not sticking with Run Script, getting switched back
+ * script check int/string use as parameters to functions
+ * sierra w/bgrnd window background doesn't shrink to fit text
+ * Option for new QFG3-style speech, where if no speech view it displays
+   at the top as if there is one, rather than doing LEC-style as at present
+ * option in Setup to disable music fading when speech is on
+ * http://www.geocities.com/netmonkster/AGS/
+ * different colour flag in interaction editor for repeatedly_execute
+
+THINGS TO REVAMP:
+ * max cursors, allow cursor loop choice
+ * more room options
+ * more bg frames for rooms, set delay of each frame
+ * allow naming of rooms 301+ in room list
+ * Multiple global scripts, to easily allow "add-in" modules
+
+ * new skip speech style - Only mouse click skips, not keyboard
+ * character idle animation speed option
+ * set listbox border and textbox border colours
+ * each background should have its own palette in hi-col games
+ * export current walk-behind mask to BMP file
+ * console to type debug commands
+ * change "Default text" to "Text" in GUI Editor for textbox/label
+ * allow define border colour seperately to foreground col
+ * option to disable default scroll buttons on list boxes
+ * game option to change which cursor mode selects inventory items
+ * option to centre text in Display messagebox
+ * mouse-over for objects
+ * option for 2-3 pixel wide hotspot on cursor, to make it easier to click stuff
+ * check sierra w/bg speech doesn't shorten box for short "Hello" speech
+ * FOA-style speech (always as background, moves with char)
+ * AddCredit, ScrollCredits; specify to scroll timed to length of music
+ * store whether screen faded out, to allow FadeOut, Wait(10), FadeIn in hi-col
+ * on_event for OnDisplaySpeech to allow custom ways of displaying it
+ * words with spaces in parser dictionary
+ * SQ6-style dialog (scrollable textbox which saves old dialog (eg last 10 sentences))
+ * different walking style, go left, then up-left, then up, to allow smooth
+   rotation of character
+ * Add Dithering as option to hi-col graphic import
+ * display room number/description on Areas tab
+ * option to walk in from an edge, to avoid scripting x=-20, movecharblocking(20,y)
+ * Freeze screen, to merge all chars/objects into the background for Raw transitions
+ * walk-to point for objects; set starting location for each room
+ - Make characters block so you can't walk through them.
+ - SetObjectIgnoreLight would be useful too.
+ * check character turning with diagonal loops (press Up-right, only turns to right frame)
+ * Loop oscillate animation (1-2-3-4-3-2-1-2-3-4 etc)
+ * DisableSound/DisableMusic
+ * allow extra help files to be added to help menu
+ * zoom in on Areas tab, esp. for walk-behinds
+ * path editor in windows editor, to allow easy path construction
+ * check having multiple inventory windows doesn't update (ie. switch on GUI with second window, stops updating)
+ * import sprite to exact slot number
+ * regions - like an extra hotspot map, but for Stands On only
+ * ScrollingCredit ("credit", font, colour);
+ * First Time ENters Screen happening twice sometimes
+ * update the // comment in dialog script when change option description
+ * templates for new games
+ * add Room Save As as a button in the settings win
+ * clicking on inventory window should run a script, to allow custom right-click, etc
+ * more characters
+ * way for script to handle right-click on LEC inventory
+ * hi-res mask import
+ * New Room (inc maybe room templates etc) option in editor
+ * only use background to speech if no speech.vox
+ * Stop walking through other characters
+ * Changing room area zoom level does not mark room as Changed for save confirmation
+ * Option to make objects use area light levels
+ * CrossfadeMusic
+ * TintObject (R,G,B) , TintCharacter (R,G,B)
+ * RawDrawImageTransparent(x,y,slot,transpercent)
+ * support speech in DisplaySpeechBackground
+ * turn through front if going from left to right
+ * FlipScreen slows game down?
+ * script compielr convert "a = b" into StrCopy(a,b) automatically
+ * allow creation of .PAT files to include graphics/rooms/etc to be a secure patch
+ * script command to change Do Not Modify Inv Cursor, Always Disp as Speech, and
+   GUI change when disabled
+ * Normal text box messages with auto remove don't disappear
+ * different color for text box outline than text
+ * allow naming of rooms not restricted to ROOMx.CRM, then link them up in editor
+ * sprite hotspots, to prevent having to add extra blank lines to sprites to level out
+ * way to mark GUI element as "deleted" when deleted rather than remove & re-number
+ * check setviewport with large rooms
+ * MP3 volume control hardly has any effect
+ * option to automatically face characters before talking and face front when not in dialog
+ * option to kern text (move left 1 pixel for each character)
+ * TextOverlayCentreText, RemoveAllBackgroundSpeech
+ * isCurrentlyScrolling function (check if offsetx/y change this frame)
+ * GetInvITemPic
+ * GetModPattern
+ * background masking sprite, to allow different areas of the screen to take pixels from
+   various anim bgrnd scenes
+ * option to change right click action on LEC inv
+ * runAnotherGame("datfile.ags");  to execl new instance to run different game instead
+ * option to change bg anim speed at runtime
+ * way of having custom modes, inc unhandled_Event handling
+ * Face Hotspot in look mode option
+ * import/export parser vocab
+ * way of grabbing really small GUI buttons
+ * option to set location of sierra-style speech pic & text
+ * on_event for BeginDialog, EndDialog
+ * stop chars moving through each other
+ * SoundOff/On, MusicOff/On
+ * allow user processing of mouse clicks on LEC inv control
+ * FileDelete (but restrict to game folder only)
+ * option to set mouse cursor speed
+ * option to centre text within message box
+ * extra-debug mode - messages like "you added blue cup to inv" and "you switched on
+   script-only gui, thus pausing the game"
+ * option to allow on_keY_press while speech is displayed
+ * No speech text on top of GUIs
+ * check if allow GUIs on top of full-screen dialog pics
+ * play loop backwards option for animateobject
+ * sometimes doesn't use idle view for idle anim
+ * music playlist
+ * multiple animations on top of each other, for random body movement & speech
+ * some sort of special character in speech text to not play animation while displayed
+   (for pause in conversation) - or just Wait dialog script command
+ * option to stretch flics like media player (ie until first edge reaches screen edge)
+ * moveCharacterThen, to set a path for the character (append to route)
+ * before speech event, after speech event (to play special animations or whatever)
+ * if char behind walk-behind area, don't recognise in GEtCharAt
+ * allow custom handling of LEC-style inventory right click
+ * allow coloured lighting for walkable areas
+ * setareazoomlevel function
+ * FadeToColor (startslot, endslot, r, g, b) for 256-col mod
+ * IsCharacterTalking
+ * vox for flics
+ * check transparent corners to text windows
+ * allow right-to-left text display (for hebrew/etc)
+ * option to skip entire dialog by pressing ESC
+ * some sort of text script include system / multiple scripts
+ * allow specifying number of loops for music repeat
+ * game checker, to count rooms, hotspots, etc, and print along with maximums
+ * allow setting number of times to repeat music
+ * stop hotspots 16-19 being grey - maybe make only current hotspot coloured, others all grey
+ * allow if (!variable) in texts cript
+ * make character import/export idle view too
+ * animations on GUI buttons - use pushedpic to store view number??
+ * option to use parsed text instead of selecting dialog option in conversations
+   (option names used as comparison for parser)
+ * script library system, to allow add-on scripts
+ * add clever string handling to text script, eg. string2 = "this" + 25 + "more";
+ * way to flip sprites to save importing left & right views seperately
+ * trainer messages, that pop up at bottom of screen when for example add blue cup to inv
+ * increase max hotspots
+ * more characters, since the file needs to be changed anyway
+ * S3M's don't work in win engine
+ * new transition (Shrinking square of old room into new)
+ * some sort of in-roomedit list of globalint names to help remember what they are
+   ( and maybe not allow setting if not named)
+ * don't display speech on background GUIs
+ * speech bubbles by using text window GUI display above character's head
+ * auto-remove narrator text if set taht way
+ * check behaviour when icon bar gui is popped up - inconsistent pausedness
+ * getsaveslotroom, getsaveslotglobalint for finding out info about saved games
+ * leaveObjPerm (like MergeObject but keeps object alive)
+ * DisplayGUI (GUINumber, text, ...)
+ * removeinvwindow to remove sierra inv window rather than re-displaying after script finishes
+ * more GUIs and GUI controls of each type
+ * option to centre text within text box
+ * check memory allocation in load_lzw for large anim bkgrnd rooms
+ * move qfg4-style dialog options to the side if using qfg4-style speech
+ * fadescreencolorin/out for night effects
+ * double-click event
+ * more hotspots
+ * text script floating point vars
+ * save thumbnail into save games
+ * add Talk To option for hotspots and objects
+ * script compiler should catch int passed as string or vice versa
+ * preview in sprite manager to show whole sprite
+ * option to make characters & objects block like walls
+ * preLoadRoom, to precache a specific room in memory 
+ * import whole folder, automatically does Import New on every PCX in folder
+ * character movement X and Y speed can be different
+ * FileOpen use clibfopen to enable user files included in .dat
+ * language packs, to override game text & if necessary graphics
+ * setsoundvolume affects mp3s after restoring game
+ * setmusicvolume/mastervolume should affect mp3
+ * zoom for objects/overlays
+ * check tiled psrite import in 256-cols
+ * check numbers in character script names
+ * bug with First Enters Screen happeneing twice
+ * check animating background import eg 640x290 room
+ * projectile support (one-shot objects) - eg. NewProjectile(x,y,to_x,to_y,speed)
+ * default script action "INTERACT WITH HOTSPOT_NAME" not "hotspot5"
+ * allow cursor change on GUI
+ * script command to close sierra inventory when executed from it
+ * add "bottom-rihgt pixel" import method
+ * easy option for character reflection in roomedit
+ * option to set current mouse cursor position
+ * option to use old-style inv order updateing
+ * interact with inv/talk to inventory
+ * more globalints
+ * Windows launcher program
+ * debug interface in engine to type script commands
+ * check inquisitor's problem - Open Inventory needs to click elsewhere first
+ * check DisplaySpeechBackground when new speech is displayed for character already talking
+ * check GUI responsiveness when activated by another GUI
+ * animateobjectblocking
+ * debug feature to execute arbitrary text script command
+ * gamma correction
+ * support "&1" in CreateTextOverlay
+ * problem with First Time Enters Screen getting run twice somehow
+ * customize colours of save/restore/inputbox
+ * more hotspots
+ * animated inventory items
+ * highlight words in speech/dialog in different colour if wrapped in [] or something
+ * restore game immediate effect
+ * character[].talking variable
+ * make Instant transition work with fades (ie. make it black out the palette)
+ * add Inventory Compatibility mode (ie. call update_invorder every time)
+ * make a downloadabel version of the KB
+ * show Wait cursor while loading room
+ * 16-bit mode that uses 8-bit background palette and 8-bit sprite palette
+ * FLC background scenes
+ * allow sound files in sub-dir to limit number of files in game folder
+ * customize position of sierra-style speech window (eg. face on right)
+ * colour tint for screen/walkable area (eg. tint red)
+ * check importing 640x280 graphics at 640x400
+ * drawing functions, eg. DrawLine, DrawPixel, etc
+ * scripting bug with arrays of strings
+ * add option to display images in letterbox borders
+ * option to reduce all graphics to 256-color when converting game
+ * some way of darkening the entire room, eg when light switched off
+ * priority of events to do when script finishes - should be in same order as they were
+   in the script
+ * popup-YP BELOW option
+ * list of user-friendly options for GUI button clicks
+ * enable multiple scripts to be run at once
+ * export walk-behind/hotspot mask
+ * GUI radio buttons
+ * scaled characters hit-testing with pixel-perfect detection is wrong
+ - looping sfx
+ - IsObjectAniatming
+ - setting screen transition for each room
+ - lock speech co-ords to virtual screen, not physical (scrolling oroms)
+ - walk slower when zoomed out
+ - stop sfx on leaving room
+ - allow locking sliders
+ - check click open btton on LEC then inv item doesn't work
+ - check using NewRoom runs First Time Enters scirpts even if not first time
+ - make sure first-time-enters-screen only runs once
+ - direction-dependant idle animations (not random loop)
+ - option to turn dithering back on
+ - put speech skipping into script (eg. IfSpeechDisplayed)
+ - option to flip frames of animation left-to-right
+ - export dialog as text option, for recording speech
+ - mouseoverhotspot doesn't run if there's an object between the hotspot & screen
+ - more hotspots
+ - color picker tool, to find out palette num of a color
+ - option for scaling to define level at top and bottom of walk area - gradual scaling
+ - allow mouse hold down when cycling thru views
+ - check global script compile error messes up sprite file
+ - check first time enters screen happens twice
+ - more transitions, eg. fade-between, marquee, etc
+ - set/getobjectname
+ - way of playing loops backwards in animation
+ - IT music
+ - speed up engine (esp prob with low-mem vid cards)
+ - add drawing functions, eg. createLineOverlay
+ - light setting for actual room; also adjustable light mask for fine control
+ - automatically face characters in conversation
+ - enable/disable walk-behind (for specific characters preferably)
+ - option for speech text to appear in normal window, and also in teletype fashion
+ - allow setting of idle animation speed
+ - right-click on hotspot event
+ - longer global messages (use local message editor or summink)
+ - FaceDirection function
+ - option for GUI to change cursor when over it
+ - scale objects
+ - view (walkable-)areas for NPCs
+ - allow changing of background colour in sprite manager
+ - Someway for QFG2 Desert type walk-behinds... where the user goes down
+   instead of foward.
+ - DisplaySpeech max string length = 150 chars
+ - inventory window background
+ - change cursor when over screen edge (eg. for "exit" cursor)
+ - set character shade (overall, not area-specific)
+ - sierra-style speech window reset to first frame instead of disappearing
+ - animating inventory items
+ - change to using a more accurate positioning system (eg. 1000x1000)
+ - text input from player
+ - allow user specify angles for movement
+ - allow customiable sierra-style inv window
+ - save speed/tempo of XM music in save games
+ - play movie in background of screen
+ - check mouse over static gui doesn't change pointer
+ - change tempo of music, play 2 simulatneous music
+ - walking speed 1 jumps to destination
+ - walkable area have sound effect for foodsteps
+ - fade-in object (eg. ObjectOnFade(x) - translucency)
+ - new animation editor, where you can test animation etc. 
+ - multuple 256-col palettes in hi-col
+ - movement paths, so in cutscenes characters can move in predefined paths
+ - command to flip character horiz/vert
+ - bug: setbackgroundframe pops up another frame
+ - try all resolutions above what is required in engine
+ - increase max hotspots
+ - add back Delete Sprite
+ - using FLC as animating backgournd
+ - make Debug's teleport command take you to a walkable area on the scren
+ - strip down size of default game
+ - add eg. 16 palettes for hi-colour mode to save space with 8-bit sprites
+ - export/import single gui element
+ - lighting effects on objects
+ - translucency for walk-behinds
+ - mouse hover text
+ - check box, radio button on gui
+ - more transitions, eg those from animation shop - also fade to white/red
+ - option to delete characters
+ - roomedit allow setting of default directory for gfx, sound, etc
+ - debug option to type name of function to run
+ - dialog in seperate window customizable
+ - inventory item can be used on its own (click in inv window activates it)
+ - export art in sprite manager
+ - script .view= must be view - 1
+ - marker points in room - used as co-ordinates to move player to, etc and
+   could also be used as entry points to the room. eg getMarkerX(4);
+ - split up DAT file into sound.dat, rooms.dat, etc
+ - naming sound/music in roomedit
+ - custom normal mode names which show up in interaction windows
+ - easy non-script based way of doing SetPlayerCharacter and ChangeCharView
+ - customizable save/load dialogs
+ - control speech frame within dialog script
+ - animating buttons on gui
+ - font import from bmp/pcx
+ - ability to add text to screen in background
+ - customizable sierra-style inventory window
+ - text window type for each character
+ - plug-in scripts
+ - character view preset editor (to change default loop order)
+ - SetObjectName (int object, string) : Change object's name.
+ - SetHotspotName ( int hotspot, string) : Change hotspot's name.
+ - Add an option in the ROOMS Options that specifies if this room is a map
+   (with all interfaces off ) or not. So when entering this room all
+   interfaces will be off and when exiting on.
+ - dialog box which you can add stuff to , eg. for cutscene
+ - option for objects to block at their base
+ - multiple text windows, specify which one to use for various stuff
+ - add hi-res masks for walk-behind
+ - different vertical move speed to horizontal move speed
+ - option to not draw bottom half of character in areas, ie. shallow water
+ - dark effect - eg. for turning off the lights and just having torch
+ - select character for global mesages
+ - diagonal base lines
+ - option to disable walking to walk-to spots on Interact & Talk
+ - walk-lines, to help pathfinder with narrow areas
+ - ability to export views, cursors, etc
+ - interface previewer - preview pushed and mouseover pictures
+ - "beginner" mode in RoomEdit, to hide advanced features for beginners
+ - link a script to a view frame
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - sub-rooms, like drawer/locker/etc in sierra games
+ - map editor, to link rooms together
+ - new game option without restarting editor

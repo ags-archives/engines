@@ -1,0 +1,16 @@
+This is a summarised version of future.txt. For the full to-do list,
+please see that.
+
+Repeated: (+ means repeated multiple times)
+ * First Time ENters Screen happening twice sometimes (+)
+ * shakescreenex (amount, length, blocking)
+ * Z-order for GUIs (+)
+ * animation of GUI buttons (eg. for death animation) (+)
+ * allow cursor change on GUI
+ * speech bubble - normal dialog box but reposition over characterz (+)
+ * more hotspots (+)
+ * some way of darkening the entire room, eg when light switched off (+)
+ * GUI check box/radio buttons
+ - Customizable sliders (+)
+ - mouse hover text
+ - more than 10 objects per screen allowed (+)

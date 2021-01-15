@@ -1,0 +1,280 @@
+<HTML>
+<head><title>SCUMM_VERBCOIN_GUI functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic73"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags73.htm#topic72"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags75.htm#topic74"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>SCUMM_VERBCOIN_GUI functions</H2>
+<P>
+SCUMM_VERBCOIN_GUI is a script module that is included with the Verb Coin template.
+The functions in this section are only available if you have created your game
+using that template.<P>
+<P>
+<A HREF="#SCUMM_VERBCOIN_GUI.Deselect">SCUMM_VERBCOIN_GUI Deselect</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.DoubleClickSpeed">SCUMM_VERBCOIN_GUI DoubleClickSpeed</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.GoInventory">SCUMM_VERBCOIN_GUI GoInventory</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Item_Count">SCUMM_VERBCOIN_GUI Item_Count</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.InvScroll_Left">SCUMM_VERBCOIN_GUI InvScroll_Left</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.InvScroll_Right">SCUMM_VERBCOIN_GUI InvScroll_Right</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Inv_Border_active">SCUMM_VERBCOIN_GUI Inv_Border_active</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Inv_Border_SetPos">SCUMM_VERBCOIN_GUI Inv_Border_SetPos</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Inventory_GUI">SCUMM_VERBCOIN_GUI Inventory_GUI</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.RunInteraction">SCUMM_VERBCOIN_GUI RunInteraction</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Select">SCUMM_VERBCOIN_GUI Select</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.Verbcoin_GUI">SCUMM_VERBCOIN_GUI Verbcoin_GUI</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.verbgraphic">SCUMM_VERBCOIN_GUI verbgraphic</A><BR>
+<A HREF="#SCUMM_VERBCOIN_GUI.doubleclick">SCUMM_VERBCOIN_GUI doubleclick variable</A><BR>
+<P>
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Deselect"></A>
+<H3>SCUMM_VERBCOIN_GUI Deselect</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Deselect()
+</PRE>
+Deselect an item if it is active or quit the inventory. Used for keyboard support.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.RunInteraction">SCUMM_VERBCOIN_GUI.RunInteraction</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Select">SCUMM_VERBCOIN_GUI.Select</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.DoubleClickSpeed"></A>
+<H3>SCUMM_VERBCOIN_GUI DoubleClickSpeed</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.DoubleClickSpeed(int speed)
+</PRE>
+Sets the time frame in which a double-click can be registered. Increase this value
+for slower double-clicks, decrease this value for quicker double-clicks.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.DoubleClickSpeed(GetGameSpeed()/4);
+</PRE>
+will set the double-click speed to 1/4 of a second. (This is a good default)<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.doubleclick">SCUMM_VERBCOIN_GUI.doubleclick</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.GoInventory"></A>
+<H3>SCUMM_VERBCOIN_GUI GoInventory</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.GoInventory()
+</PRE>
+This function opens and closes your inventory.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Item_Count"></A>
+<H3>SCUMM_VERBCOIN_GUI Item_Count</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Item_Count(int count)
+</PRE>
+Sets the number of items that inventory scrolling will use to position to the next x amount of items.<P>
+This value should equal the amount of items that fit in your inventory window.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.Item_Count(10);
+</PRE>
+will make sure that on the next inventory scroll you will start with item 11, 21, 31, ...<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.InvScroll_Left">SCUMM_VERBCOIN_GUI.InvScroll_Left</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.InvScroll_Right">SCUMM_VERBCOIN_GUI.InvScroll_Right</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.InvScroll_Left"></A>
+<H3>SCUMM_VERBCOIN_GUI InvScroll_Left</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.InvScroll_Left()
+</PRE>
+Scrolls the inventory to the left, by the number of items set with Item_Count.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Item_Count">SCUMM_VERBCOIN_GUI.Item_Count</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.InvScroll_Right">SCUMM_VERBCOIN_GUI.InvScroll_Right</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.InvScroll_Right"></A>
+<H3>SCUMM_VERBCOIN_GUI InvScroll_Right</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.InvScroll_Right()
+</PRE>
+Scrolls the inventory to the right, by the number of items set with Item_Count.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Item_Count">SCUMM_VERBCOIN_GUI.Item_Count</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.InvScroll_Left">SCUMM_VERBCOIN_GUI.InvScroll_Left</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Inv_Border_active"></A>
+<H3>SCUMM_VERBCOIN_GUI Inv_Border_active</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Inv_Border_active(bool x_borders, bool y_borders)
+</PRE>
+Sets which inventory exit borders are active.<P>
+Inventory exit borders determine where the inventory will exit when moving over a line.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.Inv_Border_active(false, true);
+</PRE>
+will make the game exit the inventory when moving the mouse over either the top or the bottom of the screen.<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Inv_Border_SetPos">SCUMM_VERBCOIN_GUI.Inv_Border_SetPos</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Inv_Border_SetPos"></A>
+<H3>SCUMM_VERBCOIN_GUI Inv_Border_SetPos</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Inv_Border_SetPos(int top, int bottom, 
+                                            int left, int right)
+</PRE>
+Sets the inventory exit border positions.<P>
+Inventory exit borders determine where the inventory will exit when moving over a line.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.Inv_Border_SetPos(20, 220, 20, 295);
+</PRE>
+will set the top exit border to y-coordinate 20, the bottom border to y-coordinate 220, 
+the left border to x-coordinate 20 and the right border to x-coordinate 295<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Inv_Border_active">SCUMM_VERBCOIN_GUI.Inv_Border_active</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Inventory_GUI"></A>
+<H3>SCUMM_VERBCOIN_GUI Inventory_GUI</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Inventory_GUI(int gInventory_ID,int gInvUnderlay_ID)
+</PRE>
+Sets the inventory gui ID's, so the module will know which GUI is your
+inventory and which GUI is the inventory underlay.<P>
+This allows you to change your inventory GUI's on the fly, which is particularly
+interesting if you have a game with multiple playable characters. You could have
+a different inventory for each character!<P>
+If the game is 32-bit with alpha-blended (transparent) GUI buttons on the
+inventory, you need to use an Underlay gui which contains the actual inventory
+background, and the regular gui which is empty except for the inventory window
+and the gui buttons.<P>
+If your game does not use alpha-blended GUI buttons, leave the underlay inventory
+empty. (use sprite 0 for its background)<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.Inventory_GUI(2, 3);
+</PRE>
+will tell the module your inventory gui is GUI nr.2 and that the underlay gui is GUI nr.3<P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.RunInteraction"></A>
+<H3>SCUMM_VERBCOIN_GUI RunInteraction</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.RunInteraction(CursorMode)
+</PRE>
+Runs the interaction of choice. Used for keyboard support.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.RunInteraction(eModeTalkto);
+</PRE>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Deselect">SCUMM_VERBCOIN_GUI.Deselect</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Select">SCUMM_VERBCOIN_GUI.Select</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Select"></A>
+<H3>SCUMM_VERBCOIN_GUI Select</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Select()
+</PRE>
+Selects an item, or if an item is active tries to use it. Used for keyboard support.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.Deselect">SCUMM_VERBCOIN_GUI.Deselect</A>,
+<A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.RunInteraction">SCUMM_VERBCOIN_GUI.RunInteraction</A><P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.Verbcoin_GUI"></A>
+<H3>SCUMM_VERBCOIN_GUI Verbcoin_GUI</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.Verbcoin_GUI(int gVerbcoin_ID)
+</PRE>
+Sets the verbcoin gui ID, so the module will know which GUI is your verbcoin GUI.<P>
+This is particularly useful if you have a game with multiple playable characters,
+where you could have a different verbcoin for each character.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.Verbcoin_GUI(1);
+</PRE>
+will tell the module your verbcoin gui is GUI nr.1<P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.verbgraphic"></A>
+<H3>SCUMM_VERBCOIN_GUI verbgraphic</H3>
+<PRE>
+static SCUMM_VERBCOIN_GUI.verbgraphic(ButtonChoice, int sprite_number)
+</PRE>
+Attaches a verbcoin sprite to a button. This sprite will be displayed when
+moving over the button.<P>
+The only exception is the 'bIdle' button, which is not a button but the default
+verbcoin graphic with no buttons active.<P>
+<B>NOTE:</B> This function is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SCUMM_VERBCOIN_GUI.verbgraphic(bTalk, 2);
+</PRE>
+will set the sprite for moving over the talk button to sprite 2<P>
+
+
+<HR>
+<A NAME="SCUMM_VERBCOIN_GUI.doubleclick"></A>
+<H3>SCUMM_VERBCOIN_GUI doubleclick variable</H3>
+<PRE>
+global bool doubleclick
+</PRE>
+Used to determine when a double-click has occured.<P>
+<B>NOTE:</B> This variable is part of the Verb Coin template and is only available if
+you used this template to create your game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+  if (doubleclick == false){
+    Display("You made a single-click");
+  }
+  else{
+    Display("You just made a double-click!");
+  }
+</PRE>
+will display "You made a single-click" when you made a single-click on the object/hotspot/character/...<P>
+<I>See Also:</I> <A HREF="ags74.htm#SCUMM_VERBCOIN_GUI.DoubleClickSpeed">SCUMM_VERBCOIN_GUI.DoubleClickSpeed</A><P>
+<P>
+
+
+</BODY></HTML>

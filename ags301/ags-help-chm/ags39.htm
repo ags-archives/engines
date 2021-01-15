@@ -1,0 +1,40 @@
+<HTML>
+<head><title>Extender functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="ExtenderFunctions"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags38.htm#DynamicArrays"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags40.htm#Globalvariables"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Extender functions</H2>
+Suppose that you wanted to add a new function, "Scream", to characters which would make 
+them cry out "AARRRGGGHHH". Because the Character type is defined within AGS, it's not
+possible for you to just add a method to it.<P>
+That's where Extender Functions come in. Here's an example:
+<PRE>
+function Scream(this Character*)
+{
+this.Say("AAAAARRRRGGGGHHHHHH!!!!");
+}
+</PRE>
+This adds a new "Scream" function to the Character type, so that in your script code
+elsewhere you can do things like:
+<PRE>
+player.Scream();
+character[EGO].Scream();
+</PRE>
+and so on.<P>
+<B>Where do I put this code?</B><P>
+In the script header, you'd put:<P>
+<TT>import function Scream(this Character*);</TT><P>
+and then put the main function in the script file. This will then allow it to be used
+by other scripts.<P>
+
+
+</BODY></HTML>

@@ -1,0 +1,190 @@
+The following features are planned for future versions of AGS.
+Features that people ask for will be implemented faster than things I think
+people want - so if you like the look of a suggestion below, post to the
+messageboard to tell me!
+
+ - semi-transparent characters/objects for eg ghosts
+ - option to change height of speech text above head
+ - check walking speed 1 NPC
+ - check hi-col inv items
+ - check roomedit slow after test gmae
+ - scale objects
+ - blocking MoveObject/MOveChar
+ - Add a picture for the sliders
+ - speed up fade out (making some kind of transition avaliable)
+ - not allow keypress to skip speech
+ - Someway for QFG2 Desert type walk-behinds... where the user goes down
+   instead of foward.
+ - allow modification of "can skip speech" in game
+ - if dialog interface is a text window, use it like qfg4 dialog boxes
+ - DisplaySpeech max string length = 150 chars
+ - FindNearestWalkableArea function
+ - inventory window background
+ - change cursor when over screen edge (eg. for "exit" cursor)
+ - set character shade (overall, not area-specific)
+ - hotspots on GUI, or transparent buttons
+ - hi-res walk-behind masks
+ - customize dialog (eg. position, icon, etc)
+ - non-blocking shakescreen func
+ - sierra-style speech window reset to first frame instead of disappearing
+ - check InterfaceOn in repeatedly_Execute locks up system
+ - animating inventory items
+ - anti-aliasing to smooth edges of characters
+ - showdialogbox function, to do multiple-response dialog
+ - increase max responses per interaction
+ - look into http://www.xiph.org/ogg/vorbis/ for music instead of MP3
+ - auto-face option, to automatically face the player towards objects
+ - change to using a more accurate positioning system (eg. 1000x1000)
+ - stretch option to make 640x400 into 640x480
+ - allow better use of 640x480 (ie. full-screen room if 320x240-size dont scroll)
+ - check mouse responseiveness in Windows
+ - roomedit stretch if high-res instead of tiny window
+ - customizable save/load dialog
+ - text input from player
+ - allow user specify angles for movement
+ - character rotate to direction of movement, like in SQ4
+ - allow customiable sierra-style inv window
+ - fix german translation to "du traegst nichts" (not tragst), or overhaul
+   translation system completely. sldo "Weiter" not "Weiterspielen"
+ - save speed/tempo of XM music in save games
+ - play movie in background of screen
+ - windowed option for engine
+ - turn up refresh rate in win engine 
+ - check space before function name in text script breaks it
+ - check mouse over static gui doesn't change pointer
+ - change tempo of music, play 2 simulatneous music
+ - AVI/MPG support in Win engine
+ - walking speed 1 jumps to destination
+ - walkable area have sound effect for foodsteps
+ - auto speech support (speech_x.wav)
+ - more frames per loop, more animated backgrounds
+ - fade-in object (eg. ObjectOnFade(x) - translucency)
+ - new animation editor, where you can test animation etc. also g.script eidtor
+ - multuple 256-col palettes in hi-col
+ - movement paths, so in cutscenes characters can move in predefined paths
+ - getinvpic
+ - command to flip character horiz/vert
+ - bug: setbackgroundframe pops up another frame
+ - on_event (at least, on_score)
+ - split up resource files
+ - try all resolutions above what is required in engine
+ - walk-behind mask resolution 640x400
+ - increase max objects
+ - speed up gui drawing
+ - increase max hotspots
+ - add back Delete Sprite
+ - using FLC as animating backgournd
+ - make Debug's teleport command take you to a walkable area on the scren
+ - strip down size of default game
+ - add eg. 16 palettes for hi-colour mode to save space with 8-bit sprites
+ - importing 256-colour sprite in hi-colour should maintain palete
+ - export/import single gui element
+ - lighting effects on objects/characters
+ - translucency for objects and walk-behinds
+ - qfg4-dialog box
+ - mouse hover text
+ - allow deletion of buttons/labels/etc
+ - check box, radio button on gui
+ - night-time feature, darken screen
+ - more transitions, eg those from animation shop
+ - "New room" option in roomedit, delete characters
+ - 960x600 res sprites
+ - roomedit allow setting of default directory for gfx, sound, etc
+ - debug option to type name of function to run
+ - customizable conversation window (eg. skull in front of each option)
+ - speed up gui drawing
+ - dialog in seperate window customizable
+ - flipv/h for individual character
+ - inventory item can be used on its own (click in inv window activates it)
+ - export art in sprite manager
+ - script .view= must be view - 1
+ - marker points in room - used as co-ordinates to move player to, etc and
+   could also be used as entry points to the room. eg getMarkerX(4);
+ - multiple timers
+ - split up DAT file into sound.dat, rooms.dat, etc
+ - naming sound/music in roomedit
+ - custom normal mode names which show up in interaction windows
+ - easy non-script based way of doing SetPlayerCharacter and ChangeCharView
+ - increase number of commands per graphical script
+ - customizable save/load dialogs
+ - control speech frame within dialog script
+ - animating buttons on gui
+ - font import from bmp/pcx
+ - ability to add text to screen in background
+ - customizable sierra-style inventory window
+ - keyboard control of character
+ - ability to set text window font
+ - text window type for each character
+ - plug-in scripts
+ - character view preset editor (to change default loop order)
+ - more  screen transitions
+ - SetObjectName (int object, string) : Change object's name.
+ - SetHotspotName ( int hotspot, string) : Change hotspot's name.
+ - ChangeInvGraphic (int inventory, int slot) : Change the image
+   of an inventory item.
+ - ChangeCharacterGraphic ( int charid, int slot) : Replace the current
+   players image with image in slot "int slot" . Used for making animations
+   without wasting views.
+ - An option for Right clicking on characters will use talk mode.
+ - Add an option in the ROOMS Options that specifies if this room is a map
+   (with all interfaces off ) or not. So when entering this room all
+   interfaces will be off and when exiting on.
+ - scroll bar in sierra inventory
+ - add display message to animation editor
+ - z-ordering of Guis
+ - increase number of topics per dialog
+ - dialog box which you can add stuff to , eg. for cutscene
+ - characters & objects should block at their base
+ - fix roomedit 640x400 sprite bugs (eg. cursor screen)
+ - multiple text windows, specify which one to use for various stuff
+ - roomedit import sprite 640x400 only has cursor granularity 2
+ - blocking movecharacter/movecharacterdirect
+ - improve room loading speed with large games
+ - add option for backrgound colour of inv window
+ - make it possible to use text script for inventory descriptions, etc.
+ - multiple language support in game
+ - way to call global funcs from local script
+ - graphical script "call text script" function
+ - add hi-res masks for walk-behind
+ - customizable save/restore dialogs
+ - different vertical move speed to horizontal move speed
+ - option to not draw bottom half of character in areas, ie. shallow water
+ - fix bug when importing global func into room script
+ - importing tiled animation sprites
+ - support for naming global flags in grahpical script
+ - flipv command to enable upside-down characters
+ - more topics per dialog
+ - dark effect - eg. for turning off the lights and just having torch
+ - select character for global mesages
+ - diagonal base lines
+ - ability to display speech text that doesn't pause game
+ - walk faster when scaled up, slower when scaled down
+ - add speech bubble option for speech display
+ - option to disable walking to walk-to spots on Interact & Talk
+ - walk-lines, to help pathfinder with narrow areas
+ - ability to export sprites, views, cursors, etc
+ - delete folders in sprite mgr
+ - different screen transitions (not only fading)
+ - inventory option for full-screne (like sam&max)
+ - customizable invnetory window
+ - custom fonts
+ - overlay-sprite function
+ - interface previewer - preview pushed and mouseover pictures
+ - built-in text editor instead of spawning DOS EDIT
+ - sliding scrollbars (ie. you can drag the main bit up and down)
+ - more than 10 objects per screen allowed
+ - QFG-type battle system
+ - improve the route finder
+ - "beginner" mode in RoomEdit, to hide advanced features for beginners
+ - support ASCII chars >=128
+ - link a script to a view frame
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - sub-rooms, like drawer/locker/etc in sierra games
+ - optional text parser
+ - map editor, to link rooms together
+ - lip-sync animations
+ - mouse-hover functions, like map in monkey island
+ - keyboard/joystick support for moving character
+ - new room/new game option without restarting roomedit
+ - customizable install program which you can use to install your games
+   on the user's computer

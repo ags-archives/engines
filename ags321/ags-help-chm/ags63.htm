@@ -1,0 +1,151 @@
+<HTML>
+<head><title>GUI Slider properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic55"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags62.htm#topic54"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags64.htm#topic56"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI Slider properties</H2>
+<A HREF="ags58.htm#GUIControl.BringToFront">BringToFront (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SendToBack">SendToBack (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#Slider.BackgroundGraphic">BackgroundGraphic property (slider)</A><BR>
+<A HREF="#Slider.HandleGraphic">HandleGraphic property</A><BR>
+<A HREF="#Slider.HandleOffset">HandleOffset property</A><BR>
+<A HREF="#Slider.Max">Max property</A><BR>
+<A HREF="#Slider.Min">Min property</A><BR>
+<A HREF="#Slider.Value">Value property</A><BR>
+<P>
+
+<HR>
+<A NAME="Slider.BackgroundGraphic"></A>
+<H3>BackgroundGraphic property (slider)</H3>
+<PRE>
+int Slider.BackgroundGraphic;
+</PRE>
+Gets/sets the sprite used to draw the slider background. This image is tiled along the length
+of the slider.<P>
+The background graphic can be set to 0, which will draw the default grey slider background.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("sldHealth's background is sprite %d", sldHealth.BackgroundGraphic);
+</PRE>
+displays the <I>sldHealth</I> slider's background image<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags63.htm#Slider.HandleGraphic">Slider.HandleGraphic</A><P>
+
+
+<HR>
+<A NAME="Slider.HandleGraphic"></A>
+<H3>HandleGraphic property</H3>
+<PRE>
+int Slider.HandleGraphic;
+</PRE>
+Gets/sets the sprite used to draw the handle on the slider. The handle represents the
+slider's current position, and can be dragged around by the player.<P>
+The handle graphic can be set to 0, which will draw the default grey handle.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("sldHealth's handle is sprite %d", sldHealth.HandleGraphic);
+</PRE>
+displays the <I>sldHealth</I> slider's handle image<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags63.htm#Slider.BackgroundGraphic">Slider.BackgroundGraphic</A>,
+<A HREF="ags63.htm#Slider.HandleOffset">Slider.HandleOffset</A><P>
+
+
+<HR>
+<A NAME="Slider.HandleOffset"></A>
+<H3>HandleOffset property</H3>
+<PRE>
+int Slider.HandleOffset;
+</PRE>
+Gets/sets the offset at which the handle image is drawn. This value is initially
+set up in the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+sldHealth.HandleOffset = 2;
+</PRE>
+sets the <I>sldHealth</I> slider's handle to be drawn an extra 2 pixels to the right.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags63.htm#Slider.HandleGraphic">Slider.HandleGraphic</A><P>
+
+
+<HR>
+<A NAME="Slider.Max"></A>
+<H3>Max property</H3>
+<PRE>
+int Slider.Max;
+</PRE>
+Gets/sets the maximum value of the specified GUI slider.<P>
+When changing the maximum, the slider's Value will be adjusted if
+necessary so that it lies within the Min - Max range.<P>
+An error occurs if you try to set the Max to a lower value than the Min.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+sldHealth.Max = 200;
+</PRE>
+sets the maximum value of the <I>sldHealth</I> slider to 200.<P>
+<I>See Also:</I> <A HREF="ags63.htm#Slider.Min">Slider.Min</A>,
+<A HREF="ags63.htm#Slider.Value">Slider.Value</A><P>
+
+
+<HR>
+<A NAME="Slider.Min"></A>
+<H3>Min property</H3>
+<PRE>
+int Slider.Min;
+</PRE>
+Gets/sets the minimum value of the specified GUI slider.<P>
+When changing the minimum, the slider's Value will be adjusted if
+necessary so that it lies within the Min - Max range.<P>
+An error occurs if you try to set the Min to a higher value than the Max.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+sldHealth.Min = 0;
+</PRE>
+sets the minimum value of the <I>sldHealth</I> slider to 0.<P>
+<I>See Also:</I> <A HREF="ags63.htm#Slider.Max">Slider.Max</A>,
+<A HREF="ags63.htm#Slider.Value">Slider.Value</A><P>
+
+
+<HR>
+<A NAME="Slider.Value"></A>
+<H3>Value property</H3>
+<I>(Formerly known as GetSliderValue, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetSliderValue, which is now obsolete)</I><P>
+<PRE>
+int Slider.Value;
+</PRE>
+Gets/sets the value of the specified GUI slider. You would usually
+use this in the slider's OnChange event handler to find out what value the
+player has changed the slider to, in order to process their command.<P>
+When setting the value, the new value must lie between the MIN and MAX settings
+for the slider, as set up in the GUI editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+System.Volume = sldVolume.Value;
+</PRE>
+will set the audio volume to the value of the slider <I>sldVolume</I>.<P>
+<I>See Also:</I> <A HREF="ags61.htm#Label.Text">Label.Text</A><P>
+<P>
+
+</BODY></HTML>

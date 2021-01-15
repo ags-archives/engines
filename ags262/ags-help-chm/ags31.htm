@@ -1,0 +1,24 @@
+<HTML>
+<head><title>Other scripting notes</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic48"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic43"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags30.htm#topic47"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags32.htm#topic49"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Other scripting notes</H2>
+Only one text script can be executing at any one time. A script is considered
+to be "executing" if there is still code left in a script function that needs
+to be executed.<P>
+What this means is that if you call a function like MoveCharacterToObject,
+which is BLOCKING - that is, it waits until the character finishes moving
+before continuing the script - then while the character is moving no other
+scripts will be run (for example, repeatedly_execute scripts).<P>
+
+</BODY></HTML>

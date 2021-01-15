@@ -1,0 +1,66 @@
+<HTML>
+<head><title>Script modules</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="ScriptModules"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic43"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags33.htm#StringFormats"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags35.htm#BlockingScripts"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Script modules</H2>
+If you're working on a fairly large game, you'll find that your global script can
+quickly become rather large and unwieldy. This is where Script Modules come in --
+they basically allow you to have lots of different global scripts, and split your
+code up accordingly.<P>
+The main global script still has to contain all the interaction functions (Look At
+Character scripts, Interact With Inventory scripts and so forth). But if you have
+any custom functions then you can put them in a seperate module in order to divide up
+your code. Modules have the added advantage that they can be easily exported and imported,
+if you want to share some of your code with other people, or even just move it from
+one game to another.<P>
+Script Modules are accessed via the "Module Manager" option on the Script menu. Each
+module has its own script header, which is where you place the <A HREF="ags36.htm#importkeyword">import</A>
+definitions for that module to allow the rest of your game to access its functionality.<P>
+Module order is important. A module can only use functionality in other modules that
+come before it in the list. The global script and room scripts can access all script
+modules, but modules cannot access the global or room scripts.<P>
+As an example, suppose you want to have a special <I>AddNumbers</I> function in a module.
+You'd create a new module in the Module Manager, then put this in its module header:
+<PRE>
+import function AddNumbers(int a, int b);
+</PRE>
+Then, in the module script you could put:
+<PRE>
+function AddNumbers(int a, int b) {
+  return a + b;
+}
+</PRE>
+As you can see, modules are based off exactly the same principles as the global script
+and script header, but allow you to split your code into more managable chunks.<P>
+<B>Special functions</B><P>
+Can script modules use special functions like <TT>game_start</TT> and <TT>repeatedly_execute</TT>?
+Well, yes and no. Script modules can contain the following functions, and they will
+be called at the appropriate times just before the global script's function is:
+<UL>
+
+<LI> function game_start()
+<LI> function on_event(EventType event, int data) 
+<LI> function on_key_press(int keycode) 
+<LI> function on_mouse_click(MouseButton button) 
+<LI> function repeatedly_execute()
+<LI> function repeatedly_execute_always()
+</UL>
+
+All other special functions, such as <TT>dialog_request</TT>, will not be called even if
+they exist in a module. If you need modules to handle any of this functionality, you
+can simply create a custom function in the module and then call it from the global script.<P>
+The <A HREF="ags41.htm#ClaimEvent">ClaimEvent</A> command is supported for on_key_press, on_mouse_click
+and on_event. Calling it prevents the rest of the modules and global script from being called.<P>
+
+
+</BODY></HTML>

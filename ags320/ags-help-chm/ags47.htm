@@ -1,0 +1,298 @@
+<HTML>
+<head><title>AudioChannel functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="AudioChannelCommands"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags46.htm#topic43"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags48.htm#AudioClipCommands"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>AudioChannel functions and properties</H2>
+The AudioChannel instance represents a currently playing audio file. You can use this
+instance to check the status of playing sounds, and adjust them.<P>
+
+<A HREF="#AudioChannel.Seek">Seek</A><BR>
+<A HREF="#AudioChannel.SetRoomLocation">SetRoomLocation</A><BR>
+<A HREF="#AudioChannel.Stop">Stop (audio channel)</A><BR>
+<A HREF="#AudioChannel.ID">ID property (audio channel)</A><BR>
+<A HREF="#AudioChannel.IsPlaying">IsPlaying property</A><BR>
+<A HREF="#AudioChannel.LengthMs">LengthMs property</A><BR>
+<A HREF="#AudioChannel.Panning">Panning property</A><BR>
+<A HREF="#AudioChannel.PlayingClip">PlayingClip property</A><BR>
+<A HREF="#AudioChannel.Position">Position property</A><BR>
+<A HREF="#AudioChannel.PositionMs">PositionMs property</A><BR>
+<A HREF="#AudioChannel.Volume">Volume property (audio channel)</A><BR>
+<P>
+
+<HR>
+<A NAME="AudioChannel.Seek"></A>
+<H3>Seek</H3>
+<I>(Formerly known as SeekMIDIPosition, which is now obsolete)</I> <br> 
+<I>(Formerly known as SeekMODPattern, which is now obsolete)</I> <br> 
+<I>(Formerly known as SeekMP3PosMillis, which is now obsolete)</I><P>
+<PRE>
+AudioChannel.Seek(int position)
+</PRE>
+Seeks the audio clip that is currently playing on this channel to <I>position</I>.<P>
+What <I>position</I> represents depends on the FileType of the audio clip:
+<UL>
+
+<LI> <B>MIDI</B> - the beat number
+<LI> <B>MOD/XM/S3M</B> - the pattern number
+<LI> <B>WAV/VOC</B> - the sample number (eg. in a 22050 Hz sound, 22050 = 1 second)
+<LI> <B>OGG/MP3</B> - milliseconds offset
+</UL>
+<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Wait(40);
+channel.Seek(0);
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, wait for a second, then seek it back to the start.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.Position">AudioChannel.Position</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.SetRoomLocation"></A>
+<H3>SetRoomLocation</H3>
+<I>(Formerly part of PlayAmbientSound, which is now obsolete)</I><P>
+<PRE>
+AudioChannel.SetRoomLocation(int x, int y)
+</PRE>
+Sets the currently playing audio to be a directional sound, eminating from (x,y).<P>
+The volume of the channel will be dynamically adjusted depending on how close the player
+character is to the co-ordinates. Therefore, as the player walks closer the volume will
+increase, and as they walk away the volume will decrease.<P>
+The channel's Volume setting sets the maximum possible volume when the player is standing
+on the specified co-ordinates.<P>
+Pass the co-ordinates as (0,0) to remove the directional effect and return this channel
+to playing at its normal volume.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aMachine.Play();
+channel.SetRoomLocation(oMachine.X, oMachine.Y);
+</PRE>
+will start playing the <I>aMachine</I> audio clip, and set it at the location of the <I>oMachine</I>
+room object.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.Volume">AudioChannel.Volume</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.Stop"></A>
+<H3>Stop (audio channel)</H3>
+<I>(Formerly known as StopAmbientSound, which is now obsolete)</I> <br> 
+<I>(Formerly known as StopChannel, which is now obsolete)</I><P>
+<PRE>
+AudioChannel.Stop()
+</PRE>
+Stops the sound that is currently playing on this audio channel.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Wait(40);
+channel.Stop();
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, wait for a second, then stop it.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#Game.StopAudio">Game.StopAudio</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.ID"></A>
+<H3>ID property (audio channel)</H3>
+<PRE>
+readonly int AudioChannel.ID
+</PRE>
+Gets the Channel ID of this audio channel. You will not normally need to use this,
+but it can be used for inter-operating with legacy commands such as StopChannel.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Display("Explosion playing on channel %d", channel.ID);
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, and display which channel it is playing on.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+
+
+<HR>
+<A NAME="AudioChannel.IsPlaying"></A>
+<H3>IsPlaying property</H3>
+<I>(Formerly known as IsChannelPlaying, which is now obsolete)</I><P>
+<PRE>
+readonly bool AudioChannel.IsPlaying
+</PRE>
+Gets whether this audio channel is currently playing a sound. Returns <I>true</I> if it is,
+or <I>false</I> if it is not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+while (channel.IsPlaying) Wait(1);
+Display("Finished playing the explosion");
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, and wait until it finishes.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.LengthMs"></A>
+<H3>LengthMs property</H3>
+<PRE>
+readonly int AudioChannel.LengthMs
+</PRE>
+Gets the length of the audio playing on this channel, in milliseconds.<P>
+This is supported by all file types, but with MIDI music it is only accurate to the nearest second.<P>
+If this channel is not currently playing any audio, returns 0.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Display("The Explosion sound is %d ms long.", channel.LengthMs);
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, then display its length.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.PositionMs">AudioChannel.PositionMs</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.Panning"></A>
+<H3>Panning property</H3>
+<PRE>
+int AudioChannel.Panning
+</PRE>
+Gets/sets the panning of this audio channel.<P>
+Panning allows you to adjust the stereo balance of the audio. The default is 0, which is
+centred and will play at the same volume on both speakers. However you can adjust this 
+between -100 (fully left) to 100 (fully right) to adjust the balance between the speakers.<P>
+<B>NOTE:</B> MIDI music files do not support panning.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+channel.Panning = -100;
+</PRE>
+will start playing the <I>aExplosion</I> audio clip on the left speaker only.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.PlayingClip"></A>
+<H3>PlayingClip property</H3>
+<I>(Formerly known as GetCurrentMusic, which is now obsolete)</I><P>
+<PRE>
+readonly AudioClip* AudioChannel.PlayingClip
+</PRE>
+Gets the audio clip that is playing on this channel. This allows you to find out the type
+of the clip, and other information.<P>
+Returns <I>null</I> if there is no sound currently playing on this channel.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = System.AudioChannels[2];
+if (channel.PlayingClip == null)
+{
+  Display("Nothing is playing on channel 2");
+}
+else 
+{
+  Display("Channel 2 is playing a clip of type %d", channel.PlayingClip.Type);
+}
+</PRE>
+will display what is currently playing on audio channel 2.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>, <A HREF="ags78.htm#System.AudioChannels">System.AudioChannels</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.Position"></A>
+<H3>Position property</H3>
+<I>(Formerly known as GetMIDIPosition, which is now obsolete)</I> <br> 
+<I>(Formerly known as GetMODPattern, which is now obsolete)</I> <br> 
+<I>(Formerly known as GetMP3PosMillis, which is now obsolete)</I><P>
+<PRE>
+readonly int AudioChannel.Position
+</PRE>
+Gets the current position of the audio playing on this channel.<P>
+What <I>position</I> represents depends on the FileType of the audio clip:
+<UL>
+
+<LI> <B>MIDI</B> - the beat number
+<LI> <B>MOD/XM/S3M</B> - the pattern number
+<LI> <B>WAV/VOC</B> - the sample number (eg. in a 22050 Hz sound, 22050 = 1 second)
+<LI> <B>OGG/MP3</B> - milliseconds offset
+</UL>
+<P>
+This property is read-only. If you want to change the current playback position within the audio file,
+use the <A HREF="ags47.htm#AudioChannel.Seek">AudioChannel.Seek</A> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Wait(40);
+channel.Seek(channel.Position + 1000);
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, wait for a second, then seek it ahead one second (if it is OGG/MP3/WAV).<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.PositionMs">AudioChannel.PositionMs</A>, 
+<A HREF="ags47.htm#AudioChannel.Seek">AudioChannel.Seek</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.PositionMs"></A>
+<H3>PositionMs property</H3>
+<PRE>
+readonly int AudioChannel.PositionMs
+</PRE>
+Gets the current position of the audio playing on this channel, in milliseconds.<P>
+This is supported by all file types except MIDI, and returns the current offset into the sound
+in milliseconds. MIDI files will always return 0.<P>
+This property is read-only. If you want to change the current playback position within the audio file,
+use the <A HREF="ags47.htm#AudioChannel.Seek">AudioChannel.Seek</A> function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Wait(40);
+Display("After 1 second, offset is %d ms.", channel.PositionMs);
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, wait for a second, then display its position.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <I>See Also:</I> <A HREF="ags47.htm#AudioChannel.LengthMs">AudioChannel.LengthMs</A>,
+<A HREF="ags47.htm#AudioChannel.Position">AudioChannel.Position</A><P>
+
+
+<HR>
+<A NAME="AudioChannel.Volume"></A>
+<H3>Volume property (audio channel)</H3>
+<I>(Formerly known as SetChannelVolume, which is now obsolete)</I> <br> 
+<I>(Formerly known as SetMusicVolume, which is now obsolete)</I><P>
+<PRE>
+int AudioChannel.Volume
+</PRE>
+Gets/sets the volume of this audio channel, from 0 to 100. This allows you to dynamically
+adjust the volume of a playing sound.<P>
+This command adjusts the volume of this channel relative to the other channels.
+It is still constrained within the overall volume, set by the System.Volume property.<P>
+<B>NOTE:</B> This command only affects the current sound being played on the channel.
+When a new audio clip starts playing on this channel, the volume will be set to the
+DefaultVolume of the new audio clip.<P>
+<B>NOTE:</B> The volume returned by this property is the channel's base volume, ie. it does
+not include the effects of any directional audio set with SetRoomLocation, or any temporary
+volume drop while speech is playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+AudioChannel *channel = aExplosion.Play();
+Wait(40);
+channel.Volume = 20;
+</PRE>
+will start playing the <I>aExplosion</I> audio clip, wait for a second, then reduce its volume.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags47.htm#AudioChannel.SetRoomLocation">AudioChannel.SetRoomLocation</A>,
+<A HREF="ags69.htm#Game.SetAudioTypeVolume">Game.SetAudioTypeVolume</A>, <A HREF="ags78.htm#System.Volume">System.Volume</A><P>
+
+
+</BODY></HTML>

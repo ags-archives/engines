@@ -1,0 +1,236 @@
+<HTML>
+<head><title>String functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic78"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic64"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags47.htm#topic77"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags49.htm#topic79"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>String functions</H2>
+<A HREF="#GetMessageText">GetMessageText</A><BR>
+<A HREF="#StrCat">StrCat</A><BR>
+<A HREF="#StrCaseComp">StrCaseComp</A><BR>
+<A HREF="#StrComp">StrComp</A><BR>
+<A HREF="#StrCopy">StrCopy</A><BR>
+<A HREF="#StrFormat">StrFormat</A><BR>
+<A HREF="#StrGetCharAt">StrGetCharAt</A><BR>
+<A HREF="#StringToInt">StringToInt</A><BR>
+<A HREF="#StrLen">StrLen</A><BR>
+<A HREF="#StrSetCharAt">StrSetCharAt</A><BR>
+<A HREF="#StrToLowerCase">StrToLowerCase</A><BR>
+<A HREF="#StrToUpperCase">StrToUpperCase</A><BR>
+<P>
+
+<HR>
+<A NAME="GetMessageText"></A>
+<H3>GetMessageText</H3>
+<PRE>
+GetMessageText (int message, string buffer)
+</PRE>
+Gets the text of global or local message number MESSAGE into the string BUFFER. This is
+useful if you want to store, for example, a room description in Message 1 in each room,
+this function will display that message from the current room.<P>
+If an invalid message number is supplied, BUFFER will be set to an empty string.<P>
+<I>NOTE:</I> Since text script strings have a limit of 200 characters, whereas system messages
+do not, you will only get the first 200 characters of a message with this function.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetMessageText (501, buffer);
+Display ("Global message 501 is: %s", buffer);
+</PRE>
+will print the contents of global message 501.<P>
+
+
+<HR>
+<A NAME="StrCat"></A>
+<H3>StrCat</H3>
+<PRE>
+StrCat (string str1, string str2)
+</PRE>
+Appends STR2 to the end of STR1. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string name;
+StrCopy(name,"My name is ");
+StrCat (name,"Chris"); 
+</PRE>
+will result a string name which will be "My name is Chris".<P>
+
+<HR>
+<A NAME="StrCaseComp"></A>
+<H3>StrCaseComp</H3>
+<PRE>
+StrCaseComp (string str1, string str2)
+</PRE>
+Does a case-insensitive comparison of STR1 and STR2. Using this function,
+"Dog", "dog" and "doG" will all be considered equal.
+Returns 0 if the two strings match, non-zero otherwise.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+if (StrCaseComp("password",input)==0)
+    { code here }
+</PRE>
+will execute the code if the input string (usually typed by the player) is "password" (no case sensitive).<P>
+
+<HR>
+<A NAME="StrComp"></A>
+<H3>StrComp</H3>
+<PRE>
+StrComp (string str1, string str2)
+</PRE>
+Compares the strings STR1 and STR2. Returns zero if they are identical, and
+non-zero if they are not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+if (StrComp("password",input)==0)
+    { code here }
+</PRE>
+will execute the code if the input string (usually typed by the player) is "password" (case sensitive).<P>
+
+<HR>
+<A NAME="StrCopy"></A>
+<H3>StrCopy</H3>
+<PRE>
+StrCopy (string str1, string str2)
+</PRE>
+Copies the contents of STR2 into STR1, overwriting STR1's original contents.
+Use this instead of the assignment STR1=STR2 .<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string message;
+StrCopy(message,"This is a message"); 
+</PRE>
+will result a string message that will be "This is a message"<P>
+
+<HR>
+<A NAME="StrFormat"></A>
+<H3>StrFormat</H3>
+<PRE>
+StrFormat (string destination, string fmt, ...)
+</PRE>
+Processes the string FMT in the same way as the Display function does (ie.
+replace <TT>%d</TT> and <TT>%s</TT> with values of variables), but instead of displaying it
+on the screen, puts the result into DESTINATION.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int health=10;
+string buffer;
+StrFormat (buffer, "%d", health) 
+</PRE>
+will pass the string (not integer) 10 to the string buffer.<P>
+<I>See Also:</I> <A HREF="ags49.htm#Display">Display</A><P>
+
+<HR>
+<A NAME="StrGetCharAt"></A>
+<H3>StrGetCharAt</H3>
+<PRE>
+StrGetCharAt (string text, int position)
+</PRE>
+Returns the character at POSITION within the string TEXT.<P>
+POSITION is the character index (where 0 is the first character, and the last
+allowable value is StrLen - 1).<P>
+If POSITION is outside the string, this function returns 0.<P>
+<I>See Also:</I> <A HREF="ags48.htm#StrSetCharAt">StrSetCharAt</A><P>
+
+
+<HR>
+<A NAME="StringToInt"></A>
+<H3>StringToInt</H3>
+<PRE>
+StringToInt (string str1)
+</PRE>
+Converts the string STR1 into an integer, and returns that value. Returns
+zero if the string does not contain a number.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number1,number2;
+number1=StringToInt("53");
+number2=StringToInt("hello");
+</PRE>
+will set number1 value to 53 and number2 value to 0.
+This function is useful for processing strings input from the user.<P>
+<I>See Also:</I> <A HREF="ags38.htm#InputBox">InputBox</A><P>
+
+<HR>
+<A NAME="StrLen"></A>
+<H3>StrLen</H3>
+<PRE>
+StrLen (string str1)
+</PRE>
+Returns the length, in characters, of the string STR1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int length;
+length=StrLen("adventure");
+</PRE>
+will set the value of the integer length to 9.<P>
+
+
+<HR>
+<A NAME="StrSetCharAt"></A>
+<H3>StrSetCharAt</H3>
+<PRE>
+StrGetCharAt (string text, int position, int character)
+</PRE>
+Changes the character at POSITION in string TEXT to CHARACTER.<P>
+POSITION is the character index (where 0 is the first character, and the last
+allowable value is StrLen - 1).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string temp;
+StrCopy (temp, "Hello");
+StrSetCharAt (temp, 3, 'm');
+</PRE>
+will change the string to contain "Helmo".<P>
+You can also use this to truncate a string, by passing 0 as the character. For example,<P>
+<PRE>
+string temp;
+StrCopy (temp, "Hello");
+StrSetCharAt (temp, 2, 0);
+</PRE>
+will change the string to read "He".<P>
+<I>See Also:</I> <A HREF="ags48.htm#StrGetCharAt">StrGetCharAt</A><P>
+
+
+<HR>
+<A NAME="StrToLowerCase"></A>
+<H3>StrToLowerCase</H3>
+<PRE>
+StrToLowerCase (string str1)
+</PRE>
+Converts the string STR1 to lower case.<P>
+(Lower case means converting all capital letters in the string to equivalent non-capital
+letters. Any other characters, such as numerical digits, are not affected).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+InputBox ("Enter some text:", input);
+StrToLowerCase (input);
+Display ("Your text, in lower case, is '%s'.", input);
+</PRE>
+reads a string from the user, and displays it back to them in lower case.<P>
+<I>See Also:</I> <A HREF="ags48.htm#StrToUpperCase">StrToUpperCase</A><P>
+
+<HR>
+<A NAME="StrToUpperCase"></A>
+<H3>StrToUpperCase</H3>
+<PRE>
+StrToUpperCase (string str1)
+</PRE>
+Converts the string STR1 to upper case.<P>
+(Upper case means converting all small letters in the string to equivalent capital
+letters. Any other characters, such as numerical digits, are not affected).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+InputBox ("Enter some text:", input);
+StrToUpperCase (input);
+Display ("Your text, in upper case, is '%s'.", input);
+</PRE>
+reads a string from the user, and displays it back to them in upper case.<P>
+<I>See Also:</I> <A HREF="ags48.htm#StrToLowerCase">StrToLowerCase</A><P>
+
+
+</BODY></HTML>

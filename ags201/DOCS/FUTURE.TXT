@@ -1,0 +1,48 @@
+The following features are planned for future versions of the Creator.
+Features that people ask for will be implemented faster than things I think
+people want - so if you like the look of a suggestion below, mail me and
+tell me!
+
+ - character preview more realistic
+ - transparent interface if bg col 0.
+ - customizable speech text speed
+ - walk faster when scaled up, slower when scaled down
+ - fix character animation where it stands still for first frame of walking
+ - different types of speech, eg. speech-bubble, close-up face
+ - option to disable clicking away of conversation text
+ - script access to iface button gfx
+ - delete folders/sprites in sprite mgr
+ - different screen transitions (not only fading)
+ - customizable invnetory window
+ - custom fonts
+ - hi-color or true-color support
+ - scroll down inv and charactrr list
+ - text buttons in interface
+ - overlay-sprite function
+ - interface previewer - preview pushed and mouseover pictures
+ - zoomed in view of mouse cursor for hotspot positioning.
+ - able to import sprites in hi-resolution
+ - built-in text editor instead of spawning DOS EDIT
+ - sliding scrollbars (ie. you can drag the main bit up and down)
+ - more than 10 objects per screen allowed
+ - animating background scene
+ - resizing fonts to screen resolution (text looks v.small at 960x600)
+ - custom background picture for text windows
+ - QFG-type battle system
+ - improve the route finder
+ - "Display message" when chosen gives list of messages, not number to type in
+ - speech bubble pictures for speech text
+ - custom transparent colour when importing sprites (instead of 0).
+ - "beginner" mode in RoomEdit, to hide advanced features for beginners
+ - support AVI/MPG video
+ - link a script to a view frame
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - very-high-res 960x600 support in roomedit
+ - lip sync animations
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - optional text parser
+ - lip-sync animations
+ - reduce save game size
+ - Windows port of the main engine
+

@@ -1,0 +1,161 @@
+<HTML>
+<head><title>DateTime functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic47"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags44.htm#topic46"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags46.htm#DrawingSurfaceFunctions"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>DateTime functions and properties</H2>
+
+<A HREF="#DateTime.Now">Now property</A><BR>
+<A HREF="#DateTime.DayOfMonth">DayOfMonth property</A><BR>
+<A HREF="#DateTime.Hour">Hour property</A><BR>
+<A HREF="#DateTime.Minute">Minute property</A><BR>
+<A HREF="#DateTime.Month">Month property</A><BR>
+<A HREF="#DateTime.RawTime">RawTime property</A><BR>
+<A HREF="#DateTime.Second">Second property</A><BR>
+<A HREF="#DateTime.Year">Year property</A><BR>
+<P>
+
+<HR>
+<A NAME="DateTime.Now"></A>
+<H3>Now property</H3>
+<I>(Formerly known as GetTime, which is now obsolete)</I><P>
+<PRE>
+readonly static DateTime* DateTime.Now;
+</PRE>
+Gets the current system time.
+You could use this for timing a loop, or for effects like telling the
+player to go to bed, and so on.<P>
+A <I>DateTime</I> object is returned, which contains various properties that you can use.<P>
+Note that the DateTime object that you get will not be kept up to date with the current time;
+it will remain static with the time at which you called DateTime.Now.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DateTime *dt = DateTime.Now;
+Display("The date is: %02d/%02d/%04d", dt.DayOfMonth, dt.Month, dt.Year);
+Display("The time is: %02d:%02d:%02d", dt.Hour, dt.Minute, dt.Second);
+</PRE>
+will display the current date and time in 24-hour format<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.DayOfMonth">DateTime.DayOfMonth</A>,
+<A HREF="ags45.htm#DateTime.Hour">DateTime.Hour</A>,
+<A HREF="ags45.htm#DateTime.Minute">DateTime.Minute</A>,
+<A HREF="ags45.htm#DateTime.Month">DateTime.Month</A>,
+<A HREF="ags45.htm#DateTime.RawTime">DateTime.RawTime</A>,
+<A HREF="ags45.htm#DateTime.Second">DateTime.Second</A>,
+<A HREF="ags45.htm#DateTime.Year">DateTime.Year</A><P>
+
+
+<HR>
+<A NAME="DateTime.DayOfMonth"></A>
+<H3>DayOfMonth property</H3>
+<PRE>
+readonly int DateTime.DayOfMonth;
+</PRE>
+Gets the day of the month represented by the DateTime object. This will be from 1 to 31,
+representing the current day within the month.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+<HR>
+<A NAME="DateTime.Hour"></A>
+<H3>Hour property</H3>
+<PRE>
+readonly int DateTime.Hour;
+</PRE>
+Gets the hour represented by the DateTime object. This will be from 0 to 23,
+representing the hour in 24-hour format.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+<HR>
+<A NAME="DateTime.Minute"></A>
+<H3>Minute property</H3>
+<PRE>
+readonly int DateTime.Minute;
+</PRE>
+Gets the minute represented by the DateTime object. This will be from 0 to 59,
+representing the minute in 24-hour format.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+<HR>
+<A NAME="DateTime.Month"></A>
+<H3>Month property</H3>
+<PRE>
+readonly int DateTime.Month;
+</PRE>
+Gets the month represented by the DateTime object. This will be from 1 to 12,
+representing the month of the year.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+<HR>
+<A NAME="DateTime.RawTime"></A>
+<H3>RawTime property</H3>
+<I>(Formerly known as GetRawTime, which is now obsolete)</I><P>
+<PRE>
+readonly int DateTime.RawTime;
+</PRE>
+This function returns the raw system time, as the number of seconds since January 1970.
+While this value is not useful in itself, you can use it to calculate time differences
+by getting the value at the start of the game, for example, and then getting the value
+later on, and the difference between the two is how much time has elapsed.<P>
+<B>NOTE:</B> Because this accesses the real-time clock on the users' system, it is not
+a good idea to use this for long term timing tasks, since if the user saves the game and
+then restores it later, the Time value returned by this function will obviously include
+the difference when they were not playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DateTime *dt = DateTime.Now;
+int start_time = dt.RawTime;
+Wait(120);
+dt = DateTime.Now;
+Display("After the wait it is now %d seconds later.", dt.RawTime - start_time);
+</PRE>
+should display that 3 seconds have elapsed.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>, <A HREF="ags49.htm#SetTimer">SetTimer</A><P>
+
+
+<HR>
+<A NAME="DateTime.Second"></A>
+<H3>Second property</H3>
+<PRE>
+readonly int DateTime.Second;
+</PRE>
+Gets the second represented by the DateTime object. This will be from 0 to 59,
+representing the second.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+<HR>
+<A NAME="DateTime.Year"></A>
+<H3>Year property</H3>
+<PRE>
+readonly int DateTime.Year;
+</PRE>
+Gets the year represented by the DateTime object. This is the full year,
+for example <I>2005</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+For an example, see <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A>.<P>
+<I>See Also:</I> <A HREF="ags45.htm#DateTime.Now">DateTime.Now</A><P>
+
+
+</BODY></HTML>

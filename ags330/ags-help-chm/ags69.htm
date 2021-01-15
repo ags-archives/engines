@@ -1,0 +1,304 @@
+<HTML>
+<head><title>Multimedia functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic60"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags68.htm#topic59"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags70.htm#topic61"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Multimedia functions</H2>
+<A HREF="#CDAudio">CDAudio</A><BR>
+<A HREF="#Game.IsAudioPlaying">IsAudioPlaying</A><BR>
+<A HREF="#IsSpeechVoxAvailable">IsSpeechVoxAvailable</A><BR>
+<A HREF="#PlayFlic">PlayFlic</A><BR>
+<A HREF="#PlaySilentMIDI">PlaySilentMIDI</A><BR>
+<A HREF="#PlayVideo">PlayVideo</A><BR>
+<A HREF="#Game.SetAudioTypeSpeechVolumeDrop">SetAudioTypeSpeechVolumeDrop</A><BR>
+<A HREF="#Game.SetAudioTypeVolume">SetAudioTypeVolume</A><BR>
+<A HREF="#SetSpeechVolume">SetSpeechVolume</A><BR>
+<A HREF="#Game.StopAudio">StopAudio</A><BR>
+<P>
+
+<HR>
+<A NAME="CDAudio"></A>
+<H3>CDAudio</H3>
+<PRE>
+CDAudio (eCDAudioFunction, int param)
+</PRE>
+This function allows you to play and control an audio CD in your game.
+Different tasks are performed, depending on the value of the AudioFunction
+parameter. If there is no CD-ROM drive on the system, the function does
+nothing.<P>
+The PARAM parameter is used by some of the functions for various reasons; if
+it is not needed for the particular function you are calling, pass zero
+instead.<P>
+The tasks performed are as follows depending on the COMMAND parameter:
+<PRE>
+eCDIsDriverPresent - checks if there is a CD-ROM driver available on
+   the system. Returns 1 if there is, and 0 if there is not.
+eCDGetPlayingStatus - checks whether the CD drive is currently playing
+   an audio track. Returns 1 if it is, and 0 if it is not.
+eCDPlayTrack - starts playback from track PARAM on the CD. If the track
+   does not exist, or if it is a data track, nothing happens.
+eCDPausePlayback - pauses the currently playing audio track.
+eCDResumePlayback - continues from where the track was paused.
+eCDGetNumTracks - returns the number of tracks on the CD
+   currently in the drive. If the drive is empty, returns 0.
+eCDEject - ejects the drive tray if the drive has the ability. This is
+   a feature you'll play with to start off because it's neat, and then
+   realize that it has no real use in your game.
+   Your script does not continue until the drive is fully ejected.
+eCDCloseTray - the reverse of Eject. This will pull the drive tray back
+   in again. Your script does not continue until the drive has been
+   fully closed.
+eCDGetCDDriveCount - returns the number of CD drives in the
+   system, normally 1.
+eCDSelectActiveCDDrive - changes the current CD drive to PARAM,
+   where PARAM ranges from 1 to (number of CD drives). All the other
+   CD Audio functions operate on the current CD drive.
+</PRE>
+NOTE: These CD Audio functions are slow compared to all the other script
+functions. This will not be noticeable if you call them from most scripts,
+but using CDAudio in a repeatedly_execute script will noticeably slow down
+the game.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes, but supports 1 CD-ROM drive only </B><br> 
+MS-DOS: <B> Yes, if CD-ROM device driver loaded </B><br> 
+Linux: <B> Yes, but supports 1 CD-ROM drive only </B><br> 
+MacOS: <B> No </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CDAudio(eCDPlayTrack, 3);
+</PRE>
+will play track 3 of the CD that's in the CD ROM drive.<P>
+
+
+<HR>
+<A NAME="Game.IsAudioPlaying"></A>
+<H3>IsAudioPlaying</H3>
+<I>(Formerly known as IsMusicPlaying, which is now obsolete)</I> <br> 
+<I>(Formerly known as IsSoundPlaying, which is now obsolete)</I><P>
+<PRE>
+static bool Game.IsAudioPlaying(optional AudioType)
+</PRE>
+Returns <I>true</I> if there is currently audio playing of the specified type. If you don't
+supply an audio type, then <I>true</I> will be returned if there is any audio at all playing
+in the game.<P>
+If no audio of the specified type is playing, returns <I>false</I>. You can use this to wait
+for some music to finish playing, for example.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+while (Game.IsAudioPlaying(eAudioTypeMusic))
+{
+  Wait(1);
+}
+</PRE>
+waits for any currently playing music to finish.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#Game.StopAudio">Game.StopAudio</A><P>
+
+
+<HR>
+<A NAME="IsSpeechVoxAvailable"></A>
+<H3>IsSpeechVoxAvailable</H3>
+<PRE>
+IsSpeechVoxAvailable()
+</PRE>
+Returns whether the SPEECH.VOX file is being used by the game.
+This could be useful if you have an optional speech download pack, and
+you want to know whether the player has it or not.<P>
+Returns 1 if the speech files are available, 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsSpeechVoxAvailable()==0)
+    Display ("You don't have the voice pack"); 
+</PRE>
+will display a message if the voice pack is not available.<P>
+<B>NOTE:</B> This function used to be called IsVoxAvailable, but has now been renamed to avoid confusion.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.IsAvailable">AudioClip.IsAvailable</A><P>
+
+
+<HR>
+<A NAME="PlayFlic"></A>
+<H3>PlayFlic</H3>
+<PRE>
+PlayFlic (int flic_number, int options)
+</PRE>
+Plays a FLI or FLC animation. The game checks for FLICx.FLC and FLICx.FLI
+(where X is FLIC_NUMBER) and if it finds one, plays it.<P>
+OPTIONS has these meanings:
+<PRE>
+0  player can't skip animation
+1  player can press ESC to skip animation
+2  player can press any key or click mouse to skip animation
++10 (ie.10,11,12) do not stretch to full-screen, just play at flc size
++100 do not clear the screen before starting playback
+</PRE>
+The game is paused while the animation plays.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayFlic(2, 1);
+</PRE>
+will play flic2 and the player will be able to skip the flic by pressing the ESC key.<P>
+<I>See Also:</I> <A HREF="ags69.htm#PlayVideo">PlayVideo</A><P>
+
+
+<HR>
+<A NAME="PlaySilentMIDI"></A>
+<H3>PlaySilentMIDI</H3>
+<PRE>
+PlaySilentMIDI (int music_number)
+</PRE>
+This command is obsolete.<P>
+Use the AudioClip.Play command and set its Volume property to 0 to simulate this effect.<P>
+<I>See Also:</I> <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>, <A HREF="ags47.htm#AudioChannel.Volume">AudioChannel.Volume</A><P>
+
+
+<HR>
+<A NAME="PlayVideo"></A>
+<H3>PlayVideo</H3>
+<PRE>
+PlayVideo (string filename, VideoSkipStyle, int flags)
+</PRE>
+Plays an AVI, MPG or OGG Theora file, or any other file type supported by Media Player.
+The game is paused while the video plays.<P>
+<I>VideoSkipStyle</I> defines how the player can skip the video:
+<PRE>
+eVideoSkipNotAllowed     player can't skip video
+eVideoSkipEscKey         player can press ESC to skip video
+eVideoSkipAnyKey         player can press any key to skip video
+eVideoSkipAnyKeyOrMouse  player can press any key or click mouse to skip
+</PRE>
+FLAGS can be one of the following:
+<PRE>
+0: the video will be played at original size, with AVI audio
+1: the video will be stretched to full screen, with appropriate
+   black borders to maintain its aspect ratio and AVI audio.
+10: original size, with game audio continuing (AVI audio muted)
+11: stretched to full screen, with game audio continuing (AVI audio muted)
+</PRE>
+There are two distinct type of videos that the PlayVideo function can play.<P>
+The first is OGG Theora, which is a recently introduced video file format. AGS
+has built-in support for playing these videos, so everyone who plays your game
+will be able to see the video. OGG Theora videos are also built into the game EXE
+file when you compile the game (just make sure the file has a .OGV extension and
+is placed in your main game folder).<P>
+The second type of files that AGS can play is anything supported by Windows Media
+Player. This includes AVI, MPG and more. However, in order for these to work on
+the player's system, they will need to have the correct codecs installed. For example,
+if you create your video with the XVid codec, the player will need to have XVid installed
+to be able to view it. These types of video cannot be included into the game EXE, 
+so you will have to place them separately in the Compiled folder for them to work.<P>
+<B>NOTE:</B> In 256-colour games, PlayVideo is not supported. Please use a FLC/FLI video
+with the <A HREF="ags69.htm#PlayFlic">PlayFlic</A> command instead.<P>
+<B>Cross-Platform Support</B><P>
+Windows: <B> Yes </B><br> 
+MS-DOS: <B> No </B><br> 
+Linux: <B> No </B><br> 
+MacOS: <B> Yes </B><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+PlayVideo("intro.mpg", eVideoSkipEscKey, 1);
+</PRE>
+will play the video Intro.mpg, allowing the player to skip with ESC if they've seen it
+before.<P>
+<I>Compatibility:</I> OGG Theora supported by <B>AGS 3.1.1</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#PlayFlic">PlayFlic</A><P>
+
+
+<HR>
+<A NAME="Game.SetAudioTypeSpeechVolumeDrop"></A>
+<H3>SetAudioTypeSpeechVolumeDrop</H3>
+<I>(Formerly known as game.speech_music_drop, which is now obsolete)</I><P>
+<PRE>
+static Game.SetAudioTypeSpeechVolumeDrop(AudioType, int volumeReduction)
+</PRE>
+Changes the VolumeReductionWhileSpeechPlaying of the specified <I>AudioType</I>. This changes
+the setting, initially set in the Audio Types part of the editor. It specifies how much
+the volume of clips of this type will be reduced by while speech is playing.<P>
+Specify 0 for no volume adjustment, up to 100 which will completely silence these audio
+clips while speech is playing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Game.SetAudioTypeSpeechVolumeDrop(eAudioTypeMusic, 25);
+</PRE>
+will reduce the volume of Music audio clips by 25 percentage points while speech is playing.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#Game.SetAudioTypeVolume">Game.SetAudioTypeVolume</A><P>
+
+
+<HR>
+<A NAME="Game.SetAudioTypeVolume"></A>
+<H3>SetAudioTypeVolume</H3>
+<I>(Formerly known as SetSoundVolume, which is now obsolete)</I><P>
+<PRE>
+static Game.SetAudioTypeVolume(AudioType, int volume, ChangeVolumeType)
+</PRE>
+Changes the default volume of the specified <I>AudioType</I>. This allows you to
+change the volume of all audio clips of a particular type, so that you can
+easily control sound and music volume separately, for example.<P>
+Possible values for <I>ChangeVolumeType</I> are:
+<PRE>
+eVolChangeExisting      change the volume of currently playing audio clips
+eVolSetFutureDefault    change the default volume for clips of this type
+eVolExistingAndFuture   change both currently playing and future audio
+</PRE>
+If you use the <I>eVolSetFutureDefault</I> or <I>eVolExistingAndFuture</I>, then
+the DefaultVolume property for all audio clips of this type will be overridden.
+This means that any DefaultVolume set up in the editor will be lost.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Game.SetAudioTypeVolume(eAudioTypeMusic, 20, eVolExistingAndFuture);
+</PRE>
+will change the volume of all currently playing and future music to <TT>20%</TT>.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#SetSpeechVolume">SetSpeechVolume</A>, <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>, 
+<A HREF="ags79.htm#System.Volume">System.Volume</A><P>
+
+
+<HR>
+<A NAME="SetSpeechVolume"></A>
+<H3>SetSpeechVolume</H3>
+<PRE>
+SetSpeechVolume (int volume)
+</PRE>
+Sets the volume for in-game speech. VOLUME ranges from 0-255, where 255 is
+the loudest. The default speech volume is 255 so this function can only
+be used to reduce the volume.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSpeechVolume(200);
+</PRE>
+will set the speech volume to 200.<P>
+<I>See Also:</I> <A HREF="ags69.htm#Game.SetAudioTypeVolume">Game.SetAudioTypeVolume</A><P>
+
+
+<HR>
+<A NAME="Game.StopAudio"></A>
+<H3>StopAudio</H3>
+<I>(Formerly known as Game.StopSound, which is now obsolete)</I> <br> 
+<I>(Formerly known as StopMusic, which is now obsolete)</I><P>
+<PRE>
+static Game.StopAudio(optional AudioType)
+</PRE>
+Stops all currently playing audio. If you pass no parameters, then all audio will be stopped.
+Alternatively, you can pass one of the AudioTypes which will only stop audio clips of that
+type.<P>
+If there are any audio clips queued up with PlayQueued, they will also be cancelled.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Game.StopAudio();
+</PRE>
+will stop all currently playing audio.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.2.0</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags69.htm#Game.IsAudioPlaying">Game.IsAudioPlaying</A>, <A HREF="ags48.htm#AudioClip.Play">AudioClip.Play</A>, 
+<A HREF="ags47.htm#AudioChannel.Stop">AudioChannel.Stop</A><P>
+
+
+</BODY></HTML>

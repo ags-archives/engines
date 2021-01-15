@@ -1,0 +1,352 @@
+<HTML>
+<head><title>File functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic53"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic43"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags39.htm#topic52"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags41.htm#topic54"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>File functions and properties</H2>
+
+<A HREF="#File.Open">Open</A><BR>
+<A HREF="#File.Close">Close</A><BR>
+<A HREF="#File.ReadString">ReadString</A><BR>
+<A HREF="#File.ReadInt">ReadInt</A><BR>
+<A HREF="#File.ReadRawChar">ReadRawChar</A><BR>
+<A HREF="#File.ReadRawInt">ReadRawInt</A><BR>
+<A HREF="#File.ReadRawLine">ReadRawLine</A><BR>
+<A HREF="#File.WriteString">WriteString</A><BR>
+<A HREF="#File.WriteInt">WriteInt</A><BR>
+<A HREF="#File.WriteRawChar">WriteRawChar</A><BR>
+<A HREF="#File.WriteRawLine">WriteRawLine</A><BR>
+<A HREF="#File.EOF">EOF property</A><BR>
+<A HREF="#File.Error">Error property</A><BR>
+<P>
+
+<HR>
+<A NAME="File.Open"></A>
+<H3>Open</H3>
+<I>(Formerly known as FileOpen, which is now obsolete)</I><P>
+<PRE>
+static File* File.Open(string filename, FileMode)
+</PRE>
+Opens a disk file for reading or writing. These disk I/O functions are only
+intended for simple tasks like the way the QFG series export the character
+when you complete it.<P>
+MODE is either eFileRead, eFileWrite or eFileAppend, depending on
+whether you want to write to or read from the file. If you pass eFileWrite
+and a file called FILENAME already exists, it will be overwritten.<P>
+eFileAppend opens an existing file for writing and starts adding information at
+the end (ie. the existing contents are not deleted).<P>
+This function returns a File object, which you use to perform operations on the
+file. <I>null</I> is returned if there was a problem (eg. file not existing when MODE
+is eFileRead).<P>
+<B>NOTE:</B> You <B>MUST</B> close the file with the Close function when you have finished
+using it. There are only a limited number of file handles, and forgetting to
+close the file can lead to problems later on.<P>
+<B>IMPORTANT</B>: If you open the file for writing, then you can ONLY work with
+files in the game directory.
+You CANNOT use a path, so any filename with "<TT>\</TT>" or "<TT>/</TT>" in it will
+automatically be rejected, for security reasons.<P>
+<B>NOTE:</B> Open file pointers are not persisted across save games. That is, if you open
+a file, then save the game; then when you restore the game, the File will not be usable
+and you'll have to open it again to continue any I/O. The safest practice is not to
+declare any global File variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("temp.tmp", eFileWrite);
+if (output == null)
+  Display("Error opening file.");
+else {
+  output.WriteString("test string");
+  output.Close();
+}
+</PRE>
+will open the file temp.tmp for writing. An error message is displayed if the file could not be created.
+Otherwise, it will write the string "test string" to the file and close it.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.Close">File.Close</A>, <A HREF="ags40.htm#File.ReadString">File.ReadString</A>,
+<A HREF="ags40.htm#File.WriteString">File.WriteString</A><P>
+<P>
+
+<HR>
+<A NAME="File.Close"></A>
+<H3>Close</H3>
+<I>(Formerly known as FileClose, which is now obsolete)</I><P>
+<PRE>
+File.Close()
+</PRE>
+Closes the file, and commits all changes to disk.
+You <B>must</B> call this function when you have finished reading/writing the file.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("test.dat", eFileWrite);
+output.WriteString("test string");
+output.Close();
+</PRE>
+will open the file test.dat, write the string "test string", and close it.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.Open">File.Open</A><P>
+
+
+<HR>
+<A NAME="File.ReadString"></A>
+<H3>ReadString</H3>
+<I>(Formerly known as FileRead, which is now obsolete)</I><P>
+<PRE>
+File.ReadString(string buffer)
+</PRE>
+Reads a string into BUFFER, from a file previously opened with File.Open.
+You should only use this with files which you previously wrote out with
+File.WriteString. Do NOT use this function with any other files, even text files.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+File *input = File.Open("test.dat", eFileRead);
+input.ReadString(buffer);
+input.Close();
+</PRE>
+will open the file test.dat (which you have previously written with File.WriteString) and
+read a string into the buffer. Then close the file.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.Open">File.Open</A>, <A HREF="ags40.htm#File.WriteString">File.WriteString</A><P>
+
+
+<HR>
+<A NAME="File.ReadInt"></A>
+<H3>ReadInt</H3>
+<I>(Formerly known as FileReadInt, which is now obsolete)</I><P>
+<PRE>
+File.ReadInt()
+</PRE>
+Reads an integer from the file, and returns it to the script.
+Only integers written with File.WriteInt can be read back.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number;
+File *input = File.Open("stats.dat", eFileRead);
+number = input.ReadInt();
+input.Close();
+</PRE>
+will open the file stats.dat, read an integer into number and then close the file.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadString">File.ReadString</A>, <A HREF="ags40.htm#File.WriteInt">File.WriteInt</A><P>
+
+
+<HR>
+<A NAME="File.ReadRawChar"></A>
+<H3>ReadRawChar</H3>
+<I>(Formerly known as FileReadRawChar, which is now obsolete)</I><P>
+<PRE>
+File.ReadRawChar()
+</PRE>
+Reads a raw character from the input file and returns it. This function
+allows you to read from files that weren't created by your game,
+however it is recommended for expert users only.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+File *input = File.Open("stats.txt", eFileRead);
+StrFormat(buffer, "%c", input.ReadRawChar());
+input.Close();
+</PRE>
+will read a raw character from file stats.txt and writes it to the string 'buffer'.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadString">File.ReadString</A>, <A HREF="ags40.htm#File.ReadRawInt">File.ReadRawInt</A>,
+<A HREF="ags40.htm#File.WriteRawChar">File.WriteRawChar</A><P>
+
+
+<HR>
+<A NAME="File.ReadRawInt"></A>
+<H3>ReadRawInt</H3>
+<I>(Formerly known as FileReadRawInt, which is now obsolete)</I><P>
+<PRE>
+File.ReadRawInt()
+</PRE>
+Reads a raw 32-bit integer from the input file and returns it to the script.
+This allows you to read from files created by other programs - however, it
+should only be used by experts as no error-checking is performed.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number;
+File *input = File.Open("stats.txt", eFileRead);
+number = input.ReadRawInt();
+input.Close();
+</PRE>
+will read a raw integer from file stats.txt and put it into the integer number.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadString">File.ReadString</A>, <A HREF="ags40.htm#File.ReadRawChar">File.ReadRawChar</A><P>
+
+
+<HR>
+<A NAME="File.ReadRawLine"></A>
+<H3>ReadRawLine</H3>
+<PRE>
+File.ReadRawLine(string buffer)
+</PRE>
+Reads a line of text from the file into <I>buffer</I>. This enables you to 
+read in lines from text files and use them in your game.<P>
+<B>NOTE:</B> this command can only read back plain text lines from text files. If you 
+attempt to use it with binary files or files written with commands like WriteString,
+WriteInt, etc then the results are unpredictable.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *input = File.Open("error.log", eFileRead);
+if (input != null) {
+  while (!input.EOF) {
+    string buffer;
+    input.ReadRawLine(buffer);
+    Display("%s", buffer);
+  }
+  input.Close();
+}
+</PRE>
+will display the contents of the 'error.log' file, if it exists<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.WriteRawLine">File.WriteRawLine</A><P>
+
+
+<HR>
+<A NAME="File.WriteString"></A>
+<H3>WriteString</H3>
+<I>(Formerly known as FileWrite, which is now obsolete)</I><P>
+<PRE>
+File.WriteString(string text)
+</PRE>
+Writes TEXT to the file, which must have been previously opened with
+File.Open for writing. The string is written using a custom format to
+the file, which can only be read back by using File.ReadString.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("temp.tmp", eFileWrite);
+if (output == null) Display("Error opening file.");
+else {
+  output.WriteString("test string");
+  output.Close();
+}
+</PRE>
+will open the file temp.tmp for writing. If it cannot create the file, it will display
+an error message. Otherwise, it will write the string "test string" and close it.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadString">File.ReadString</A>, <A HREF="ags40.htm#File.Open">File.Open</A>,
+<A HREF="ags40.htm#File.WriteRawLine">File.WriteRawLine</A><P>
+
+
+<HR>
+<A NAME="File.WriteInt"></A>
+<H3>WriteInt</H3>
+<I>(Formerly known as FileWriteInt, which is now obsolete)</I><P>
+<PRE>
+File.WriteInt(int value)
+</PRE>
+Writes VALUE to the file. This allows you to save the contents of
+variables to disk. The file must have been previously opened with File.Open,
+and you can read the value back later with File.ReadInt.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number = 6;
+File *output = File.Open("stats.dat", eFileWrite);
+output.WriteInt(number);
+output.Close();
+</PRE>
+will open the file stats.dat and write the integer number in it.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadInt">File.ReadInt</A>, <A HREF="ags40.htm#File.WriteString">File.WriteString</A><P>
+
+
+<HR>
+<A NAME="File.WriteRawChar"></A>
+<H3>WriteRawChar</H3>
+<I>(Formerly known as FileWriteRawChar, which is now obsolete)</I><P>
+<PRE>
+File.WriteRawChar(int value)
+</PRE>
+Writes a single character to the specified file, in raw mode so that other
+applications can read it back. If you are just creating a file for your
+game to read back in, use File.WriteInt instead because it offers additional
+protection. Only use this function if you need other applications to be
+able to read the file in.<P>
+This command writes a single byte to the output file - therefore, VALUE can
+contain any value from 0 to 255.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("output.txt", eFileWrite);
+output.WriteRawChar('A');
+output.WriteRawChar('B');
+output.WriteRawChar(13);
+output.Close();
+</PRE>
+will write the text "AB", followed by a carriage return character, to the file.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadRawChar">File.ReadRawChar</A>, <A HREF="ags40.htm#File.WriteInt">File.WriteInt</A><P>
+
+
+<HR>
+<A NAME="File.WriteRawLine"></A>
+<H3>WriteRawLine</H3>
+<I>(Formerly known as FileWriteRawLine, which is now obsolete)</I><P>
+<PRE>
+File.WriteRawLine(string text)
+</PRE>
+Writes a string of text to the file in plain text format. This enables
+you to read it back in Notepad or any text editor. This is useful for generating
+logs and such like.<P>
+The TEXT will be printed to the file, followed by the standard newline characters.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("error.log", eFileAppend);
+output.WriteRawLine("There was an error playing sound1.wav");
+output.Close();
+</PRE>
+will write an error line in the file error.log.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.ReadRawLine">File.ReadRawLine</A>,
+<A HREF="ags40.htm#File.WriteString">File.WriteString</A><P>
+
+
+<HR>
+<A NAME="File.EOF"></A>
+<H3>EOF property</H3>
+<I>(Formerly known as FileIsEOF, which is now obsolete)</I><P>
+<PRE>
+readonly bool File.EOF
+</PRE>
+Checks whether the specified file has had all its data read. This is only useful
+with files opened for <B>reading</B>. It returns 1 if the entire contents of the file
+has now been read, or 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("test.dat", eFileRead);
+while (!output.EOF) {
+  int temp = output.ReadRawChar();
+  Display("%c", temp);
+}
+output.Close();
+</PRE>
+will display every character in the file test.dat, one by one, to the screen.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.Error">File.Error</A>, <A HREF="ags40.htm#File.Open">File.Open</A>,
+<A HREF="ags40.htm#File.ReadString">File.ReadString</A><P>
+
+
+<HR>
+<A NAME="File.Error"></A>
+<H3>Error property</H3>
+<I>(Formerly known as FileIsError, which is now obsolete)</I><P>
+<PRE>
+readonly bool File.Error
+</PRE>
+Checks whether an error has occured reading from or writing to the specified file.<P>
+An error can occur if, for example, you run out of disk space or the user removes the
+disk that is being read from.<P>
+This function only checks for errors while actually reading/writing data. The File.Open
+function will return null if there was an error actually opening or creating the file.<P>
+To find out whether all data has been read from a file, use <A HREF="ags40.htm#File.EOF">EOF</A> instead.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+File *output = File.Open("test.dat", eFileWrite);
+output.WriteInt(51);
+if (output.Error) {
+  Display("Error writing the data!");
+}
+output.Close();
+</PRE>
+will write a number to the file 'test.dat', and display a message if there was a problem.<P>
+<I>See Also:</I> <A HREF="ags40.htm#File.EOF">File.EOF</A>, <A HREF="ags40.htm#File.ReadString">File.ReadString</A><P>
+<P>
+
+</BODY></HTML>

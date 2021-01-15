@@ -1,0 +1,377 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AGS.Types</name>
+    </assembly>
+    <members>
+        <member name="M:AGS.Types.SerializeUtils.GetElementString(System.Xml.XmlNode,System.String)">
+            <summary>
+            Wrapper function for SelectSingleNode that throws an exception
+            mentioning the node name if it is not found. Returns the node text
+            if successful.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.SerializeUtils.GetChildNodes(System.Xml.XmlNode,System.String)">
+            <summary>
+            Wrapper function for SelectSingleNode that throws an exception
+            mentioning the node name if it is not found. Returns the node's
+            children if successful.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.NotifyClientsViewsUpdated">
+            <summary>
+            Causes the ViewListUpdated event to be fired. You should call this
+            if you add/remove views and need the views component to update
+            to reflect the changes.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.FindAvailableViewID">
+            <summary>
+            Returns an unused View ID
+            </summary>
+        </member>
+        <member name="M:AGS.Types.Game.FindViewByID(System.Int32)">
+            <summary>
+            Returns the View object associated with the supplied ID
+            </summary>
+        </member>
+        <member name="E:AGS.Types.Game.ViewListUpdated">
+            <summary>
+            Fired when an external client adds/removes views
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.DirectoryPath">
+            <summary>
+            Full path to the directory where the game is located
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.FilesAddedOrRemoved">
+            <summary>
+            If this is set, then the editor is more forceful about making
+            the user save the game on exit.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.MinRoomHeight">
+            <summary>
+            Returns the minimum height of the room background, in 320x200-units,
+            for the current game resolution.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.MinRoomWidth">
+            <summary>
+            Returns the minimum width of the room background, in 320x200-units,
+            for the current game resolution.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.Game.ViewCount">
+            <summary>
+            Returns the highest numbered View in the game
+            </summary>
+        </member>
+        <member name="M:AGS.Types.GUIControl.GetSpritesUsed">
+            <summary>
+            Gets a list of all sprites used by this control. Useful for
+            exporting the control.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.GUIControl.UpdateSpritesWithMapping(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Updates sprite numbers on the control using the supplied mapping.
+            Usually used after this control has just been imported from an external
+            source, to link up its imported sprites.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.ViewFolder.FindViewByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the View object for the specified view number.
+            Returns null if the view is not found.
+            </summary>
+            <param name="viewNumber">View number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumDescription(System.Enum)">
+            <summary>
+            Gets Enum Value's Description Attribute
+            </summary>
+            <param name="value">The value you want the description attribute for</param>
+            <returns>The description, if any, else it's .ToString()</returns>
+        </member>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumDescription(System.Type,System.String)">
+            <summary>
+            Gets the description for certaing named value in an Enumeration
+            </summary>
+            <param name="value">The type of the Enumeration</param>
+            <param name="name">The name of the Enumeration value</param>
+            <returns>The description, if any, else the passed name</returns>
+        </member>
+        <member name="M:AGS.Types.EnumTypeConverter.GetEnumValue(System.Type,System.String)">
+            <summary>
+            Gets the value of an Enum, based on it's Description Attribute or named value
+            </summary>
+            <param name="value">The Enum type</param>
+            <param name="description">The description or name of the element</param>
+            <returns>The value, or the passed in description, if it was not found</returns>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RegisterIcon(System.String,System.Drawing.Icon)">
+            <summary>
+            Registers an icon with the AGS Editor. Supply a unique ID which
+            you use later to refer to this icon.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddOrShowPane(AGS.Types.ContentDocument)">
+            <summary>
+            Makes the specified pane into the active pane in the editor,
+            or adds it if it doesn't already exist.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RemovePaneIfExists(AGS.Types.ContentDocument)">
+            <summary>
+            Removes the pane from the main tabbed window area. If it doesn't
+            exist there, nothing happens.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.ShowMessage(System.String,AGS.Types.MessageBoxIconType)">
+            <summary>
+            Shows a message box with the specified message and icon
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddMenu(AGS.Types.IEditorComponent,System.String,System.String,System.String)">
+            <summary>
+            Adds a new main menu to the editor. The ID will be used
+            to identify it in code, and Title is the user friendly name.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.AddMenuItems(AGS.Types.IEditorComponent,AGS.Types.MenuCommands)">
+            <summary>
+            Adds a set of new commands to the editor main menus
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.CreateMenuCommand(AGS.Types.IEditorComponent,System.String,System.String)">
+            <summary>
+            Creates a MenuCommand for the specified component
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.RemoveMenuItems(AGS.Types.MenuCommands)">
+            <summary>
+            Removes a set of previously added commands from the editor main menus
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IGUIController.CreateScriptEditor(System.Drawing.Point,System.Drawing.Size)">
+            <summary>
+            Creates a script editor control at the specified position and size.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGUIController.ProjectTree">
+            <summary>
+            Gets the Project Tree controller which provides access to
+            adding and removing nodes from the main tree.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IGUIController.FileMenuID">
+            <summary>
+            The menu ID of the File menu
+            </summary>
+        </member>
+        <member name="P:AGS.Types.GetAboutDialogTextEventArgs.Text">
+            <summary>
+            The text to be displayed.
+            </summary>
+        </member>
+        <member name="T:AGS.Types.RequiredAGSVersionAttribute">
+            <summary>
+            The minimum version of AGS that this plugin will work with.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.RequiredAGSVersionAttribute.#ctor(System.String)">
+            <summary>
+            Specifies the minimum AGS version required by this plugin
+            </summary>
+            <param name="requiredVersion">Minimum version number, in format a.b.c.d (eg. 3.0.0.0)</param>
+        </member>
+        <member name="M:AGS.Types.SpriteFolder.FindSpriteByID(System.Int32,System.Boolean)">
+            <summary>
+            Finds the Sprite object for the specified sprite number.
+            Returns null if the sprite is not found.
+            </summary>
+            <param name="spriteNumber">Sprite number to look for</param>
+            <param name="recursive">Whether to also search sub-folders</param>
+        </member>
+        <member name="M:AGS.Types.SpriteFolder.NotifyClientsOfUpdate">
+            <summary>
+            Causes the SpritesUpdated event to be fired. You should call this
+            if you modify the sprites and need the Sprite Manager window
+            to update to reflect the changes.
+            </summary>
+        </member>
+        <member name="E:AGS.Types.SpriteFolder.SpritesUpdated">
+            <summary>
+             Fired when an external client makes changes to the sprites
+            </summary>
+        </member>
+        <member name="P:AGS.Types.ViewLoop.Full">
+            <summary>
+            This is pretty much obsolete now, it used to be Full if the
+            Max Frames Per Loop was reached, but now there isn't one.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.AutoComplete.ScriptFunction.HideOnMainFunctionList">
+            <summary>
+            If this function should be hidden from the main autocomplete list.
+            This applies to member function definitions, since the import statement
+            will be used instead.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.View.NotifyClientsOfUpdate">
+            <summary>
+            Causes the ViewUpdated event to be fired. You should call this
+            if you modify the view and need any currently open editor View
+            windows to update to reflect the changes.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new MenuCommands collection
+            </summary>
+            <param name="menuName">The Menu ID to add the commands to</param>
+            <param name="insertAfterMenu">For pane-specific menus, where to insert the extra menu</param>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.Collections.Generic.IList{AGS.Types.MenuCommand})">
+            <summary>
+            Creates a new MenuCommands collection to wrap an existing list of commands
+            </summary>
+            <param name="commands"></param>
+        </member>
+        <member name="M:AGS.Types.MenuCommands.#ctor(System.String)">
+            <summary>
+            Creates a new MenuCommands collection
+            </summary>
+            <param name="menuName">The Menu ID to add the commands to</param>
+        </member>
+        <member name="M:AGS.Types.Script.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a new Script which can be compiled with the AGS Script Compiler.
+            </summary>
+            <param name="fileName">The script filename. If the script is internally
+            generated and not stored on disk, make up a name and prefix it with
+            an underscore.</param>
+            <param name="text">The script itself.</param>
+            <param name="isHeader">Is this a script header or an actual script?</param>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.OnPanelClosing(System.Boolean,System.Boolean@)">
+            <summary>
+            This pane is about to be closed. If canCancel is true, then
+            the user is attempting to close and it can be aborted. If it's
+            false, then the editor is exiting and you can't abort the close.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.WindowActivated">
+            <summary>
+            This panel has just become the active one
+            </summary>
+        </member>
+        <member name="M:AGS.Types.EditorContentPanel.OnGetHelpKeyword">
+            <summary>
+            Gets the help keyword that will be used to bring up the help
+            file when the user presses F1 in this pane.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.AddComponent(AGS.Types.IEditorComponent)">
+            <summary>
+            Adds a new component to the editor. Once added, it cannot be removed
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.RebuildAutocompleteCache(AGS.Types.Script)">
+            <summary>
+            Re-constructs the autocomplete data for the specified script.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IAGSEditor.GetAllScriptHeaders">
+            <summary>
+            Retrieves a list of all the script headers that will be passed
+            to the compiler, in the correct order.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.GUIController">
+            <summary>
+            Returns the GUI controller, which provides access to various
+            aspects of the editor GUI.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.CurrentGame">
+            <summary>
+            Returns the game which is loaded into the editor
+            </summary>
+        </member>
+        <member name="P:AGS.Types.IAGSEditor.Version">
+            <summary>
+            Editor version number
+            </summary>
+        </member>
+        <member name="E:AGS.Types.IAGSEditor.GetScriptHeaderList">
+            <summary>
+            Allows you to add extra built-in script headers to the compiler.
+            You can't add extra functions because your plugin will not be
+            loaded at run-time, but you can add enums and #defines.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.AddTreeRoot(AGS.Types.IEditorComponent,System.String,System.String,System.String)">
+            <summary>
+            Adds a new root to the project tree.
+            </summary>
+            <param name="component">The owning component</param>
+            <param name="id">Unique ID for this tree node</param>
+            <param name="name">User-friendly name to display</param>
+            <param name="iconKey">The icon to display, registered earlier with RegisterIcon</param>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.StartFromNode(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Sets the project tree's internal marker to the specified node.
+            Any AddTreeLeaf commands will add them as children of this node.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.AddTreeLeaf(AGS.Types.IEditorComponent,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a new child node to the project tree.
+            </summary>
+            <param name="component">The owning component</param>
+            <param name="id">Unique ID for this tree node</param>
+            <param name="name">User-friendly name to display</param>
+            <param name="iconKey">The icon to display, registered earlier with RegisterIcon</param>
+            <param name="greyedOut">Whether this item should be greyed out (normally false)</param>
+            <returns></returns>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.SelectNode(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Sets the project tree to display this node as selected.
+            </summary>
+        </member>
+        <member name="M:AGS.Types.IProjectTree.RemoveAllChildNodes(AGS.Types.IEditorComponent,System.String)">
+            <summary>
+            Removes all child nodes of the specified node. This allows you
+            to refresh your list of child nodes by adding them all back
+            again.
+            </summary>
+        </member>
+        <member name="E:AGS.Types.IProjectTree.BeforeShowContextMenu">
+            <summary>
+            Fired just before a context menu is displayed in the project tree.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.Component">
+            <summary>
+            The component that created the activated node.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.MenuCommands">
+            <summary>
+            The context menu commands that have been created by the
+            owning component.
+            </summary>
+        </member>
+        <member name="P:AGS.Types.BeforeShowContextMenuEventArgs.SelectedNodeID">
+            <summary>
+            The ID of the tree node that was right-clicked.
+            </summary>
+        </member>
+    </members>
+</doc>

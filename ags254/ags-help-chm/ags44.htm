@@ -1,0 +1,139 @@
+<HTML>
+<head><title>Overlay functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic65"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags34.htm#topic55"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags43.htm#topic64"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags45.htm#topic66"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Overlay functions</H2>
+<A HREF="#CreateGraphicOverlay">CreateGraphicOverlay</A><BR>
+<A HREF="#CreateTextOverlay">CreateTextOverlay</A><BR>
+<A HREF="#IsOverlayValid">IsOverlayValid</A><BR>
+<A HREF="#MoveOverlay">MoveOverlay</A><BR>
+<A HREF="#RemoveOverlay">RemoveOverlay</A><BR>
+<A HREF="#SetTextOverlay">SetTextOverlay</A><BR>
+<P>
+
+<HR>
+<A NAME="CreateGraphicOverlay"></A>
+<H3>CreateGraphicOverlay</H3>
+<PRE>
+CreateGraphicOverlay (int x, int y, int slot, int transparent)
+</PRE>
+Creates a screen overlay containing a copy of the image from SLOT in
+the Sprite Manager. The image is placed at (X,Y) on the screen (these are
+screen co-ordinates, not room co-ordinates). If TRANSPARENT is 1 then the
+overlay will be drawn in the same way as characters/objects, if it is 0
+then the a black rectangle will be painted behind the sprite.<P>
+See the description of CreateTextOverlay for more on overlays.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CreateGraphicOverlay(100,100,300,1);
+</PRE>
+will create an overlay of the image stored in sprite manager’s slot 300, at the coordinates 100,100.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateTextOverlay">CreateTextOverlay</A>, <A HREF="ags44.htm#RemoveOverlay">RemoveOverlay</A><P>
+
+<HR>
+<A NAME="CreateTextOverlay"></A>
+<H3>CreateTextOverlay</H3>
+<PRE>
+CreateTextOverlay (int x, int y, int width, int font, int color, string text)
+</PRE>
+Creates a screen overlay containing the text you pass at the position
+specified. A screen overlay looks identical to the way speech text is
+displayed in conversations, except that with this command the text stays
+on the screen until either you remove it with RemoveOverlay, or the player
+goes to a different room, in which case it is automatically removed.<P>
+The X and Y parameters specify the upper-left corner of where the text
+will be written. WIDTH is the width, in pixels, of the text area. FONT is
+the font number from the editor to use (0 is the normal font, 1 is the speech
+font). COLOR is the text color - use one of the colours from 1 to 15.
+Finally, TEXT is obviously the text that gets displayed.<P>
+The function returns the Overlay ID, which you use later to reposition
+and remove the overlay.<P>
+NOTE: screen overlays, in the same way as objects, slow down the game
+while displayed.<P>
+NOTE: there is currently a maximum of 10 overlays displayed at any one time.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CreateTextOverlay (50,80,120,2,15,"This is a text overlay");
+</PRE>
+will display a 120 pixels text area with its upper left corner at coordinates 50,80 containing the string "This is a text overlay" using font number 1 and green color.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateGraphicOverlay">CreateGraphicOverlay</A>, <A HREF="ags44.htm#MoveOverlay">MoveOverlay</A>, <A HREF="ags44.htm#RemoveOverlay">RemoveOverlay</A><P>
+
+
+<HR>
+<A NAME="IsOverlayValid"></A>
+<H3>IsOverlayValid</H3>
+<PRE>
+IsOverlayValid (int overlay_id)
+</PRE>
+Checks whether OVERLAY_ID is a current overlay or not. Returns 1 if it is, 0 if it isn't.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateTextOverlay">CreateTextOverlay</A>, <A HREF="ags44.htm#RemoveOverlay">RemoveOverlay</A><P>
+<P>
+
+<HR>
+<A NAME="MoveOverlay"></A>
+<H3>MoveOverlay</H3>
+<PRE>
+MoveOverlay (int overlay_id, int x, int y)
+</PRE>
+Repositions screen overlay OVERLAY_ID to have its upper-left corner
+at (X,Y). The move is instant (ie. it doesn't gradually glide over to the
+new position).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int over1;
+over1=CreateTextOverlay (50,80,120,2,15,"This is a text overlay");
+Wait(200);
+MoveOverlay(over1,100,100);
+</PRE>
+will create a text overlay , wait for 200 game cycles (about 5 seconds) and then move the overlay to coordinates 100,100.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateTextOverlay">CreateTextOverlay</A>, <A HREF="ags44.htm#RemoveOverlay">RemoveOverlay</A><P>
+
+<HR>
+<A NAME="RemoveOverlay"></A>
+<H3>RemoveOverlay</H3>
+<PRE>
+RemoveOverlay (int overlay_id)
+</PRE>
+Removes the specified overlay from the screen. OVERLAY_ID is the value
+returned from the overlay creation functions like CreateTextOverlay.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int over1;
+over1=CreateTextOverlay (50,80,120,2,15,"This is a text overlay");
+Wait(200);
+RemoveOverlay(over1);
+</PRE>
+will create a text overlay , wait for 200 game cycles (about 5 seconds) and then remove the overlay from the screen.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateTextOverlay">CreateTextOverlay</A><P>
+
+<HR>
+<A NAME="SetTextOverlay"></A>
+<H3>SetTextOverlay</H3>
+<PRE>
+SetTextOverlay (int overlay_id, int x, int y, int width, int font, int color, string text)
+</PRE>
+Similar to CreateTextOverlay, except that this function replaces an
+existing overlay with the new text. This has two advantages over simply
+using RemoveOverlay followed by CreateTextOverlay to change the text -
+it is one function call, and it allows you to keep the same overlay ID
+number.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int over1;
+over1 = CreateTextOverlay (50,80,120,2,15,"This is a text overlay");
+Wait(200);
+SetTextOverlay (over1, 50,80,120,2,15,"This is another text overlay");
+</PRE>
+will create a text overlay , wait for 200 game cycles (about 5 seconds) and then replace the overlay with another one.<P>
+<I>See Also:</I> <A HREF="ags44.htm#CreateTextOverlay">CreateTextOverlay</A>, <A HREF="ags44.htm#RemoveOverlay">RemoveOverlay</A><P>
+
+</BODY></HTML>

@@ -1,0 +1,669 @@
+<HTML>
+<head><title>Room functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic68"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags71.htm#topic67"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags73.htm#topic69"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Room functions</H2>
+
+<A HREF="#AreThingsOverlapping">AreThingsOverlapping</A><BR>
+<A HREF="#DisableGroundLevelAreas">DisableGroundLevelAreas</A><BR>
+<A HREF="#EnableGroundLevelAreas">EnableGroundLevelAreas</A><BR>
+<A HREF="#GetBackgroundFrame">GetBackgroundFrame</A><BR>
+<A HREF="#Room.GetDrawingSurfaceForBackground">GetDrawingSurfaceForBackground</A><BR>
+<A HREF="#GetPlayerCharacter">GetPlayerCharacter</A><BR>
+<A HREF="#GetRoomProperty">GetRoomProperty</A><BR>
+<A HREF="#Room.GetTextProperty">GetTextProperty (room)</A><BR>
+<A HREF="#GetScalingAt">GetScalingAt</A><BR>
+<A HREF="#GetViewportX">GetViewportX</A><BR>
+<A HREF="#GetViewportY">GetViewportY</A><BR>
+<A HREF="#GetWalkableAreaAt">GetWalkableAreaAt</A><BR>
+<A HREF="#HasPlayerBeenInRoom">HasPlayerBeenInRoom</A><BR>
+<A HREF="#ReleaseViewport">ReleaseViewport</A><BR>
+<A HREF="#RemoveWalkableArea">RemoveWalkableArea</A><BR>
+<A HREF="#ResetRoom">ResetRoom</A><BR>
+<A HREF="#RestoreWalkableArea">RestoreWalkableArea</A><BR>
+<A HREF="#SetAreaScaling">SetAreaScaling</A><BR>
+<A HREF="#SetBackgroundFrame">SetBackgroundFrame</A><BR>
+<A HREF="#SetViewport">SetViewport</A><BR>
+<A HREF="#SetWalkBehindBase">SetWalkBehindBase</A><BR>
+<A HREF="#Room.BottomEdge">BottomEdge property</A><BR>
+<A HREF="#Room.ColorDepth">ColorDepth property (room)</A><BR>
+<A HREF="#Room.Height">Height property (room)</A><BR>
+<A HREF="#Room.LeftEdge">LeftEdge property</A><BR>
+<A HREF="#Room.Messages">Messages property</A><BR>
+<A HREF="#Room.MusicOnLoad">MusicOnLoad property</A><BR>
+<A HREF="#Room.ObjectCount">ObjectCount property</A><BR>
+<A HREF="#Room.RightEdge">RightEdge property</A><BR>
+<A HREF="#Room.TopEdge">TopEdge property</A><BR>
+<A HREF="#Room.Width">Width property (room)</A><BR>
+<P>
+
+<HR>
+<A NAME="AreThingsOverlapping"></A>
+<H3>AreThingsOverlapping</H3>
+<PRE>
+AreThingsOverlapping(int thing1, int thing2)
+</PRE>
+Checks whether two characters or objects are overlapping each other on screen. This simply
+carries out a quick rectangular check on the two things to decide - so if they have large
+transparent regions around the edges, it may seem to be overlapping too soon.<P>
+THING1 and THING2 can either be a CHARID, or can be an object number PLUS 1000.
+So for example, passing EGO as THING1, and 1004 as THING2, will compare the character EGO
+with Object 4 in the current room.<P>
+Returns 0 if they are not overlapping, or the overlapping amount if they are. This amount
+is an arbitrary scale, but 1 means they are just about touching, all the way up to higher numbers
+for more overlappingness.<P>
+Calling this function with both the parameters as objects is the same as calling Object.IsCollidingWithObject.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (AreThingsOverlapping(1002, EGO)) {
+  // code here
+}
+</PRE>
+will run the code if object 2 is overlapping EGO. This could be useful if object 2 was a bullet,
+for instance.<P>
+<I>See Also:</I> <A HREF="ags46.htm#Character.IsCollidingWithChar">Character.IsCollidingWithChar</A>,
+<A HREF="ags67.htm#Object.IsCollidingWithObject">Object.IsCollidingWithObject</A><P>
+<P>
+
+<HR>
+<A NAME="DisableGroundLevelAreas"></A>
+<H3>DisableGroundLevelAreas</H3>
+<PRE>
+DisableGroundLevelAreas(int disableTints)
+</PRE>
+Disables all ground-level events. This means that all Region events, the Player Stands
+On Hotspot event, and the room edges become disabled.<P>
+This command is useful in conjunction with the character[].z variable, if you want the player
+to be able to temporarily fly or levitate, for example. It allows you to stop the character
+from triggering Player Stands On events while they are in the air.<P>
+This command is also useful during some cutscenes, if you don't want the player to trigger
+events as they walk around the room while in the cutscene.<P>
+The DISABLETINTS parameter specifies whether the visual effects of the regions (ie. light
+levels and tints) are also disabled. If you pass this as 0, then just the events will
+be turned off.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisableGroundLevelAreas(0);
+</PRE>
+will disable all ground-level events, but leave light levels working<P>
+<I>See Also:</I> <A HREF="ags62.htm#Hotspot.Enabled">Hotspot.Enabled</A>, <A HREF="ags71.htm#Region.Enabled">Region.Enabled</A>,
+<A HREF="ags72.htm#EnableGroundLevelAreas">EnableGroundLevelAreas</A><P>
+
+
+<HR>
+<A NAME="EnableGroundLevelAreas"></A>
+<H3>EnableGroundLevelAreas</H3>
+<PRE>
+EnableGroundLevelAreas()
+</PRE>
+Re-enables all ground-level events. This is used to reverse the effects of
+using the DisableGroundLevelAreas command, and will return things to normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+EnableGroundLevelAreas();
+</PRE>
+will re-enable all ground-level events.<P>
+<I>See Also:</I> <A HREF="ags62.htm#Hotspot.Enabled">Hotspot.Enabled</A>, <A HREF="ags71.htm#Region.Enabled">Region.Enabled</A>,
+<A HREF="ags72.htm#DisableGroundLevelAreas">DisableGroundLevelAreas</A><P>
+
+
+<HR>
+<A NAME="GetBackgroundFrame"></A>
+<H3>GetBackgroundFrame</H3>
+<PRE>
+GetBackgroundFrame()
+</PRE>
+Returns the number of the current background being displayed. In a room
+without animating backgrounds, this will always return 0. Otherwise, the
+current frame number is returned from 0 to 4.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetBackgroundFrame()==4)
+  object[2].Visible = true;
+</PRE>
+will turn on object 2 if the background frame of the room is frame 4.<P>
+<I>See Also:</I> <A HREF="ags72.htm#SetBackgroundFrame">SetBackgroundFrame</A><P>
+
+
+<HR>
+<A NAME="Room.GetDrawingSurfaceForBackground"></A>
+<H3>GetDrawingSurfaceForBackground</H3>
+<PRE>
+static DrawingSurface* Room.GetDrawingSurfaceForBackground(optional int backgroundNumber)
+</PRE>
+Gets a drawing surface for a room background, which allows you to directly draw
+onto the room's background image. You can provide a background frame number if you
+want to modify a specific frame; otherwise, the current background's surface will be returned.<P>
+After calling this method, use the various <A HREF="ags50.htm#DrawingSurfaceFunctions">DrawingSurface functions</A> to modify the
+background, then call Release on the surface when you are finished.<P>
+Any changes you make will only last until the player leaves the room, at 
+which point they will be lost. If you need to make long-lasting changes, you
+can either use this method in the Player Enters Room event, or consider using
+an alternate background frame for the changed image.<P>
+<B>NOTE:</B> Drawing onto the room background can be slow, especially when using the Direct3D
+driver. Do not use this command in repeatedly_execute; make sure you only use this command
+when absolutely necessary.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.DrawingColor = 14;
+surface.DrawLine(0, 0, 50, 50);
+surface.Release();
+</PRE>
+draws a yellow diagonal line across the top-left of the current room background,
+then releases the image.<P>
+<I>See Also:</I> <A HREF="ags50.htm#DrawingSurface.DrawLine">DrawingSurface.DrawLine</A>, 
+<A HREF="ags50.htm#DrawingSurface.Release">DrawingSurface.Release</A><P>
+
+
+<HR>
+<A NAME="GetPlayerCharacter"></A>
+<H3>GetPlayerCharacter</H3>
+<PRE>
+GetPlayerCharacter ()
+</PRE>
+<B>THIS COMMAND IS NOW OBSOLETE.</B> <br> 
+The recommended replacement is to use the player character's ID property, as follows:<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The player character number is %d", player.ID);
+</PRE>
+<I>See Also:</I> <A HREF="ags46.htm#Character.ID">Character.ID</A><P>
+
+
+<HR>
+<A NAME="GetRoomProperty"></A>
+<H3>GetRoomProperty</H3>
+<PRE>
+GetRoomProperty (string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the current room.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent Room.GetTextProperty function to get a text property.<P>
+Note that you cannot retrieve room properties of other rooms - only the current room
+can be checked.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetRoomProperty("CanBeAttackedHere"))
+  Display("An evil monster lunges at you!");
+</PRE>
+will print the message if the current room has its "CanBeAttackedHere" box ticked.<P>
+<I>See Also:</I> <A HREF="ags72.htm#Room.GetTextProperty">Room.GetTextProperty</A><P>
+
+
+<HR>
+<A NAME="Room.GetTextProperty"></A>
+<H3>GetTextProperty (room)</H3>
+<I>(Formerly known as global function GetRoomPropertyText, which is now obsolete)</I><P>
+<PRE>
+static String Room.GetTextProperty(string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the current room.<P>
+This command works with Text properties only. The property's text will be
+returned from this function.<P>
+Use the equivalent GetRoomProperty function to get a non-text property.<P>
+Note that you cannot retrieve room properties of other rooms - only the current room
+can be checked.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String description = Room.GetTextProperty("Description");
+Display("The room's description: %s", description);
+</PRE>
+will retrieve the room's "description" property then display it.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetRoomProperty">GetRoomProperty</A><P>
+
+
+<HR>
+<A NAME="GetScalingAt"></A>
+<H3>GetScalingAt</H3>
+<PRE>
+GetScalingAt (int x, int y)
+</PRE>
+Returns the room area scaling at room co-ordinates (X,Y).<P>
+The value returned is from 1 to 200, with 100 being the normal un-scaled setting.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetScalingAt(player.x, player.y) == 100)
+    Display ("The player is currently at normal size.");
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#GetWalkableAreaAt">GetWalkableAreaAt</A>, <A HREF="ags72.htm#SetAreaScaling">SetAreaScaling</A><P>
+<P>
+
+<HR>
+<A NAME="GetViewportX"></A>
+<H3>GetViewportX</H3>
+<PRE>
+GetViewportX ()
+</PRE>
+Returns the X-offset of the current viewport in a scrolling room. This
+allows you to find out what part of the room the player is looking at.
+The co-ordinate returned is the left edge of the screen, and so it can
+have a value between 0 and (ROOM WIDTH - 320).<P>
+If the room is a non-scrolling room, returns 0.<P>
+See the SetViewport function description for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetViewportX()&gt;100)
+    object[2].Visible = true;
+</PRE>
+will turn object 2 on if the player has scrolled the room by 100 pixels to the right.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetViewportY">GetViewportY</A>, <A HREF="ags72.htm#SetViewport">SetViewport</A><P>
+
+<HR>
+<A NAME="GetViewportY"></A>
+<H3>GetViewportY</H3>
+<PRE>
+GetViewportY ()
+</PRE>
+Returns the Y-offset of the current viewport in a scrolling room. This
+allows you to find out what part of the room the player is looking at.
+The co-ordinate returned is the top edge of the screen, and so it can
+have a value between 0 and (ROOM HEIGHT - 200).<P>
+If the room is a non-scrolling room, returns 0.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetViewportY()&gt;20)
+    object[2].Visible = true;
+</PRE>
+will turn object 2 on if the player has scrolled the room by 20 pixels to the bottom.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetViewportX">GetViewportX</A>, <A HREF="ags72.htm#SetViewport">SetViewport</A><P>
+
+
+<HR>
+<A NAME="GetWalkableAreaAt"></A>
+<H3>GetWalkableAreaAt</H3>
+<PRE>
+GetWalkableAreaAt (int x, int y)
+</PRE>
+Returns the number of the walkable area at SCREEN co-ordinates (X,Y).
+If there is no walkable area there, or if invalid co-ordinates are specified,
+returns 0.<P>
+NOTE: The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetWalkableAreaAt(mouse.x,mouse.y) == 0)
+    Display ("You can't walk there.");
+</PRE>
+<I>See Also:</I> <A HREF="ags62.htm#Hotspot.GetAtScreenXY">Hotspot.GetAtScreenXY</A>,
+<A HREF="ags71.htm#Region.GetAtRoomXY">Region.GetAtRoomXY</A>,
+<A HREF="ags72.htm#GetScalingAt">GetScalingAt</A><P>
+
+
+<HR>
+<A NAME="HasPlayerBeenInRoom"></A>
+<H3>HasPlayerBeenInRoom</H3>
+<PRE>
+HasPlayerBeenInRoom(int room_number)
+</PRE>
+Checks whether the player has ever been in ROOM_NUMBER (ie. has the 'First Time Player
+Enters Room' event there ever been run). Returns 1 if they have, and 0 if they haven't.<P>
+You can use this function to determine whether the player has been to a particular location
+previously. If you reset the room with ResetRoom, then this command will return 0 until
+they enter the room again.<P>
+This command will always return 1 if you ask it about the current room; and it will always
+return 0 if you ask it about a non-state saving room (ie. rooms numbered &gt; 300).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (HasPlayerBeenInRoom(14)) {
+  Display("The player has been to room 14 before.");
+}
+</PRE>
+will display a message if the player has been to room 14.<P>
+<I>See Also:</I> <A HREF="ags72.htm#ResetRoom">ResetRoom</A><P>
+
+
+<HR>
+<A NAME="ReleaseViewport"></A>
+<H3>ReleaseViewport</H3>
+<PRE>
+ReleaseViewport ()
+</PRE>
+Releases the lock on the screen viewport, allowing it to automatically
+scroll around following the player character as normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int x;
+while (x&lt;100) {
+   SetViewport(x,0);
+   x++; 
+   Wait(1);
+}
+ReleaseViewPort();
+</PRE>
+will scroll the room 100 pixels to the right and then return the screen to its original position and unlock the screen viewport.<P>
+<I>See Also:</I> <A HREF="ags72.htm#SetViewport">SetViewport</A><P>
+
+
+<HR>
+<A NAME="RemoveWalkableArea"></A>
+<H3>RemoveWalkableArea</H3>
+<PRE>
+RemoveWalkableArea (int areanum)
+</PRE>
+Removes the walkable areas in colour AREANUM from the current room. You can
+put the area back with RestoreWalkableArea.<P>
+NOTE: When the player leaves the screen, all the walkable areas are reset.
+Therefore, if you want an area to remain off when they leave the screen,
+you will need to set a flag, then run the RemoveWalkableArea command in
+the "Player enters room" event when they return.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RemoveWalkableArea(5); 
+</PRE>
+will make the walking area 5 unwalkable.<P>
+<I>See Also:</I> <A HREF="ags72.htm#RestoreWalkableArea">RestoreWalkableArea</A><P>
+
+
+<HR>
+<A NAME="ResetRoom"></A>
+<H3>ResetRoom</H3>
+<PRE>
+ResetRoom (int room_number)
+</PRE>
+Discards all the data that the engine has in memory about when the player
+last visited ROOM_NUMBER, and resets it as if they'd never been there. The
+next time the player goes to that room, all the objects and scripts will
+be in their initial state (as set up in the editor), and not how they were
+when the player left the room. The "First time enters room" event will be
+run when they enter this room again.<P>
+This function is useful if you want to have a "View intro" option to allow
+the player to watch an intro again - this function can reset all the
+objects in the intro rooms to their starting positions.<P>
+NOTE: You cannot reset the current room (ie. the room that the player is in).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ResetRoom(0); 
+</PRE>
+will reset the intro room so it can be played again if the player wants to.<P>
+<I>See Also:</I> <A HREF="ags72.htm#HasPlayerBeenInRoom">HasPlayerBeenInRoom</A><P>
+
+
+<HR>
+<A NAME="RestoreWalkableArea"></A>
+<H3>RestoreWalkableArea</H3>
+<PRE>
+RestoreWalkableArea (int areanum)
+</PRE>
+Makes the area AREANUM walkable again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RestoreWalkableArea(4); 
+</PRE>
+will make the walking area 4 walkable again.<P>
+<I>See Also:</I> <A HREF="ags72.htm#RemoveWalkableArea">RemoveWalkableArea</A><P>
+
+
+<HR>
+<A NAME="SetAreaScaling"></A>
+<H3>SetAreaScaling</H3>
+<PRE>
+SetAreaScaling(int area, int min, int max)
+</PRE>
+Changes walkable area number AREA's scaling. <P>
+There are two ways to use this command: <br> 
+1. Pass the same value for MIN and MAX. This will give the walkable area fixed
+scaling (same as setting it in the editor with "Use continuous scaling" un-ticked). <br> 
+2. Pass different values for MIN and MAX. In this case, continuous scaling is
+enabled for the walkable area, and will go from MIN at the top to MAX at the bottom.<P>
+MIN and MAX have ranges from 5 to 200, the same as in the editor. Pass 100 for both values
+to revert to the normal zoom level (100<TT>%</TT>) for that area.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetAreaScaling(5, 120, 170);
+</PRE>
+will set walkable area 5 to use continuous scaling from 120 to 170 percent.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetScalingAt">GetScalingAt</A>, <A HREF="ags72.htm#GetWalkableAreaAt">GetWalkableAreaAt</A><P>
+
+
+<HR>
+<A NAME="SetBackgroundFrame"></A>
+<H3>SetBackgroundFrame</H3>
+<PRE>
+SetBackgroundFrame (int frame)
+</PRE>
+Locks the background to frame number FRAME of an animating-background
+screen. (Values for FRAME are from 0 to 4). This allows you to use the
+animating backgrounds feature for another purpose - you can have two
+frames of the background, one for example with a spaceship crashed on it.
+Then, once the right event has happened, call SetBackgroundFrame in the
+Player Enters Room event to set the background before the screen fades in.<P>
+Pass the <I>frame</I> as -1 to return to the default behaviour of automatically
+cycling through all the background frames.<P>
+The frame lock is released when the game changes rooms.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(20)==1)
+    SetBackgroundFrame(4); 
+</PRE>
+will change the current room's background frame to 4 if the global integer 20 is 1.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetBackgroundFrame">GetBackgroundFrame</A><P>
+
+
+<HR>
+<A NAME="SetViewport"></A>
+<H3>SetViewport</H3>
+<PRE>
+SetViewport (int x, int y)
+</PRE>
+Locks the screen viewport to having the top-left hand corner at (X,Y) in
+a scrolling room. This allows you to manually pan across a scrolling room
+or to have the screen follow a non-player character.<P>
+The lock is released when you either call ReleaseViewport or the player
+changes rooms.<P>
+<B>NOTE:</B> The co-ordinates supplied are 320x200-scale co-ordinates, and will
+be automatically multiplied up by the engine.<P>
+<B>NOTE:</B> This function has no effect if the current room isn't a scrolling room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int ypos = 0;
+while (ypos &lt; 60) {
+  SetViewport(0, ypos);
+  Wait(1);
+  ypos++;
+}
+ReleaseViewport();
+</PRE>
+will scroll the screen down from the top 60 pixels, then release it back
+to follow the player around.<P>
+<I>See Also:</I> <A HREF="ags72.htm#GetViewportX">GetViewportX</A>, <A HREF="ags72.htm#GetViewportY">GetViewportY</A>, <A HREF="ags72.htm#ReleaseViewport">ReleaseViewport</A><P>
+
+
+<HR>
+<A NAME="SetWalkBehindBase"></A>
+<H3>SetWalkBehindBase</H3>
+<PRE>
+SetWalkBehindBase (int area, int baseline)
+</PRE>
+Changes the walk-behind AREA to have new BASELINE. This effectively allows
+you to turn walk-behinds on and off, although you can do other tricks with
+it as well. BASELINE is from 1 to the height of the room (normally 200) and
+moves the line which you set originally in the editor.<P>
+Passing BASELINE as 0 disables the walk-behind area, so that the player
+will always walk in front of it.<P>
+Basically, if the character's feet are below BASELINE, he will be drawn in
+front of it, otherwise he will be drawn behind it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetWalkBehindBase (3,0); 
+</PRE>
+will disable the walkbehind area number 3.<P>
+<I>See Also:</I> <A HREF="ags67.htm#Object.Baseline">Object.Baseline</A><P>
+
+
+<HR>
+<A NAME="Room.BottomEdge"></A>
+<H3>BottomEdge property</H3>
+<PRE>
+readonly static int Room.BottomEdge
+</PRE>
+Returns the Y co-ordinate of the bottom edge of the room, as set in the Room Settings
+pane of the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room's bottom edge is at %d.", Room.BottomEdge);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.LeftEdge">Room.LeftEdge</A>, <A HREF="ags72.htm#Room.RightEdge">Room.RightEdge</A>,
+<A HREF="ags72.htm#Room.TopEdge">Room.TopEdge</A><P>
+
+
+<HR>
+<A NAME="Room.ColorDepth"></A>
+<H3>ColorDepth property (room)</H3>
+<PRE>
+readonly static int Room.ColorDepth
+</PRE>
+Returns the colour depth of the room's background scene. This is important if
+you want to use DrawImage, since any sprites that you draw must be the same
+colour depth as the room itself.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room background is %d-bit colour.", Room.ColorDepth);
+</PRE>
+<I>See Also:</I> <A HREF="ags50.htm#DrawingSurface.DrawImage">DrawingSurface.DrawImage</A><P>
+
+
+<HR>
+<A NAME="Room.Height"></A>
+<H3>Height property (room)</H3>
+<I>(Formerly known as game.room_height, which is now obsolete)</I><P>
+<PRE>
+readonly static int Room.Height
+</PRE>
+Returns the height of the room, in 320x200-style co-ordinates. This is
+the same height as is displayed as the "Relative size" in the Editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room size is %d x %d.", Room.Width, Room.Height);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.Width">Room.Width</A><P>
+
+
+<HR>
+<A NAME="Room.LeftEdge"></A>
+<H3>LeftEdge property</H3>
+<PRE>
+readonly static int Room.LeftEdge
+</PRE>
+Returns the X co-ordinate of the left edge of the room, as set in the Room Settings
+pane of the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room's left edge is at %d.", Room.LeftEdge);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.BottomEdge">Room.BottomEdge</A>, <A HREF="ags72.htm#Room.RightEdge">Room.RightEdge</A>,
+<A HREF="ags72.htm#Room.TopEdge">Room.TopEdge</A><P>
+
+
+<HR>
+<A NAME="Room.Messages"></A>
+<H3>Messages property</H3>
+<I>(Formerly known as global function GetMessageText, which is now obsolete)</I><P>
+<PRE>
+readonly static String Room.Messages[int message]
+</PRE>
+Gets the text of the specified room message. This is useful if you want to store,
+for example, a room description in Message 1 in each room -- this property allows
+you to retrieve the text for that message from the current room.<P>
+If an invalid message number is supplied, <I>null</I> will be returned. Otherwise, the
+message contents will be returned.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String message1 = Room.Messages[1];
+Display("Message 1 says: %s", message1);
+</PRE>
+will print the contents of room message 1.<P>
+
+
+<HR>
+<A NAME="Room.MusicOnLoad"></A>
+<H3>MusicOnLoad property</H3>
+<PRE>
+readonly static int Room.MusicOnLoad
+</PRE>
+Returns the music number that is set to play when the player enters this room, as
+set in the "Room Settings" pane in the editor. If no music is set for this room,
+returns 0.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room plays music %d when the player enters.", Room.MusicOnLoad);
+</PRE>
+
+
+<HR>
+<A NAME="Room.ObjectCount"></A>
+<H3>ObjectCount property</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly static int Room.ObjectCount
+</PRE>
+Returns the number of objects in the room.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room contains %d objects.", Room.ObjectCount);
+</PRE>
+
+
+<HR>
+<A NAME="Room.RightEdge"></A>
+<H3>RightEdge property</H3>
+<PRE>
+readonly static int Room.RightEdge
+</PRE>
+Returns the X co-ordinate of the right edge of the room, as set in the Room Settings
+pane of the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room's right edge is at %d.", Room.RightEdge);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.BottomEdge">Room.BottomEdge</A>, <A HREF="ags72.htm#Room.LeftEdge">Room.LeftEdge</A>,
+<A HREF="ags72.htm#Room.TopEdge">Room.TopEdge</A><P>
+
+
+<HR>
+<A NAME="Room.TopEdge"></A>
+<H3>TopEdge property</H3>
+<PRE>
+readonly static int Room.TopEdge
+</PRE>
+Returns the Y co-ordinate of the top edge of the room, as set in the Room Settings
+pane of the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room's top edge is at %d.", Room.TopEdge);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.BottomEdge">Room.BottomEdge</A>, <A HREF="ags72.htm#Room.LeftEdge">Room.LeftEdge</A>,
+<A HREF="ags72.htm#Room.RightEdge">Room.RightEdge</A><P>
+
+
+<HR>
+<A NAME="Room.Width"></A>
+<H3>Width property (room)</H3>
+<I>(Formerly known as game.room_width, which is now obsolete)</I><P>
+<PRE>
+readonly static int Room.Width
+</PRE>
+Returns the width of the room, in 320x200-style co-ordinates. This is
+the same width as is displayed as the "Relative size" in the Editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current room size is %d x %d.", Room.Width, Room.Height);
+</PRE>
+<I>See Also:</I> <A HREF="ags72.htm#Room.Height">Room.Height</A><P>
+<P>
+
+</BODY></HTML>

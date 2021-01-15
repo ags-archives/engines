@@ -1,0 +1,102 @@
+<HTML>
+<head><title>Interaction commands</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="InteractionCommands"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic53"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags27.htm#topic54"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags29.htm#topic60"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Interaction commands</H2>
+The following commands are available in response to events in Interaction
+windows:<DL>
+
+
+</TD>
+<DT> Go to screen VAL
+<DD> changes the player character's current room to the VAL.
+If this is in response to one of the screen edge events, the character will
+be placed on the opposite side of the screen. Otherwise, you must use the Data
+column to specify where on the new screen the man is placed. <P>
+You specify which
+edge by using these numbers: 1000=left, 2000=right, 3000=bottom, 4000=top.
+He will be placed in the middle of that side, unless you add the pixel offset
+along the edge, which you can get from the "Mouse Position" label in the
+Room Settings pane. For example, Data=2150 would place him near the bottom of
+the right-hand side.
+
+</TD>
+<DT> (Do nothing)
+<DD> nothing happens.
+
+</TD>
+<DT> Stop man walking
+<DD> the player character stops moving if he is currently
+moving.
+
+</TD>
+<DT> Player dies
+<DD> this command does not actually do anything other than
+call the on_event text script event.
+
+</TD>
+<DT> Run animation VAL
+<DD> (currently not implemented)
+
+</TD>
+<DT> Display message VAL
+<DD> displays a message. If the number is below 40, then
+the room message of that number will be displayed. If the number is above
+500, then the relevant global message is displayed.
+
+</TD>
+<DT> Remove object VAL
+<DD> turns the specified object off. It will no longer
+appear on this screen, until it is turned back on by the "Turn object on"
+command.
+
+</TD>
+<DT> Remv obj VAL, add inv
+<DD> turns the specified object off, and adds the
+inventory number in the Data column to the player's inventory.
+
+</TD>
+<DT> Add inventory VAL
+<DD> Adds the specified inventory item to the player's
+inventory.
+
+</TD>
+<DT> Run script
+<DD> Runs a text script. Click the "..." button to edit the
+script. Section 4.4, above, introduces the text script system.
+
+</TD>
+<DT> Run graphical script
+<DD> (currently not implemented)
+
+</TD>
+<DT> Play sound VAL
+<DD> plays the sound effect SOUNDx.WAV or SOUNDx.VOC, where X
+is the number you supply. If the number is &gt;=1000, then this command will
+instead change the background music to MUSICx.MID/MOD/XM, where X is the
+number you supply minus 1000.
+
+</TD>
+<DT> Play FLI/FLC VAL
+<DD> plays either FLICVAL.FLC or FLICVAL.FLI. If you set the
+Data column to 1 then the player can skip the animation by pressing ESC.
+Otherwise, they must watch the whole thing. For information on converting
+AVI files to FLC, see the FAQ section.
+
+</TD>
+<DT> Turn object VAL on
+<DD> turns the specified object on. Either it was
+previously turned off using the "Remove object" command, or it was set
+to initially Off in the Room Editor.
+
+</TD>
+<DT> Run dialog topic VAL
+<DD> starts a conversation, using topic number "VAL" from
+the Dialog Editor.
+</DL>
+<P>
+
+</BODY></HTML>

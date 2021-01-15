@@ -1,0 +1,235 @@
+<HTML>
+<head><title>Dialog functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic48"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags47.htm#topic47"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags49.htm#DialogOptionsRenderingInfoFunctions"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Dialog functions and properties</H2>
+
+<A HREF="#Dialog.DisplayOptions">DisplayOptions (dialog)</A><BR>
+<A HREF="#Dialog.GetOptionState">GetOptionState (dialog)</A><BR>
+<A HREF="#Dialog.GetOptionText">GetOptionText (dialog)</A><BR>
+<A HREF="#Dialog.ID">ID property (dialog)</A><BR>
+<A HREF="#Dialog.OptionCount">OptionCount property (dialog)</A><BR>
+<A HREF="#Dialog.SetOptionState">SetOptionState (dialog)</A><BR>
+<A HREF="#Dialog.Start">Start (dialog)</A><BR>
+<A HREF="#StopDialog">StopDialog</A><BR>
+<P>
+
+<HR>
+<A NAME="Dialog.DisplayOptions"></A>
+<H3>DisplayOptions (dialog)</H3>
+<PRE>
+int Dialog.DisplayOptions(optional DialogOptionSayStyle)
+</PRE>
+Presents the options for this dialog to the user and waits until they select
+one of them. The selected option number is returned.<P>
+<B>NOTE:</B> This command does not run any dialog scripts, it simply displays
+the options and waits for the player to choose one.  To run the dialog normally,
+use the <A HREF="ags48.htm#Dialog.Start">Dialog.Start</A> command instead.<P>
+This command is useful if you want to implement your own dialog system, but still
+use the standard AGS dialog option selection screens.<P>
+The optional <I>DialogOptionSayStyle</I> parameter determines whether the chosen option
+is automatically spoken by the player character. The default is <I>eSayUseOptionSetting</I>,
+which will use the option's "Say" setting from the dialog editor. You can alternatively
+use <I>eSayAlways</I>, which will speak the chosen option regardless of its setting
+in the editor; or <I>eSayNever</I>, which will not speak the chosen option.<P>
+If the text parser is enabled for this dialog and the player types something into
+it rather than selecting an option, the special value <TT>DIALOG_PARSER_SELECTED</TT>
+will be returned, and AGS will have automatically called <A HREF="ags70.htm#Parser.ParseText">Parser.ParseText</A>
+with the player's text. Therefore, you can call <A HREF="ags70.htm#Parser.Said">Parser.Said</A>
+to process it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int result = dOldMan.DisplayOptions();
+if (result == DIALOG_PARSER_SELECTED)
+{
+  Display("They typed something into the parser!!");
+}
+else
+{
+  Display("They chose dialog option %d.", result);
+}
+</PRE>
+will show the options for dialog <I>dOldMan</I> and display a message depending
+on what the player selected.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.2</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.Start">Dialog.Start</A>,
+<A HREF="ags70.htm#Parser.ParseText">Parser.ParseText</A><P>
+
+
+<HR>
+<A NAME="Dialog.GetOptionState"></A>
+<H3>GetOptionState (dialog)</H3>
+<I>(Formerly known as global function GetDialogOption, which is now obsolete)</I><P>
+<PRE>
+Dialog.GetOptionState(int option)
+</PRE>
+Finds out whether an option in a conversation is available to the player or
+not.<P>
+OPTION is the option number within the dialog, from 1 to whatever the
+highest option is for that topic.<P>
+The return value can have the following values:
+<PRE>
+eOptionOff
+  The option is disabled - the player will not see it
+eOptionOn
+  The option is enabled - the player can now see and use it
+eOptionOffForever
+  The option is permanently disabled - no other command can ever turn
+  it back on again.
+</PRE>
+These are the same as the options passed to Dialog.SetOptionState.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (dJoeExcited.GetOptionState(2) != eOptionOn)
+  Display("It's turned off");
+</PRE>
+Will display a message if option 2 of dialog dJoeExcited is not currently switched on.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.SetOptionState">Dialog.SetOptionState</A><P>
+
+
+<HR>
+<A NAME="Dialog.GetOptionText"></A>
+<H3>GetOptionText (dialog)</H3>
+<PRE>
+String Dialog.GetOptionText(int option)
+</PRE>
+Returns the text for the specified dialog option.<P>
+OPTION is the option number within the dialog, from 1 to whatever the
+highest option is for that topic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String optionText = dJoeBloggs.GetOptionText(3);
+Display("Option 3 of dialog dJoeBloggs is %s!", optionText);
+</PRE>
+will display the text for the third option of the dJoeBloggs dialog.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.2</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.OptionCount">Dialog.OptionCount</A>,
+<A HREF="ags48.htm#Dialog.GetOptionState">Dialog.GetOptionState</A><P>
+
+
+<HR>
+<A NAME="Dialog.ID"></A>
+<H3>ID property (dialog)</H3>
+<PRE>
+readonly int Dialog.ID;
+</PRE>
+Gets the dialog ID number from the editor.<P>
+This might be useful if you need to interoperate with legacy scripts
+that work with dialog ID numbers.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("dFisherman is Dialog %d!", dFisherman.ID);
+</PRE>
+will display the ID number of the dFisherman dialog<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.1.0</B> and later versions.<P>
+
+
+<HR>
+<A NAME="Dialog.OptionCount"></A>
+<H3>OptionCount property (dialog)</H3>
+<PRE>
+readonly int Dialog.OptionCount;
+</PRE>
+Gets the number of options that this dialog has.<P>
+This might be useful in a script module if you want to iterate through all
+the possible choices in the dialog.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("dFisherman has %d options!", dFisherman.OptionCount);
+</PRE>
+will display the number of options in the dFisherman dialog.<P>
+<I>Compatibility:</I> Supported by <B>AGS 3.0.2</B> and later versions.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.GetOptionText">Dialog.GetOptionText</A>,
+<A HREF="ags48.htm#Dialog.GetOptionState">Dialog.GetOptionState</A><P>
+
+
+<HR>
+<A NAME="Dialog.SetOptionState"></A>
+<H3>SetOptionState (dialog)</H3>
+<I>(Formerly known as global function SetDialogOption, which is now obsolete)</I><P>
+<PRE>
+Dialog.SetOptionState(int option, DialogOptionState)
+</PRE>
+Changes whether an option in a conversation is available to the player or
+not. This allows you to add extra options to a conversation once the player
+has done certain things.<P>
+OPTION is the option number within the topic, from 1 to whatever the
+highest option is for that topic.<P>
+The DialogOptionState controls what happens to this option. It can have the following
+values:
+<PRE>
+eOptionOff
+  The option is disabled - the player will not see it
+eOptionOn
+  The option is enabled - the player can now see and use it
+eOptionOffForever
+  The option is permanently disabled - no other command can ever turn
+  it back on again.
+</PRE>
+These are equivalent to the option-off, option-on, and option-off-forever
+dialog commands.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(10)==1)
+    dialog[4].SetOptionState(2, eOptionOn);
+</PRE>
+will enable option 2 of topic number 4 if the Global Integer 10 is 1.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.GetOptionState">Dialog.GetOptionState</A>,
+<A HREF="ags48.htm#Dialog.Start">Dialog.Start</A>, <A HREF="ags48.htm#StopDialog">StopDialog</A><P>
+
+
+<HR>
+<A NAME="Dialog.Start"></A>
+<H3>Start (dialog)</H3>
+<I>(Formerly known as global function RunDialog, which is now obsolete)</I><P>
+<PRE>
+Dialog.Start()
+</PRE>
+Starts a conversation from the specified topic.<P>
+NOTE: The conversation will not start immediately; instead, it will be run
+when the current script function finishes executing.<P>
+If you use this command from within the dialog_request function, it will
+specify that the game should return to this new topic when the script finishes.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+dMerchant.Start();
+</PRE>
+will start the conversation topic named dMerchant.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.DisplayOptions">Dialog.DisplayOptions</A>,
+<A HREF="ags48.htm#Dialog.SetOptionState">Dialog.SetOptionState</A><P>
+
+
+<HR>
+<A NAME="StopDialog"></A>
+<H3>StopDialog</H3>
+<PRE>
+StopDialog ()
+</PRE>
+This command can only be used from within the dialog_request function. It
+tells AGS that when dialog_request finishes, the whole conversation should
+stop rather than continuing with the dialog script.<P>
+You can use this function to end the conversation depending on whether the
+player has/does a certain thing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ function dialog_request (int dr) {
+ if (dr==1) {
+   cEgo.AddInventory(iPoster);
+   StopDialog();
+ }
+</PRE>
+will give the player the inventory item 3 and then end the conversation.<P>
+<I>See Also:</I> <A HREF="ags48.htm#Dialog.SetOptionState">Dialog.SetOptionState</A><P>
+<P>
+
+</BODY></HTML>

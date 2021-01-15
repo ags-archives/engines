@@ -1,0 +1,213 @@
+<HTML>
+<head><title>Hotspot functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic60"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic42"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags50.htm#topic59"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags52.htm#topic61"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Hotspot functions and properties</H2>
+
+<A HREF="#Hotspot.GetAtScreenXY">GetAtScreenXY (hotspot)</A><BR>
+<A HREF="#Hotspot.GetProperty">GetProperty (hotspot)</A><BR>
+<A HREF="#Hotspot.GetTextProperty">GetTextProperty (hotspot)</A><BR>
+<A HREF="#Hotspot.RunInteraction">RunInteraction (hotspot)</A><BR>
+<A HREF="#Hotspot.Enabled">Enabled property (hotspot)</A><BR>
+<A HREF="#Hotspot.ID">ID property (hotspot)</A><BR>
+<A HREF="#Hotspot.Name">Name property (hotspot)</A><BR>
+<A HREF="#Hotspot.WalkToX">WalkToX property</A><BR>
+<A HREF="#Hotspot.WalkToY">WalkToY property</A><BR>
+<P>
+
+<HR>
+<A NAME="Hotspot.GetAtScreenXY"></A>
+<H3>GetAtScreenXY (hotspot)</H3>
+<I>(Formerly known as global function GetHotspotAt, which is now obsolete)</I><P>
+<PRE>
+static Hotspot* Hotspot.GetAtScreenXY(int x, int y)
+</PRE>
+Returns the hotspot at SCREEN co-ordinates (X,Y).
+If there is no hotspot there, or if invalid co-ordinates are specified,
+the Hotspot* representing hotspot 0 will be returned.<P>
+<B>NOTE:</B> The co-ordinates are SCREEN co-ordinates, NOT ROOM co-ordinates. This
+means that with a scrolling room, the co-ordinates you pass are relative to
+the screen's current position, and NOT absolute room co-ordinates. This
+means that this function is suitable for use with the mouse cursor position
+variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (Hotspot.GetAtScreenXY(mouse.x, mouse.y) == hDoor)
+  Display("Mouse on the door");
+else if (Hotspot.GetAtScreenXY(mouse.x, mouse.y) != hotspot[0])
+  Display("Mouse is on something (but not the door)!");
+else
+  Display("Mouse not on a hotspot");
+</PRE>
+will display a message depending on what the mouse is on.<P>
+<I>See Also:</I> <A HREF="ags42.htm#Game.GetLocationName">Game.GetLocationName</A>, <A HREF="ags42.htm#GetLocationType">GetLocationType</A><P>
+
+
+<HR>
+<A NAME="Hotspot.GetProperty"></A>
+<H3>GetProperty (hotspot)</H3>
+<I>(Formerly known as GetHotspotProperty, which is now obsolete)</I><P>
+<PRE>
+Hotspot.GetProperty(string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the hotspot.<P>
+This command works with Number properties (it returns the number), and with Boolean
+properties (returns 1 if the box was checked, 0 if not).<P>
+Use the equivalent GetTextProperty function to get a text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (hotspot[1].GetProperty("Value") &gt; 200)
+  Display("Hotspot 1's value is over 200!");
+</PRE>
+will print the message if hotspot 1 has its "Value" property set to more than 200.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Hotspot.GetTextProperty">Hotspot.GetTextProperty</A><P>
+
+
+<HR>
+<A NAME="Hotspot.GetTextProperty"></A>
+<H3>GetTextProperty (hotspot)</H3>
+<I>(Formerly known as GetHotspotPropertyText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Hotspot.GetPropertyText, which is now obsolete)</I><P>
+<PRE>
+String Hotspot.GetTextProperty(string property)
+</PRE>
+Returns the custom property setting of the PROPERTY for the hotspot.<P>
+This command works with Text properties only. The property's text will be
+returned from this function.<P>
+Use the equivalent GetProperty function to get a non-text property.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String description = hotspot[2].GetTextProperty("Description");
+Display("Hotspot 2's description: %s", description);
+</PRE>
+will retrieve hotspot 2's "description" property and display it.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Hotspot.GetProperty">Hotspot.GetProperty</A><P>
+<P>
+
+<HR>
+<A NAME="Hotspot.RunInteraction"></A>
+<H3>RunInteraction (hotspot)</H3>
+<I>(Formerly known as RunHotspotInteraction, which is now obsolete)</I><P>
+<PRE>
+Hotspot.RunInteraction(CursorMode)
+</PRE>
+Processes the interaction list as if the player had clicked the mouse
+on the hotspot using the specified cursor mode.
+May be useful with the text parser for simulating a mouse click if they
+type specific words in.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+hDoor.RunInteraction(eModeLook);
+</PRE>
+will run the code defined in the "LOOK AT HOTSPOT" interaction for hotspot hDoor.<P>
+<I>See Also:</I> <A HREF="ags42.htm#ProcessClick">ProcessClick</A>,
+<A HREF="ags38.htm#Character.RunInteraction">Character.RunInteraction</A>,
+<A HREF="ags56.htm#Object.RunInteraction">Object.RunInteraction</A><P>
+
+
+<HR>
+<A NAME="Hotspot.Enabled"></A>
+<H3>Enabled property (hotspot)</H3>
+<I>(Formerly known as DisableHotspot, which is now obsolete)</I> <br> 
+<I>(Formerly known as EnableHotspot, which is now obsolete)</I><P>
+<PRE>
+bool Hotspot.Enabled
+</PRE>
+Enables/disables the specified hotspot. If you set this to false, then all areas of the screen
+that were previously made up of the hotspot now act as type 0 (no hotspot). You can turn the
+hotspot back on later by setting this back to true.<P>
+This setting is persisted in-game; that is, it will not be reset when the player
+re-enters the room.<P>
+The default value of this property is always <I>true</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+hBrownTree.Enabled = false;
+</PRE>
+will disable the hBrownTree hotspot.<P>
+<I>See Also:</I> <A HREF="ags60.htm#Region.Enabled">Region.Enabled</A>,
+<A HREF="ags61.htm#RemoveWalkableArea">RemoveWalkableArea</A>,
+<A HREF="ags61.htm#RestoreWalkableArea">RestoreWalkableArea</A><P>
+
+
+<HR>
+<A NAME="Hotspot.ID"></A>
+<H3>ID property (hotspot)</H3>
+<PRE>
+readonly int Hotspot.ID
+</PRE>
+Gets the hotspot number of this hotspot. This allows you to interoperate with old
+script using the number-based hotspot functions.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Hotspot hDoor is hotspot number %d.", hDoor.ID);
+Display("Hotspot 3 is number %d.", hotspot[3].ID);
+</PRE>
+displays hDoor's hotspot number, and then displays hotspot 3's number (which will be 3).<P>
+<I>See Also:</I> <A HREF="ags51.htm#Hotspot.GetAtScreenXY">Hotspot.GetAtScreenXY</A><P>
+
+
+<HR>
+<A NAME="Hotspot.Name"></A>
+<H3>Name property (hotspot)</H3>
+<I>(Formerly known as GetHotspotName, which is now obsolete)</I> <br> 
+<I>(Formerly known as Hotspot.GetName, which is now obsolete)</I><P>
+<PRE>
+readonly String Hotspot.Name;
+</PRE>
+Gets the name of the hotspot.<P>
+This property is read-only; it is currently not possible to change hotspot names at run-time.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Hotspot 3's name is %s.", hotspot[3].Name);
+</PRE>
+will retrieve and then display hotspot 3's name.<P>
+<I>See Also:</I> <A HREF="ags42.htm#Game.GetLocationName">Game.GetLocationName</A><P>
+
+
+<HR>
+<A NAME="Hotspot.WalkToX"></A>
+<H3>WalkToX property</H3>
+<I>(Formerly known as GetHotspotPointX, which is now obsolete)</I><P>
+<PRE>
+readonly int Hotspot.WalkToX
+</PRE>
+Gets the X room co-ordinate of the hotspot's walk-to point. If the hotspot
+does not have a walk-to point, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+player.Walk(hTable.WalkToX, hTable.WalkToY, eBlock, eWalkableAreas);
+</PRE>
+will move the character to hotspot hTable's walk-to point.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Hotspot.WalkToY">Hotspot.WalkToY</A>,
+<A HREF="ags42.htm#MoveCharacterToHotspot">MoveCharacterToHotspot</A><P>
+
+
+<HR>
+<A NAME="Hotspot.WalkToY"></A>
+<H3>WalkToY property</H3>
+<I>(Formerly known as GetHotspotPointY, which is now obsolete)</I><P>
+<PRE>
+readonly int Hotspot.WalkToY
+</PRE>
+Gets the Y room co-ordinate of the hotspot's walk-to point. If the hotspot
+does not have a walk-to point, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+player.Walk(hTable.WalkToX, hTable.WalkToY, eBlock, eWalkableAreas);
+</PRE>
+will move the character to hotspot hTable's walk-to point.<P>
+<I>See Also:</I> <A HREF="ags51.htm#Hotspot.WalkToX">Hotspot.WalkToX</A>,
+<A HREF="ags42.htm#MoveCharacterToHotspot">MoveCharacterToHotspot</A><P>
+<P>
+
+</BODY></HTML>

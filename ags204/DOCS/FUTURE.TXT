@@ -1,0 +1,48 @@
+The following features are planned for future versions of AGS.
+Features that people ask for will be implemented faster than things I think
+people want - so if you like the look of a suggestion below, mail me and
+tell me!
+
+ - fix bug when importing global func into room script
+ - transparent interface if bg col 0.
+ - fix hit-testing on scaled characters
+ - importing bmp mask for walk-behind, etc
+ - customizable speech text speed
+ - manual scrolling commands, for intros, etc
+ - invnetory window update when combine objects
+ - add Wait text script command
+ - ability to display speech text that doesn't pause game
+ - walk faster when scaled up, slower when scaled down
+ - fix character animation where it stands still for first frame of walking
+ - add speech bubble option for speech display
+ - option to disable walking to walk-to spots on Interact & Talk
+ - walk-lines, to help pathfinder with narrow areas
+ - script access to iface button gfx
+ - ability to export sprites, characters, views, cursors, etc
+ - delete folders in sprite mgr
+ - different screen transitions (not only fading)
+ - customizable invnetory window
+ - custom fonts
+ - hi-color or true-color support
+ - scroll down inv and charactrr list
+ - text buttons in interface
+ - overlay-sprite function
+ - interface previewer - preview pushed and mouseover pictures
+ - built-in text editor instead of spawning DOS EDIT
+ - sliding scrollbars (ie. you can drag the main bit up and down)
+ - more than 10 objects per screen allowed
+ - animating background scene
+ - resizing fonts to screen resolution (text looks v.small at 960x600)
+ - QFG-type battle system
+ - improve the route finder
+ - "beginner" mode in RoomEdit, to hide advanced features for beginners
+ - support AVI/MPG video
+ - support ASCII chars >=128
+ - link a script to a view frame
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - optional text parser
+ - lip-sync animations
+ - reduce save game size
+ - Windows port of the main engine

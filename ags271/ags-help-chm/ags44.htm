@@ -1,0 +1,336 @@
+<HTML>
+<head><title>GUI control functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic54"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic42"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags43.htm#GUIFuncsAndProps"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags45.htm#topic55"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI control functions and properties</H2>
+<P>
+This section lists the functions and properties common to all types of GUI control.
+Each individual control type (Button, ListBox, etc) also has its own specific section.<P>
+
+<A HREF="#GUIControl.GetAtScreenXY">GetAtScreenXY (GUI control)</A><BR>
+<A HREF="#GUIControl.AsType">AsType properties (GUI controls)</A><BR>
+<A HREF="#GUIControl.Clickable">Clickable property (GUI controls)</A><BR>
+<A HREF="#GUIControl.Enabled">Enabled property (GUI controls)</A><BR>
+<A HREF="#GUIControl.Height">Height property (GUI controls)</A><BR>
+<A HREF="#GUIControl.ID">ID property (GUI controls)</A><BR>
+<A HREF="#GUIControl.OwningGUI">OwningGUI property (GUI controls)</A><BR>
+<A HREF="#GUIControl.SetPosition">SetPosition (GUI controls)</A><BR>
+<A HREF="#GUIControl.SetSize">SetSize (GUI controls)</A><BR>
+<A HREF="#GUIControl.Visible">Visible property (GUI controls)</A><BR>
+<A HREF="#GUIControl.Width">Width property (GUI controls)</A><BR>
+<A HREF="#GUIControl.X">X property (GUI controls)</A><BR>
+<A HREF="#GUIControl.Y">Y property (GUI controls)</A><BR>
+<P>
+
+<HR>
+<A NAME="GUIControl.GetAtScreenXY"></A>
+<H3>GetAtScreenXY (GUI control)</H3>
+<I>(Formerly known as GetGUIObjectAt, which is now obsolete)</I><P>
+<PRE>
+static GUIControl* GUIControl.GetAtScreenXY(int x, int y)
+</PRE>
+Checks whether there is a GUI control at screen co-ordinates (X,Y). Returns
+the control object if there is, or null if there is not. You probably
+want to use this in conjunction with GetGUIAtLocation.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GUIControl *theControl = GUIControl.GetAtScreenXY(mouse.x, mouse.y);
+if (theControl == lstSaveGames) {
+  Display("The mouse is over the Save Games list box.");
+}
+else if (theControl == null) {
+  Display("The mouse is not over a control.");
+}
+else {
+  GUI *onGui = theControl.OwningGUI;
+  Display("The mouse is over control %d on GUI %d.", theControl.ID, onGui.ID);
+}
+</PRE>
+will display what control the mouse is over.<P>
+<I>See Also:</I> <A HREF="ags43.htm#GUI.GetAtScreenXY">GUI.GetAtScreenXY</A><P>
+
+
+<HR>
+<A NAME="GUIControl.AsType"></A>
+<H3>AsType properties (GUI controls)</H3>
+<PRE>
+Button*  GUIControl.AsButton;
+InvWindow* GUIControl.AsInvWindow;
+Label*   GUIControl.AsLabel;
+ListBox* GUIControl.AsListBox;
+Slider*  GUIControl.AsSlider;
+TextBox* GUIControl.AsTextBox;
+</PRE>
+Converts a generic GUIControl* pointer into a variable of the correct type, and returns
+it. If the control is not of the requested type, returns <I>null</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Button *theButton = gIconbar.Controls[2].AsButton;
+if (theButton == null) {
+  Display("Control 2 is not a button!!!!");
+}
+else {
+  theButton.NormalGraphic = 44;
+}
+</PRE>
+attempts to set Button 2 on GUI ICONBAR to have NormalGraphic 44, but if that
+control is not a button, prints a message.<P>
+<I>See Also:</I> <A HREF="ags43.htm#GUI.Controls">GUI.Controls</A><P>
+
+
+<HR>
+<A NAME="GUIControl.Clickable"></A>
+<H3>Clickable property (GUI controls)</H3>
+<PRE>
+bool GUIControl.Clickable
+</PRE>
+Gets/sets whether the GUI control is clickable.<P>
+This property determines whether the player can click the mouse on the control. If it is set to <I>false</I>,
+then any mouse clicks will go straight through the control onto whatever is behind it. Unlike the Enabled
+property though, setting Clickable to false does not alter the appearance of the control.<P>
+Note that disabling the control by setting Enabled to false overrides this setting -- that is, if Enabled
+is false then the control will not be clickable, regardless of the <I>Clickable</I> setting.<P>
+Also, bear in mind that if you set <I>Clickable</I> to false then any mouse clicks will go through the control
+onto whatever is behind. On the other hand, if <I>Enabled</I> is set to false then the control "absorbs"
+the mouse click but does not do anything with it.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnSaveGame.Clickable = false;
+</PRE>
+will make the <I>btnSaveGame</I> button non-clickable.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Enabled">GUIControl.Enabled</A><P>
+
+
+<HR>
+<A NAME="GUIControl.Enabled"></A>
+<H3>Enabled property (GUI controls)</H3>
+<I>(Formerly known as SetGUIObjectEnabled, which is now obsolete)</I><P>
+<PRE>
+bool GUIControl.Enabled
+</PRE>
+Enables or disables a GUI control. <P>
+Normally, all your GUI controls (such as buttons, sliders, etc) are enabled at all times
+except during a cutscene, when they are disabled. This command allows you to explicitly
+disable a control at your script's discretion.<P>
+If you set this to true, the control will be enabled; set to false to disable it.<P>
+Whether you set it as enabled or not, it will <B>always</B> be disabled during a blocking
+cutscene, along with all the other controls.<P>
+While a control is disabled, it will not respond to mouse clicks. If it is a button, its
+mouseover and pushed pictures will not be shown. The control will be drawn according to
+the game "When GUI Disabled" settings, as usual.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnSaveGame.Enabled = false;
+</PRE>
+will disable the <I>btnSaveGame</I> button.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Clickable">GUIControl.Clickable</A>,
+<A HREF="ags44.htm#GUIControl.Visible">GUIControl.Visible</A><P>
+
+
+<HR>
+<A NAME="GUIControl.Height"></A>
+<H3>Height property (GUI controls)</H3>
+<PRE>
+int GUIControl.Height;
+</PRE>
+Gets/sets the height of the GUI control.  This allows you to dynamically
+resize GUI controls while the game is running.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnConfirm.Height = 20;
+</PRE>
+makes the <I>btnConfirm</I> button 20 pixels high.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.SetSize">GUIControl.SetSize</A>,
+<A HREF="ags44.htm#GUIControl.Width">GUIControl.Width</A><P>
+
+
+<HR>
+<A NAME="GUIControl.ID"></A>
+<H3>ID property (GUI controls)</H3>
+<PRE>
+readonly int GUIControl.ID
+</PRE>
+Gets the GUI control's ID number. This is the control's object number from the GUI editor,
+and is useful if you need to interoperate with legacy code that uses the control's number
+rather than object name.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGUIObjectEnabled(lstSaves.OwningGUI.ID, lstSaves.ID, 1);
+lstSaves.Enabled = false;
+</PRE>
+uses the obsolete SetGUIObjectEnabled function to enable the lstSaves list box,
+and then uses the equivalent modern property to disable it.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.OwningGUI">GUIControl.OwningGUI</A>, <A HREF="ags43.htm#GUI.ID">GUI.ID</A><P>
+<P>
+
+<HR>
+<A NAME="GUIControl.OwningGUI"></A>
+<H3>OwningGUI property (GUI controls)</H3>
+<PRE>
+readonly GUI* GUIControl.OwningGUI
+</PRE>
+Gets the GUI control's owning GUI, which is the GUI that contains the control.<P>
+Returns a GUI, which allows you to use all the usual
+<A HREF="ags43.htm#GUIFuncsAndProps">GUI functions and properties</A>.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GUI *thegui = lstSaves.OwningGUI;
+thegui.Visible = false;
+
+lstSaves.OwningGUI.Visible = true;
+</PRE>
+turns off the GUI that contains the lstSaves list box, then turns it on again using
+the niftier full pathing approach.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.ID">GUIControl.ID</A>, <A HREF="ags43.htm#GUI.ID">GUI.ID</A><P>
+
+
+<HR>
+<A NAME="GUIControl.SetPosition"></A>
+<H3>SetPosition (GUI controls)</H3>
+<I>(Formerly known as SetGUIObjectPosition, which is now obsolete)</I><P>
+<PRE>
+GUIControl.SetPosition(int x, int y)
+</PRE>
+Moves the top-left corner of the GUI control to be at (X,Y). These co-ordinates
+are relative to the GUI which contains the control.<P>
+This allows you to dynamically move GUI controls around on the screen while the
+game is running, and this may well be useful in conjunction with GUI.SetSize if you
+want to create dynamically resizable GUIs.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnConfirm.SetPosition(40, 10);
+</PRE>
+will move the <I>btnConfirm</I> button to be positioned at (40,10) within the GUI.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Enabled">GUIControl.Enabled</A>,
+<A HREF="ags43.htm#GUI.SetPosition">GUI.SetPosition</A>, <A HREF="ags44.htm#GUIControl.SetSize">GUIControl.SetSize</A>,
+<A HREF="ags44.htm#GUIControl.X">GUIControl.X</A>, <A HREF="ags44.htm#GUIControl.Y">GUIControl.Y</A><P>
+
+
+<HR>
+<A NAME="GUIControl.SetSize"></A>
+<H3>SetSize (GUI controls)</H3>
+<I>(Formerly known as SetGUIObjectSize, which is now obsolete)</I><P>
+<PRE>
+GUIControl.SetSize(int width, int height)
+</PRE>
+Adjusts the specified GUI control to have the new size WIDTH x HEIGHT.<P>
+This allows you to dynamically resize GUI controls on the screen while the
+game is running, and this may well be useful in conjunction with GUI.SetSize and
+GUIControl.SetPosition if you want to create dynamically resizable GUIs.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.SetSize(160, 100);
+</PRE>
+will resize the <I>invMain</I> control to have a size of 160 x 100.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Height">GUIControl.Height</A>,
+<A HREF="ags44.htm#GUIControl.SetPosition">GUIControl.SetPosition</A>,
+<A HREF="ags43.htm#GUI.SetSize">GUI.SetSize</A>,
+<A HREF="ags44.htm#GUIControl.Width">GUIControl.Width</A>,<P>
+
+
+<HR>
+<A NAME="GUIControl.Visible"></A>
+<H3>Visible property (GUI controls)</H3>
+<PRE>
+bool GUIControl.Visible
+</PRE>
+Gets/sets whether the GUI control is visible. This is <I>true</I> by default, but you
+can set it to <I>false</I> in order to temporarily remove the GUI control from the GUI.<P>
+While the control is invisible, it will not be drawn on the screen, and will not register
+clicks or otherwise respond to any user input.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnSaveGame.Visible = false;
+</PRE>
+will make the <I>btnSaveGame</I> button invisible.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Enabled">GUIControl.Enabled</A><P>
+
+
+<HR>
+<A NAME="GUIControl.Width"></A>
+<H3>Width property (GUI controls)</H3>
+<PRE>
+int GUIControl.Width;
+</PRE>
+Gets/sets the width of the GUI control.  This allows you to dynamically
+resize GUI controls while the game is running.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnConfirm.Width = 110;
+</PRE>
+makes the <I>btnConfirm</I> button 110 pixels wide.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.Height">GUIControl.Height</A>,
+<A HREF="ags44.htm#GUIControl.SetSize">GUIControl.SetSize</A><P>
+
+
+<HR>
+<A NAME="GUIControl.X"></A>
+<H3>X property (GUI controls)</H3>
+<PRE>
+int GUIControl.X;
+</PRE>
+Gets/sets the X position of the GUI control. This specifies its left edge, and is
+relative to the GUI which contains the control.<P>
+This allows you to dynamically move GUI controls around on their parent GUI while the
+game is running.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnConfirm.X = 10;
+</PRE>
+will move the <I>btnConfirm</I> button to be positioned 10 pixels from the left of its GUI.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.SetPosition">GUIControl.SetPosition</A>,
+<A HREF="ags44.htm#GUIControl.Y">GUIControl.Y</A><P>
+
+
+<HR>
+<A NAME="GUIControl.Y"></A>
+<H3>Y property (GUI controls)</H3>
+<PRE>
+int GUIControl.Y;
+</PRE>
+Gets/sets the Y position of the GUI control. This specifies its top edge, and is
+relative to the GUI which contains the control.<P>
+This allows you to dynamically move GUI controls around on their parent GUI while the
+game is running.<P>
+<B>Applies To</B><P>
+Inherited by the Button, InvWindow, Label, ListBox, Slider and TextBox.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnConfirm.Y = 20;
+</PRE>
+will move the <I>btnConfirm</I> button to be positioned 20 pixels from the top of its GUI.<P>
+<I>See Also:</I> <A HREF="ags44.htm#GUIControl.SetPosition">GUIControl.SetPosition</A>,
+<A HREF="ags44.htm#GUIControl.X">GUIControl.X</A><P>
+<P>
+
+</BODY></HTML>

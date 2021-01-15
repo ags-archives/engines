@@ -1,0 +1,559 @@
+<HTML>
+<head><title>GUI functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic62"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags36.htm#topic57"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags40.htm#topic61"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags42.htm#topic63"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI functions</H2>
+
+<A HREF="#CentreGUI">CentreGUI</A><BR>
+<A HREF="#GetGUIAt">GetGUIAt</A><BR>
+<A HREF="#GetGUIObjectAt">GetGUIObjectAt</A><BR>
+<A HREF="#GetSliderValue">GetSliderValue</A><BR>
+<A HREF="#GetTextBoxText">GetTextBoxText</A><BR>
+<A HREF="#InputBox">InputBox</A><BR>
+<A HREF="#GUIOff">GUIOff</A><BR>
+<A HREF="#GUIOn">GUIOn</A><BR>
+<A HREF="#IsGUIOn">IsGUIOn</A><BR>
+<A HREF="#ListBoxAdd">ListBoxAdd</A><BR>
+<A HREF="#ListBoxClear">ListBoxClear</A><BR>
+<A HREF="#ListBoxDirList">ListBoxDirList</A><BR>
+<A HREF="#ListBoxGetItemText">ListBoxGetItemText</A><BR>
+<A HREF="#ListBoxGetNumItems">ListBoxGetNumItems</A><BR>
+<A HREF="#ListBoxGetSelected">ListBoxGetSelected</A><BR>
+<A HREF="#ListBoxSaveGameList">ListBoxSaveGameList</A><BR>
+<A HREF="#ListBoxSetSelected">ListBoxSetSelected</A><BR>
+<A HREF="#ListBoxSetTopItem">ListBoxSetTopItem</A><BR>
+<A HREF="#SetButtonPic">SetButtonPic</A><BR>
+<A HREF="#SetButtonText">SetButtonText</A><BR>
+<A HREF="#SetGUIBackgroundPic">SetGUIBackgroundPic</A><BR>
+<A HREF="#SetGUIPosition">SetGUIPosition</A><BR>
+<A HREF="#SetGUITransparency">SetGUITransparency</A><BR>
+<A HREF="#SetLabelColor">SetLabelColor</A><BR>
+<A HREF="#SetLabelFont">SetLabelFont</A><BR>
+<A HREF="#SetLabelText">SetLabelText</A><BR>
+<A HREF="#SetSliderValue">SetSliderValue</A><BR>
+<A HREF="#SetTextBoxText">SetTextBoxText</A><BR>
+<A HREF="#SetTextWindowGUI">SetTextWindowGUI</A><BR>
+<P>
+
+<HR>
+<A NAME="CentreGUI"></A>
+<H3>CentreGUI</H3>
+<PRE>
+CentreGUI (int gui)
+</PRE>
+Centres the specified GUI in the middle of the screen. Useful if you've been moving
+it around with SetGUIPosition and just want to return it to the centre.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+CentreGUI (2);
+</PRE>
+will centre GUI 2 in the middle of the screen.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetGUIPosition">SetGUIPosition</A><P>
+
+
+<HR>
+<A NAME="GetGUIAt"></A>
+<H3>GetGUIAt</H3>
+<PRE>
+GetGUIAt (int x, int y)
+</PRE>
+Checks whether there is currently a GUI at screen co-ordinates (X,Y). If
+there is, returns its GUI number.<P>
+If there is not currently a displayed, clickable GUI at the location,
+returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGUIAt(mouse.x,mouse.y)==2)
+    GUIOff(3); 
+</PRE>
+will check if the mouse is over GUI number 2. If it is it will turn GUI number 3 off.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GetGUIObjectAt">GetGUIObjectAt</A><P>
+
+<HR>
+<A NAME="GetGUIObjectAt"></A>
+<H3>GetGUIObjectAt</H3>
+<PRE>
+GetGUIObjectAt (int x, int y)
+</PRE>
+Checks whether there is a GUI object at screen co-ordinates (X,Y). Returns
+its object (button) number if there is, or -1 if there is not. You probably
+want to use this in conjunction with GetGUIAt.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGUIObjectAt(mouse.x,mouse.y)!=-1)
+</PRE>
+will check if the cursor is over a GUI button.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GetGUIAt">GetGUIAt</A><P>
+
+<HR>
+<A NAME="GetSliderValue"></A>
+<H3>GetSliderValue</H3>
+<PRE>
+GetSliderValue (int gui, int object)
+</PRE>
+Returns the value of slider OBJECT on GUI to your program. You would usually
+use this command in the interface_click function to find out what value the
+player has changed the slider to, in order to process their command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetMusicMasterVolume(GetSliderValue(2,5));
+</PRE>
+will set the master music volume to the value of the slider 5 of GUI number 2. <P>
+<I>See Also:</I> <A HREF="ags41.htm#SetLabelText">SetLabelText</A>, <A HREF="ags41.htm#SetSliderValue">SetSliderValue</A><P>
+
+<HR>
+<A NAME="GetTextBoxText"></A>
+<H3>GetTextBoxText</H3>
+<PRE>
+GetTextBoxText (int gui, int object, string buffer)
+</PRE>
+Retrieves the contents of textbox OBJECT on gui GUI into the BUFFER.
+This allows you to find out what the player typed in, and to respond
+appropriately.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+GetTextBoxText (2,2,input);
+Display ("%s",input);
+</PRE>
+will read what the user typed in textbox 2 of GUI 2 pass it in string input and display it on the screen.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetTextBoxText">SetTextBoxText</A>, <A HREF="ags52.htm#StrCaseComp">StrCaseComp</A>, <A HREF="ags52.htm#StrComp">StrComp</A><P>
+
+<HR>
+<A NAME="InputBox"></A>
+<H3>InputBox</H3>
+<PRE>
+InputBox (string prompt, string buffer)
+</PRE>
+This function allows your script to read a string typed in by the user.
+When this function is called it pops up a window asking the user to type
+in a string, with PROMPT as the text in the window. What they type in will
+be copied into BUFFER.<P>
+Note that this function only allows small strings (about 20 characters)
+due to the size of the input box it uses.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string name;
+InputBox("What is your name?", name);
+</PRE>
+will prompt the user for his name and store in in the string name.<P>
+<I>See Also:</I> <A HREF="ags52.htm#StringToInt">StringToInt</A><P>
+
+<HR>
+<A NAME="GUIOff"></A>
+<H3>GUIOff</H3>
+<PRE>
+GUIOff (int gui_number)
+</PRE>
+Turns GUI number GUI_NUMBER off. It will no longer appear on
+the screen (or, if it is a pop-up GUI, it cannot be popped up).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GUIOff(2);
+</PRE>
+will turn GUI 2 off .<P>
+<I>NOTE:</I> This function used to be called InterfaceOff but has now been renamed
+to avoid confusion.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GUIOn">GUIOn</A><P>
+
+<HR>
+<A NAME="GUIOn"></A>
+<H3>GUIOn</H3>
+<PRE>
+GUIOn (int gui_number)
+</PRE>
+Turns GUI number GUI_NUMBER on and displays it on the screen.
+This can be used to display a previously turned off GUI, or to bring
+up a special interface like an inventory window.<P>
+If the specified GUI is a script-only GUI (set to "On script
+command" in the editor), then the game will be paused while the
+interface is displayed, and you should use GUIOff as a reaction to
+a button click on the GUI to remove it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+GUIOn(2);
+</PRE>
+will turn GUI 2 on.<P>
+<I>NOTE:</I> This function used to be called InterfaceOn but has now been renamed
+to avoid confusion.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GUIOff">GUIOff</A>, <A HREF="ags40.htm#IsGamePaused">IsGamePaused</A><P>
+
+<HR>
+<A NAME="IsGUIOn"></A>
+<H3>IsGUIOn</H3>
+<PRE>
+IsGUIOn (int gui)
+</PRE>
+Checks whether the specified GUI is currently displayed or not. Returns 1
+if it is, 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsGUIOn(4)==0)
+    GUIOn(4);
+</PRE>
+will turn on interface 4 if it is off.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GUIOff">GUIOff</A>, <A HREF="ags41.htm#GUIOn">GUIOn</A><P>
+
+<HR>
+<A NAME="ListBoxAdd"></A>
+<H3>ListBoxAdd</H3>
+<PRE>
+ListBoxAdd (int gui, int object, string newitem)
+</PRE>
+Adds NEWITEM to the list box OBJECT on GUI. The item will be appended to
+the end of the list.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+GetTextBoxText(1,2,input);
+ListBoxAdd(2,3,input);
+</PRE>
+will take the input from the user and add in in the listbox 3 of GUI 2.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxClear">ListBoxClear</A>, <A HREF="ags41.htm#ListBoxDirList">ListBoxDirList</A><P>
+
+<HR>
+<A NAME="ListBoxClear"></A>
+<H3>ListBoxClear</H3>
+<PRE>
+ListBoxClear (int gui, int object)
+</PRE>
+Removes all items from the specified list box.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ListBoxClear (2,3);
+</PRE>
+will remove all the items from listbox 3 of GUI2<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxAdd">ListBoxAdd</A><P>
+
+<HR>
+<A NAME="ListBoxDirList"></A>
+<H3>ListBoxDirList</H3>
+<PRE>
+ListBoxDirList (int gui, int object, string filemask)
+</PRE>
+Fills the list box OBJECT on gui GUI with a list of filenames matching
+the FILEMASK in the current directory. This could be useful if you have
+various data files and the player can choose which one to load.<P>
+FILEMASK is a standard DOS/Windows search expression such as "*.dat"
+or "data*.*".<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ListBoxDirList (2,3,"agssave.*");
+</PRE>
+will fill the listbox 3 of GUI 2 with the list of the saved games.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxAdd">ListBoxAdd</A>, <A HREF="ags41.htm#ListBoxClear">ListBoxClear</A>, <A HREF="ags41.htm#ListBoxSaveGameList">ListBoxSaveGameList</A><P>
+
+<HR>
+<A NAME="ListBoxGetItemText"></A>
+<H3>ListBoxGetItemText</H3>
+<PRE>
+ListBoxGetItemText (int gui, int object, int item, string buffer)
+</PRE>
+Fills BUFFER with the text from list item number ITEM in listbox OBJECT on
+gui GUI. This is useful for finding out the name of the option the user
+selected.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+ListBoxGetItemText (2,3,ListBoxGetSelected(2,3),buffer);
+</PRE>
+will get the text of the selected item in listbox 3 of GUI 2.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxGetSelected">ListBoxGetSelected</A><P>
+
+<HR>
+<A NAME="ListBoxGetNumItems"></A>
+<H3>ListBoxGetNumItems</H3>
+<PRE>
+ListBoxGetNumItems (int gui, int object)
+</PRE>
+Returns the number of items in the specified listbox. Valid item indexes
+range from 0 to (numItems - 1).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int saves;
+saves = ListBoxGetNumItems(2,3);
+</PRE>
+will pass the number of saved games to int saves.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxGetItemText">ListBoxGetItemText</A><P>
+
+<HR>
+<A NAME="ListBoxGetSelected"></A>
+<H3>ListBoxGetSelected</H3>
+<PRE>
+ListBoxGetSelected (int gui, int object)
+</PRE>
+Returns the index into the list of the currently selected item. The first
+item is 0, second is 1, and so on. If no item is selected, returns -1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+ListBoxGetItemText (2,3,ListBoxGetSelected(2,3),buffer);
+</PRE>
+will get the text of the selected item in listbox 3 of GUI 2.<P>
+
+<HR>
+<A NAME="ListBoxSaveGameList"></A>
+<H3>ListBoxSaveGameList</H3>
+<PRE>
+ListBoxSaveGameList (int gui, int object)
+</PRE>
+Fills the specified listbox with the save game list, sorted correctly
+with the most recent game at the top of the list.<P>
+The global  savegameindex  array is updated with the actual slot numbers
+of the entries. So, you could do:
+<PRE>
+int index = ListBoxGetSelected (GUI_NUMBER, OBJECT_NUMBER);
+RestoreGameSlot (savegameindex[index]);
+</PRE>
+NOTE: The save game list can only hold 20 save games. If ListBoxGetNumItems
+returns 20 and you are doing a Save dialog box, you may want to make the
+user replace an existing file rather than saving a new one.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ListBoxSaveGameList(2,3);
+</PRE>
+will fill the listbox 3 of GUI 2 with the list of the saved games.<P>
+<I>See Also:</I> <A HREF="ags41.htm#ListBoxDirList">ListBoxDirList</A>, <A HREF="ags41.htm#ListBoxGetSelected">ListBoxGetSelected</A>, <A HREF="ags41.htm#ListBoxGetNumItems">ListBoxGetNumItems</A><P>
+
+<HR>
+<A NAME="ListBoxSetSelected"></A>
+<H3>ListBoxSetSelected</H3>
+<PRE>
+ListBoxSetSelected (int gui, int object, int selection)
+</PRE>
+Changes the currently selected item in the list to SELECTION. Indexes start
+at 0 for the first item, 1 for the second, and so on. If you specify an
+item that does not exist (eg. -1), the highlight will be removed.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ListBoxSetSelected(2,3,0);
+</PRE>
+will automatically select the first item  of the lisbox 3 of GUI 2.<P>
+
+<HR>
+<A NAME="ListBoxSetTopItem"></A>
+<H3>ListBoxSetTopItem</H3>
+<PRE>
+ListBoxSetTopItem (int gui, int object, int topitem)
+</PRE>
+Repositions the list box so that TOPITEM is the first item visible. This
+allows you to manually scroll the list box to any position you like.<P>
+Indexes for TOPITEM start from 0 for the first item in the list.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ListBoxSetTopItem (2,3,0);
+</PRE>
+will automatically scroll listbox 3 of GUI 2 back to the top of the list.<P>
+
+
+<HR>
+<A NAME="SetButtonPic"></A>
+<H3>SetButtonPic</H3>
+<PRE>
+SetButtonPic (int gui, int object, int which, int newslot)
+</PRE>
+Changes a GUI button's graphic to the one you specify. This could be used
+as an indicator of whether a feature is switched on or off by changing its
+picture. Sets object number OBJECT on gui GUI to NEWSLOT from the sprite
+manager.<P>
+The WHICH parameter selects which picture to change. It can have these
+values:
+<PRE>
+1  normal picture
+2  mouse-over picture
+3  button pushed picture
+</PRE>
+Note that you can pass NEWSLOT as -1 to disable the mouse-over and pushed
+pictures. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+if the GUI setup in the editor specifies a pushed-pic, but you want to change the main picture in the game (and so remove the old pushed picture), you can do something like this:
+<PRE>
+SetButtonPic (2, 3, 1, 100);
+SetButtonPic (2, 3, 3, -1);
+</PRE>
+which will change button 3 on GUI 2 to have normal picture the one in slot 100 and
+not have a pushed graphic.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetGUIBackgroundPic">SetGUIBackgroundPic</A>, <A HREF="ags41.htm#SetButtonText">SetButtonText</A><P>
+
+
+<HR>
+<A NAME="SetButtonText"></A>
+<H3>SetButtonText</H3>
+<PRE>
+SetButtonText (int gui, int object, string newtext)
+</PRE>
+Changes the text displayed in the specified button to NEWTEXT. The affected
+button will be object OBJECT from GUI. You can find out a button's object
+number by looking at the Properties window of the button.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetButtonText(2,3,"Enable jibble");
+</PRE>
+will change button 3 on GUI 2 to read 'Enable jibble'.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetButtonPic">SetButtonPic</A>, <A HREF="ags41.htm#SetLabelText">SetLabelText</A><P>
+
+
+<HR>
+<A NAME="SetGUIBackgroundPic"></A>
+<H3>SetGUIBackgroundPic</H3>
+<PRE>
+SetGUIBackgroundPic (int gui, int slot)
+</PRE>
+Changes the background image of GUI to SLOT.<P>
+You can pass SLOT as 0 to remove the background image from the GUI.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetGUIPosition">SetGUIPosition</A>, <A HREF="ags41.htm#SetButtonPic">SetButtonPic</A><P>
+
+
+<HR>
+<A NAME="SetGUIPosition"></A>
+<H3>SetGUIPosition</H3>
+<PRE>
+SetGUIPosition (int gui, int x, int y)
+</PRE>
+Moves the top-left corner of GUI to the new location (X,Y) on the screen.
+This allows you to dynamically move GUIs around on the screen while the
+game is running. The co-ordinates are screen co-ordinates, not room
+co-ordinates, and use the same scale as in the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGUIPosition(2,mouse.x,mouse.y);
+</PRE>
+will move the GUI 2 to the position where the cursor is.<P>
+<I>See Also:</I> <A HREF="ags41.htm#CentreGUI">CentreGUI</A>, <A HREF="ags41.htm#SetGUIBackgroundPic">SetGUIBackgroundPic</A><P>
+
+
+<HR>
+<A NAME="SetGUITransparency"></A>
+<H3>SetGUITransparency</H3>
+<PRE>
+SetGUITransparency (int gui, int amount)
+</PRE>
+Sets GUI to be AMOUNT <TT>%</TT> transparent.<P>
+Setting AMOUNT to 100 means it is totally invisible, and lower values
+represent varying levels of transparency. Pass AMOUNT as 0 to stop the
+GUI being semi-transparent.<P>
+<I>NOTE: Transparency currently only works in hi-color games.</I><P>
+<I>NOTE: Having a large transparent GUI can significantly slow down the
+engine.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetGUITransparency(2, 50);
+</PRE>
+will make GUI 2 look semi transparent.<P>
+<I>See Also:</I> <A HREF="ags46.htm#SetObjectTransparency">SetObjectTransparency</A><P>
+<P>
+
+<HR>
+<A NAME="SetLabelColor"></A>
+<H3>SetLabelColor</H3>
+<PRE>
+SetLabelColor (int gui, int object, int color)
+</PRE>
+Changes the text colour of label OBJECT on gui GUI to COLOR. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetLabelColor(4,3,14);
+</PRE>
+will change label 3 on GUI 4 to have yellow text.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetLabelFont">SetLabelFont</A>, <A HREF="ags41.htm#SetLabelText">SetLabelText</A><P>
+
+
+<HR>
+<A NAME="SetLabelFont"></A>
+<H3>SetLabelFont</H3>
+<PRE>
+SetLabelFont (int gui, int object, int font)
+</PRE>
+Changes the font used to display label OBJECT on gui GUI to FONT. This is useful
+if you have a standard SCI font for your English version, but want to change to
+a TTF font for foreign language versions.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsTranslationAvailable()) {
+  SetLabelFont(4,3,2);
+}
+</PRE>
+will change label 3 on GUI 4 to use font 2 if a game translation is in use.<P>
+<I>See Also:</I> <A HREF="ags40.htm#IsTranslationAvailable">IsTranslationAvailable</A>,
+<A HREF="ags41.htm#SetLabelText">SetLabelText</A><P>
+
+<HR>
+<A NAME="SetLabelText"></A>
+<H3>SetLabelText</H3>
+<PRE>
+SetLabelText (int gui, int object, string newtext)
+</PRE>
+Changes the text displayed in the specified label to NEWTEXT. The affected
+label will be object OBJECT from GUI. You can find out a label's object
+number by looking at the Properties window of the label.<P>
+This command allows you to change the text during the game, for example
+to create a Lucasarts-style status line.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+GetLocationName(mouse.x,mouse.y,buffer);
+SetLabelText(2,3,buffer);
+</PRE>
+will display on text box 3 of GUI 2 the name of the location the cursor is over.<P>
+<I>See Also:</I> <A HREF="ags41.htm#SetButtonPic">SetButtonPic</A>, <A HREF="ags41.htm#SetButtonText">SetButtonText</A>,
+<A HREF="ags41.htm#SetLabelColor">SetLabelColor</A>, <A HREF="ags41.htm#SetLabelFont">SetLabelFont</A><P>
+
+<HR>
+<A NAME="SetSliderValue"></A>
+<H3>SetSliderValue</H3>
+<PRE>
+SetSliderValue (int gui, int object, int value)
+</PRE>
+Changes the specified slider (object number OBJECT on GUI) to have the
+new value VALUE. VALUE must lie between the MIN and MAX settings for the
+slider, as set up in the GUI editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSliderValue(2,3,200);
+</PRE>
+will change the value of the slider 3 of GUI 2 to 200.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GetSliderValue">GetSliderValue</A>, <A HREF="ags41.htm#SetLabelText">SetLabelText</A><P>
+
+<HR>
+<A NAME="SetTextBoxText"></A>
+<H3>SetTextBoxText</H3>
+<PRE>
+SetTextBoxText (int gui, int object, string newtext)
+</PRE>
+Changes the text box OBJECT on gui number GUI to contain NEWTEXT. This
+might be useful to reset the text box to blank after the user has typed
+something in, or to fill in a default value.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetTextBoxText(2,3,"");
+</PRE>
+will clear the textbox 3 of GUI 2.<P>
+<I>See Also:</I> <A HREF="ags41.htm#GetTextBoxText">GetTextBoxText</A>, <A HREF="ags41.htm#SetLabelText">SetLabelText</A><P>
+
+
+<HR>
+<A NAME="SetTextWindowGUI"></A>
+<H3>SetTextWindowGUI</H3>
+<PRE>
+SetTextWindowGUI (int gui)
+</PRE>
+Changes the GUI used for text windows to the specified GUI. This overrides
+the "text windows use GUI" setting in the editor.<P>
+You can pass -1 as the GUI number to go back to using the default white text box.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetTextWindowGUI (4);
+</PRE>
+will change Textwindow GUI 4 to be used for displaying text windows in future.<P>
+
+
+</BODY></HTML>

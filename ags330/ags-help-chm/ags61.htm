@@ -1,0 +1,93 @@
+<HTML>
+<head><title>GUI Label functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic52"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags60.htm#GUIInvFuncs"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags62.htm#topic53"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI Label functions and properties</H2>
+<A HREF="ags58.htm#GUIControl.BringToFront">BringToFront (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SendToBack">SendToBack (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#Label.Font">Font property (label)</A><BR>
+<A HREF="#Label.Text">Text property (label)</A><BR>
+<A HREF="#Label.TextColor">TextColor property (label)</A><BR>
+<P>
+
+<HR>
+<A NAME="Label.Font"></A>
+<H3>Font property (label)</H3>
+<I>(Formerly known as SetLabelFont, which is now obsolete)</I><P>
+<PRE>
+FontType Label.Font;
+</PRE>
+Gets/sets the font used to display the label's text. This is useful if you
+have a standard SCI font for your English version, but want to change to
+a TTF font for foreign language versions.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (IsTranslationAvailable()) {
+  lblStatus.Font = eFontForeign;
+}
+</PRE>
+will change label 'lblStatus' to use font "Foreign" if a game translation is in use.<P>
+<I>See Also:</I> <A HREF="ags56.htm#IsTranslationAvailable">IsTranslationAvailable</A>,
+<A HREF="ags61.htm#Label.Text">Label.Text</A>, <A HREF="ags64.htm#TextBox.Font">TextBox.Font</A><P>
+
+
+<HR>
+<A NAME="Label.Text"></A>
+<H3>Text property (label)</H3>
+<I>(Formerly known as SetLabelText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Label.GetText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Label.SetText, which is now obsolete)</I><P>
+<PRE>
+String Label.Text;
+</PRE>
+Gets/sets the text displayed in the specified label.  This allows you to change
+the text during the game, for example to create a Lucasarts-style status line.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+lblStatus.Text = Game.GetLocationName(mouse.x, mouse.y);
+</PRE>
+will display the name of the location the cursor is over on label 'lblStatus'<P>
+<I>See Also:</I> <A HREF="ags59.htm#Button.NormalGraphic">Button.NormalGraphic</A>,
+<A HREF="ags59.htm#Button.Text">Button.Text</A>,
+<A HREF="ags61.htm#Label.TextColor">Label.TextColor</A>, <A HREF="ags61.htm#Label.Font">Label.Font</A><P>
+
+
+<HR>
+<A NAME="Label.TextColor"></A>
+<H3>TextColor property (label)</H3>
+<I>(Formerly known as SetLabelColor, which is now obsolete)</I><P>
+<PRE>
+int Label.TextColor;
+</PRE>
+Gets/sets the text colour used to display the label's text. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+lblStatus.TextColor = 14;
+</PRE>
+will change label 'lblStatus' to have yellow text.<P>
+<I>See Also:</I> <A HREF="ags61.htm#Label.Font">Label.Font</A>, <A HREF="ags61.htm#Label.Text">Label.Text</A><P>
+<P>
+
+</BODY></HTML>

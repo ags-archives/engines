@@ -1,0 +1,586 @@
+<HTML>
+<head><title>Script language keywords</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic44"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags27.htm#topic39"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags42.htm#BuiltInEnums"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags44.htm#topic46"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Script language keywords</H2>
+<P>
+
+<A HREF="#Arrays">Arrays</A><BR>
+<A HREF="#Datatypes">Data types</A><BR>
+<A HREF="#topic45">Operators</A><BR>
+<A HREF="#Constants">Constants</A><BR>
+<A HREF="#VersionChecks">Version checking</A><BR>
+<A HREF="#ifelsestatements">if, else statements</A><BR>
+<A HREF="#whilestatement">while</A><BR>
+<A HREF="#function">function</A><BR>
+<A HREF="#struct">struct</A><BR>
+<A HREF="#enum">enum</A><BR>
+<A HREF="#this">this</A><BR>
+<A HREF="#importkeyword">import</A><BR>
+<A HREF="#exportkeyword">export</A><BR>
+<A HREF="#noloopcheck">noloopcheck</A><BR>
+<P>
+
+<HR>
+<A NAME="Arrays"></A>
+<H3>Arrays</H3>
+<I>data_type</I> <I>name</I> <TT>[</TT> <I>size</I> <TT>];</TT><P>
+Arrays allow you to easily create several variables of the same type. For example,
+suppose you wanted to store a health variable for all the different characters in the game.
+One way would be to declare several different variables like this:
+<PRE>
+int egoHealth;
+int badGuyHealth;
+int swordsmanHealth;
+</PRE>
+but that quickly gets messy and difficult to keep up to date, since you need to use
+different script code to update each one. So instead, you can do this:
+<PRE>
+int health[50];
+</PRE>
+This example declares 50 int variables, all called <I>health</I>. <br> 
+You access each seperate variable via its <B>index</B> (the number in the brackets). Indexes
+start from 0, so in this case the <I>health</I> array can be accessed by indexes 0 to 49.
+If you attempt to access an invalid index, your game will exit with an error.<P>
+Here's an example of using the array:
+<PRE>
+  health[3] = 50;
+  health[4] = 100;
+  health[player.ID] = 10;
+</PRE>
+this sets Health 3 to 50, Health 4 to 100, and the Health index that corresponds to the player
+character's ID number to 10.<P>
+See Also: <A HREF="ags38.htm#DynamicArrays">Dynamic arrays</A><P>
+
+
+<HR>
+<A NAME="Datatypes"></A>
+<H3>Data types</H3>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B> Type </B></TD>
+<TD ALIGN=LEFT><B> Description </B>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> char </TD>
+<TD ALIGN=LEFT> Single byte data type, can store a single character or number 0 to 255 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> short </TD>
+<TD ALIGN=LEFT> 16-bit integer, can store numbers from –32,768 to 32,767 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> int </TD>
+<TD ALIGN=LEFT> 32-bit integer, can store from –2,147,483,648 to 2,147,483,647 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> String </TD>
+<TD ALIGN=LEFT> Stores a string of characters 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> float </TD>
+<TD ALIGN=LEFT> A 32-bit floating point number. Accuracy normally about 6 decimal places,
+                    but varies depending on the size of the number being stored. 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> bool </TD>
+<TD ALIGN=LEFT> a variable that stores either 'true' or 'false' 
+</TD>
+</TR>
+</TABLE>
+<P>
+You will normally only need to use the <B>int</B> and <B>String</B> data types. The smaller types
+are only useful for conserving memory if you are creating a very large number of variables.<P>
+To declare a variable, write the type followed by the variable name, then a semicolon.
+For example:<P>
+<TT>int my_variable;</TT><P>
+declares a new 32-bit integer called  my_variable  <P>
+<B>WARNING:</B> When using the <I>float</I> data type, you may find that the == and != operators
+don't seem to work properly. For example:
+<PRE>
+float result = 2.0 * 3.0;
+if (result == 6.0) {
+  Display("Result is 6!");
+}
+</PRE>
+may not always work. This is due to the nature of floating point variables, and the solution
+is to code like this:
+<PRE>
+float result = 2.0 * 3.0;
+if ((result &gt; 5.99) && (result &lt; 6.01)) {
+  Display("Result is 6!");
+}
+</PRE>
+The way floating point numbers are stored means that 6 might actually be stored as 6.000001
+or 5.999999; this is a common gotcha to all programming languages so just be aware of it
+if you use any floating point arithmetic.<P>
+
+
+<HR>
+<A NAME="topic45"></A>
+<H3>Operators</H3>
+The AGS scripting engine supports the following operators in expressions. They are listed
+in order of precedence, with the most tightly bound at the top of the list.<P>
+<B>WARNING:</B> When using operators of equal precedence, AGS by default evaluates them
+right-to-left. So, the expression <TT>a = 5 - 4 - 2;</TT> evaluates as <TT>a = 5 - (4 - 2);</TT>
+which is not what you might expect. Always use parenthesis to make it clear what you want. <br> 
+The "Left-to-right operator precedence" option on the General Settings pane allows you to
+control this behaviour.<P>
+<B><PRE>
+
+Operator  Description              Example
+</PRE>
+ </B><P>
+<PRE>
+  !    NOT                        if (!a) 
+  *    Multiply                   a = b * c;
+  /    Divide                     a = b / c;
+  %    Remainder                  a = b % c;
+  +    Add                        a = b + c;
+  -    Subtract                   a = b - c;
+  &lt;&lt;   Bitwise Left Shift         a = b &lt;&lt; c;
+       (advanced users only) 
+  &gt;&gt;   Bitwise Right Shift        a = b &gt;&gt; c;
+       (advanced users only) 
+  &    Bitwise AND                a = b & c;
+       (advanced users only) 
+  |    Bitwise OR                 a = b | c;
+       (advanced users only) 
+  ^    Bitwise XOR                a = b ^ c;
+       (advanced users only) 
+  ==   Is equal to                if (a == b)
+  !=   Is not equal to            if (a != b)
+  &gt;    Is greater than            if (a &gt; b)
+  &lt;    Is less than               if (a &lt; b)
+  &gt;=   Is greater than or equal   if (a &gt;= b)
+  &lt;=   Is less than or equal      if (a &lt;= b)
+  &&   Logical AND                if (a && b)
+  ||   Logical OR                 if (a || b)
+</PRE>
+This order of precedence allows expressions such as the following to evaluate as expected:<P>
+<TT>if (!a && b &lt; 4)</TT><P>
+which will execute the 'if' block if <B>a</B> is 0 and <B>b</B> is less than 4.<P>
+However, it is always good practice to use parenthesis to group expressions. It's much
+more readable to script the above expression like this:<P>
+<TT>if ((!a) && (b &lt; 4))</TT><P>
+<P>
+
+<HR>
+<A NAME="Constants"></A>
+<H3>Constants</H3>
+The following predefined macros are available in your scripts:<P>
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B> Name </B></TD>
+<TD ALIGN=LEFT><B> Description </B>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> DEBUG </TD>
+<TD ALIGN=LEFT> Defined if the game is being compiled in debug mode, not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> STRICT </TD>
+<TD ALIGN=LEFT> Defined if "Enforce Object Based Scripting" is ticked, not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> STRICT_STRINGS </TD>
+<TD ALIGN=LEFT> Defined if "Enforce new-style strings" is ticked, not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> LRPRECEDENCE </TD>
+<TD ALIGN=LEFT> Defined if "Left-to-right operator precedence" is ticked, not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_NEW_STRINGS </TD>
+<TD ALIGN=LEFT> Defined if AGS 2.71 or later (with new-String support), not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_SUPPORTS_IFVER </TD>
+<TD ALIGN=LEFT> Defined if AGS 2.72 or later (with <TT>#ifver</TT> support), not defined otherwise 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_MAX_INV_ITEMS </TD>
+<TD ALIGN=LEFT> The maximum number of inventory items 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_MAX_CONTROLS_PER_GUI </TD>
+<TD ALIGN=LEFT> The maximum number of controls on a GUI 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_MAX_OBJECTS </TD>
+<TD ALIGN=LEFT> The maximum objects per room 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_MAX_HOTSPOTS </TD>
+<TD ALIGN=LEFT> The maximum hotspots per room 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> AGS_MAX_REGIONS </TD>
+<TD ALIGN=LEFT> The maximum regions per room 
+</TD>
+</TR>
+</TABLE>
+<P>
+You can check for whether a macro is defined or not by using the <TT>#ifdef</TT> and
+<TT>#ifndef</TT> keywords:
+<PRE>
+#ifndef STRICT
+  // only compile the MoveCharacter command if not using object-based scripting
+  MoveCharacter(EGO, 30, 40);
+#endif
+#ifdef DEBUG
+  // only display this when the game is compiled in debug mode
+  Display("Debugging information");
+#endif
+</PRE>
+There is also an <TT>#error</TT> directive you can use to stop the script compiling:
+<PRE>
+#ifndef AGS_NEW_STRINGS
+#error This script requires at least AGS 2.71
+#endif
+</PRE>
+The other constants (AGS_MAX_*) are useful if you are writing some script code that you
+want to be portable to different versions of AGS, and to pick up the limits from the user's
+AGS version. For example, if you wanted to store some extra information on all the inventory
+items, you could do:
+<PRE>
+int invWeights[AGS_MAX_INV_ITEMS];
+</PRE>
+To get the actual number of things in the game rather than the AGS limit, use the
+<A HREF="ags49.htm#Game.CharacterCount">Game.CharacterCount</A>-style properties.<P>
+
+
+<HR>
+<A NAME="VersionChecks"></A>
+<H3>Version checking</H3>
+If you are writing a script module, you may need to check which version of AGS the user
+of your module is using.<P>
+For this purpose there are two directives:
+<PRE>
+#ifver 2.72
+// do stuff for 2.72 and above
+#endif
+#ifnver 2.72
+// do stuff for 2.71 and below
+#endif
+</PRE>
+Note that this ability was only added in 2.72, so you cannot use the <TT>#ifver</TT> checks
+if you want your module to work with earlier versions than this.<P>
+
+
+<HR>
+<A NAME="ifelsestatements"></A>
+<H3>if, else statements</H3>
+<B>if (</B> <I>expression</I> <B>)</B>  <TT>{</TT> <br> 
+  <I>statements1</I> <br> 
+<TT>}</TT> <br> 
+[ <B>else</B>  <TT>{</TT> <br> 
+  <I>statements2</I> <br> 
+<TT>}</TT> ]<P>
+If <I>expression</I> is true, then <I>statements1</I> are run.<P>
+If <I>expression</I> is not true, and there is an <B>else</B> clause present, then
+<I>statements2</I> are run instead.<P>
+For example:<P>
+<PRE>
+if (GetGlobalInt(5) == 10) {
+  Display("Globalint 5 is 10.");
+}
+else {
+  Display("Globalint 5 is not 10.");
+}
+</PRE>
+In this example, the first message will be displayed if the return value from
+<TT>GetGlobalInt(5)</TT> is 10, and the second message will be displayed if it is not.<P>
+<B>if</B> statements can be nested inside <B>else</B> statements to produce an "else if"
+effect. For example:<P>
+<PRE>
+if (GetGlobalInt(5) == 1) {
+  Display("Globalint 5 is 1.");
+}
+else if (GetGlobalInt(5) == 2) {
+  Display("Globalint 5 is 2.");
+}
+else {
+  Display("Globalint 5 is not 1 or 2.");
+}
+</PRE>
+
+
+<HR>
+<A NAME="whilestatement"></A>
+<H3>while</H3>
+<B>while (</B> <I>expression</I> <B>)</B>  <TT>{</TT> <br> 
+  <I>statements</I> <br> 
+<TT>}</TT><P>
+Runs <I>statements</I> continuously, while <I>expression</I> is true.<P>
+For example:<P>
+<PRE>
+while (cEgo.Moving) {
+  Wait(1);
+}
+</PRE>
+will run the script <TT>Wait(1);</TT> repeatedly, as long as <TT>cEgo.Moving</TT> is
+not zero. Once it is zero, the <B>while</B> statement will exit at the end of the loop.<P>
+
+
+<HR>
+<A NAME="function"></A>
+<H3>function</H3>
+<B>function</B> <I>name</I> <TT>(</TT> [<I>type1 param1</I>, <I>type2 param2</I>, ... ] <TT>)</TT><P>
+Declares a custom function in your script. A function is a way in which you can
+separate out commonly used code into its own place, and thus avoid duplicating code.<P>
+For example, suppose that you quite often want to play a sound and add an inventory item
+at the same time. You could write both commands each time, or you could define a custom
+function:<P>
+<PRE>
+function AddInvAndPlaySound(int inventoryItem) {
+  player.AddInventory(inventory[inventoryItem]);
+  PlaySound(5);
+}
+</PRE>
+then, elsewhere in your code you can simply call:
+<PRE>
+AddInvAndPlaySound(8);
+</PRE>
+to add inventory item 8 and play the sound.<P>
+Generally, you place your functions in your global script. You then need to add
+an <A HREF="ags43.htm#importkeyword">import</A> line to your script header to allow the function to be called
+from room scripts.<P>
+<B>Optional parameters</B><P>
+You can make <I>int</I> parameters optional if there is a default value that the user
+doesn't need to supply. To do this, change the script header <I>import</I> declaration like this:
+<PRE>
+import function TestFunction(int stuff, int things = 5);
+</PRE>
+that declares a function with a mandatory <I>stuff</I> parameter, and an optional <I>things</I>
+parameter. If the caller does not supply the second parameter, it will default to 5.<P>
+<B>NOTE:</B> To use optional parameters, you need to have an "import" declaration for the function
+in the script header. The default values cannot be specified in the actual function declaration
+itself.<P>
+
+
+<HR>
+<A NAME="struct"></A>
+<H3>struct</H3>
+<B>struct</B> <I>name</I> <TT>{</TT><P>
+Declares a custom struct type in your script. <br> 
+Structs allow you to group together related variables in order to make your
+script more structured and readable. For example, suppose that wanted to store
+some information on weapons that the player could carry. You could declare
+the variables like this:
+<PRE>
+int swordDamage;
+int swordPrice;
+String swordName;
+</PRE>
+but that quickly gets out of hand and leaves you with tons of variables to keep track of.
+This is where structs come in:
+<PRE>
+struct Weapon {
+  int damage;
+  int price;
+  String name;
+};
+</PRE>
+Now, you can declare a struct in one go, like so:
+<PRE>
+Weapon sword;
+sword.damage = 10;
+sword.price = 50;
+sword.name = "Fine sword";
+</PRE>
+Much neater and better organised. You can also combine structs with <A HREF="ags43.htm#Arrays">arrays</A>:
+<PRE>
+// at top of script
+Weapon weapons[10];
+// inside script function
+weapons[0].damage = 10;
+weapons[0].price = 50;
+weapons[0].name = "Fine sword";
+weapons[1].damage = 20;
+weapons[1].price = 80;
+weapons[1].name = "Poison dagger";
+</PRE>
+structs are essential if you have complex data that you need to store in your scripts.<P>
+
+
+<HR>
+<A NAME="enum"></A>
+<H3>enum</H3>
+<B>Recommended for advanced users only</B><P>
+<B>enum</B> <I>name</I> <TT>{</TT> <br> 
+  <I>option1</I> [ = <I>value1</I> ], <br> 
+  <I>option2</I> [ = <I>value2</I> ], <br> 
+  ... <br> 
+<TT>};</TT><P>
+Declares an enumeration type. An enumeration allows you to group together a set of related
+options, where only one will be true at any one time -- a bit like the contents of a list box.<P>
+For example, if you have a script function, <I>doStuff</I>, that can perform 3 different
+operations, you could do this:<P>
+<PRE>
+function doStuff(int param) {
+  if (param == 1) {
+    // do something
+  }
+  else if (param == 2) {
+    // do something else
+  }
+  // etc
+}
+</PRE>
+but it's hard to read, and when calling the function from elsewhere in your script,
+it's not clear what 1 or 2 means. That's where enums come in:<P>
+<PRE>
+enum DoStuffOption {
+  BakeCake,
+  DoLaundry
+};
+
+function doStuff(DoStuffOption param) {
+  if (param == BakeCake) {
+    // do something
+  }
+  else if (param == DoLaundry) {
+    // do something else
+  }
+  // etc
+}
+</PRE>
+and then the calling code looks like: <br> 
+<TT>doStuff(BakeCake);</TT> <br> 
+thus making it perfectly clear what the command will do.<P>
+Normally, you would put the enum definition into the script header.<P>
+In summary, enums are not an essential part of scripting and you can get away perfectly
+well without using them, but in some specific situations they're very handy.<P>
+
+
+<HR>
+<A NAME="this"></A>
+<H3>this</H3>
+There are two uses for the <TT>this</TT> keyword.<P>
+<B>1. Accessing members of the current struct</B><P>
+When you are creating custom <A HREF="ags43.htm#struct">structs</A>, you use the "this" keyword inside member
+functions to refer to the current struct. For example:<P>
+Suppose you had this in your script header:
+<PRE>
+struct MyStruct {
+  int myValue;
+  
+  import function MyMethod();
+};
+</PRE>
+Then, in your main script, you could put this:
+<PRE>
+function MyStruct::MyMethod()
+{
+  this.myValue = 5;
+}
+</PRE>
+The <TT>MyStruct::MyMethod</TT> tells AGS that you are defining the function <I>MyMethod</I>
+which belongs to the struct <I>MyStruct</I> (the <TT>::</TT> operator means "belongs to").<P>
+The code above will mean that when the MyMethod function is called, it sets
+the <TT>myValue</TT> variable to 5.<P>
+<B>2. Declaring extender functions</B><P>
+Please see the <A HREF="ags39.htm#ExtenderFunctions">Extender functions</A> page for details.<P>
+
+
+<HR>
+<A NAME="importkeyword"></A>
+<H3>import</H3>
+<B>import</B> <I>declaration</I> ;<P>
+Declares <I>declaration</I> as a variable or function which is external to the current
+script, but that the script needs access to it. You use this to provide your room scripts
+with access to parts of your global script.<P>
+For example:<P>
+<PRE>
+import int counter;
+import function add_numbers (int, int);
+</PRE>
+This imports an integer variable <TT>counter</TT> and the function <TT>add_numbers</TT> from
+the global script to enable the current script to call them. You normally place import
+statements into the script header so that all rooms can benefit from them.<P>
+In order to import the variable, it must have been exported from the global script
+with the <A HREF="ags43.htm#exportkeyword">export keyword</A>.<P>
+<B>NOTE:</B> You <B>MUST</B> import external variables with the correct type. If <TT>counter</TT>
+was declared as a <B>short</B> in the global script, you MUST import it as a short, otherwise
+your game may crash.<P>
+<B>NOTE:</B> You cannot import old-style <TT>string</TT> variables (this does not
+apply to new-style <TT>String</TT> variables).<P>
+
+
+<HR>
+<A NAME="exportkeyword"></A>
+<H3>export</H3>
+<B>export</B> <I>variable</I> [, <I>variable</I> ... ] ;<P>
+Declares that <I>variable</I> can be exported and accessed by other scripts. You must place
+this at the <B>end</B> of your global script. You can export many variables with one export
+line.<P>
+For example:<P>
+<PRE>
+export my_variable;
+export counter, strength;
+</PRE>
+This exports three variables - my_variable, counter and strength.<P>
+
+
+<HR>
+<A NAME="noloopcheck"></A>
+<H3>noloopcheck</H3>
+function <B>noloopcheck</B> <I>function_name</I> ( <I>parameters ...</I> ) <TT>{</TT><P>
+The noloopcheck keyword disables the script loop checking for the current function.<P>
+Normally, if a <A HREF="ags43.htm#whilestatement">while</A> loop runs for more than 150,000
+loops, AGS will assume that the script has hung and abort the game. This is to assist
+scripting since otherwise the game would lock up if you scripted a loop wrongly.<P>
+However, there are some rare situations in which you need a loop to run several thousand
+times (for example, when initialising a very large array). In this case, the <I>noloopcheck</I>
+keyword can be used to stop AGS aborting your script.<P>
+<B>NOTE:</B> The <I>noloopcheck</I> keyword must be placed between "function" and the function's name. <br> 
+If you import the function into the script header, you <B>do not</B> include the "noloopcheck" keyword
+in the import declaration -- it is only included in the actual function body.<P>
+<B>NOTE:</B> If AGS gives you a script iterations error, <B>DO NOT</B> just automatically
+add this keyword as a way to fix the problem -- more often than not, it is a fault in
+your scripting and using this keyword will mean that the game will hang rather than abort.<P>
+For example:
+<PRE>
+function noloopcheck initialize_array() {
+  char bigarray[200000];
+  int a = 0;
+  while (a &lt; 200000) {
+    bigarray[a] = 1;
+    a++;
+  }
+}
+</PRE>
+without the "noloopcheck" keyword here, AGS would abort that script.<P>
+<P>
+
+</BODY></HTML>

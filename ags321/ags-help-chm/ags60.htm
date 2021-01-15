@@ -1,0 +1,237 @@
+<HTML>
+<head><title>GUI InvWindow functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="GUIInvFuncs"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags28.htm#topic38"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags59.htm#topic52"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags61.htm#topic53"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI InvWindow functions and properties</H2>
+<A HREF="ags58.htm#GUIControl.BringToFront">BringToFront (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SendToBack">SendToBack (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags58.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#InvWindow.ScrollDown">ScrollDown (inv window)</A><BR>
+<A HREF="#InvWindow.ScrollUp">ScrollUp (inv window)</A><BR>
+<A HREF="#InvWindow.CharacterToUse">CharacterToUse property</A><BR>
+<A HREF="#InvWindow.ItemAtIndex">ItemAtIndex property</A><BR>
+<A HREF="#InvWindow.ItemCount">ItemCount property (inv window)</A><BR>
+<A HREF="#InvWindow.ItemHeight">ItemHeight property</A><BR>
+<A HREF="#InvWindow.ItemWidth">ItemWidth property</A><BR>
+<A HREF="#InvWindow.ItemsPerRow">ItemsPerRow property</A><BR>
+<A HREF="#InvWindow.RowCount">RowCount property (inv window)</A><BR>
+<A HREF="#InvWindow.TopItem">TopItem property (inv window)</A><BR>
+<P>
+
+<HR>
+<A NAME="InvWindow.ScrollDown"></A>
+<H3>ScrollDown (inv window)</H3>
+<PRE>
+InvWindow.ScrollDown()
+</PRE>
+Scrolls the inventory window down one line, if there are more items to display.
+If the inventory window is already at the bottom, then nothing happens.<P>
+You would usually use this in response to a GUI button press on a Down arrow button
+on your GUI.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.ScrollDown();
+</PRE>
+will scroll the <I>invMain</I> inv window down one row.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ScrollUp">InvWindow.ScrollUp</A>,
+<A HREF="ags60.htm#InvWindow.TopItem">InvWindow.TopItem</A><P>
+
+
+<HR>
+<A NAME="InvWindow.ScrollUp"></A>
+<H3>ScrollUp (inv window)</H3>
+<PRE>
+InvWindow.ScrollUp()
+</PRE>
+Scrolls the inventory window up one line, if there are more items to display.
+If the inventory window is already at the top, then nothing happens.<P>
+You would usually use this in response to a GUI button press on an Up arrow button
+on your GUI.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.ScrollUp();
+</PRE>
+will scroll the <I>invMain</I> inv window up one row.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ScrollDown">InvWindow.ScrollDown</A>,
+<A HREF="ags60.htm#InvWindow.TopItem">InvWindow.TopItem</A><P>
+
+
+<HR>
+<A NAME="InvWindow.CharacterToUse"></A>
+<H3>CharacterToUse property</H3>
+<PRE>
+Character* InvWindow.CharacterToUse;
+</PRE>
+Gets/sets which character the inventory window is currently displaying the inventory
+for. This is either set to a specific character, or it can be set to <I>null</I>, in which
+case the inventory window will track the current player character (this is the default).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.CharacterToUse = cJack;
+</PRE>
+will change the <I>invMain</I> inventory window to display character JACK's inventory.<P>
+
+
+<HR>
+<A NAME="InvWindow.ItemAtIndex"></A>
+<H3>ItemAtIndex property</H3>
+<PRE>
+readonly InventoryItem* InvWindow.ItemAtIndex[];
+</PRE>
+Gets the inventory item that is currently displayed at the specified index in this
+inventory window. The number of items in the window can be retrieved with the
+<A HREF="ags60.htm#InvWindow.ItemCount">ItemCount</A> property. Indexes range from 0 to ItemCount - 1.<P>
+If an invalid index is supplied, <I>null</I> is returned.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+String firstOne = invMain.ItemAtIndex[0].Name;
+Display("First item is %s.", firstOne);
+</PRE>
+will display the name of the first item displayed in the <I>invMain</I> inventory window.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemCount">InvWindow.ItemCount</A><P>
+
+
+<HR>
+<A NAME="InvWindow.ItemCount"></A>
+<H3>ItemCount property (inv window)</H3>
+<I>(Formerly known as game.num_inv_items, which is now obsolete)</I><P>
+<PRE>
+readonly int InvWindow.ItemCount;
+</PRE>
+Gets the total number of items contained in the inventory window. This will tend
+to equal the total number of items that the character has (though it may not if
+the "Display multiple items multiple times" game setting is not checked).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (invMain.ItemCount &gt; (invMain.ItemsPerRow * invMain.RowCount)) {
+  btnInvUp.Enabled = true;
+  btnInvDown.Enabled = false;
+}
+</PRE>
+will enable the GUI buttons <I>btnInvUp</I> and <I>btnInvDown</I> if there are more
+inventory items than will fit in the inventory window.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemAtIndex">InvWindow.ItemAtIndex</A>,
+<A HREF="ags60.htm#InvWindow.ItemsPerRow">InvWindow.ItemsPerRow</A>,
+<A HREF="ags60.htm#InvWindow.RowCount">InvWindow.RowCount</A><P>
+
+
+<HR>
+<A NAME="InvWindow.ItemHeight"></A>
+<H3>ItemHeight property</H3>
+<I>(Formerly known as SetInvDimensions, which is now obsolete)</I><P>
+<PRE>
+int InvWindow.ItemHeight;
+</PRE>
+Gets/sets the height of the rows in the inventory window. You should generally set this
+up in game_start to the height of your largest inventory item. The default is 22.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.ItemWidth = 50;
+invMain.ItemHeight = 30;
+</PRE>
+sets the <I>invMain</I> inventory window to use item cells 50x30 large.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemWidth">InvWindow.ItemWidth</A>,
+<A HREF="ags60.htm#InvWindow.RowCount">InvWindow.RowCount</A><P>
+
+
+<HR>
+<A NAME="InvWindow.ItemWidth"></A>
+<H3>ItemWidth property</H3>
+<I>(Formerly known as SetInvDimensions, which is now obsolete)</I><P>
+<PRE>
+int InvWindow.ItemWidth;
+</PRE>
+Gets/sets the width of the items in the inventory window. You should generally set this
+up in game_start to the width of your largest inventory item. The default is 40.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+invMain.ItemWidth = 50;
+invMain.ItemHeight = 30;
+</PRE>
+sets the <I>invMain</I> inventory window to use item cells 50x30 large.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemHeight">InvWindow.ItemHeight</A>,
+<A HREF="ags60.htm#InvWindow.ItemsPerRow">InvWindow.ItemsPerRow</A><P>
+
+
+<HR>
+<A NAME="InvWindow.ItemsPerRow"></A>
+<H3>ItemsPerRow property</H3>
+<I>(Formerly known as game.items_per_line, which is now obsolete)</I><P>
+<PRE>
+readonly int InvWindow.ItemsPerRow;
+</PRE>
+Gets the number of items that can be displayed in each row of the inventory window.
+This is calculated by the width of the inventory window divided by the individual ItemWidth.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The inventory window can show %d items at a time", invMain.ItemsPerRow * invMain.RowCount);
+</PRE>
+displays how many items can be visible in the invMain window at once.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemWidth">InvWindow.ItemWidth</A>,
+<A HREF="ags60.htm#InvWindow.RowCount">InvWindow.RowCount</A><P>
+
+
+<HR>
+<A NAME="InvWindow.RowCount"></A>
+<H3>RowCount property (inv window)</H3>
+<PRE>
+readonly int InvWindow.RowCount;
+</PRE>
+Gets the number of rows that can be displayed within the inventory window. This is
+calculated by dividing the height of the window by the individual ItemHeight.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The inventory window can show %d items at a time", invMain.ItemsPerRow * invMain.RowCount);
+</PRE>
+displays how many items can be visible in the invMain window at once.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemHeight">InvWindow.ItemHeight</A>,
+<A HREF="ags60.htm#InvWindow.ItemsPerRow">InvWindow.ItemsPerRow</A><P>
+
+
+<HR>
+<A NAME="InvWindow.TopItem"></A>
+<H3>TopItem property (inv window)</H3>
+<I>(Formerly known as game.top_inv_item, which is now obsolete)</I><P>
+<PRE>
+int InvWindow.TopItem;
+</PRE>
+Gets/sets the index of the first item currently displayed in the inventory window.
+The first item is represented by 0, and the last item is has an index of
+<A HREF="ags60.htm#InvWindow.ItemCount">ItemCount</A> - 1.<P>
+You can use this to work out whether to display scroll arrows or not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (invMain.TopItem &gt; 0) {
+  btnScrollUp.Visible = true;
+}
+else {
+  btnScrollUp.Visible = false;
+}
+</PRE>
+makes the <I>btnScrollUp</I> button visible or invisible depending on whether the
+inventory list can be scrolled up.<P>
+<I>See Also:</I> <A HREF="ags60.htm#InvWindow.ItemCount">InvWindow.ItemCount</A><P>
+<P>
+
+</BODY></HTML>

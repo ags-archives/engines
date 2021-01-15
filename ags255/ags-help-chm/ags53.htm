@@ -1,0 +1,380 @@
+<HTML>
+<head><title>Text display / Speech functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic74"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags36.htm#topic57"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags52.htm#topic73"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags54.htm#topic75"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Text display / Speech functions</H2>
+<A HREF="#Display">Display</A><BR>
+<A HREF="#DisplayAt">DisplayAt</A><BR>
+<A HREF="#DisplayAtY">DisplayAtY</A><BR>
+<A HREF="#DisplayMessage">DisplayMessage</A><BR>
+<A HREF="#DisplayMessageAtY">DisplayMessageAtY</A><BR>
+<A HREF="#DisplaySpeech">DisplaySpeech</A><BR>
+<A HREF="#DisplaySpeechAt">DisplaySpeechAt</A><BR>
+<A HREF="#DisplaySpeechBackground">DisplaySpeechBackground</A><BR>
+<A HREF="#DisplayThought">DisplayThought</A><BR>
+<A HREF="#GetDialogOption">GetDialogOption</A><BR>
+<A HREF="#RunDialog">RunDialog</A><BR>
+<A HREF="#SetDialogOption">SetDialogOption</A><BR>
+<A HREF="#SetSkipSpeech">SetSkipSpeech</A><BR>
+<A HREF="#SetSpeechFont">SetSpeechFont</A><BR>
+<A HREF="#SetSpeechStyle">SetSpeechStyle</A><BR>
+<A HREF="#StopDialog">StopDialog</A><BR>
+<P>
+
+<HR>
+<A NAME="Display"></A>
+<H3>Display</H3>
+<PRE>
+Display (string message, ...)
+</PRE>
+Displays a message to the screen. It will be displayed in the standard
+message box, and centred in the middle of the screen. You can insert the
+values of variables using "<TT>%d</TT>" and "<TT>%s</TT>" in the message. To insert the value of an integer variable, use <TT>%d</TT>, to insert a string use <TT>%s</TT>. <P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int my_counter;
+Display ("The counter is currently set to %d.", my_counter);
+</PRE>
+will replace the '<TT>%d</TT>' with the value of the variable "my_counter".<P>
+NOTE: Display is a blocking function - that is, control will not return
+to the script until the player has removed the text window (by pressing a
+key or clicking the mouse). While the window is displayed, all other
+processing, like animations and interface display, are disabled. This is
+usually used for responses to the player LOOKing at things.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DisplayAt">DisplayAt</A>, <A HREF="ags53.htm#DisplayMessage">DisplayMessage</A>, <A HREF="ags53.htm#DisplaySpeech">DisplaySpeech</A>, <A HREF="ags52.htm#StrFormat">StrFormat</A><P>
+
+<HR>
+<A NAME="DisplayAt"></A>
+<H3>DisplayAt</H3>
+<PRE>
+DisplayAt(int x, int y, int width, string message, ...)
+
+</PRE>
+Identical to the "Display" function, only this allows you to define the
+position and size of the window where the text is displayed. The X and Y
+variables define the co-ordinates of the upper-left corner of the window.
+The WIDTH variable defines the width of the window. The height is then
+automatically calculated so that the message fits into the window.<P>
+Note: This is a blocking call. See the "Display" help for more information.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplayAt (50,50,100, "This is a message");
+</PRE>
+will display the message at coordinates 50,50 in a box 100 pixels wide.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Display">Display</A>, <A HREF="ags53.htm#DisplayAtY">DisplayAtY</A><P>
+
+<HR>
+<A NAME="DisplayAtY"></A>
+<H3>DisplayAtY</H3>
+<PRE>
+DisplayAtY (int y, string message)
+</PRE>
+Similar to the Display function, except that this will display the message
+box at the specified Y location on the screen. The Y defines the co-ordinate
+of the top of the message box. The horizontal positioning will be
+automatically calculated as usual.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplayAt (50, "This is a message");
+</PRE>
+will display the message at y coordinate 50.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Display">Display</A>, <A HREF="ags53.htm#DisplayAt">DisplayAt</A><P>
+
+<HR>
+<A NAME="DisplayMessage"></A>
+<H3>DisplayMessage</H3>
+<PRE>
+DisplayMessage (int message_number)
+</PRE>
+Identical to the Display function, but this uses a message text defined in
+the Room Editor rather than in the script. It will either use a message
+from the current room, or a global message (if message_number &gt;= 500).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplayMessage(220);
+</PRE>
+will display the message 220 of the Room message editor.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Display">Display</A>, <A HREF="ags53.htm#DisplayMessageAtY">DisplayMessageAtY</A><P>
+
+
+<HR>
+<A NAME="DisplayMessageAtY"></A>
+<H3>DisplayMessageAtY</H3>
+<PRE>
+DisplayMessageAtY (int message_number, int yposition)
+</PRE>
+Identical to the DisplayMessage function, except that the text box
+is positioned with its top at YPOSITION, the same way as DisplayAtY
+works.<P>
+This is useful if you have an important graphic in the middle of the screen that
+the text box would normally cover up - with this function you can place the message
+above or below it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplayMessageAtY(527, 200);
+</PRE>
+will display global message 527, int the lower half of the screen.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DisplayAtY">DisplayAtY</A>, <A HREF="ags53.htm#DisplayMessage">DisplayMessage</A><P>
+
+<HR>
+<A NAME="DisplaySpeech"></A>
+<H3>DisplaySpeech</H3>
+<PRE>
+DisplaySpeech (CHARID, string message)
+</PRE>
+Displays the text MESSAGE as speech above the specified character's head.
+The text will remain on screen for a limited time, and the user may or may
+not be able to click it away depending on the setting of "Player can't
+skip speech text". The text displayed by this function looks identical to
+that used by the dialog system.<P>
+NOTE: This function allows variables like "<TT>%d</TT>" and "<TT>%s</TT>" in the message.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplaySpeech (EGO , "My name is ego");
+</PRE>
+will display the message above the character’s EGO head like the LEC games and play the character’s talking animation.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Display">Display</A>, <A HREF="ags53.htm#DisplaySpeechAt">DisplaySpeechAt</A>,
+<A HREF="ags53.htm#DisplaySpeechBackground">DisplaySpeechBackground</A>, <A HREF="ags53.htm#DisplayThought">DisplayThought</A><P>
+
+
+<HR>
+<A NAME="DisplaySpeechAt"></A>
+<H3>DisplaySpeechAt</H3>
+<PRE>
+DisplaySpeechAt (int x, int y, int width, CHARID, string message)
+</PRE>
+Similar to <A HREF="ags53.htm#DisplaySpeech">DisplaySpeech</A>, except that the text is displayed
+with its top left corner at (X,Y), in an area WIDTH wide.<P>
+You can use this function to write the character's speech text anywhere you like, and
+AGS will still play the character's talking animation and so on if appropriate.<P>
+<B>NOTE:</B> This function does not support QFG4-style speech.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplaySpeechAt (220, 20, 100, EGO , "My name is ego");
+</PRE>
+will display the message in the top right corner of the screen, and play the character's talking animation.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DisplaySpeech">DisplaySpeech</A>, <A HREF="ags53.htm#DisplaySpeechBackground">DisplaySpeechBackground</A><P>
+
+
+<HR>
+<A NAME="DisplaySpeechBackground"></A>
+<H3>DisplaySpeechBackground</H3>
+<PRE>
+DisplaySpeechBackground (CHARID, string message)
+</PRE>
+Similar to DisplaySpeech, except that this function returns immediately
+and the game continues while the character is talking. This allows you
+to have characters talking in the background while the player does other
+things. Note that the character's talking animation is not played if this
+function is used.<P>
+This command works by creating a text overlay with an automatic removal time
+delay. The overlay ID is returned by this command, so you can save it for
+use later with IsOverlayValid and RemoveOverlay, if you want to remove the
+text prematurely.<P>
+All background speech is automatically removed when a normal DisplaySpeech command
+is used (unless you set the global variable <A HREF="ags32.htm#Globalvariables">game.bgspeech_stay_on_display</A> to 1).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplaySpeechBackground (MAN, "Hey, why don’t you talk to me?");
+</PRE>
+will display the message above character MAN's head without pausing the game.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DisplaySpeech">DisplaySpeech</A><P>
+
+
+<HR>
+<A NAME="DisplayThought"></A>
+<H3>DisplayThought</H3>
+<PRE>
+DisplayThought (CHARID, string message)
+</PRE>
+Displays the text MESSAGE as a thought above the specified character's head.
+The text will remain on screen for a limited time, and the user may or may
+not be able to click it away depending on the setting of "Player can't
+skip speech text".<P>
+How this function displays the text depends on a few things: the Speech Style
+setting, the 'Thought uses bubble GUI' setting, and whether the character has a thinking
+animation or not.<P>
+If the "Thought uses bubble GUI" setting is not checked, then the thought will be displayed
+in the same way as normal speech - the difference being that the character's thinking animation
+will play (or no animation if they don't have one).<P>
+If you are using Sierra-style speech and the character doesn't have a thinking animation,
+the thought bubble will be displayed in lucasarts-style.<P>
+If the "Thought uses bubble GUI" setting has been set, then the thought will be displayed
+like normal speech, except that the bubble GUI will be used for the window background.
+In Lucasarts-style speech this means above the character's head, in Sierra-style it will
+be done along the top of the screen as normal.<P>
+If the character has a thinking animation, it will just loop through once (it won't repeat).<P>
+NOTE: This function allows variables like "<TT>%d</TT>" and "<TT>%s</TT>" in the message.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+DisplayThought (EGO, "I wonder what's for dinner.");
+</PRE>
+will display the message above EGO's head and play the character's thinking animation.<P>
+<I>See Also:</I> <A HREF="ags53.htm#DisplaySpeech">DisplaySpeech</A>, <A HREF="ags32.htm#Globalvariables">game.speech_bubble_width</A><P>
+<P>
+
+<HR>
+<A NAME="GetDialogOption"></A>
+<H3>GetDialogOption</H3>
+<PRE>
+GetDialogOption (int topic, int option)
+</PRE>
+Finds out whether an option in a conversation is available to the player or
+not.<P>
+TOPIC is the topic number, from 0 to the number of topics - 1. Find this
+out in the Room Editor.<P>
+OPTION is the option number within that topic, from 1 to whatever the
+highest option is for that topic.<P>
+The return value can have the following values:
+<PRE>
+0   The option is disabled - the player will not see it
+1   The option is enabled - the player can see and use it
+2   The option is permanently disabled - no other command can ever turn
+    it back on again.
+</PRE>
+These are the same as the options passed to SetDialogOption.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetDialogOption (4, 2) != 1)
+  Display("It's turned off");
+</PRE>
+Will display a message if option 2 of topic 4 is not currently switched on.<P>
+<I>See Also:</I> <A HREF="ags53.htm#SetDialogOption">SetDialogOption</A><P>
+
+
+<HR>
+<A NAME="RunDialog"></A>
+<H3>RunDialog</H3>
+<PRE>
+RunDialog (int topic)
+</PRE>
+Starts a conversation using topic number TOPIC. This is identical to the
+"Run dialog topic VAL" room interaction command.<P>
+Note: The conversation will not start immediately; instead, it will be run
+when the current script function finishes executing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+RunDialog(3); 
+</PRE>
+will start conversation topic number 3.<P>
+<I>See Also:</I> <A HREF="ags53.htm#SetDialogOption">SetDialogOption</A><P>
+
+<HR>
+<A NAME="SetDialogOption"></A>
+<H3>SetDialogOption</H3>
+<PRE>
+SetDialogOption (int topic, int option, int new_state)
+</PRE>
+Changes whether an option in a conversation is available to the player or
+not. This allows you to add extra options to a conversation once the player
+has done certain things.<P>
+TOPIC is the topic number, from 0 to the number of topics - 1. Find this
+out in the Room Editor.<P>
+OPTION is the option number within that topic, from 1 to whatever the
+highest option is for that topic.<P>
+NEW_STATE controls what happens to this option. It can have the following
+values:
+<PRE>
+0   The option is disabled - the player will not see it
+1   The option is enabled - the player can now see and use it
+2   The option is permanently disabled - no other command can ever turn
+    it back on again.
+</PRE>
+These are equivalent to the option-off, option-on, and option-off-forever
+dialog commands.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (GetGlobalInt(10)==1)
+    SetDialogOption(4,2,1);  
+</PRE>
+will enable option 2 of topic number 4 if the Global Integer 10 is 1.<P>
+<I>See Also:</I> <A HREF="ags53.htm#GetDialogOption">GetDialogOption</A>, <A HREF="ags53.htm#RunDialog">RunDialog</A>, <A HREF="ags53.htm#StopDialog">StopDialog</A><P>
+
+<HR>
+<A NAME="SetSkipSpeech"></A>
+<H3>SetSkipSpeech</H3>
+<PRE>
+SetSkipSpeech (int new_mode)
+</PRE>
+Changes whether the player can skip speech text by clicking the mouse.
+This option is initially set in a checkbox in the Main tab of the editor, but
+this function allows you to change it at run-time.
+The value of NEW_MODE means the following:
+<PRE>
+0  player can skip text by clicking mouse or pressing key
+1  player can skip text by pressing key only, not by clicking mouse
+2  player cannot skip text with mouse or keyboard
+3  text does not time-out; player must click mouse or press key each time
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSkipSpeech (2);
+</PRE>
+will make the player unable to skip the text by pressing a mouse button or a key.<P>
+
+<HR>
+<A NAME="SetSpeechFont"></A>
+<H3>SetSpeechFont</H3>
+<PRE>
+SetSpeechFont (int font_number)
+</PRE>
+Changes the font used for character speech. FONT_NUMBER must be from 0
+to the number of fonts you have. By default the only options are 0 and 1.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSpeechFont (5);
+</PRE>
+will change the character’s speech font to 5.<P>
+<I>See Also:</I> <A HREF="ags40.htm#SetNormalFont">SetNormalFont</A><P>
+
+<HR>
+<A NAME="SetSpeechStyle"></A>
+<H3>SetSpeechStyle</H3>
+<PRE>
+SetSpeechStyle (new_style)
+</PRE>
+Changes the way in which speech text is displayed. This modifies the setting
+originally set in the editor. NEW_STYLE can be:
+<PRE>
+SPEECH_LUCASARTS     speech text over character's head
+SPEECH_SIERRA        close-up portrait of character
+SPEECH_SIERRABKGRND  close-up portrait + background window for text
+SPEECH_FULLSCREEN    QFG4-style full screen dialog pictures
+</PRE>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetSpeechStyle (SPEECH_SIERRA);
+</PRE>
+will change the speech style to a close up portrait of the character.<P>
+
+<HR>
+<A NAME="StopDialog"></A>
+<H3>StopDialog</H3>
+<PRE>
+StopDialog ()
+</PRE>
+This command can only be used from within the dialog_request function. It
+tells AGS that when dialog_request finishes, the whole conversation should
+stop rather than continuing with the dialog script.<P>
+You can use this function to end the conversation depending on whether the
+player has/does a certain thing.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ function dialog_request (int dr) {
+ if (dr==1) 
+    { AddInventory(3);
+      StopDialog();  }
+</PRE>
+will give the player the inventory item 3 and then end the conversation.<P>
+<I>See Also:</I> <A HREF="ags53.htm#SetDialogOption">SetDialogOption</A><P>
+
+</BODY></HTML>

@@ -1,0 +1,209 @@
+<HTML>
+<head><title>GUI Button functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic55"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags26.htm#topic42"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags44.htm#topic54"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags46.htm#GUIInvFuncs"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>GUI Button functions and properties</H2>
+<A HREF="ags44.htm#GUIControl.Clickable">Clickable property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.Enabled">Enabled property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.Height">Height property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.ID">ID property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.OwningGUI">OwningGUI property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.SetPosition">SetPosition (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.SetSize">SetSize (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.Visible">Visible property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.Width">Width property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.X">X property (inherited)</A><br> 
+<A HREF="ags44.htm#GUIControl.Y">Y property (inherited)</A><P>
+
+<A HREF="#Button.Animate">Animate (button)</A><BR>
+<A HREF="#Button.ClipImage">ClipImage property</A><BR>
+<A HREF="#Button.Graphic">Graphic property (button)</A><BR>
+<A HREF="#Button.MouseOverGraphic">MouseOverGraphic property (button)</A><BR>
+<A HREF="#Button.NormalGraphic">NormalGraphic property (button)</A><BR>
+<A HREF="#Button.PushedGraphic">PushedGraphic property (button)</A><BR>
+<A HREF="#Button.Text">Text property (button)</A><BR>
+<A HREF="#Button.TextColor">TextColor property (button)</A><BR>
+<P>
+
+<HR>
+<A NAME="Button.Animate"></A>
+<H3>Animate (button)</H3>
+<I>(Formerly known as AnimateButton, which is now obsolete)</I><P>
+<PRE>
+Button.Animate(int view, int loop, int delay, RepeatStyle)
+</PRE>
+Animates a GUI button by playing the specified view loop on it. This could be
+useful for Sierra-style death animations and other effects.<P>
+LOOP from VIEW will be played on the button. The DELAY specifies the speed of
+the animation - larger numbers are slower. This has the same values you use
+with the Character.Animate and Object.Animate commands.<P>
+REPEAT determines whether the animation will loop repeatedly, or just play once and stop
+with the last frame showing (eOnce or eRepeat are the possible values).<P>
+You can abort an animation at any time by setting the button's NormalGraphic property, or
+starting a new animation on the same button.<P>
+<B>NOTE:</B> This command destroys the button's normal, pushed and mouseover images. If you
+want to return the button to normal usage after playing an animation, you will have to set
+the Graphic properties to restore the images.<P>
+<B>NOTE:</B> This command does not support flipped view frames. Any frames marked as "Flipped"
+will in fact be drawn normally when on a button.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnDeathAnim.Animate(6, 2, 4, eRepeat);
+</PRE>
+will animate the 'btnDeathAnim' button using loop 2 of view 6, with a delay of 4
+cycles per frame, and repeat the animation continually.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A><P>
+
+
+<HR>
+<A NAME="Button.ClipImage"></A>
+<H3>ClipImage property</H3>
+<PRE>
+bool Button.ClipImage;
+</PRE>
+Gets/sets whether the button clips its image to the button boundaries.<P>
+For example, if the button is sized 30x30, but its Graphic is a 50x50 image, then
+this property controls whether the image is allowed to spill over the edge of the button.<P>
+The default is false, ie. the image is not clipped.<P>
+Setting this to true can be useful in that it ensures that the button's image is not larger
+than the button's clickable area, which can cause confusion when it happens.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnOK.ClipImage = true;
+</PRE>
+sets the <I>btnOK</I> button so that its image will be restrained to the button's clickable area.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.Graphic">Button.Graphic</A><P>
+
+
+<HR>
+<A NAME="Button.Graphic"></A>
+<H3>Graphic property (button)</H3>
+<I>(Formerly part of GetButtonPic, which is now obsolete)</I><P>
+<PRE>
+readonly int Button.Graphic;
+</PRE>
+Gets the current image on a GUI button. If a value less than 1 is returned,
+then no image is currently displayed on the button.<P>
+This property is read-only; in order to set the image, you must use one of the specific
+properties.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The button is currently using sprite %d.", btnPlay.Graphic);
+</PRE>
+will display btnPlay's current sprite number.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.ClipImage">Button.ClipImage</A>,
+<A HREF="ags45.htm#Button.MouseOverGraphic">Button.MouseOverGraphic</A>,
+<A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A>,
+<A HREF="ags45.htm#Button.PushedGraphic">Button.PushedGraphic</A><P>
+
+
+<HR>
+<A NAME="Button.MouseOverGraphic"></A>
+<H3>MouseOverGraphic property (button)</H3>
+<I>(Formerly part of GetButtonPic, which is now obsolete)</I> <br> 
+<I>(Formerly part of SetButtonPic, which is now obsolete)</I><P>
+<PRE>
+int Button.MouseOverGraphic;
+</PRE>
+Gets/sets the button's mouse-over sprite. This can be -1, which indicates that the button
+does not have a mouse-over graphic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The button's mouse-over image is sprite %d.", btnPlay.MouseOverGraphic);
+</PRE>
+will display btnPlay's mouse-over sprite number.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.Graphic">Button.Graphic</A>,
+<A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A>,
+<A HREF="ags45.htm#Button.PushedGraphic">Button.PushedGraphic</A><P>
+
+
+<HR>
+<A NAME="Button.NormalGraphic"></A>
+<H3>NormalGraphic property (button)</H3>
+<I>(Formerly part of GetButtonPic, which is now obsolete)</I> <br> 
+<I>(Formerly part of SetButtonPic, which is now obsolete)</I><P>
+<PRE>
+int Button.NormalGraphic;
+</PRE>
+Gets/sets the button's normal sprite (ie. the graphic used when the button is not pushed
+and the mouse is not over it).<P>
+Note that setting this to a different sprite will change the button's size to match the size of the new sprite.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The button's normal image is sprite %d.", btnPlay.NormalGraphic);
+</PRE>
+will display btnPlay's normal sprite number.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.ClipImage">Button.ClipImage</A>
+<A HREF="ags45.htm#Button.Graphic">Button.Graphic</A>,
+<A HREF="ags45.htm#Button.MouseOverGraphic">Button.MouseOverGraphic</A>,
+<A HREF="ags45.htm#Button.PushedGraphic">Button.PushedGraphic</A>,
+<A HREF="ags45.htm#Button.TextColor">Button.TextColor</A><P>
+
+
+<HR>
+<A NAME="Button.PushedGraphic"></A>
+<H3>PushedGraphic property (button)</H3>
+<I>(Formerly part of GetButtonPic, which is now obsolete)</I> <br> 
+<I>(Formerly part of SetButtonPic, which is now obsolete)</I><P>
+<PRE>
+int Button.PushedGraphic;
+</PRE>
+Gets/sets the button's pushed sprite (ie. the graphic used when the button is pushed
+in by the user). This can be -1, which indicates that the button does not have a pushed
+image.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The button's pushed image is sprite %d.", btnPlay.PushedGraphic);
+</PRE>
+will display btnPlay's pushed sprite number.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.Graphic">Button.Graphic</A>,
+<A HREF="ags45.htm#Button.MouseOverGraphic">Button.MouseOverGraphic</A>,
+<A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A><P>
+
+
+<HR>
+<A NAME="Button.Text"></A>
+<H3>Text property (button)</H3>
+<I>(Formerly known as SetButtonText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Button.GetText, which is now obsolete)</I> <br> 
+<I>(Formerly known as Button.SetText, which is now obsolete)</I><P>
+<PRE>
+String Button.Text;
+</PRE>
+Gets/sets the text displayed on the button.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Button displayed: %s", btnController.Text);
+btnController.Text = "Enable jibble";
+</PRE>
+will display the old text, then change button btnController to read 'Enable jibble'.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A>, <A HREF="ags47.htm#Label.Text">Label.Text</A><P>
+
+
+<HR>
+<A NAME="Button.TextColor"></A>
+<H3>TextColor property (button)</H3>
+<PRE>
+int Button.TextColor;
+</PRE>
+Gets/sets the text colour used to display the button's text. <P>
+If the button is displaying an image rather than text, then this property has no effect.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+btnRestart.TextColor = 15;
+</PRE>
+will change button 'btnRestart' to have white text.<P>
+<I>See Also:</I> <A HREF="ags45.htm#Button.NormalGraphic">Button.NormalGraphic</A><P>
+<P>
+
+</BODY></HTML>
