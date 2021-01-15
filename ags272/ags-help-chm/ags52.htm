@@ -1,0 +1,281 @@
+<HTML>
+<head><title>Maths functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic61"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags25.htm#topic41"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags51.htm#topic60"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags53.htm#topic62"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Maths functions and properties</H2>
+<P>
+<A HREF="#FloatToInt">FloatToInt</A><BR>
+<A HREF="#IntToFloat">IntToFloat</A><BR>
+<A HREF="#Maths.ArcCos">ArcCos</A><BR>
+<A HREF="#Maths.ArcSin">ArcSin</A><BR>
+<A HREF="#Maths.ArcTan">ArcTan</A><BR>
+<A HREF="#Maths.ArcTan2">ArcTan2</A><BR>
+<A HREF="#Maths.Cos">Cos</A><BR>
+<A HREF="#Maths.DegreesToRadians">DegreesToRadians</A><BR>
+<A HREF="#Maths.RadiansToDegrees">RadiansToDegrees</A><BR>
+<A HREF="#Maths.RaiseToPower">RaiseToPower</A><BR>
+<A HREF="#Maths.Sin">Sin</A><BR>
+<A HREF="#Maths.Sqrt">Sqrt</A><BR>
+<A HREF="#Maths.Tan">Tan</A><BR>
+<A HREF="#Maths.Pi">Pi property</A><BR>
+<P>
+
+<HR>
+<A NAME="FloatToInt"></A>
+<H3>FloatToInt</H3>
+<PRE>
+int FloatToInt(float value, optional RoundDirection)
+</PRE>
+Converts the supplied floating point value into an integer.<P>
+This function is necessary because implicit conversions in the script are not supported.<P>
+RoundDirection can be either <I>eRoundDown</I> (the default), <I>eRoundUp</I> or <I>eRoundNearest</I>,
+which specifies what direction to round the floating point number in.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Round down: %d", FloatToInt(10.7));
+Display("Round up: %d", FloatToInt(10.7, eRoundUp));
+Display("Round nearest: %d", FloatToInt(10.7, eRoundNearest));
+</PRE>
+displays the integer value of 10.7, rounded in the three different ways.<P>
+<I>See Also:</I> <A HREF="ags52.htm#IntToFloat">IntToFloat</A><P>
+
+
+<HR>
+<A NAME="IntToFloat"></A>
+<H3>IntToFloat</H3>
+<PRE>
+float IntToFloat(int value)
+</PRE>
+Converts the supplied integer value into a floating point number.<P>
+This function is necessary because implicit conversions in the script are not supported.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float number = IntToFloat(10);
+</PRE>
+loads 10.0 into the variable <I>number</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#FloatToInt">FloatToInt</A><P>
+
+
+<HR>
+<A NAME="Maths.ArcCos"></A>
+<H3>ArcCos</H3>
+<PRE>
+float Maths.ArcCos(float value)
+</PRE>
+Calculates the arc-cosine, in radians, of the specified value.<P>
+To convert an angle in radians to degrees, use <A HREF="ags52.htm#Maths.RadiansToDegrees">Maths.RadiansToDegrees</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float angle = Maths.ArcCos(1.0);
+</PRE>
+calculates the arc-cosine of 1.0 and places it into variable <I>angle</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,<P>
+
+
+<HR>
+<A NAME="Maths.ArcSin"></A>
+<H3>ArcSin</H3>
+<PRE>
+float Maths.ArcSin(float value)
+</PRE>
+Calculates the arc-sine, in radians, of the specified value.<P>
+To convert an angle in radians to degrees, use <A HREF="ags52.htm#Maths.RadiansToDegrees">Maths.RadiansToDegrees</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float angle = Maths.ArcSin(0.5);
+</PRE>
+calculates the arc-sine of 0.5 and places it into variable <I>angle</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,<P>
+
+
+<HR>
+<A NAME="Maths.ArcTan"></A>
+<H3>ArcTan</H3>
+<PRE>
+float Maths.ArcTan(float value)
+</PRE>
+Calculates the arc-tan, in radians, of the specified value.<P>
+To convert an angle in radians to degrees, use <A HREF="ags52.htm#Maths.RadiansToDegrees">Maths.RadiansToDegrees</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float angle = Maths.ArcTan(0.5);
+</PRE>
+calculates the arc-tan of 0.5 and places it into variable <I>angle</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.ArcTan2">Maths.ArcTan2</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.ArcTan2"></A>
+<H3>ArcTan2</H3>
+<PRE>
+float Maths.ArcTan2(float y, float x)
+</PRE>
+Calculates the arctangent of y/x. This is well defined for every point other than the origin,
+even if x equals 0 and y does not equal 0. The result is returned in radians.<P>
+To convert an angle in radians to degrees, use <A HREF="ags52.htm#Maths.RadiansToDegrees">Maths.RadiansToDegrees</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float angle = Maths.ArcTan2(-862.42, 78.5149);
+</PRE>
+calculates the arc-tan of -862.42 / 78.5149 and places it into variable <I>angle</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.ArcTan">Maths.ArcTan</A><P>
+
+
+<HR>
+<A NAME="Maths.Cos"></A>
+<H3>Cos</H3>
+<PRE>
+float Maths.Cos(float radians)
+</PRE>
+Calculates the cosine of the specified angle (in radians).<P>
+To convert an angle in degrees to radians, use <A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float cosine = Maths.Cos(Maths.DegreesToRadians(360.0));
+</PRE>
+calculates the cosine of 360 degrees (which is 1.0) and places it into variable <I>cosine</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.ArcCos">Maths.ArcCos</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>, <A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.DegreesToRadians"></A>
+<H3>DegreesToRadians</H3>
+<PRE>
+float Maths.DegreesToRadians(float degrees)
+</PRE>
+Converts the supplied angle in degrees, to the equivalent angle in radians.<P>
+Since the trigonometric functions such as Sin, Cos and Tan work in radians, this
+function is handy if you know the angle you want in degrees.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float cosine = Maths.Cos(Maths.DegreesToRadians(360.0));
+</PRE>
+calculates the cosine of 360 degrees (which is 1.0) and places it into variable <I>cosine</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>,
+<A HREF="ags52.htm#Maths.RadiansToDegrees">Maths.RadiansToDegrees</A>,
+<A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>, <A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.RadiansToDegrees"></A>
+<H3>RadiansToDegrees</H3>
+<PRE>
+float Maths.RadiansToDegrees(float radians)
+</PRE>
+Converts the supplied angle in radians, to the equivalent angle in degrees.<P>
+Since the trigonometic functions such as Sin, Cos and Tan work in radians, this
+function is handy to convert the results of one of those functions back to degrees.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float halfCircle = Maths.RadiansToDegrees(Maths.Pi);
+</PRE>
+converts <I>PI</I> radians into degrees (which is 180).<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>, <A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.RaiseToPower"></A>
+<H3>RaiseToPower</H3>
+<PRE>
+float Maths.RaiseToPower(float base, float exponent)
+</PRE>
+Calculates the value of <I>base</I> raised to the power <I>exponent</I>.<P>
+This means that <I>base</I> is multiplied by itself <I>exponent</I> times.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float value = Maths.RaiseToPower(4.0, 3.0);
+</PRE>
+calculates 4 to the power 3 (which is 64).<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Sqrt">Maths.Sqrt</A><P>
+
+
+<HR>
+<A NAME="Maths.Sin"></A>
+<H3>Sin</H3>
+<PRE>
+float Maths.Sin(float radians)
+</PRE>
+Calculates the sine of the specified angle (in radians).<P>
+To convert an angle in degrees to radians, use <A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float sine = Maths.Sin(Maths.DegreesToRadians(360.0));
+</PRE>
+calculates the cosine of 360 degrees (which is 0) and places it into variable <I>sine</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.ArcSin">Maths.ArcSin</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>, <A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.Sqrt"></A>
+<H3>Sqrt</H3>
+<PRE>
+float Maths.Sqrt(float value)
+</PRE>
+Calculates the square root of the supplied value.<P>
+The square root is the number which, when multiplied by itself, equals <I>value</I>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The square root of 4 is %d!", FloatToInt(Maths.Sqrt(4.0)));
+</PRE>
+displays the square root of 4 (rounded down to the nearest integer).<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>,
+<A HREF="ags52.htm#Maths.RaiseToPower">Maths.RaiseToPower</A>,
+<A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>, <A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+
+
+<HR>
+<A NAME="Maths.Tan"></A>
+<H3>Tan</H3>
+<PRE>
+float Maths.Tan(float radians)
+</PRE>
+Calculates the tangent of the specified angle (in radians).<P>
+To convert an angle in degrees to radians, use <A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+float tan = Maths.Tan(Maths.DegreesToRadians(45.0));
+</PRE>
+calculates the tan of 45 degrees (which is 1.0) and places it into variable <I>tan</I>.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.ArcTan">Maths.ArcTan</A>,
+<A HREF="ags52.htm#Maths.DegreesToRadians">Maths.DegreesToRadians</A>,
+<A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>, <A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>,<P>
+
+
+<HR>
+<A NAME="Maths.Pi"></A>
+<H3>Pi property</H3>
+<PRE>
+readonly float Maths.Pi
+</PRE>
+Gets the value of Pi (defined as 3.14159265358979323846).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("Pi is %f!", Maths.Pi);
+</PRE>
+displays the value of Pi.<P>
+<I>See Also:</I> <A HREF="ags52.htm#Maths.Cos">Maths.Cos</A>, <A HREF="ags52.htm#Maths.Sin">Maths.Sin</A>,
+<A HREF="ags52.htm#Maths.Tan">Maths.Tan</A><P>
+<P>
+
+</BODY></HTML>

@@ -1,0 +1,105 @@
+<HTML>
+<head><title>String formatting</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="StringFormats"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags25.htm#topic41"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags32.htm#topic45"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags34.htm#ScriptModules"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>String formatting</H2>
+You will find many times in your game when you need to create a string based
+on the values of variables, and functions like <A HREF="ags64.htm#Display">Display</A> and
+<A HREF="ags62.htm#String.Format">String.Format</A> allow you to do so.<P>
+AGS uses printf-style argument formatting (used by the C language). This means
+that you intersperse your text with special codes to insert a variable's value. These
+special codes begin with a percent sign, and then specify the variable type. The
+actual variables that you want to display are then listed afterwards.<P>
+The special codes you can use are as follows:
+<TABLE BORDER>
+
+<TR>
+<TD ALIGN=LEFT> <B> Code </B></TD>
+<TD ALIGN=LEFT><B> Description </B>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%d</TT> </TD>
+<TD ALIGN=LEFT> Integer (use to display value of int and short variables) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%0Xd</TT> </TD>
+<TD ALIGN=LEFT> Integer left-padded with up to X zeros 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%s</TT> </TD>
+<TD ALIGN=LEFT> String (use to display string variables) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%c</TT> </TD>
+<TD ALIGN=LEFT> Character (displays the ASCII character of the supplied value) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%f</TT> </TD>
+<TD ALIGN=LEFT> Float (displays a float variable) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%.Xf</TT> </TD>
+<TD ALIGN=LEFT> Float to X decimal places 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>%%</TT> </TD>
+<TD ALIGN=LEFT> Display the percent character (ie. no variable) 
+</TD>
+</TR>
+<TR>
+<TD ALIGN=LEFT> <TT>[</TT> </TD>
+<TD ALIGN=LEFT> Inserts a new line into the message 
+</TD>
+</TR>
+</TABLE>
+<P>
+Some examples:
+<PRE>
+int life = 42;
+float twoPi = Maths.Pi * 2.0;
+String message = "A string variable";
+
+Display("A normal string with no variables.");
+Display("The meaning of life is %d.", life);
+Display("The meaning of life in 3 digits is %03d.", life);
+Display("2 times Pi is %f.", twoPi);
+Display("The message says: %s.", message);
+</PRE>
+would display:
+<PRE>
+A normal string with no variables.
+The meaning of life is 42.
+The meaning of life in 3 digits is 042.
+2 times Pi is 6.283186.
+The message says: A string variable.
+</PRE>
+You can display as many variables as you like in one line:
+<PRE>
+int life = 42;
+float twoPi = Maths.Pi * 2.0;
+
+Display("Life is %d, 2 x Pi = %f, and my dinner is %s.", life, twoPi, "awful");
+</PRE>
+but, <B>be very careful</B> that you supply the right number of variables to correspond
+with the tags you use in the text. If you don't supply enough variables, your game could
+crash.<P>
+
+
+</BODY></HTML>

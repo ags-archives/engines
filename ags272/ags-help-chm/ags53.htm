@@ -1,0 +1,356 @@
+<HTML>
+<head><title>Mouse functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic62"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags25.htm#topic41"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags52.htm#topic61"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags54.htm#topic63"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Mouse functions and properties</H2>
+
+<A HREF="#Mouse.ChangeModeGraphic">ChangeModeGraphic</A><BR>
+<A HREF="#Mouse.ChangeModeHotspot">ChangeModeHotspot</A><BR>
+<A HREF="#Mouse.ChangeModeView">ChangeModeView</A><BR>
+<A HREF="#Mouse.DisableMode">DisableMode</A><BR>
+<A HREF="#Mouse.EnableMode">EnableMode</A><BR>
+<A HREF="#Mouse.GetModeGraphic">GetModeGraphic</A><BR>
+<A HREF="#Mouse.IsButtonDown">IsButtonDown</A><BR>
+<A HREF="#Mouse.SaveCursorUntilItLeaves">SaveCursorUntilItLeaves</A><BR>
+<A HREF="#Mouse.SelectNextMode">SelectNextMode</A><BR>
+<A HREF="#Mouse.SetBounds">SetBounds</A><BR>
+<A HREF="#Mouse.SetPosition">SetPosition (mouse)</A><BR>
+<A HREF="#Mouse.Update">Update</A><BR>
+<A HREF="#Mouse.UseDefaultGraphic">UseDefaultGraphic</A><BR>
+<A HREF="#Mouse.UseModeGraphic">UseModeGraphic</A><BR>
+<A HREF="#Mouse.Mode">Mode property (mouse)</A><BR>
+<A HREF="#Mouse.Visible">Visible property (mouse)</A><BR>
+<P>
+
+<HR>
+<A NAME="Mouse.ChangeModeGraphic"></A>
+<H3>ChangeModeGraphic</H3>
+<I>(Formerly known as ChangeCursorGraphic, which is now obsolete)</I><P>
+<PRE>
+Mouse.ChangeModeGraphic(CursorMode, int slot)
+</PRE>
+Changes the specified mouse cursor mode's cursor graphic to SLOT.
+This permanently changes the specified mode's cursor graphic. This function
+may be useful if you need more than the maximum number of mouse cursors.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.ChangeModeGraphic(eModeLook, 120);
+</PRE>
+will change the cursor’s graphic for look mode to the image that's imported in the sprite’s manager slot 120.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.ChangeModeHotspot">Mouse.ChangeModeHotspot</A>,
+<A HREF="ags53.htm#Mouse.ChangeModeView">Mouse.ChangeModeView</A>,
+<A HREF="ags53.htm#Mouse.GetModeGraphic">Mouse.GetModeGraphic</A>,
+<A HREF="ags53.htm#Mouse.Mode">Mouse.Mode</A><P>
+
+
+<HR>
+<A NAME="Mouse.ChangeModeHotspot"></A>
+<H3>ChangeModeHotspot</H3>
+<I>(Formerly known as ChangeCursorHotspot, which is now obsolete)</I><P>
+<PRE>
+Mouse.ChangeModeHotspot(CursorMode, int x, int y)
+</PRE>
+Permanently changes the specified mouse cursor mode's hotspot on the cursor graphic
+to (X,Y). This is the offset into the graphic where the click takes effect.
+(0,0) is the upper left corner of the cursor graphic.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.ChangeModeHotspot(eModeWalkto, 10, 10);
+</PRE>
+will change the cursor’s hotspot for walk mode to coordinates 10,10.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.ChangeModeGraphic">Mouse.ChangeModeGraphic</A>,
+<A HREF="ags53.htm#Mouse.ChangeModeView">Mouse.ChangeModeView</A><P>
+
+
+<HR>
+<A NAME="Mouse.ChangeModeView"></A>
+<H3>ChangeModeView</H3>
+<PRE>
+Mouse.ChangeModeView(CursorMode, int view)
+</PRE>
+Changes the specified mouse cursor mode's animation view to VIEW.<P>
+You can pass <I>view</I> as -1 to stop the cursor from animating.<P>
+This allows you to dynamically change the view used for the cursor's animation
+while the game is running.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.ChangeModeView(eModeLook, ROLLEYES);
+</PRE>
+will change the Look cursor's view to ROLLEYES.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.ChangeModeGraphic">Mouse.ChangeModeGraphic</A>,
+<A HREF="ags53.htm#Mouse.ChangeModeHotspot">Mouse.ChangeModeHotspot</A><P>
+
+
+<HR>
+<A NAME="Mouse.DisableMode"></A>
+<H3>DisableMode</H3>
+<I>(Formerly known as DisableCursorMode, which is now obsolete)</I><P>
+<PRE>
+Mouse.DisableMode(int mode)
+</PRE>
+Disables the mouse cursor MODE. Any attempts to set the cursor to this mode
+while it is disabled (such as using UseModeGraphic) will fail. This function
+also greys out and disables any interface buttons whose left-click command
+is set as "Set mode X", where X is equal to MODE.<P>
+If the current cursor mode is MODE, then the engine will change it to the
+next enabled standard cursor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.DisableMode(eModeWalkto);
+</PRE>
+will make the walk mode unavailable until it's enabled again.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.EnableMode">Mouse.EnableMode</A><P>
+
+
+<HR>
+<A NAME="Mouse.EnableMode"></A>
+<H3>EnableMode</H3>
+<I>(Formerly known as EnableCursorMode, which is now obsolete)</I><P>
+<PRE>
+Mouse.EnableMode(int mode)
+</PRE>
+Re-enables the mouse cursor mode MODE. This function also enables any
+interface buttons which were disabled by the DisableMode command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.EnableMode(eModeWalkto);
+</PRE>
+will enable cursor mode walk which was disabled before.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.DisableMode">Mouse.DisableMode</A><P>
+
+
+<HR>
+<A NAME="Mouse.GetModeGraphic"></A>
+<H3>GetModeGraphic</H3>
+<PRE>
+static int Mouse.GetModeGraphic(CursorMode)
+</PRE>
+Returns the sprite slot number of the specified mouse cursor mode.<P>
+This could be useful if you want to change it manually with ChangeModeGraphic but be able
+to remember what it was before.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The current mouse cursor sprite is %d.", mouse.GetModeGraphic(mouse.Mode));
+</PRE>
+will display the sprite slot number of the current mouse cursor.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.ChangeModeGraphic">Mouse.ChangeModeGraphic</A><P>
+
+
+<HR>
+<A NAME="Mouse.IsButtonDown"></A>
+<H3>IsButtonDown</H3>
+<I>(Formerly known as global function IsButtonDown, which is now obsolete)</I><P>
+<PRE>
+Mouse.IsButtonDown(MouseButton)
+</PRE>
+Tests whether the user has the specified mouse button down. BUTTON must either
+be eMouseLeft or eMouseRight (the middle button does not work with this function).
+Returns 1 if the button is currently pressed, 0 if not. This could be used to
+test the length of a mouse click and similar effects.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int timer=0;  // (at top of script file)
+if (mouse.IsButtonDown(eMouseRight)) {
+  if (timer == 40) {
+    Display("You pressed the right button for 1 sec");
+    timer = 0;
+  }
+  else {
+    timer++;
+  }
+}
+</PRE>
+will display the message if the player presses the right button for 1 sec.<P>
+<I>See Also:</I> <A HREF="ags41.htm#IsKeyPressed">IsKeyPressed</A><P>
+
+
+<HR>
+<A NAME="Mouse.SaveCursorUntilItLeaves"></A>
+<H3>SaveCursorUntilItLeaves</H3>
+<I>(Formerly known as SaveCursorForLocationChange, which is now obsolete)</I><P>
+<PRE>
+Mouse.SaveCursorUntilItLeaves()
+</PRE>
+Saves the current mouse cursor, and restores it when the mouse leaves the current hotspot,
+object or character.<P>
+This allows you to temporarily change the mouse cursor when the mouse moves over a hotspot,
+and have it automatically change back to the old cursor when the player moves the mouse away.<P>
+<B>NOTE:</B> You must call this <B>BEFORE</B> you change to your new temporary cursor, or the
+new cursor will be saved by this command.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.SaveCursorUntilItLeaves();
+mouse.Mode = eModeTalk;
+</PRE>
+will change the cursor mode to Talk for as long as the mouse is over the current object<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.Mode">Mouse.Mode</A><P>
+
+
+<HR>
+<A NAME="Mouse.SelectNextMode"></A>
+<H3>SelectNextMode</H3>
+<I>(Formerly known as SetNextCursorMode, which is now obsolete)</I><P>
+<PRE>
+Mouse.SelectNextMode()
+</PRE>
+Selects the next enabled mouse cursor mode. This is useful for Sierra-style right-click
+cycling through modes. This function will choose the next mode marked as a Standard Mode, and
+will also use the Use Inventory mode if the player has an active inventory item.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.Mode">Mouse.Mode</A><P>
+
+
+<HR>
+<A NAME="Mouse.SetBounds"></A>
+<H3>SetBounds</H3>
+<I>(Formerly known as SetMouseBounds, which is now obsolete)</I><P>
+<PRE>
+Mouse.SetBounds(int left, int top, int right, int bottom)
+</PRE>
+Restricts the area where the mouse can move on screen. The four parameters are
+the relevant pixel co-ordinates of that edge of the bounding rectangle. They are
+in the usual range (0,0) - (320,200).<P>
+You can pass (0,0,0,0) to disable the bounding rectangle and allow the mouse to move
+everywhere, as usual.<P>
+<I>NOTE:</I> The effect of this function only lasts until the player leaves the screen,
+at which point the cursor bounds will be reset.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.SetBounds(160, 100, 320, 200);
+</PRE>
+will restrict the mouse cursor to the bottom-right quarter of the screen.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.SetPosition">Mouse.SetPosition</A><P>
+
+
+<HR>
+<A NAME="Mouse.SetPosition"></A>
+<H3>SetPosition (mouse)</H3>
+<I>(Formerly known as SetMousePosition, which is now obsolete)</I><P>
+<PRE>
+Mouse.SetPosition(int x, int y)
+</PRE>
+Moves the mouse pointer to screen co-ordinates (X,Y). They are
+in the usual range (0,0) - (320,200/240). The mouse.x and mouse.y variables will be
+updated to reflect the new position.<P>
+<B>NOTE:</B> Only use this command when absolutely necessary. Moving the mouse cursor
+for the player is a sure way to irritate them if you do it too often during the game.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.SetPosition(160, 100);
+</PRE>
+will place the mouse cursor in the centre of the screen.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.SetBounds">Mouse.SetBounds</A><P>
+
+
+<HR>
+<A NAME="Mouse.Update"></A>
+<H3>Update</H3>
+<I>(Formerly known as RefreshMouse, which is now obsolete)</I><P>
+<PRE>
+Mouse.Update();
+</PRE>
+Updates the global variables "mouse.x" and "mouse.y" with the current
+position of the mouse. Normally, these variables are set just before each
+script function is executed. However, if you have a very long script where
+the mouse may have moved since the start of the function, and you need the
+exact current location, then this command will update the variables.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+Display("The mouse was at: %d, %d.", mouse.x, mouse.y);
+mouse.Update();
+Display("The mouse is now at: %d, %d.", mouse.x, mouse.y);
+</PRE>
+will display the mouse position just before each dialog box is displayed<P>
+
+
+<HR>
+<A NAME="Mouse.UseDefaultGraphic"></A>
+<H3>UseDefaultGraphic</H3>
+<I>(Formerly known as SetDefaultCursor, which is now obsolete)</I><P>
+<PRE>
+Mouse.UseDefaultGraphic()
+</PRE>
+Changes the appearance of the mouse cursor to the default for the current
+cursor mode. Use this to restore the cursor picture after you changed it
+with the UseModeGraphic function.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.UseModeGraphic">Mouse.UseModeGraphic</A><P>
+
+
+<HR>
+<A NAME="Mouse.UseModeGraphic"></A>
+<H3>UseModeGraphic</H3>
+<I>(Formerly known as SetMouseCursor, which is now obsolete)</I><P>
+<PRE>
+Mouse.UseModeGraphic(CursorMode)
+</PRE>
+Changes the appearance of the mouse cursor to use the specified cursor. Unlike
+the Mouse.Mode property, this does not change the mode used if the user
+clicks on a hotspot. This is useful for displaying a "wait" cursor temporarily.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.UseModeGraphic(eModeWait);
+</PRE>
+will change the mouse cursor to the cursor 'Wait' specified in the Cursors tab.<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.ChangeModeGraphic">Mouse.ChangeModeGraphic</A>,
+<A HREF="ags53.htm#Mouse.Mode">Mouse.Mode</A>, <A HREF="ags53.htm#Mouse.UseDefaultGraphic">Mouse.UseDefaultGraphic</A><P>
+
+
+<HR>
+<A NAME="Mouse.Mode"></A>
+<H3>Mode property (mouse)</H3>
+<I>(Formerly known as GetCursorMode, which is now obsolete)</I><br> 
+<I>(Formerly known as SetCursorMode, which is now obsolete)</I><P>
+<PRE>
+int Mouse.Mode;
+</PRE>
+Gets/sets the current mode of the mouse cursor. This is one of the cursor modes
+from your Cursors tab (but with eMode prepended). For example, a cursor mode called "Walk to"
+on your cursors tab would be  eModeWalkto.<P>
+Setting this changes both the appearance of the cursor and the Cursor Mode
+used if the player clicks on a hotspot.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+if (mouse.Mode == eModeWalkto)
+{
+   // code here
+}
+</PRE>
+will execute the code only if the current cursor mode is MODE 0 (WALK).<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.SaveCursorUntilItLeaves">Mouse.SaveCursorUntilItLeaves</A>,
+<A HREF="ags53.htm#Mouse.UseModeGraphic">Mouse.UseModeGraphic</A>, <A HREF="ags53.htm#Mouse.SelectNextMode">Mouse.SelectNextMode</A><P>
+
+
+<HR>
+<A NAME="Mouse.Visible"></A>
+<H3>Visible property (mouse)</H3>
+<I>(Formerly known as HideMouseCursor, which is now obsolete)</I><br> 
+<I>(Formerly known as ShowMouseCursor, which is now obsolete)</I><P>
+<PRE>
+bool Mouse.Visible;
+</PRE>
+Gets/sets whether the mouse cursor is visible. This is initially true by default,
+but setting this to false is useful for briefly hiding the cursor on occasions
+when you don't want it around.<P>
+If you want the Lucasarts-style where the mouse cursor is never visible during cutscenes
+then a much easier solution is simply to import a transparent graphic over the default
+wait cursor, so that the Wait cursor becomes invisible.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+mouse.Visible = false;
+Wait(40);
+mouse.Visible = true;
+</PRE>
+hides the mouse, waits for a second, then turns it back on again<P>
+<I>See Also:</I> <A HREF="ags53.htm#Mouse.UseModeGraphic">Mouse.UseModeGraphic</A><P>
+
+
+</BODY></HTML>

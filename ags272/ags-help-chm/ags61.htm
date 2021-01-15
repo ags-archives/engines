@@ -1,0 +1,217 @@
+<HTML>
+<head><title>Screen functions</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic70"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags25.htm#topic41"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags60.htm#topic69"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags62.htm#topic71"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Screen functions</H2>
+
+<A HREF="#FadeIn">FadeIn</A><BR>
+<A HREF="#FadeOut">FadeOut</A><BR>
+<A HREF="#FlipScreen">FlipScreen</A><BR>
+<A HREF="#SetFadeColor">SetFadeColor</A><BR>
+<A HREF="#SetNextScreenTransition">SetNextScreenTransition</A><BR>
+<A HREF="#SetScreenTransition">SetScreenTransition</A><BR>
+<A HREF="#ShakeScreen">ShakeScreen</A><BR>
+<A HREF="#ShakeScreenBackground">ShakeScreenBackground</A><BR>
+<A HREF="#TintScreen">TintScreen</A><BR>
+<P>
+
+<HR>
+<A NAME="FadeIn"></A>
+<H3>FadeIn</H3>
+<PRE>
+FadeIn (int speed)
+</PRE>
+Fades in from a black screen to the current palette. This is used to restore
+the screen after a FadeOut call. SPEED is from 1 (slowest) to 64 (fastest).<P>
+<I>NOTE: This is a blocking function.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FadeOut(30);
+Wait(40);
+FadeIn(10); 
+</PRE>
+will fade the screen to black, wait 1 sec (40 game cycles) and then fade in again.<P>
+<I>See Also:</I> <A HREF="ags57.htm#CyclePalette">CyclePalette</A>, <A HREF="ags61.htm#FadeOut">FadeOut</A>,
+<A HREF="ags61.htm#SetFadeColor">SetFadeColor</A><P>
+
+
+<HR>
+<A NAME="FadeOut"></A>
+<H3>FadeOut</H3>
+<PRE>
+FadeOut (int speed)
+</PRE>
+Fades the screen out to black. SPEED is the speed of the fade, from 1
+(slowest) to 64 (instant). You can restore the screen with FadeIn.<P>
+<I>NOTE: This is a blocking function.</I><P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FadeOut(30);
+Wait(40);
+FadeIn(10); 
+</PRE>
+will fade the screen to black, wait 1 sec (40 game cycles) and then fade in again.<P>
+<I>See Also:</I> <A HREF="ags57.htm#CyclePalette">CyclePalette</A>, <A HREF="ags61.htm#FadeIn">FadeIn</A>,
+<A HREF="ags61.htm#SetFadeColor">SetFadeColor</A><P>
+
+
+<HR>
+<A NAME="FlipScreen"></A>
+<H3>FlipScreen</H3>
+<PRE>
+FlipScreen (int way)
+</PRE>
+Flips the screen round either the horizontal or vertical axis, or both.
+This function is for special effects only - all co-ordinates remain the
+same and it doesn't effect any other script functions.<P>
+The value of WAY selects:
+<PRE>
+0  normal
+1  horizontal-flip (upside-down)
+2  vertical-flip  (left-to-right)
+3  both (upside-down and backwards)
+</PRE>
+<B>NOTE</B>: This function is still a bit buggy - black parts of the screen may
+show up wrong, and and pop-up messages will flip the screen back to normal.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+FlipScreen(1); 
+</PRE>
+will flip the screen upside down.<P>
+
+
+<HR>
+<A NAME="SetFadeColor"></A>
+<H3>SetFadeColor</H3>
+<PRE>
+SetFadeColor(int red, int green, int blue)
+</PRE>
+Changes the colour which the screen fades out to, to have the specified RGB value. Each of the
+parameters can range from 0-255. The default is black, ie. (0, 0, 0)<P>
+The colour that you set here will be used in all future calls to FadeIn/FadeOut, and also
+for the screen transition if it is set to Fade In/Out.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetFadeColor(200, 0, 0);
+</PRE>
+will mean that next time the screen fades out, it fades to red instead of black.<P>
+SeeAlso: <A HREF="ags61.htm#FadeIn">FadeIn</A>, <A HREF="ags61.htm#FadeOut">FadeOut</A>,
+<A HREF="ags61.htm#SetScreenTransition">SetScreenTransition</A><P>
+
+
+<HR>
+<A NAME="SetNextScreenTransition"></A>
+<H3>SetNextScreenTransition</H3>
+<PRE>
+SetNextScreenTransition(TransitionStyle)
+</PRE>
+Sets the room transition type to <I>TransitionStyle</I>, but ONLY for the next room change. After
+that, it will revert back to the normal transition type specified in the editor or with
+SetScreenTransition.<P>
+For the possible values for TransitionStyle, see <A HREF="ags61.htm#SetScreenTransition">SetScreenTransition</A>.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetNextScreenTransition(eTransitionBoxout);
+character[EGO].ChangeRoom(10);
+</PRE>
+will go to room 10 with a box-out effect, but then return to the normal transition
+type from then on.<P>
+SeeAlso: <A HREF="ags61.htm#SetScreenTransition">SetScreenTransition</A><P>
+
+
+<HR>
+<A NAME="SetScreenTransition"></A>
+<H3>SetScreenTransition</H3>
+<PRE>
+SetScreenTransition(TransitionStyle)
+</PRE>
+Changes the default screen transition. TransitionStyle can be one of the following:
+<PRE>
+eTransitionFade
+eTransitionInstant
+eTransitionDissolve
+eTransitionBoxout
+eTransitionCrossfade
+</PRE>
+All future transitions will be done as specified until you call this
+function again.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+SetScreenTransition(eTransitionFade); 
+</PRE>
+will change the room transitions to Fade.<P>
+SeeAlso: <A HREF="ags61.htm#SetNextScreenTransition">SetNextScreenTransition</A><P>
+
+
+<HR>
+<A NAME="ShakeScreen"></A>
+<H3>ShakeScreen</H3>
+<PRE>
+ShakeScreen (int amount)
+</PRE>
+Shakes the screen to simulate, for example, an earthquake. AMOUNT is
+how much the screen shakes: 1 is hardly anything, and 25 is a lot.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ShakeScreen(5); 
+</PRE>
+will shake the screen a little.<P>
+<I>See Also:</I> <A HREF="ags61.htm#ShakeScreenBackground">ShakeScreenBackground</A><P>
+
+
+<HR>
+<A NAME="ShakeScreenBackground"></A>
+<H3>ShakeScreenBackground</H3>
+<PRE>
+ShakeScreenBackground (int delay, int amount, int length)
+</PRE>
+Shakes the screen to simulate, for example, an earthquake. The game is not paused
+while the screen shakes - it will continue in the background.<P>
+DELAY specifies the 'shakiness' of the shake - 2 is the lowest you can pass for this,
+and will create the most shaky screen.<P>
+AMOUNT specifies the ferociousness of the shake - ie. how much the screen moves by when it
+does shake. Here, 1 is a very tiny shake, up to about 30 for a ferocious shake.<P>
+LENGTH specifies how long the shake lasts for, in game loops. For example, 80 would be
+equivalent to 2 seconds at the default game speed.<P>
+You can abort any current background shake that is in progress by calling this command
+with the LENGTH parameter as zero.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ShakeScreenBackground (4, 10, 80); 
+</PRE>
+will shake the screen a little for 2 seconds.<P>
+<I>See Also:</I> <A HREF="ags61.htm#ShakeScreen">ShakeScreen</A><P>
+
+
+<HR>
+<A NAME="TintScreen"></A>
+<H3>TintScreen</H3>
+<PRE>
+TintScreen (int red, int green, int blue)
+</PRE>
+Tints the screen with the specified RGB values. RED, GREEN and BLUE range
+from 1 to 100. <P>
+Pass (0, 0, 0) to turn off the tinting and go back to how the screen
+normally looks.<P>
+NOTE: This command is currently experimental, since it causes a massive
+slowdown in the engine, especially at high resolutions. If you use it, you
+should provide an option for the player to turn it off.<P>
+NOTE: This feature only works in hi-colour games.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+TintScreen (100, 50, 50); 
+</PRE>
+will tint a heavy dose of red. <P>
+<P>
+
+</BODY></HTML>

@@ -1,0 +1,228 @@
+<HTML>
+<head><title>File I/O functions</title></head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic57"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags33.htm#topic55"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags34.htm#topic56"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags36.htm#topic58"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>File I/O functions</H2>
+<A HREF="#FileClose">FileClose</A><BR>
+<A HREF="#FileIsEOF">FileIsEOF</A><BR>
+<A HREF="#FileOpen">FileOpen</A><BR>
+<A HREF="#FileRead">FileRead</A><BR>
+<A HREF="#FileReadInt">FileReadInt</A><BR>
+<A HREF="#FileReadRawChar">FileReadRawChar</A><BR>
+<A HREF="#FileReadRawInt">FileReadRawInt</A><BR>
+<A HREF="#FileWrite">FileWrite</A><BR>
+<A HREF="#FileWriteInt">FileWriteInt</A><BR>
+<A HREF="#FileWriteRawLine">FileWriteRawLine</A><BR>
+<P>
+
+<HR>
+<A NAME="FileClose"></A>
+<H3>FileClose</H3>
+<PRE>
+FileClose (int handle)
+</PRE>
+Closes the file with handle HANDLE, and commits all changes to disk.
+You MUST close the file after you have finished with it.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int handle = FileOpen ("test.dat", FILE_WRITE);
+FileWrite (handle, "test string");
+FileClose (handle);
+</PRE>
+will open the file test.dat write the string "test string" and close it.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileOpen">FileOpen</A><P>
+
+
+<HR>
+<A NAME="FileIsEOF"></A>
+<H3>FileIsEOF</H3>
+<PRE>
+FileIsEOF (int handle)
+</PRE>
+Checks whether the specified file has had all its data read. This is only useful
+with files opened for <B>reading</B>. It returns 1 if the entire contents of the file
+has now been read, or 0 if not.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int handle = FileOpen ("test.dat", FILE_READ);
+while (FileIsEOF(handle) == 0) {
+  int temp = FileReadRawChar (handle);
+  Display("%c", temp);
+}
+FileClose (handle);
+</PRE>
+will display every character in the file test.dat, one by one, to the screen.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileOpen">FileOpen</A>, <A HREF="ags35.htm#FileRead">FileRead</A><P>
+
+
+<HR>
+<A NAME="FileOpen"></A>
+<H3>FileOpen</H3>
+<PRE>
+FileOpen (string filename, int mode)
+</PRE>
+Opens a disk file for reading or writing. These disk I/O functions are only
+intended for simple tasks like the way the QFG series export the character
+when you complete it. MODE is either FILE_READ or FILE_WRITE, depending on
+whether you want to write to or read from the file. If you pass FILE_WRITE
+and a file called FILENAME already exists, it will be overwritten.<P>
+This function returns a file handle, which you use in future calls to
+file functions, or returns 0 if there was a problem (eg. file not existing
+when MODE is FILE_READ).<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int handle = FileOpen ("temp.tmp", FILE_WRITE);
+if (handle == 0) Display("Error opening file.");
+else {
+FileWrite (handle, "test string");
+FileClose (handle);
+}
+</PRE>
+will open the file temp.tmp for writing. If there’s no such file it will display an error message. If the file exists it will write the string "test string" and close it.<P>
+<B>IMPORTANT</B>: This function will ONLY work with files in the game directory.
+You CANNOT use a path, so any filename with "<TT>\</TT>" or "<TT>/</TT>" in it will
+automatically be rejected, for security reasons.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileClose">FileClose</A>, <A HREF="ags35.htm#FileRead">FileRead</A>, <A HREF="ags35.htm#FileWrite">FileWrite</A><P>
+
+<HR>
+<A NAME="FileRead"></A>
+<H3>FileRead</H3>
+<PRE>
+FileRead (int handle, string buffer)
+</PRE>
+Reads a string into BUFFER, from a file previously opened with FileOpen
+which returned HANDLE. You should only use this with files which you
+previously wrote out with FileWrite. Do NOT use this function with any
+other files, even text files.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string buffer;
+int handle = FileOpen ("test.dat", FILE_READ);
+FileRead (handle, buffer);
+
+FileClose (handle);
+</PRE>
+will open the file test.dat (which you have previously written with FileWrite) and read a string into the buffer. Then close the file.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileOpen">FileOpen</A>, <A HREF="ags35.htm#FileWrite">FileWrite</A><P>
+
+
+<HR>
+<A NAME="FileReadInt"></A>
+<H3>FileReadInt</H3>
+<PRE>
+FileReadInt (int handle)
+</PRE>
+Reads an integer from the file HANDLE, and returns it to the script.
+Only integers written with FileWriteInt can be read back.<P>
+
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number;
+int handle = FileOpen ("stats.dat", FILE_READ);
+number = FileReadInt (handle);
+FileClose (handle);
+</PRE>
+will open the file stats.dat read an integer pass it to number and then close the file.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileRead">FileRead</A>, <A HREF="ags35.htm#FileWriteInt">FileWriteInt</A><P>
+
+<HR>
+<A NAME="FileReadRawChar"></A>
+<H3>FileReadRawChar</H3>
+<PRE>
+FileReadRawChar (int handle)
+</PRE>
+Reads a raw character from the input file HANDLE and returns it. This
+function allows you to read from files that weren't created by your game,
+however it is recommended for expert users only.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+string input;
+int handle = FileOpen ("stats.txt", FILE_READ);
+StrFormat (input, "%c", FileReadRawChar (handle));
+FileClose (handle);
+</PRE>
+will read a raw character from file stats.txt and pass it into the string char.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileRead">FileRead</A>, <A HREF="ags35.htm#FileReadRawInt">FileReadRawInt</A><P>
+
+<HR>
+<A NAME="FileReadRawInt"></A>
+<H3>FileReadRawInt</H3>
+<PRE>
+FileReadRawInt (int handle)
+</PRE>
+Reads a raw 32-bit integer from the input file and returns it to the script.
+This allows you to read from files created by other programs - however, it
+should only be used by experts as no error-checking is performed.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number;
+int handle = FileOpen ("stats.txt", FILE_READ);
+number=FileReadRawInt(handle));
+FileClose (handle);
+</PRE>
+will read a raw integer from file stats.txt and pass it into the integer number.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileRead">FileRead</A>, <A HREF="ags35.htm#FileReadRawChar">FileReadRawChar</A><P>
+
+<HR>
+<A NAME="FileWrite"></A>
+<H3>FileWrite</H3>
+<PRE>
+FileWrite (int handle, string text)
+</PRE>
+Writes TEXT to the file HANDLE, which must have been previously opened
+with FileOpen for writing. The string is written using a custom format to
+the file, which can only be read back by using FileRead.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int handle = FileOpen ("temp.tmp", FILE_WRITE);
+if (handle == 0) Display("Error opening file.");
+else {
+FileWrite (handle, "test string");
+FileClose (handle);
+}
+</PRE>
+will open the file temp.tmp for writing. If there’s no such file it will display an error message. If the file exists it will write the string "test string" and close it.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileRead">FileRead</A>, <A HREF="ags35.htm#FileOpen">FileOpen</A>, <A HREF="ags35.htm#FileWriteRawLine">FileWriteRawLine</A><P>
+
+<HR>
+<A NAME="FileWriteInt"></A>
+<H3>FileWriteInt</H3>
+<PRE>
+FileWriteInt (int handle, int value)
+</PRE>
+Writes VALUE to the file HANDLE. This allows you to save the contents of
+variables to disk. The file must have been previously opened with FileOpen,
+and you can read the value back later with FileReadInt.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int number;
+int handle = FileOpen ("stats.dat", FILE_WRITE);
+FileWriteInt (handle,number);
+FileClose (handle);
+</PRE>
+will open the file stats.dat and write the integer number in it.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileReadInt">FileReadInt</A>, <A HREF="ags35.htm#FileWrite">FileWrite</A><P>
+
+<HR>
+<A NAME="FileWriteRawLine"></A>
+<H3>FileWriteRawLine</H3>
+<PRE>
+FileWriteRawLine (int handle, string text)
+</PRE>
+Writes a string of text to the file in plain text format. This enables
+you to read it back in Notepad or any editor; however, your game cannot
+read the file back in. This is useful for generating logs and such like.
+The TEXT will be printed to the file, followed by the newline characters.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+int handle = FileOpen ("error.log", FILE_WRITE);
+FileWriteRawLine (handle,"There was an error playing sound1.wav");
+FileClose (handle);
+</PRE>
+will write an error line in the file error.log.<P>
+<I>See Also:</I> <A HREF="ags35.htm#FileWrite">FileWrite</A><P>
+
+</BODY></HTML>

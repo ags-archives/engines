@@ -1,0 +1,157 @@
+<HTML>
+<head><title>ViewFrame functions and properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic74"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags25.htm#topic41"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags64.htm#topic73"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags66.htm#topic75"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>ViewFrame functions and properties</H2>
+<P>
+
+<A HREF="#ViewFrame.Flipped">Flipped property</A><BR>
+<A HREF="#ViewFrame.Frame">Frame property (view frame)</A><BR>
+<A HREF="#ViewFrame.Graphic">Graphic property (view frame)</A><BR>
+<A HREF="#ViewFrame.Loop">Loop property (view frame)</A><BR>
+<A HREF="#ViewFrame.Sound">Sound property (view frame)</A><BR>
+<A HREF="#ViewFrame.Speed">Speed property (view frame)</A><BR>
+<A HREF="#ViewFrame.View">View property (view frame)</A><BR>
+<P>
+
+<HR>
+<A NAME="ViewFrame.Flipped"></A>
+<H3>Flipped property</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly bool ViewFrame.Flipped
+</PRE>
+Gets whether the frame was set to Flipped in the editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+if (frame.Flipped) {
+  Display("This frame is flipped");
+}
+else {
+  Display("This frame is not flipped");
+}
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A>,
+<A HREF="ags65.htm#ViewFrame.Graphic">ViewFrame.Graphic</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.Frame"></A>
+<H3>Frame property (view frame)</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly int ViewFrame.Frame
+</PRE>
+Returns the frame number represented by this ViewFrame.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This ViewFrame is view %d, loop %d, frame %d",
+  frame.View, frame.Loop, frame.Frame);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A>,
+<A HREF="ags65.htm#ViewFrame.Loop">ViewFrame.Loop</A>,
+<A HREF="ags65.htm#ViewFrame.View">ViewFrame.View</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.Graphic"></A>
+<H3>Graphic property (view frame)</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+int ViewFrame.Graphic
+</PRE>
+Gets/sets the sprite slot number that this view frame displays.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This frame uses sprite %d", frame.Graphic);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.Loop"></A>
+<H3>Loop property (view frame)</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly int ViewFrame.Loop
+</PRE>
+Returns the loop number represented by this ViewFrame.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This ViewFrame is view %d, loop %d, frame %d",
+  frame.View, frame.Loop, frame.Frame);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A>,
+<A HREF="ags65.htm#ViewFrame.Frame">ViewFrame.Frame</A>,
+<A HREF="ags65.htm#ViewFrame.View">ViewFrame.View</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.Sound"></A>
+<H3>Sound property (view frame)</H3>
+<I>(Formerly known as SetFrameSound, which is now obsolete)</I> <br> 
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+int ViewFrame.Sound
+</PRE>
+Gets/sets the sound number of the sound that is linked to this frame.
+If there is no linked sound, this should be 0.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This frame has frame-linked sound %d.", frame.Sound);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.Speed"></A>
+<H3>Speed property (view frame)</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly int ViewFrame.Speed
+</PRE>
+Gets the speed setting of the view frame. This is 0 by default but may have been changed
+in the AGS Editor.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This frame has speed %d.", frame.Speed);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A><P>
+
+
+<HR>
+<A NAME="ViewFrame.View"></A>
+<H3>View property (view frame)</H3>
+<I>(Formerly part of GetGameParameter, which is now obsolete)</I><P>
+<PRE>
+readonly int ViewFrame.View
+</PRE>
+Returns the view number represented by this ViewFrame.<P>
+<FONT COLOR="#FF0000">Example:</FONT>
+<PRE>
+ViewFrame *frame = Game.GetViewFrame(WALKING, 2, 4);
+Display("This ViewFrame is view %d, loop %d, frame %d",
+  frame.View, frame.Loop, frame.Frame);
+</PRE>
+<I>See Also:</I> <A HREF="ags41.htm#Game.GetViewFrame">Game.GetViewFrame</A>,
+<A HREF="ags65.htm#ViewFrame.Loop">ViewFrame.Loop</A>,
+<A HREF="ags65.htm#ViewFrame.Frame">ViewFrame.Frame</A><P>
+<P>
+
+</BODY></HTML>

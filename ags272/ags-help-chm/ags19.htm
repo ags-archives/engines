@@ -1,0 +1,63 @@
+<HTML>
+<head><title>Custom Properties</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic36"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags11.htm#topic23"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags18.htm#topic35"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags20.htm#topic37"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Custom Properties</H2>
+<B>What are custom properties?</B><P>
+Suppose you're making a Lucasarts-style game, and you want all your hotspots to have
+a default interaction (so if the player right-clicks a window, for example, "Open" will be
+the default, but if they click on a pen, "Pick up" will be the default).<P>
+To do that, surely you would have to script in lots of code to change the default mode
+over each different object?<P>
+This is where Custom Properties come to the rescue. You can create a custom property
+for "Default interaction", for example, and then have some simple code in the global script
+to use the setting accordingly.<P>
+<B>How do I use them?</B><P>
+You'll notice that characters, objects, hotspots, rooms and inventory items all have
+a "Properties" button. Click it.<P>
+Since you don't yet have any custom properties, you are sent to the Schema Editor. This
+allows you to create the various properties you want in your game. To begin with you are
+presented with an empty list box, so right-click in it and choose "Add property".<P>
+In the "Add Property" window you can set various options about the new property:
+<UL>
+
+<LI> <B>Name</B> - this is the name by which you will access the property from the script.
+This cannot be changed after the property has been created.
+<LI> <B>Description</B> - this is the user-friendly description which will be displayed
+in the custom property editor when you are setting the property.
+<LI> <B>Type</B> - this specifies what type of property you want. "Boolean" gives you
+a checkbox (which will return 0 or 1 to the script), "Number" gives you a text box which
+you can type numbers into, and "Text" gives you a larger text box which can store a string.
+<LI> <B>Default value</B> - this specifies what the default value of the property will be
+for objects where you have not set it specifically.
+</UL>
+<P>
+For example, add a new "Boolean" property. Close the schema editor, and then click the
+"Properties" button again. You'll now have a window with a checkbox with the description
+text you typed in. You can click the "Edit schema" button there to return to the schema
+editor if you like.<P>
+All types of game item share the same schema. That is, if you create a "Jibble" property
+in the schema editor for a hotspot, it will also appear in the properties window for
+characters, objects, and so on.<P>
+<B>Getting values in the script</B><P>
+To access the properties from the script, there are various script functions. See
+their descriptions for how they work:<P>
+<A HREF="ags37.htm#Character.GetProperty">Character.GetProperty</A>, <A HREF="ags37.htm#Character.GetTextProperty">Character.GetTextProperty</A> <br> 
+<A HREF="ags50.htm#Hotspot.GetProperty">Hotspot.GetProperty</A>, <A HREF="ags50.htm#Hotspot.GetTextProperty">Hotspot.GetTextProperty</A> <br> 
+<A HREF="ags51.htm#InventoryItem.GetProperty">InventoryItem.GetProperty</A>, <A HREF="ags51.htm#InventoryItem.GetTextProperty">InventoryItem.GetTextProperty</A> <br> 
+<A HREF="ags55.htm#Object.GetProperty">Object.GetProperty</A>, <A HREF="ags55.htm#Object.GetTextProperty">Object.GetTextProperty</A> <br> 
+<A HREF="ags60.htm#GetRoomProperty">GetRoomProperty</A>, <A HREF="ags60.htm#Room.GetTextProperty">Room.GetTextProperty</A><P>
+Custom property values cannot currently be set from within the game script - they are read-only
+at runtime.<P>
+
+</BODY></HTML>

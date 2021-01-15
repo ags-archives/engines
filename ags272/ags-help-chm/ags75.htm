@@ -1,0 +1,49 @@
+<HTML>
+<head><title>Game creation problems</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="topic86"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags73.htm#topic84"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags74.htm#topic85"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags76.htm#topic87"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Game creation problems</H2>
+Please refer to the online Knowledge Base for a proper list of current
+bugs and fixes. It's under the "Support" link on the AGS website. This
+section of these docs is very rarely updated.<P>
+<B>Q. How do I import this character I downloaded in CHA format?</B><P>
+A. In the editor, go to the Characters pane and click the "Import character" button. Simple.<P>
+<B>Q. On my screen, I can't move the main character. Wherever I click to move him,
+   he just stands there.</B><P>
+A. If the main character isn't on a walkable area, he will not be able to move.
+   Load the screen into the Room Editor, and check that the location where the
+   man is has a walkable area there.<P>
+<B>Q. When I enter a certain room, I just get a black screen.</B><P>
+A. Make sure that you haven't used a Display Message command in the "Player
+   enters room" event for that room. Remember that this event happens BEFORE
+   the screen fades in.<P>
+   To make sure, when you get the black screen, try pressing enter, or clicking
+   the left mouse button. If nothing happens then something more serious may
+   have happened. If this is the case, press Alt+X, which should exit the
+   program and give you a list of numbers which you can send to me to
+   investigate.<P>
+<B>Q. The character isn't drawn behind my walk-behind areas!</B><P>
+A. You need to define the base line for the area, or he will always be drawn
+   in front. See the tutorial for more information.<P>
+<B>Q. My USERGAME.EXE file seems to have disappeared.</B><P>
+A. Because this file is your entire game, including the room files, when you
+   save a room in the Room Editor it will delete the exe file (because the
+   room contained in the exe is out of date). To get it back, simply save the
+   game again by using the "Save game" command on the File menu.<P>
+<B>Q. I get a message "Exiting due to signal SIGxxxx, Shutting down Allegro"
+   and it says it "exited without requesting it".</B><P>
+A. If you see a list of numbers, each starting with "0x", please write them
+   down and contact me. Check that you haven't done anything silly, like used
+   a sprite or view number which doesn't exist.<P>
+
+</BODY></HTML>

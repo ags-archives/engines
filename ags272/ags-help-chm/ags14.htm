@@ -1,0 +1,87 @@
+<HTML>
+<head><title>Distributing your game</title><style type="text/css">
+<!--
+body         { font-family: Verdana; font-size: 10pt }
+td           { font-family: Verdana; font-size: 10pt }
+a            { font-weight: bold }
+-->
+</style>
+</head>
+
+<BODY BGCOLOR=#FFFFE1 TEXT=#000000>
+<A NAME="DistGame"></A><CENTER>
+<A HREF="ags.htm"><img align=center src="contents.gif" BORDER=0 ALT="Contents"></A> <A HREF="ags11.htm#topic23"><img align=center src="up.gif" BORDER=0 ALT="Up"></A> <A HREF="ags13.htm#topic25"><img align=center src="back.gif" BORDER=0 ALT="Previous"></A> <A HREF="ags15.htm#topic33"><img align=center src="forward.gif" BORDER=0 ALT="Next"></A> </CENTER><HR>
+
+<H2>Distributing your game</H2>
+When you choose the "Save game" option in the Editor, a "Compiled" sub-directory
+is created in your game's folder, with all the files that you need to distribute
+your game. At its simplest this will just be your game executable and the setup
+program, but you may also have the digital music and speech files (MUSIC.VOX and
+SPEECH.VOX); and if you have selected to split resources files, you will also
+have several files named "game.001", "game.002", and so forth.<P>
+So, when you want to upload your game to the internet, just zip up the files in
+the Compiled folder, and there you go!<P>
+<I>NOTE: It is not possible to load the exe file back into the AGS Editor. This
+means two things when only the EXE file is available: (1) other people can't
+edit your game's data, and (2) you can't either. Always keep a backup of the
+other files produced (*.CRM, AC2GAME.DTA, etc) as they are what the Editor
+needs to be able to load your game for editing.</I><P>
+<I>TIP:</I> You can make a "Loading..." style splash screen to be displayed while your game starts
+up. To do so, simply save the image as  PRELOAD.PCX (must be the same resolution and colour depth
+as the game) in the game folder, and save the game. It should then display while the game is loading.<P>
+<I>NOTE: Due to the licenses of code used by AGS, your documentation should acknowledge the
+following:</I><P>
+TrueType font display uses ALFont by Javier Gonzalez and the Freetype project. Distributed
+under the terms of the FreeType project license.<P>
+OGG player is alogg by Javier Gonzalez, using the Ogg Vorbis decoder, which is available
+from http://www.xiph.org/  Copyright (c) 2002, Xiph.org Foundation<P>
+MP3 player is almp3, by Javier Gonzalez and the FreeAmp team. It uses the mpg123 MP3 decoder,
+and is distributed under the terms of the GNU Lesser General Public License version 2.1.<P>
+You should also include all the license_* files from the DOCS directory with your game.<P>
+<B>IMPORTANT: If you intend to make money for your game, be it shareware or commercial,
+it is imperative that you read the Legal Information page on the AGS website, currently
+at http://www.bigbluecup.com/aclegal.htm </B><P>
+<I>NOTE: MP3, OGG and WAV music files are not included in the exe. They will instead be
+built into a file called MUSIC.VOX when you click the "Rebuild VOX files"
+option in the editor. Since OGGs, MP3s and WAVs override all other music file types, this
+allows you to have an Digital Music Pack which you can distribute separately to
+your game. If it is present in the game directory it will be used, otherwise
+any other music available (eg. MIDI) will be played instead.</I><P>
+<A HREF="#topic32">Custom icon</A><BR>
+<A HREF="#SplitRes">Splitting resource files</A><BR>
+<P>
+
+<HR>
+<A NAME="topic32"></A>
+<H3>Custom icon</H3>
+If you wish, you can use your own custom icon when you build a Windows EXE
+file. To do this, simply place your icon in your game's folder, and name
+it USER.ICO. Then, load the editor and save the game.<P>
+If you are using Windows 95, 98 or ME, your icon <B>must</B> be 32x32 pixels in 16-colour.
+If it is any other size or colour depth, AGS will not be able to use it. <br> 
+If you are using Windows 2000 or XP, your icon can be of any size and colour depth. This
+will not cause a problem for people who play your game on Windows 98; it is simply that
+the editor can only compile high-colour icons when it is running on Windows 2000 and XP.<P>
+<I>NOTE: The icon <B>must</B> be a proper Windows .ICO file, <B>not</B> just a renamed
+BMP file. Icon editors, such as AX-Icons from http://www.axialis.com, will convert
+it for you.</I><P>
+You can also have a custom icon for the Setup program generated. To do so, create
+your icon as above but name it <B>setup.ico</B> in the game folder.<P>
+
+<HR>
+<A NAME="SplitRes"></A>
+<H3>Splitting resource files</H3>
+Some people found that once their game became large, the single EXE file
+was slow at changing rooms. AGS now includes an option to split up the
+resource files into smaller chunks to avoid this happening. On the
+General Settings pane you'll notice a checkbox "Split resource files up into X Mb".
+If you tick this, then type in a number such as 1 or 2, then save the game,
+the game data will be split up into chunks that size, named GAME.001,
+GAME.002 and so on.<P>
+Some resources are still combined into the EXE file but
+all the rooms will be placed into the other files.
+If you use this option, you need to distribute your game's EXE file plus
+all the GAME.00? files.<P>
+
+
+</BODY></HTML>
