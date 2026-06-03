@@ -1,0 +1,281 @@
+$ 0 File | Load room...
+This option allows you to load a screen saved with<1, File | Save room...>.
+From the file selector, click on the screen you want to load.
+
+Note that if the screen has been passworded then before you can load it you
+have to enter the correct password using<41, Misc | Password >.
+$ 1 File | Save room...
+This allows you to save the current screen to disk.
+
+To name your work, click on the yellow "*.CRM" and type in the new name.
+
+See also: <0, File | Load room... >
+$ 3 File | Load scene...
+Loads a new picture in to be displayed during the game.
+
+This is the first thing you'll do when creating a new room.
+You can change the scene of a finished room by loading in a new scene but
+then you'll have to do all the walls, etc again...
+
+The scenes are VGA 320x200 or 640x400 256-colour PCX or BMP images. They can
+be created using many paint programs.
+$ 10 Walk-behind | View
+This option draws all the walk-behind areas onto the screen in the correct
+colours.
+
+See also: <11, Walk-behind | Add >
+$ 11 Walk-behind | Add
+Creates a new walk-behind area in the current colour.
+
+To draw the walk-behind area, draw each edge of it by starting the line
+by clicking the LEFT button and finishing it with the RIGHT button.
+Only finish the last edge by clicking the LEFT button. You then
+have to click inside the shape and it will be filled in (so make sure all
+the edges join up).
+
+See also: <10, Walk-behind | View   >  <13, Walk-behind | Change >
+          <12, Walk-behind | Remove >
+$ 12 Walk-behind | Remove
+Removes walk-behind areas created with <11, Walk-behind | Add >.
+
+Use the same procedure as for adding, except that when you click to fill
+the area will be removed.
+$ 13 Walk-behind | Change
+Cycles through the 15 available walk-behind colours.
+
+Walk-behind colours are necessary because the main engine needs to know
+what Y position the character needs to be above for him to be drawn behind
+the walk-behind area. Each colour has a<14, base line, >which defines this.
+$ 14 Walk-behind | Base
+Changes the base line for the current colour.
+
+The base line defines when the character will be drawn behind the walk-behind
+area. If the character's feet are above the base line then he will be drawn
+behind it, otherwise he will be drawn in front.
+For this reason different colours are needed because not all walk behind
+areas have the same base.
+
+Use the LEFT button to position the line and the RIGHT button to confirm the
+position.
+
+See also: <13, Changing the colour >
+$ 20 Walls | View
+Draws all the walls on the screen.
+
+This shows all the walls that have been added using<21, Walls | Add. >It is
+necessary to use this command if the screen has been overwritten, for example
+to view the<33, condition areas. >
+$ 21 Walls | Add
+Walls block the character's feet from walking over them. You place walls
+along the bottom of a fence, around a boulder, etc.
+
+To add a wall, click at the beginning and end. To make a curved wall, draw
+lots of short straight walls next to each other.
+
+You can press A instead of choosing  Walls | Add  to add walls.
+
+See also: <20, Walls | View >  <22, Walls | Remove >
+$ 22 Walls | Remove
+Removes walls created with<21, Walls | Add. >
+
+Just click on the beginning and end of a line and it will be removed.
+
+After using this command the screen may not look right: just choose
+<20,Walls | View >to sort it out.
+$ 30 Condition | Change
+This is where you define how the game<105, reacts >to different events.
+Use the UP and DOWN arrows and PGUP and PGDN to scroll the list, and
+press RETURN to change the reaction.
+
+Also on this screen are another 3 columns, one headed "Score", one headed
+"Data" and the other headed "Misc". The Score column is where you give the
+player points when the condition occurs. The points are only given once, even
+if the event occurs several times. The Data column is where you give
+<105,extra information >about the reaction. With some reactions this is
+necessary, with others it's optional. The Misc column is where you can set
+another reaction to happen after the current one (chained).
+
+Press S to change the score, D to change Data and M to change Misc.
+$ 31 Condition | Edges
+This is where you define the edges of the screen. These are used as the
+boundaries the character must pass in order to create conditions 1-4.
+They also define where the character will appear when it enters the screen.
+
+Click the RIGHT button to cycle through the different edges, and press
+the LEFT button to move the currently selected wall.
+
+See also: <30, Changing conditions >
+$ 32 Condition | View screen
+Draws on the screen all the condition areas.
+
+This is used to view where the condition areas are. It is necessary because
+either the Walls + Walk-behind areas or the Condition areas can be displayed
+at one time.
+$ 33 Condition | Set screen
+Allows you to add a condition area in the current colour.
+
+You add condition areas the same way you add<11, walk-behind areas. >
+$ 34 Condition | Remove
+Removes previously added condition areas.
+
+You remove condition areas the same way you remove<12, walk-behind areas. >
+$ 35 Condition | Select
+Cycles through the 15 available condition area colours.
+
+Each colour can be set with a different reaction to events occuring on it.
+$ 36 Condition | Messages
+This screen is where you create and edit room messages.
+
+To create a new message, press A. To choose the message you want to edit,
+use the LEFT and RIGHT arrow keys. When you're on the correct message, press
+RETURN to change it. Note that you must re-type the whole message.
+
+To force a carriage return to be displayed in the game instead of the words
+wrapping round, just type a bracket [ into the message.
+
+You can use F2 to toggle whether the next message will be displayed after
+this one. This allows you to have conversations and long descriptions.
+
+F3 changes how the message will look when it is displayed. Normal means
+in the standard grey box. Red and purple speech display the text in speech
+marks at the top of the screen in the respective colours.
+$ 40 Misc | Objects
+This command lets you position objects onto the screen. Objects, unlike the
+background, can be moved and taken.
+
+Click the LEFT button to position the object, press N to change what it
+looks like, and press A to cycle through the objects. To add an object, just
+cycle through to the first unused number (0 is first position) and press
+the LEFT button, which will automatically appear as a cup.
+You can switch an object off by pressing the O key. This means it will not
+appear on the screen to begin with, but you can switch it on with the <105,"turn
+object on" response>. Note that moving an object (clicking the LEFT button)
+will automatically turn it back on.
+
+Once you're done, hit ESCAPE to return to the main screen.
+
+NOTE: Don't create, for example, object 3 if you haven't created object 2. Go
+      through the numbers in ascending order.
+
+See also: <43, Misc | Sprite manager >
+$ 41 Misc | Password
+This screen is where you enter the password to be used for loading and
+saving screens.
+
+To password protect your screen, enter a password here by clicking in the
+box and typing it in. Then save your work and the password will be saved.
+
+To load a password protected screen, enter the password here by clicking in
+the box, and then choose<0, File | Load room... >.
+
+See also: <1, File | Save room... >
+$ 42 Misc | Options
+This allows you to change various screen-related options. At present
+they are:
+
+Start music    ³ Defines the music to play when the player enters the screen.
+Can save/load  ³ Whether the save and load functions work on this screen.
+Man visible    ³ Whether the main character appears on the this screen.
+
+To return to the main interface click outside the window.
+$ 43 Misc | Sprite Manager
+The sprite manager is part of RoomMake which allows you to import your own
+graphics for objects.
+
+The screen shows a grid of the current 'sprite set' - that is, all the object
+graphics in the entire game. To import a graphic of your own in BMP or PCX
+format, select the graphic you want to overwrite by clicking on it and then
+clicking on "import". If you don't want to overwrite anything, choose
+"import new" instead which will create a new slot for the object.
+The imported graphic will be displayed on the screen. You can press ENTER to
+import the whole picture, or you can drag a rectangle with the mouse to only
+import a portion of it.
+
+When you are done, hit ESC to exit the sprite manager. You will be asked
+whether you want to save the new sprite set.
+
+See also: <40, Misc | Objects >
+$ 44 Misc | View Manager
+The view manager allows you to create and edit 'views'. The meaning of a view
+is described in the documentation.
+
+To change the graphic for a frame, double-click on the frame, then choose a
+picture from the current sprite set.
+To add a new frame to a loop, click on the grey rectangle at the far right
+of the loop.
+To remove a frame, right-click on it.
+
+To remove an entire loop, right-click on its number at the left of the screen.
+To add a new loop to a view, click on the button at the bottom of the screen.
+
+To cycle through the views, click "prev view" or "next view" at the bottom of
+the screen.
+$ 45 Misc | Ask Position
+This screen allows you to find out the X and Y co-ordinates of a point on
+the screen. This is useful mainly for two things:
+ - The Data column with the "Go to screen" response to specify an offset
+ - A move-to command in an animation sequence.
+
+Click the LEFT mouse button on the screen and the co-ordinates of the point
+where you clicked are displayed in the status bar.
+
+When you are done, hit any key to return to the Room Editor.
+$ 1000 Contents
+<100, Welcome to help >
+
+The File menu            The Condition menu
+<0, Load a room... >         <30, Change >
+<1, Save a room... >         <31, Edges >
+<3, Load scene... >          <32, View screen >
+                         <33, Set screen >
+The Walk-behind menu     <34, Remove >
+<10, View >                   <35, Select >
+<11, Add >                    <36, Messages >
+<12, Remove >
+<13, Change >
+<14, Base >                   The Misc menu
+                         <40, Objects >
+The Walls menu           <41, Password >
+<20, View >                   <42, Options >
+<21, Add >                    <43, Sprite Manager>
+<22, Remove >                 <44, View Manager>
+$ 100 Welcome to help
+Welcome to on-line help! On-line help makes your job much easier because
+you don't have to constantly refer to a manual or a .DOC file.
+
+You can call on help at most times by pressing the F1 key.
+
+Help is context-sensitive: it will display the most useful information
+depending on the job you are doing. For example, pressing F1 while
+on the Condition screen will go directly to help for that screen.
+
+On-line help contains hyperlinks: a link that takes you to another part of
+help. Hyperlinks are displayed in yellow.
+To move the cursor, use the arrow keys, HOME and END. TAB highlights the
+next hyperlink, and RETURN activates the current hyperlink.
+
+Try it now: either use the arrows or TAB to activate this hyperlink:
+ <1000, Help Contents >
+$ 105 Reactions and the Data column
+There are at present these possible reactions:
+
+Go to screen         ³ Loads another room. Data (opt): Which side of room
+                     ³  man appears on (1000=left, 2000=right, 3000=bottom,
+                     ³  4000=top). Can add offset of position.
+No action            ³ Ignores the event.
+Blocked: Can't walk  ³ The man can't move.
+Man dies             ³ The man dies.
+Run animation        ³ Runs an animation. Hit F10 to edit it.
+Display message      ³ Displays a message (0-100 room, 500-990 global).
+Remove object        ³ The object disappears.
+Remove obj, add inv  ³ Remove the object and add inventory number Data.
+Add inventory        ³ Adds the specified item to the player's inventory.
+Run script           ³ Runs a block from the text script file.
+Run graphical script ³ Use graphical script for response, hit F10 to edit.
+Play sound           ³ Plays sound effect SOUND%d.WAV or SOUND%d.VOC
+Play FLI/FLC         ³ Plays FLIC%d.FLC or FLIC%d.FLI animation file.
+Turn object on       ³ Turns on an object removed with "Remove object".
+
+See the AC.DOC file for a more detailed description.
+$ 999 Error
+

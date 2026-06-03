@@ -1,0 +1,127 @@
+REVISION HISTORY
+================
+VERSION 1.12a, February 1999
+NOTE: You cannot load old save game positions saved before this version.
+ - You can now move non-player objects with the "Move object" animation
+   command.
+ - Non-player objects are now drawn correctly when in walk-behind areas.
+ - Fixed the bug where objects sometimes weren't being removed from the screen
+   properly, like the poster in the demo game.
+ - Better screen-changing routine which fades in with the objects on, so you
+   don't get that sudden change effect.
+ - The current MIDI track and position are now saved in the save games. Woohoo!
+
+VERSION 1.12, February 1999
+NOTE: You will need to re-compile any games made with versions before this.
+NOTE: You cannot load old save game positions saved before this version.
+ - Added ability to change main character's graphic. See section 3.10 in the
+   documentation for more information.
+ - Added FLI/FLC animation support
+ - Added simple animation support, so you can have, for example, a door
+   actually opening. See section 3.11 in the documentation for info.
+ - You can use Data column values in graphical script
+ - New response "Turn object on" allows you to put back an object you removed
+   with "Remove object".
+ - You can now disable the main character in a room - this allows you to do
+   things like close-ups of a control panel. This is now demonstrated in the
+   demo game, and described in section 3.12.
+ - You can now set an object to initally off in RoomMake, which you can turn
+   on later using "Turn object on".
+ - Added Finnish translation by Teemu Eramaa and Norwegian translation by
+   Martin Seterstoen.
+ - You can now import a portion of a PCX/BMP for object graphics. This allows
+   you to draw several frames in one file, and then import each frame from the
+   same graphic.
+ - New option in the Sprite Manager allows you to use full 256-colour palette
+   for imports if the graphic will only be used in one room. (This prevents
+   the mapping to greyscale).
+ - The Sprite Manager importer now preserves colour 0 (transparent) pixels in
+   the imported image.
+ - You can change the background music through a command as well as with the
+   room option.
+ - Improved message editor allows you to edit existing messages without having
+   to re-type the whole thing and also allows longer messages.
+ - Tweaked the auto-route finder: removed the bug where he would sometimes
+   walk further than you asked, and shortened the time the routefinder is
+   allowed before giving up. This means that it is quicker realizing that you
+   can't get somewhere, but it may not be able to work out a path round
+   complex obstacles.
+ - Pressing 'N' in object editor now uses Sprite manager to select graphic
+   instead of cycling through all available graphs.
+ - Fixed a silly bug with the Go-to-screen data column value where he would
+   appear on the wrong side.
+ - The walk and hand icons have now been replaced.
+ - Slowed down the animation speed of the main character, so he looks more
+   like he's walking.
+ - F1 now works in the Sprite Manager! Oh yes!
+ - Fixed bug in RoomMake which crashed when you moved the mouse to the bottom
+   of the screen.
+
+VERSION 1.1, January 1999
+NOTE: You will need to re-compile any games made with versions before this
+version. If you do not, you will not be able to run the game with this version.
+NOTE: The files needed to distribute your games have changed. Please see
+section 6.2 of AC.DOC for information.
+ - Added SVGA support. Background scenes can now be up to 640x400 256-colour!
+   Please read section 3.9 in AC.DOC for notes on this new feature.
+ - Added background music support, using MIDI files (see section 3.2 of AC.DOC
+   for information).
+ - Added sound effect support (see section 4.2 in AC.DOC for info).
+ - Character movement by mouse added: click on the destination and he will
+   walk there, as in Sierra's VGA games.
+ - New compression algorithm for room files, leading to smaller files. In fact,
+   the room file is now sometimes smaller than the imported scene's PCX file!
+ - Foreign language support added.
+ - Portuguese translation by Nuno Costa.
+ - You can now import your own PCX/BMP files as graphics for objects.
+ - Support for animating background sprites added. SUPPORT is the key word
+   here, because currently I've only drawn one animating sprite.
+ - The first screen of the demo has been changed to show off SVGA and
+   animating sprites. And it looks better like this.
+ - Expanded text script to make it more powerful. It still doesn't rival AGI
+   for power, but you can now print out variable values and do crude intro
+   sequences. See section 4.4 in the documentation for information.
+ - New, much better icons for the top icon bar.
+ - Slowed down the time-of-day to a fixed rate (on fast systems it was
+   changing from day to night to day far too quickly).
+ - Keypad 5 now stops the character walking properly.
+ - Ported the run-time engine to DJGPP (a 32-bit DOS system).
+ - You can now remove the status bar. Wow!
+
+SERVICE RELEASE 1, December 1998
+NOTE: Save games created by this release are not readable with previous
+versions; and this version cannot load old save games. Sorry. If you try to
+load an old game, you'll get Oops error 600. This is the price of progress :-)
+You CAN, however, still use old rooms (so you haven't lost anything - phew!)
+ - Added graphical script editor to RoomMake. This allows easy advanced
+   scripting without using the .SCR file. See the AC.DOC file for more info.
+ - RoomMake has been ported to DPMI. No more memory problems running RoomMake!
+ - RoomMake now has an improved user interface:
+    * a new file selector which allows changing directory and is easier to use
+    * improved other dialogs, such as the "Are you sure you want to Quit"
+      dialog and the "enter password" dialog.
+    * supports long filenames if run under Windows 95, 98, or LFNDOS.
+    * better palette remapping when reading in a PCX file.
+    * supports importing BMP files as a background scene
+ - The old screen now fades out and the new one in when changing screens.
+ - Corrected the bug which caused a crash if you used an object with certain
+   graphics.
+ - Corrected the crash which occured if the script file was newer than the
+   compiled file (thanks Luke!)
+ - One extra screen has been added to the demo game, and it now ends
+   gracefully instead of with a Load_Room error.
+
+REVISION 10.07.97
+NOTE: You will need to re-compile any games you made with any versions
+before revision 10.07.97.A.
+This includes the demo game. If you do not, you will not be able to run the
+games. See the AC.DOC file for information on compiling.
+ - added StartPos option to INI file, to define where the man starts on
+   the first screen. Also fixed the jump which happened when he first moved
+   from the beginning.
+ - removed the 'please register' nag screen, since I've decided that the
+   Adventure Creator is now swap-ware (see LICENSE.TXT for info).
+
+VERSION 1.00, FEBRUARY 1997
+Original release.
+

@@ -1,0 +1,1373 @@
+Adventure Creator v1.12a (c) 1995-1999 Chris Jones
+
+The Adventure Creator (AC for short) allows you to create Sierra-style
+adventure games. It incorporates the point 'n' click interface and has
+walk, look, interact and speak (or man, eye, hand and head). At present
+it does not include smell or taste, or any other more unusual icons.
+Normally it would take a company weeks or months to make a game, but
+you can do it in a matter of hours (or days depending on your artistic skill!)
+And you don't need any programming experience to use the Adventure Creator:
+all you need is a little knowledge of DOS (so I don't have to tell you how to
+change directory, etc). And for those of you who are more experienced, the
+Adventure Creator supports scripting: a means by which you can write a sort of
+program, making the Creator even more powerful.
+The Adventure Creator handles many tasks for you, like load/save game, keeping
+track of inventory, and the player interface.
+
+Why not print this file and use it as a tutorial? Just type PRINT AC.DOC at
+the DOS prompt. WARNING: This requires about 20 sheets of paper.
+
+This file consists of six sections:
+ 1. Using the run-time engine
+ 2. Creating your own games: Tutorial
+ 3. Other features
+ 4. Command reference
+ 5. Troubleshooting
+ 6. Miscellaneous/contact info
+ 7. Technical Info
+ 8. Disclaimer
+
+This document is set up with a quick search capability, to enable you to go
+straight to any part of the text - press F7 now (assuming you're looking at
+this in VIEW).
+The first section explains the interface to the actual game engine.
+Work through (or just read) the tutorial next, which will teach you how to do
+the basic things involved in creating games. The Other Features section
+describes more advanced features not explained in the tutorial. Refer to the
+command reference for a complete list of information on various topics.
+
+The Adventure Creator has these system requirements:
+  - A 386 or above processor (486/66 recommended, P133 recommended for SVGA).
+  - A Microsoft-compatible mouse with driver loaded.
+  - VGA (or better) 256-colour card and monitor. SVGA req'd for Room Editor.
+  - 4 Mb RAM
+  - Optional Adlib and Sound Blaster support.
+
+More detailed contents:
+ 1    THE RUN-TIME ENGINE
+ 1.1  The demo game
+ 2    TUTORIAL
+ 2.1  Setting up a screen
+ 2.2  Walls
+ 2.3  Walk-behind areas
+ 2.4  Saving your work
+ 2.5  Conditions
+ 2.5.1 Giving points
+ 2.5.2 The script editor
+ 2.5.3 Miscellaneous conditions
+ 2.6  Screen edges
+ 2.7  Objects
+ 2.7.1 The Sprite Manager
+ 2.8  Testing the game
+ 3    OTHER FEATURES
+ 3.1  Global messages
+ 3.2  Music
+ 3.3  Using passwords
+ 3.4  The General Instruction File
+ 3.5  Calculating the total score
+ 3.6  Building a data file
+ 3.7  Foreign language support
+ 3.8  Using scripting
+ 3.9  Notes on using SVGA
+ 3.10 The View Manager
+ 3.10.1 Overriding the character graphic
+ 3.11 The Animation Editor
+ 4    COMMAND REFERENCE
+ 4.1  The General Instruction File
+ 4.2  Responses to events
+ 4.3  Events
+ 4.4  Scripting built-ins
+ 4.5  Animation Editor commands
+ 5    TROUBLESHOOTING
+ 5.1  General problems
+ 5.2  Game-specific errors
+ 6    MISCELLANEOUS
+ 6.1  How do I register?
+ 6.2  Distributing your games
+ 6.2.1 Which files do I need?
+ 6.3  Note from the author
+ 6.4  Contacting the author
+ 6.5  Tips for designing games
+ 6.6  Credits
+
+1. The run-time engine
+----------------------
+The game program is what runs your games and is what the end player will see.
+To move the character, click the mouse on your destination. The character will
+either move there, or if he cannot (because there is a block in the way or
+you tried to walk into a wall) then the cursor changes to an X symbol briefly.
+To switch mode (from walk -> look -> interact -> talk -> use) click the RIGHT
+button, to use the current mode on something click the LEFT button over it.
+You can also move the mouse to the top of the screen and choose the mode from
+the bar which appears.
+Press TAB to view your inventory, Ctrl-P to pause game, Ctrl-Q to quit game.
+To use an object, click on the bag on the top bar, then click on the
+inventory item you want to use. To save your current game position either
+press F5 or use the title bar, to load press F7.
+1.1 THE DEMO GAME
+Once you've read through the tutorial, or even before, why not try out the
+demo game. It's not particularly difficult to complete, and the graphics
+aren't much good (I'm no artist), but it does show you how all the different
+options work. Once you've played the demo, you should have a pretty good idea
+of how the Adventure Creator works and what it can do.
+1.2 RUN-TIME ENGINE SETUP
+With the new SVGA and sound support in version 1.1, the Adventure Creator
+now has a Setup program, to specify your preferences. The user doesn't have
+to run Setup, and if they don't then the sound card will be autodetected
+and the video mode will be set to 320x200.
+To run Setup, type SETUP and hit enter. Here the user can select their
+sound card settings, and most importantly, choose what resolution to run
+the game in. As a general rule, only use SVGA on Pentium-133 and faster
+systems.
+
+
+2. What do I do? - Tutorial
+---------------------------
+First of all you need to think of a plot and draw the screen where the
+character will begin the adventure in your favourite paint program. You must
+save it as either a 320x200 or 640x400 256-colour picture in the PCX or BMP
+format.    NOTE: Please note this  ^^^ . It is NOT 640x480, as some people
+have assumed. (Why 640x400? Well, it's exactly double 320x200, which makes
+conversions so much easier).
+The player using the run-time engine can choose their screen resolution as
+either 320x200 or 640x400, and the engine will automatically stretch or shrink
+the room scenes so that all can be seen at any resolution.
+See section 3.9 for more information on SVGA.
+
+2.0 THE PROJECT MANAGER
+The Project Manager is a new addition to the Adventure Creator which I just
+wrote, so the rest of this documentation hasn't been updated to include it.
+What it provides is an easy way to edit the project options, launch the
+screen creator and compile the game. Type PROJMAN project_name to start
+the Project Manager.
+
+2.1 SETTING UP A SCREEN
+Once the scene is drawn, load the screen creator by typing ROOMMAKE. You will
+be presented with a blank screen with a menu bar at the top. To open a menu,
+move the cursor over the title and drag down. Move the cursor until it
+highlights the option you want and click the LEFT button.
+
+Click on Load scene... on the File menu. Throughout this .doc file, that
+will be known as  File | Load scene... . A dialog box will appear with all
+the PCX and BMP files in the current directory. When you see your background
+scene, click on it. It will be loaded and displayed on the screen.
+
+NOTE: The ROOMMAKE program has on-line context-sensitive help. Just press F1
+      or choose Misc | Help Contents.
+NOTE: Although there is a Start New option on the File menu, it is
+      recommended that to start a new screen you quit to DOS and then
+      type ROOMMAKE again. The Start New option isn't very reliable.
+
+2.2 WALLS
+Now you can put the walls in. These are barriers that the character's feet
+will not be allowed to cross. So, for example, if you have a fence in your
+picture, place a wall along the bottom of it. To place a wall click on
+Walls | Add  or press A. Then click the mouse at the beginning and end of
+the wall. Repeat this for everywhere you need to stop the player walking.
+If the wall isn't horizontal or vertical it's probably best to place another
+wall alongside it 1 pixel away. This is necessary because the character
+movement algorithm is optimized for speed, and might not notice a 1-pixel
+wall. If, when you run the game, you notice that the character can walk
+through a wall, you will need to reinforce it by putting another layer of
+wall one pixel away from it.
+It also stops the player wriggling through in keyboard control-mode by
+pressing combinations of arrow keys.
+
+2.3 WALK-BEHIND AREAS
+Once you've got all the walls in, you can define the walk-behind areas.
+These are areas that will be drawn in front of the character. For example,
+if you had a pillar on the screen, the pillar is a walk-behind area because
+if the character is behind it then that part of them won't be drawn. To add
+a walk-behind area click on  Walk-behind | Add  or press O. You now have to
+draw round the outline of the object. Click the left button to start a line,
+then the RIGHT button to finish it. Repeat this process until you have an
+enclosed shape, but click the LEFT button to finish the last line. Then click
+somewhere inside the shape, and it will be filled in blue. If you didn't
+enclose it, the whole screen will fill blue; start again.
+You now need to define the BASE - that is, the level at which the character's
+feet must be for him to walk behind it. Obviously, you don't want him shown
+behind it if he's standing in front! Choose  Walk-behind | Base  and click
+at the bottom pixel of the shape. A blue horizontal line will appear. Once
+you have positioned it correctly using the LEFT button, click the RIGHT button
+to fix it there.
+To create a second walk-behind area click  Walk-Behind | Change  or press C.
+The background colour of the Walk-behind menu will change to green. Now repeat
+the process for this walk-behind area. Note that you can only have one BASE
+per colour, so if you have two objects at the same level, you can use the
+same colour for both. There is a maximum of 15 walk-behind areas per screen.
+Choosing  Walk-behind | Change  on the 15th will go back to 1 (dark blue).
+
+2.4 SAVING THE SCREEN
+Now would be a good time to save your work so far. Choose  File | Save... .
+A dialog box similar to the load scene one will appear. Click where it says
+"*.CRM" and when the cursor appears type in the name you want to call the file.
+The actual screens used by the game are ROOM1.CRM, ROOM2.CRM, etc so to
+test your screen you will have to give it the name of the correct room. The
+screen where the character starts is ROOM1.CRM, or screen 1.
+If you want to test your screen, just call it ROOM1.CRM, then see section 2.8
+for info on how to load it into the run-time engine. Move the character around
+with the arrow keys. Check that he can't walk through anything he shouldn't be
+able to and that he walks behind the right areas. Then quit by pressing CTRL-Q
+and load ROOMMAKE once more. Load your screen back in by clicking
+File | Load...  and clicking on your screen.
+NOTE: The AC program will check for a sub-directory called ROOMS and use
+any *.CRM files in it, however this is not compulsory.
+
+2.5 CONDITIONS
+The penultimate thing to do is to define the CONDITIONS: what happens to the
+character and the course of the game when various events happen. For example,
+suppose your background scene had a signpost on it. You want the player to
+be able to look at the signpost. To do this, choose  Condition | Set screen
+and do the same process as for walk-behind areas (see above): draw the
+outline of the signpost and fill it in. Once you've done this you need to
+specify what happens when you look at it. You'll notice that the background
+colour of the Condition menu is dark blue: this is type 1. If you cycle
+through the condition areas by choosing  Condition | Select  or pressing N,
+you will notice that, as with walk-behind areas, the menu colour changes.
+If you press N once, the colour will go dark green: this is type 2. Press it
+again, turquoise: type 3, and so on. There is a limit of 15 condition areas
+per screen.
+Now, click on  Condition | Change . The display will switch to text mode and
+a list will appear. There are the misellaneous conditions at the top - they
+don't relate to objects or condition areas. They include events like walking
+off the screen. Below them is a list of events which start with Look at type 1
+and go down to Speak to object 9. Use the down arrow key to move the + to the
+line which says "Look at type 1" and press return. A menu will appear. It is
+asking what should happen when you click the eye on the signpost. Scroll the
+menu to "Display message %d" and press return. A cursor will appear next to
+the number 0. Press return to accept it (the numbering of messages starts
+at 0).
+Now, press ESCAPE to return to the interface and choose  Condition | Messages.
+(SHORTCUT: You can also hit F10 when the condition is selected in the
+condition list).
+The display will switch to text-mode once more, and the screen will be blank
+save for the top line. Press A to create message 0, and press RETURN.
+Type in the message you want displayed when someone looks at the signpost.
+Press RETURN to end the message. To force a carriage return when displaying,
+type a "[" in the message, for example, type
+It's a signpost which reads [ WARNING!
+This is not necessary at the end of every line: text wrapping does occur,
+however you might want to insert a carriage return somewhere yourself.
+Note that if you press F2 (while not typing in a message), you can toggle
+"Display Next Message" on and off. If this is on, then the next message will
+be displayed after the player has clicked to make this one disappear. This is
+useful for long messages and conversations between characters. In fact,
+using F3 you can tell the program to display the message as speech instead of
+in the standard box in the middle of the screen.
+2.5.1 GIVING POINTS
+You will have noticed another column on the Condition list screen which is
+filled with 0s. This column is where you put the score that the player gets
+for doing something. So, if you want them to get 2 points for looking at
+the signpost, scroll down to "Look at type 1", press S and type 2. They will
+only get the points the first time the event occurs. The maximum number
+of points per event is 120 (why would you give someone that many?).
+Note that you can take points off by entering a negative number.
+2.5.2 THE SCRIPT EDITOR
+New in v1.00 SR-1 of the Adventure Creator is a graphical script editor. This
+allows you to create more advanced reactions to events than was possible
+before. It also eliminates the need for misc conditions (if you don't know
+what they are, see 2.5.3 below). Notice how in the demo game, when you talk
+to the man by the door he now reacts differently if you have already spoken to
+him. This is made possible by the script editor.
+Suppose that when the player clicks the hand on a bottle (object 0), you want
+to display a message and remove the object. To do this, set the reaction for
+"Action on object 0" to "Run graphical script". Then, hit F10 to launch the
+script editor.
+NOTE: The script editor requires an SVGA display and a VESA driver (the driver
+will usually be built into your video card).
+The current script is shown on the left hand side of the screen. All the
+possible actions are listed on the right hand side. To add an action to the
+script, drag the icon from the right hand side to the position you want to
+insert it on the left. To delete an action, drag it back into the list on the
+right.
+In our example, drag "Remove object %d" from the right hand side to the left
+hand side of the screen. A dialog will appear asking you to type in the
+replacement for %d. Since the bottle is object 0, type in 0 and press return.
+Now, drag "Display message %d" from the right to below "remove object" on the
+left. (dragging it *below* means it happens afterwards. In this case, it
+doesn't matter which way round the actions occur, but usually it would).
+You can change the settings for a script line by double-clicking on it.
+
+IMPORTANT: The action 'Remove obj %d, add inv' has been removed from the
+graphical script, since it can be done by using 'Remove object %d' followed
+by 'Add inventory %d'.
+IMPORTANT: The run-time engine DOES NOT currently support the following actions
+when used in a graphical script. Using them will cause an error:
+ - Go to screen %d
+ - Run text script %d
+If you need to use these reactions, you must use the old misc condition method.
+I hope to implement these by the next release.
+IMPORTANT: Actions such as giving score and adding object to inventory *will*
+be repeated in a graphical script (in a normal response these will only be
+activated the first time the event happens). Thus to make sure the player
+can only score the points once, you should use flags with conditional
+statements, as explained below.
+
+2.5.2.1 CONDITIONAL STATEMENTS
+The main benefit of the script editor is that it allows you to create
+conditional responses - that is, the response is different depending on what
+has happened previously. You do this through the use of FLAGS. A flag is
+a variable which contains either 'true' or 'false'.
+In the script editor, each flag has a name. You name the flags, giving them
+descriptive names of what they do. Let's look at an example. Say you have a
+man on the screen. The first time the player talks to him, he should explain
+the objective of the game. However, if the player then talks to him again,
+he will just reply with something like "I've told you what to do, now get on
+with it".
+Drag 'If flag %s is clear' onto the left. Either choose a flag from the list
+or click "New Flag..." to create a new one. Then, double click the "display
+message %d" which it automatically creates and type a message number. Now,
+drag 'Set flag %s' onto 'display message'. Choose the same flag you used
+earlier. This means that the next time the script is called, the flag will be
+set and so the message will not be displayed.
+Drag 'Stop Script' onto the 'display message'. You may need to swap them
+round (so that Stop Script happens *after* displaying the message). Stop
+script tells the game to immediately abort the current graphical script.
+Now, drag another 'display message' from the right to the bottom of the
+script, after the 'stop script' line. The result should look like this:
+ If flag TALKED is clear
+   Set flag TALKED
+   Display message 1
+   Stop script
+ Display message 2
+So, the first time you talk to him message 1 will be displayed, then after
+that message 2 will be displayed. Press ESCape to return to the condition list.
+NOTE: Each screen has a different set of flags, so any flags you use on one
+screen cannot be used on another.
+
+2.5.3 USING MISCELLANEOUS CONDITIONS
+Before the script editor was written, you could have multiple responses to
+an event by using misc conditions. These are obsolete now, but are still
+supported for backward compatibility. Another way of doing the example
+in section 2.5.2 would be:
+Set the reaction for "Action on object 0" to "Remove object %d", and type 0.
+Now, press M and type in 1. Scroll the list to "Misc condition 1" and set the
+reaction to "Display Message %d". You can chain as many misc conditions as you
+like this way.
+
+Some reactions require the use of another 0-filled column, the Data column.
+See the command reference and on-line help for more info.
+
+2.6 SCREEN EDGES
+The last thing you have to do is to define the edges of the screen. For
+example, you might want a door which leads to another screen or you might
+want to lower the top edge. Click on  Condition | Edges  . The defaults will
+be displayed. Use the RIGHT button to cycle through to the edge you want
+to alter and then use the LEFT button to change it.
+You will probably want the game to change screens when the character walks
+off the edge. To do this, choose  Condition | Change  and move the + to
+"Character walks off right". Press RETURN and select "Go to screen %d" from
+the menu. Use BACKSPACE to erase the 0 and type 2. So now when the character
+walks off the right hand edge, ROOM2.CRM will be loaded and the character
+will be displayed on the left hand side. Of course, you will have to also
+change screen 2 so that when you walk off the left you go back to screen 1.
+It is quite useful to draw a map on a piece of paper of the way the screens
+link up or you could have a nightmare trying to remember which screen is on
+the left of screen 8, etc.
+
+2.7 OBJECTS
+Objects, also called sprites, are images on the screen which, unlike the
+background scene, can change, move and disappear.
+For example, suppose you want a key to be lying on the floor. If you drew it
+on the background scene there'd be no way to erase it when it was taken. With
+an object, however, this is possible. There is a limit of 10 objects per
+screen.
+To add an object choose  Misc | Objects  . Click the LEFT button to position
+the object, press N to change what it looks like or press A to cycle
+through the objects. You can also press O to toggle the object on/off. If it
+is set to "off" then the object will not appear to begin with in the game,
+but you can turn it on using the "Turn object on" command. The current object
+number (0-9) is displayed on the title bar. When you've finished, press ESC.
+There is a selection of 20 pictures for objects. Most of them aren't much
+good and so you can say they're whatever you like. If you want to use your
+own objects, you need to call up the Sprite Manager. Choose the
+Misc | Sprite Editor  menu option. This brings up the sprite manager
+screen (see section 2.7.1 below).
+To define what happens when the player interacts with the objects, click
+on  Condition | Change  and use the "Look at object 0" through to
+"Speak to object 9". For example, if you want a key to disappear when taken,
+select "Action on object 0" and choose "Remove object %d" and type 0.
+When objects are displayed during the game, the player character will be drawn
+behind them if he is in that position: you don't need walk-behind areas on
+objects.
+2.7.1 THE SPRITE MANAGER
+The sprite manager is part of the Room Editor which allows you to import your
+own graphics for objects. You access it by choosing  Misc | Sprite Editor  .
+You are presented with a screen showing the entire sprite set. It is organized
+as a grid, and any sprites which are too big for one 'cell' in the grid are
+shrunk (so don't worry if they look too small).
+You can select a sprite by clicking the mouse on it. When you do so, a
+rectangle is drawn around the sprite to show that it is selected. There isn't
+a lot you can do with the sprites - the only options (as shown at the bottom
+of the screen) are 'import' and 'import new'. Clicking on either option will
+bring up the file selector with which you can choose a BMP or PCX file to
+import. The difference between the options is that 'import' will overwrite
+the selected sprite image with the imported one, whereas 'import new' will
+create a new slot for the image.
+The imported image will be displayed on the screen. Press ENTER to import the
+whole thing, or click and drag the mouse to only import a particular rectangle
+of the image.
+NOTE: You may have noticed another option, 'import pal', on the screen.
+Normally, only the first 40 palette colours may be used for sprites, since
+they are common across all screen backgrounds. These colours are the
+standard 16 EGA colours plus a range of greys. This means you may find that
+your image has been mapped to black and white when imported.
+If, however, you know that the sprite you are importing will ONLY be used on
+the current room (ie. the room currently loaded into RoomMake), you can
+choose 'import pal'. This works the same as 'import' except that it will use
+the whole palette available for the current room. By doing this your objects
+can look a lot better, but if you try to use a graphic you imported with
+'import pal' on any other screen, it will probably look stupid.
+Note: since the images will be used as sprites, don't import anything too
+large. The Sprite Manager imposes no restrictions, but anything larger than
+about 100 x 100 will probably be hard to manage. Also, note that the sprite
+images are drawn for the 320x200 resolution and will be stretched if
+necessary.
+When you are finished, press ESC to exit the Sprite Manager. You will be
+asked whether you want to save the new sprite set.
+Note: The sprite set applies to the whole game - that is, you do NOT have a
+seperate sprite set for each room.
+Technical note: The sprite set is stored in the file USERSPR.SPR, so if you
+want to copy the set for use in another game, copy this file into the other
+directory. Also, if you delete the file the sprite set will revert to the
+default sprites.
+
+2.8 TESTING YOUR GAME
+To finish off your game and make it playable you need to create a project.
+A project is basically the name that your game will be known by in DOS (usual
+rules apply: 8 chars max, although a Win95 version will probably come soon).
+Each project must have 2 files: xxxx.INI and xxxx.SCR. The .INI file is the
+General Instruction File, the .SCR file is the script file (more advanced
+users only). If you aren't using scripting, the file still needs to be there
+but can be empty.
+In this example, I will create a project called MYGAME. Replace MYGAME with
+whatever you're calling your project. First of all, copy the TEMPLATE.INI file
+to MYGAME.INI and the TEMPLATE.SCR file to MYGAME.SCR. Now you would modify
+the MYGAME.INI file to suit your game (see section 3.4), but to begin with
+it's probably best to just leave it as it is and try out the game.
+Once you have the .INI and .SCR files you need to compile the project, which
+will produce a single file MYGAME.PRG, the file you will distribute with your
+game. To compile your project, either type
+AC MYGAME /COMPILE
+or choose  Action | Compile  from the Project Manager.
+Assuming there are no errors the file MYGAME.PRG will be produced, otherwise
+you will be notified and must correct the errors then try again.
+If all went well, to run the game just type
+AC MYGAME
+or choose  Action | Run Game  from the Project Manager, and the game should
+load and place you in the first room.
+
+3. Other features
+-----------------
+3.1 GLOBAL MESSAGES
+In the tutorial I explained how to create a message to be displayed when
+an event happened. Suppose, however, that you have pictures of trees on more
+than one screen. Obviously, you don't want to have to enter the message on
+each screen. For this purpose there are GLOBAL MESSAGES: these can be
+displayed from any screen. You place the global messages in the GIF. Global
+message numbering starts at 500 so as not to confuse the messages with the
+individual room messages. So, for example, a GIF line might read:
+Message 500 = I think it's a tree. It looks like one.
+You would set the condition for looking at the tree to "Display message 500".
+More about GIFs later.
+
+3.2 MUSIC
+Something which will give your game more appeal is sound. The Adventure
+Creator currently supports Adlib and Sound Blaster for background music.
+The music used has the file name MUSIC*.MID. When the game loads, MUSIC0.MID
+will be played, if it exists in the game directory. If you want a specific
+tune to be played when the player enters a screen, load that screen
+in ROOMMAKE and choose  Misc | Options  . Click on the word NONE alongside
+"Start music" until the correct number appears. For example, to play
+MUSIC15.MID when the player enters the screen, keep clicking until the
+number 15 appears.
+The game automatically detects the installed sound hardware. The files used
+are standard MIDI files.
+
+3.3 USING PASSWORDS
+You will probably want to give your files some security to stop other users
+of the Adventure Creator from looking at (and changing) them. For this reason,
+RoomMake provides the  Misc | Password  option. Before you save the screen,
+choose this and click in the box. Type in a password of up to 10 letters (the
+password is case-sensitive: hello and Hello are different). In future when
+you want to edit the screen then before you click on  File | Load room...
+you have to click on  Misc | Password  and type in the password. If you
+attempt to load a screen you don't know the password to then a message will
+inform you and the screen won't load. To change a password just load the
+screen, change the password with  Misc | Password  and save the screen.
+NOTE: The password is only used in ROOMMAKE. The main game engine bypasses
+the password (otherwise people wouldn't be able to play your game!).
+NOTE: There is an additional layer of security you can use, building a data
+file. See section 3.6 for details.
+
+3.4 THE GENERAL INSTRUCTION FILE
+Late Note: The editing of the GIF is now made much easier by the introduction
+of the Project Manager; please see section 2.0 for details. If you want to
+edit it the hard way, read on...
+The General Instruction File (GIF): This file contains information about
+global things (they don't change from screen to screen). Its name is
+????.INI, where the ???? represents a name of your choosing. Note that if
+you want to have a script file, that must have the same name (but with .SCR
+extension). The layout of the GIF is as follows:
+
+Command[ number] = EqualTo<Ù
+
+The carriage return defines the end of the command.
+There are several commands you can use, the most common of which is probably
+the MESSAGE command. This defines a global message (see section 3.1). This
+would be set out like:
+
+Message 501 = It's a rock. They are small grey things that aren't much use.
+
+There are 4 lines that must be present in the GIF file. These are Messages
+997 - 999 and TotalScore. Message 999 is displayed if the player clicks the
+eye on the character, Message 998 if they click the hand and 997 if they
+talk to themselves. TotalScore is the 10 in "Score: 0 of 10". See section 3.5
+for how to work this out. The defaults for the 4 compulsory commands are:
+
+Message 997 = Talking to yourself is a sign of madness!
+Message 998 = Keep your hands off yourself!
+Message 999 = Damn, I'm looking good!
+TotalScore = 10
+
+A list of all GIF commands is in the Command Reference (section 4.1).
+If you modify the GIF file you must re-compile the project to see the changes
+in the game: see section 2.8 for information.
+
+3.5 CALCULATING THE TOTAL SCORE
+To work this out you can either go through adding all the points up manually
+or get the Adventure Creator to do it for you. Just type ADVEN ROOM /SCORE,
+or choose  Action | Total Score  from the Project Manager, and it will add up
+the total number of points possible. It does this by checking all ROOM*.CRM
+files so if you have a screen with a different name it won't be included in
+the total.
+Note that negative scores will NOT be subtracted from the total, so if it
+isn't possible to avoid losing 5 points for doing something, the total score
+will be too high. Also, any modifications to the score within the script file
+will not be counted.
+
+3.6 BUILDING A DATA FILE
+The problem with having all the necessary files lying around the directory
+is that it's harder to find what you want and that other people can view
+the files. If you're going to be distributing a game, you don't want other
+people looking at your artwork, sound, etc without playing the game. OK, so
+the .CRM files do have password protection but the WIN.PCX, LOSE.PCX and sound
+files don't.
+To overcome this problem, you can build a data file. For this purpose a
+program called MAKEDATA is included. It will create a file containing all the
+game files (ROOM*.CRM, *.PCX, MUSIC*.MID and xxxx.PRG). This will be called
+xxxx.DAT (xxxx is the filename of the .PRG file), and can be distributed
+instead of all the seperate files. This, as well as being more secure,
+makes distribution easier.
+Only use a data file for distribution - if you use it normally then you will
+have to keep re-building it whenever you alter a file.
+
+3.7 FOREIGN LANGUAGE SUPPORT
+New in version 1.1 of the Adventure Creator is foreign language support for
+the system messages. By "system messages", I mean messages like "Are you sure
+you want to quit?" and "Select game to restore:". Language support is only
+available in the run-time engine (in RoomMake you will only get English).
+The reason for this is that if you are writing a game in, say, German, and
+all the text messages in your game are in German, then the player could be
+confused by a message asking, in English, if they want to quit.
+To select the default language for your game, either use the Project Manager
+or add a line to the .INI file reading: "DefaultLanguage = xx", where xx is
+the two-letter code for the country. For example, EN is English, DE is German,
+and so on. The user can override this default language by setting the LANGUAGE
+environment variable to their country code.
+NOTE: The language setting will only work if the system has been translated
+to that language. If no translation is available, the Creator will use the
+English defaults. Currently translations are supported for: English (EN),
+Portugese (PO), Finnish (FI) and Norwegian (NO). If you would like to do the
+translation to your language, e-mail me.
+
+3.8 SCRIPTING
+Scripting adds much more power to the Adventure Creator for more experienced/
+computer literate people. If you have some programming experience then you
+will find scripting easy to master, if not then it won't take long to pick up.
+Basically, scripting provides you with the ability to manipulate variables,
+for example the player's score, and to run several conditions without having
+to chain them as misc conditions. The script file has the extension xxxx.SCR,
+where xxxx is your project name (see section 2.8). Scripts are written in
+a C-like language, but it is very limited at present.
+3.8.1 MACROS
+Macros are ways to easily remember a particular number. You define a macro
+using the "define" keyword, like follows:
+define SHOWMESSAGE 5
+This means that now, whenever you use the word SHOWMESSAGE in the script,
+the compiler will replace it with the number 5. Macros make it easier to
+understand the script that you've written than just a jumble of numbers. Also,
+in the future if the Display Message function was changed to number 11, all
+you would need to do to the script would be to change the line to read
+define SHOWMESSAGE 11
+instead of changing every reference. You can have a maximum of 40 macros
+per project.
+3.8.2 VARIABLES
+There are two types of variables available in scripting: built-in and user
+defined. The built-in variables are things like the player's score, which
+relates directly to the game and if modified will update the game immediately.
+The user defined variables are what you use to keep track of things like
+whether the player has been to a certain location. User defined variables must
+be declared at the beginning of the script file, like follows:
+variable been_there, got_torch, hungry;
+variable example, test;
+The above lines would define five variables, "been_there", "got_torch",
+"hungry", "example" and "test". There is no limit to the number of variables
+per line nor to the number of lines of variables, but you can only have a
+maximum of 40 user-defined variables per project. All user-defined variables
+are set to 0 at the beginning of the game.
+3.8.3 THE PROGRAM
+The program is written in blocks, each with a different number. When a
+condition in a room is run which says "run script 6", for example, block
+number 6 will run.
+A block is started by the line
+script x {
+where x is the block number, and finished by a
+}
+on its own on a line.
+In between these two lines goes the actual program. Variables are modified
+using the supported operators. A list of these is below:
+=   assignment
+-=  decrement
++=  increment
+|=  bitwise OR
+Comparisons are made using the "IF" keyword and an operator from the following
+list. Note that at present AND and OR aren't supported, so you can only have
+one comparison per line.
+==  is equal to
+!=  is not equal to
+<   is less than
+>   is more than
+An example of a complete script follows:
+script 1 {
+  if (got_torch==1) {                checks if user variable got_torch is 1
+    player.score+=10                 adds 10 to the player's score
+    got_torch=2                      sets got_torch to 2
+    }
+  }
+Comments can be added by placing a semicolon ";" or double slash "//" at the
+start of the line: any line beginning with one of these is ignored.
+As well as changing variable contents, you can call built-in functions,
+which allow you to perform all the tasks you can do in the Condition list.
+See section 4.4 for a list of functions you can use. For an example of their
+use, take a look at the demo game's script file (DEMO.SCR).
+
+3.9 NOTES ON USING SVGA
+Version 1.1 of the Creator provides new SVGA support. Each room can be either
+a 320x200 of 640x400 sized-picture, and RoomMake will automatically switch
+between VGA/SVGA depending on what size scene is loaded.
+With the run-time engine, the user chooses one screen resolution - either
+320x200 (runs faster) or 640x400 (runs slower), and all the scenes will be
+automatically resized to the chosen display size. 320x200 scenes will look
+just the same in 640x400, but scenes drawn at 640x400 may look distorted when
+shrunk down to 320x200.
+Therefore the best thing to do is probably draw all the scenes at 640x400 for
+greatest image quality, and any player who selects the lower-res mode for
+viewing will see a more blocky image. On the other hand, an SVGA room file
+takes up about 3 times as much disk space as a 320x200 room file, so if you
+will distribute your game on the internet then you may want to use the lower
+resolution for most of your rooms, with a few special SVGA ones.
+Your game can consist of a mixture of VGA and SVGA scenes - it doesn't matter.
+They will all be adjusted for the user's chosen resolution.
+Note: all game co-ordinates, such as the player's position, are still stored
+in the range (320,200), no matter what the screen size. So if you use the
+player's position in your script, don't worry, it'll still work.
+
+3.10 THE VIEW MANAGER
+The view manager is part of the Room Editor which allows you to create and
+edit views. A "view" is a way of drawing a sprite. It defines how all the
+sprite graphics link together and optionally animate.
+A view is made up of up to four loops. Each object in the game uses one view
+at a time, and one loop of that view. The object will repeatly cycle through
+all the frames in its current loop.
+For example, the view normally used for the player character consists of
+four loops, one loop for each direction he can face. Loop 0 (numbering starts
+at 0) consists of 5 frames, each frame having a different picture of him
+walking downwards (towards the screen). By cycling through these frames in
+the game, it gives the animation and impression of him actually walking.
+Loop 1 has 5 frames of him walking left, loop 2 of him walking right, and
+loop 3 of him walking upwards (away from the screen).
+To start the View Manager, load up the Room Editor and choose
+Misc | View Manager  . The screen shows the current view. It is arranged
+with each loop of the view on a seperate line, with the frames of that loop
+in a horizontal line going right from the loop number (load it and look if
+you don't get what I mean). After the last frame is a grey rectangle.
+Clicking on this will create a new frame. You can only have up to 10 frames
+per loop. To change the graphic assigned to a frame, double-click on the frame
+and then choose the graphic from the screen which appears.
+You can delete a frame by right-clicking on it. To delete an entire loop,
+right-click on the loop number in the left-hand column. You can create a
+new loop by clicking on the button at the bottom of the screen.
+NOTE: If you will use the view for a moving, animating sprite such as the
+main character, you MUST have 4 loops in the view. Failing to do so can
+cause the game to crash.
+NOTE: The views are shared between all rooms, so you don't get a different set
+of views for each screen.
+3.10.1 OVERRIDING THE CHARACTER GRAPHIC
+Several people have requested the ability to change what the main character
+looks like. This is now possible using the view manager. This section explains
+how to change the character's graphics.
+First, start the Room Editor and go to the Sprite Manager. Import all the
+graphics you have drawn into new slots. Do NOT use the "import pal" option
+of the Sprite Manager, since the main character will be used on ALL screens.
+Note: the main character graphic is only allocated 40 palette colours, which
+are the standard 16 EGA colours plus a range of greys. You can see how the
+original man was drawn to accomodate this (his clothes are gradiented grey).
+Therefore, if you import a graphic you have drawn which uses many colours, you
+may find that they are mapped to greyscale.
+Now, go to the View Manager. Find a free view slot (if you haven't created
+any views, the default slot 1 will be fine). Make sure you have 4 loops - if
+you don't then create them by clicking the "new loop" button at the bottom of
+the screen.
+Now, create as many frames as you have drawn for each direction, by clicking
+on the grey rectangles until enough frames are shown in each loop.
+The loops represent the following directions:
+  Loop 0 - walking down (towards screen)
+  Loop 1 - walking left
+  Loop 2 - walking right
+  Loop 3 - walking up (away from screen)
+Now, for each frame, double-click the frame to change the graphic to the
+correct picture from the sprite set. Once you're done setting up the view,
+hit ESC to exit the View Manager. You will be asked if you want to save your
+changes, so click OK.
+NOTE: The first frame in each loop is the standing frame - it is the graphic
+which will be used when the character is standing still. It will not be
+included in the animation when walking.
+Now, load up your game's .INI file into a text editor like Notepad or the
+MS-DOS Edit program, and add a line at the bottom which reads
+ManView = n
+where n is the view number you used (probably 1 if you used the default
+view slot). Adding this line is important, because otherwise the Creator
+won't know that you want to override the graphics. Remember to compile your
+game, then run it and see what happens.
+
+3.11 THE ANIMATION EDITOR
+New in v1.12 of the Creator is the Animation Editor. This allows you to
+create simple animation sequences. For example, now in the demo game when
+you unlock the door it looks like the door is actually opening. This can give
+your games a much more professional look.
+To use an animation in your game, load RoomMake, and go to the event which
+you want to cause the animation to happen. Change the response to 'Run
+animation %d'. It will ask you for the number to replace the '%d'. This is
+because you can have up to 10 animations per room, so type in a number
+from 0 to 9 (if this is the first animation, use 0). The numbering allows
+you to use the same animation from two different conditions (unlike the
+graphical scripts, where you have to use misc conditions to share them).
+Now, hit F10 which will start the Animation Editor. You will notice that
+this looks quite similar to the graphical script editor. It operates just
+the same way, except that you have a different list of responses to drag
+across. (Section 2.5.2 describes the script editor).
+Each command in an animation also has three extra properties. You will notice
+three columns beside the scripts. These are labelled "obj", "wt" and "spd".
+Each animation command acts on a specific object. This object number is the
+number in the "obj" column. The numbers correspond to the object numbers from
+the main Room Editor  Misc | Objects  screen. You can also use a special
+object number 99, which is the number of the main player character.
+The "wt" column specifies whether to wait for this command to finish before
+continuing with the animation. It is either yes 'Y' or no 'N'. For example,
+if you had a "move object to 66,139" command and wait was set to Yes, then
+the next command in the animation would not be carried out until the object
+had finished moving. If wait was No, then the next command would be carried
+out immediately, which would allow you to have two (or more) objects moving
+or animating at the same time.
+The "spd" column is the speed. This only applies to some commands, and it
+defines how quickly it takes place. 0 is the fastest, 10 is the slowest. For
+example, with an "animate object" command the speed defines how quickly the
+object cycles through all the frames.
+You can edit the "obj", "wt" and "spd" columns in the same way as the other
+properties of the command, by either double-left-clicking or by right-clicking
+on the command. The speed is adjusted with a slider bar, and the Wait column
+is shown as a check box.
+The Properties screen also includes a line which reads "second value". This
+is used to enter the value for the second '%d', if there are two. Otherwise
+it is ignored.
+You can find a description of all the animation commands in section 4.5 below.
+NOTE: Currently you can only have a maximum of 10 commands per animation.
+
+3.12 REMOVING THE MAIN CHARACTER
+In some situations, such as when you want to give a close-up of a control
+panel or a puzzle, you don't want the man walking around on top. A new
+option in RoomMake allows you to disable the man on a screen. Load in the
+room and choose  Misc | Options  , and set Man Visible to false. When the
+man is off, he will not be displayed on the screen and the "walk" mode will
+not be available.
+
+4. Command reference
+--------------------
+4.1 THE GENERAL INSTRUCTION FILE
+The GIF contains many additional optional commands not described above. Below
+is a list of all valid GIF commands, in alphabetical order:
+
+þ CursorControl = Yes | No
+    If yes, the game uses the old (v1.00) method of character movement
+    controlled by the cursor keys. The mouse cannot be used to move the
+    character when in this mode.
+þ DebugMode = Yes | No
+    If yes, enables the debugging mode, which gives you some extra info if
+    you press Ctrl-D during the game. You can tell when debug mode is on,
+    because the amount of free memory will be displayed in the status bar.
+    Also, in debug mode pressing Ctrl-W will display the walls (as drawn
+    in RoomMake) on top of the screen.
+þ DefaultLanguage = xx
+    Sets the default language for your game. xx must be the two-letter code
+    for the country, eg. DE means German, ES means Spanish, EN is English,
+    and so on. See section 3.7 for information.
+þ GameName = name
+    Defines the text displayed on the right hand side of the title bar,
+    usually the game name. If not supplied, defaults to Chris Quest!
+þ Inventory number = name
+    Defines what the inventory item will be called when the player presses
+    TAB to view inventory.
+þ ManView = n
+    Tells the Creator you will be using custom graphics for the main
+    character. n should be the view number of the graphics, as shown at the
+    top of the screen in the View Manager.
+þ Message message_number = message_text
+    The MESSAGE command defines a message to be displayed with the "Display
+    Message %d" option in the Condition dialogue. Messages 997-999 have
+    special meaning (see section 3.4), and messages 0-100 are different in
+    different rooms. Messages 500-990 are defined with the MESSAGE command.
+    These are global messages, which can be displayed from any room.
+þ NearObjects = Yes | No
+    Whether you need to be near an object to pick it up or speak to it.
+    Default=Yes. If set to no, can take an object from anywhere on screen.
+þ NightTime = Yes | No
+    Whether the game has time, default=No. If Yes, then pressing Ctrl-T will
+    display the current time. At 19:00 the screen will darken, lighting up
+    again at 08:00 the next day.
+þ ScoreSound = Yes | No
+    Whether a sound is played when the player does something which adds
+    points to their score. Default=Yes.
+þ ScoreTick = Yes | No
+    Defines whether when you recieve, for example, 6 points, the score just
+    changes (ScoreTick=No) or whether it does a LSL3-type adding on the
+    points 1 by 1 (ScoreTick=Yes).
+þ StartPosX = x
+þ StartPosY = y
+    Defines the position of the character on the first screen when the game
+    starts. The values are in the range 1-300 for X, and 30-195 for Y.
+    The default position is (100,100), which is in the left middle of the
+    screen.
+þ TotalScore = score
+    Defines the total score possible, displayed in the game in the title bar
+    as "Score: 0 of 20". To work it out, use ADVEN /SCORE (see section 3.5).
+
+4.2 RESPONSES TO EVENTS
+Event responses are edited by using  Condition | Change . Events occur when
+the player walks off the screen, looks at something, talks to something
+or interacts with something. There are also 20 miscellaneous events which
+can be used to produce more than one reaction to an event (see section 2.5.3).
+Below are the possible reactions and what they do:
+
+þ Go to screen %d
+    If this is set for one of the first 4 conditions (walking off the edges)
+    then the character will first walk all the way off the screen.
+    The new screen will be loaded and the character placed on the opposite
+    side, unless the Data column is set. This value defines which side of
+    the screen to place the character (1000=left, 2000=right, 3000=bottom,
+    4000=top). The character will be placed in the middle of this side, unless
+    the pixel offset is added (0-319 for top & bottom, 0-199 for left and
+    right). For example, Data=2150 will place the man near the bottom of the
+    right hand side.
+    The Data value is mandatory if the condition is not one of the first four.
+    You can find out the offset value by choosing  Misc | Ask Position  in the
+    Room Editor.
+þ No action
+    Ignores the event.
+þ Blocked: Can't walk
+    Prevents the character from entering the condition area or object.
+þ Character dies
+    The game ends, displaying LOSE.PCX. Optionally, the Data column can
+    contain a number (1-99) which will display LOSE??.PCX instead. This way
+    you can have different endings depending on how they die.
+þ Run animation %d
+    Runs an animation. Section 3.11 explains animations.
+þ Display Message %d
+    Displays the message defined with  Condition | Messages .
+þ Remove object %d
+    Removes the defined object from the game. It will no longer appear on
+    this screen.
+þ Remove obj %d, add inv
+    Removes the object from the game, and adds inventory number Data to
+    the inventory. For example, if the GIF contains "Inventory 3 = Cup" then
+    entering 3 in the Data column will add "Cup" to the inventory list.
+þ Add inventory %d
+    Adds the inventory number to the inventory. Data column defines how
+    many times this may be done. For example, Data=2 means that the first
+    two times the event occurs, inv will be added. Will only chain to misc
+    conditions if adding inv, so chaining to a misc condition which describes
+    what's happening would be OK.
+þ Run script %d
+    Runs a script (see section 3.8 for details).
+þ Run graphical script
+    Tells the Creator you will be using a graphical script to respond to this
+    event. See section 2.5.2 for information on the graphical script editor.
+þ Play sound %d
+    Plays a sound effect, in .WAV or .VOC format. The game will search first
+    for SOUNDn.WAV (where n is the %d number), and if it is not found,
+    SOUNDn.VOC, and play it.
+    This command can also be used to change the background music: if you type
+    a sound number greater than 1000, then the background music will be
+    set the MUSICn.MID, where n is the number minus 1000. So, Play sound 1005
+    would start background music MUSIC5.MID.
+þ Play FLI/FLC %d
+    Plays an animation, in FLI or FLC format. The game will search first for
+    FLICn.FLC (where n is the %d number), and if it is not found, FLICn.FLI,
+    and play the animation. If the Data column is set to 1, the player can
+    skip the animation by pressing ESC while it is playing. If Data is 0, the
+    player cannot skip the animation.
+    Note: only animations up to 640x400 size can be played. The animation will
+    be stretched or shrunk to full screen, no matter what resolution the
+    player is using.
+    Note: while the animation is playing, the status bar will be disabled and
+    the mouse cursor will be hidden.
+þ Turn on object %d
+    Switches the specified object back on. The object could have been
+    previously removed with the "Remove object" command or it could have been
+    initially off by setting it that way in RoomMake.
+
+4.3 CONDITIONS
+Below is a list of all the conditions on the  Condition | Change  screen,
+and how they are triggered:
+
+þ Character walks off xxxxxx
+    Occurs when the man walks off the edge of the screen (Condition | Edges).
+þ Player first enters screen
+    Occurs the first time the player enters the screen. Useful for showing
+    a message describing the scene.
+þ Character stands on type xx
+    Occurs when the man walks onto condition area xx.
+þ Look at type xx
+    Occurs when the eye cursor is clicked on condition area xx.
+þ Action on type xx
+    Occurs when the hand cursor is clicked on condition area xx.
+þ Use inv on type xx
+    Occurs when the bag cursor is clicked on condition area xx. Data must
+    contain the number of the inventory item which will trigger the condition.
+    Therefore to use a reaction which needs the Data column you must choose
+    "No action" and use a Misc Condition.
+þ Look at object xx
+    Occurs when the eye cursor is clicked on object xx.
+þ Action on object xx
+    Occurs when the hand cursor is clicked on object xx.
+þ Talk to object xx
+    Occurs when the talk cursor is clicked on object xx.
+þ Use inv on object xx
+    Occurs when the bag cursor is clicked on object xx. See description for
+    "Use inv on type xx" for more info.
+þ Misc condition xx
+    Occurs after the condition which triggered it.
+
+4.4 SCRIPTING BUILT-INS
+The following variables are pre-defined and may be used in your program:
+  game.hour       Current hour, in game time
+  game.lastkey    ASCII code of last key pressed
+  game.minute     Current minute, game time
+* player.prevroom The last room the player was in before this one
+* player.room     The current room number
+  player.score    The player's current score
+* player.x        The present X co-ordinate of the man's feet (from 0-319)
+* player.y        The present Y co-ordinate of the man's feet (from 0-199)
+  inv[1]          Whether you have inventory number 1    and so on, up to...
+  inv[46]         Whether you have inventory number 46
+Those marked with an asterisk * are read-only variables. The compiler does
+not enforce this rule, so it will allow you to change the variables. However,
+doing so can cause problems and strange results in the game.
+The following functions are built in and may be called by your program:
+delay n, variable
+  Delays for n hundredths of a second. Once the delay has elapsed, increments
+  the specified variable. Mainly useful in intros and the like to keep the
+  screen up for a set time. eg.  delay 200, myvar   will increment myvar
+  after 2 seconds.
+display "message" [,variable]
+  This displays the message in the standard grey message window on the screen.
+  It is the equivalent of putting a global message in the .INI file, then
+  using runcondition(SHOWMESSAGE,mesnum,0) to display it. As I think you'll
+  agree, this way is a lot easier.
+  Optionally, you can display a variable value in the message, by typing '%v'
+  (without the quotes) into the message. For example,
+   display "Your score is %v.", player.score
+  Will replace the %v with the value of the variable when the message is
+  displayed. Note: you can only use one %v per message.
+play_sound n
+  Just calls runcondition(11,n,0). This is intended as a convenient way to
+  play a sound effect, and it also makes the script file more readable than
+  lots of runcondition() lines. I may add more statements like this for the
+  other popular conditions in future if anyone requests them.
+return
+  Aborts the current script immediately. This is the equivalent to 'Stop
+  script' in the graphical script. This command is useful because the Creator
+  currently doesn't support an 'else' statement, so you can exit from an 'if'
+  using 'return' to stop the following statements being processed.
+runcondition(response,value,data)
+  Runs a response as if it had occured by a condition being met. response is
+  the type, for example 0 means go to screen and 5 means display message.
+  value is the equivalent of the "%d" value in ROOMMAKE. For example, value=3
+  and response=0 means go to screen 3. data is the equivalent of the data
+  column in ROOMMAKE. Note that no score or misc columns are needed since
+  these are implemented in other ways in scripting. Example of use:
+  runcondition(7,1,4)   This would remove object 1 and add inventory number 4.
+show_picture n
+  Loads the PCX file PICn.PCX, and displays it as a full-screen image. For
+  example,  show_picture 18  will display PIC18.PCX. This is intended for
+  intro sequences and the like.
+start_game
+  Ends the intro and places the player in room 1. (At the start of the game,
+  the GameStartup script, if present, will be repeatedly run until this
+  command is executed, which signals the beginning of the game).
+status_bar_off
+status_bar_on
+  Turns off and on, respectively, the score bar at the top of the screen. For
+  example, you will probably want this off while displaying an intro sequence.
+
+4.5 ANIMATION EDITOR COMMANDS
+This section describes all the commands available in the Animation Editor.
+The editor is explained in section 3.11.
+
+þ Set object view to %d
+    Changes the view assigned to the object. The '%d' is the number of the
+    view, from the status bar in the View Editor. This command also resets
+    the object's graphic to the first frame of loop 0 in the chosen view.
+þ Animate using loop %d
+    Starts the object animating using loop number '%d' of its current view.
+    The object will cycle through all the frames in the loop and then stop.
+    If the Wait column is set, the next command will not be executed until
+    the animation has finished.
+þ Move to %d,%d
+    Starts the object moving to the specified co-ordinates. You can find out
+    the co-ordinates of a point by using the  Misc | Ask Position  feature
+    in RoomMake. If the Wait column is set, the next command will not be
+    executed until the object has reached its destination.
+    NOTE: If you specify a target point which cannot be reached, there will
+    be a short delay and then the next command will be executed immediately.
+
+5. Troubleshooting
+------------------
+
+If you encounter problems, please check this section first before contacting
+me for help. If you don't find the solution here, please read section 6.4
+first before e-mailing me.
+
+5.1 GENERAL PROBLEMS
+This section deals with problems encountered in both ROOMMAKE and AC.
+
+5.1.1 RUN-TIME ENGINE QUESTIONS
+This section contains problems when making a game.
+
+Q. How come sometimes an item in the inventory will have a picture beside it,
+   but sometimes I just get the description?
+A. If the object was picked up using the "remove obj, add inv" condition then
+   the graphic from the on-screen object will be used for the inventory. If
+   the item was added to inventory using "add inventory %d" then it will not
+   have a picture.
+
+Q. How do I get it to display the name of the item in the inventory window?
+A. The inventory items are all named in your game's .INI file, with the lines
+   Inventory n = item name,  eg. Inventory 1 = A small rock.
+   Then when you add inventory 'n' during the game that description from
+   the .INI file will be used.
+
+Q. The man keeps walking through my walls!
+A. That's not a question.
+
+Q. Ok, how can I stop the man walking through my walls?
+A. As explained in section 2.2, you may need to place another layer of wall
+   right behind the main wall. That is, you should make the wall at least
+   two pixels wide.
+
+Q. I changed a setting in the .INI file, but it doesn't seem to have had any
+   effect when I run the game.
+A. Make sure you compile the game after you alter the INI file. The game will
+   warn you if the .SCR file hasn't been compiled, but it won't notice if
+   the INI file is too old.
+
+Q. On a certain screen, when I click a button in the top icon bar it does
+   something wierd to the pictures of all the buttons.
+A. This occurs if the line of pixels just below the icon bar on that room
+   are the same colour as the shaded part of the buttons. Try slightly
+   adjusting the shading of the top bit of your picture and re-importing it.
+
+5.1.2 RUN-TIME ENGINE PROBLEMS
+This section deals with system errors in the run-time engine.
+
+Q. I keep getting "Out of memory" errors: how can I free more up?
+A. Both RoomMake and AC have now been ported to DPMI, which means there
+   should be no memory problems unless you only have 2 Mb RAM. If you do,
+   all I can say is upgrade!
+   If you do get an out of memory error, contact me as it should never
+   happen any more.
+
+Q. When playing the game, I get an 'Unhandled exception' and a load of
+   technogarbage in big print and it crashes.
+A. If this happens to you, note down the details and mail me. The only known
+   cause of this was the old version of the game driver. It may also happen
+   in revision 10.07.97.A or earlier if you place an object on the screen
+   which uses the new graphics (the pictures from the radio through to the
+   piece of parchment). If this is the case, you should upgrade your version,
+   check the website (see section 6.4) for details.
+
+Q. When playing the game, it suddenly exits with 'Shutting down Allegro',
+   'exiting due to signal SIGSEGV' or similar.
+A. If this happens, check that you have the most recent version of the Creator.
+   If you do, please e-mail me with the circumstances under which it happens.
+
+Q. AC says a mouse driver is not installed, but it is.
+A. Check that your mouse driver is Microsoft-compatible. This error is also
+   caused by running some incompatible DPMI hosts, for example Borland 32RTM
+   in the background. If this happens, try running from a Windows DOS box,
+   and see if that cures the problem.
+
+Q. When I try to compile my game, AC says "(E202): General instruction file
+   incomplete" and exits.
+A. You have not included a required line in the .INI file. Check that
+   you have the TotalScore and GameName lines, and that there is a space
+   each side of the = sign.
+
+Q. When I try to compile my game, it says "(E211): Game driver not found".
+A. This error only affects v1.00 SR-1 and earlier. It should never happen
+   in v1.1 and later, since they no longer use the DLL file.
+   This means that the ACDRV.DLL file was not found in the current working
+   directory. Make sure that the working directory is the same directory as
+   that containing the ADVEN.EXE and ACDRV.DLL files. If you have copied some
+   of the Adventure Creator out of its original directory, you must copy
+   ADVEN.EXE, AC.BAT, ACDRV.DLL and AC.DAT. If you leave one of these files
+   out, you may get strange error messages.
+
+5.1.3 ROOM EDITOR PROBLEMS
+This section deals with errors in the Room Editor.
+
+Q. In ROOMMAKE, I create a message and type it in, and the program quits
+   displaying "MYALLOC (E182): Memory corrupt". What can I do?
+A. This is a bug which seems to occur when you've used File | Start New, or if
+   you've loaded too many different rooms.
+    - To start a new room, quit and then load Roommake again.
+    - To modify an existing room, quit then re-load Roommake and load this
+      room straight away.
+
+Q. After changing a condition in ROOMMAKE, when I return to the main screen
+   there is a fuzz near the bottom of the screen.
+A. This was a bug in some beta versions of the program. Visit the website
+   (address in section 6.4) for an update.
+
+5.2 GAME ERRORS
+Below is a list of error messages and their meanings:
+NOTE: Most of the errors are to do with the Data column. If you think you
+have corrected the problem, make sure you aren't loading a save game which
+you saved before updating the screen. (save games include the room setups).
+
+Attempted to display non-existent message
+   You have a response such as "Display message 542" but message 542 doesn't
+   exist.
+Found lonely condition 7 (REMOVE & ADD)
+   You haven't specified which inventory item to add (Data column reads 0).
+Found lonely UseInvOnObject condition
+Found lonely UseInvOnType condition
+   You have not specified which inventory item needs to be used to cause
+   the condition (Data column reads 0).
+Go_to_screen used without Data column
+   You have used Go To Screen not as a response to one of the first four
+   conditions, therefore the Data column is mandatory. See section 4.2.
+Run_graph_script: unknown event XX
+   You used an invalid response in the graphical script. This is explained
+   in section 2.5.2.
+
+5.3 KNOWN BUGS
+This section lists known problems with the Creator. Please don't e-mail me
+about these, as I know there is a problem and will try to fix it soon.
+ - In SVGA, the text is all a bit small. I'll try to get round to drawing
+   a bigger font soon, but until then, put up with it. If you want to draw
+   the font, help is always appreciated :-)
+ - Ctrl-P (pause) is currently broken. I'm not sure why this has happened
+   and am investigating. You can pause the game in alternative ways: by
+   choosing the Quit option, the game pauses until you click 'Continue'.
+That's it. If you think you've found a bug, mail me and I'll see what I can
+do. (Please read section 6.4 first before you make a bug report).
+
+6. Miscellaneous
+----------------
+I think I've spelt that word right...
+
+6.1 HOW DO I REGISTER?
+You haven't read license.txt, have you :-) But seriously, in plain English,
+here is the agreement:
+ The Adventure Creator is swap-ware. That means, that if you use and like
+ the Adventure Creator, you should send me something in return. This could
+ be a game you have created using it, some new graphics for objects (since I
+ can't really draw), a translation for the system messages, or even money!
+ You don't HAVE to do this, though, if you're really mean, and I won't hold
+ it against you. Probably ;-)
+
+6.2 DISTRIBUTING YOUR GAMES
+There are several ways of marketing your games. If you want to make money,
+you could distribute a "shareware version" which only has the first 10 rooms,
+and then ask for registration for the complete game.
+Or, you could just make a fun game for the entire world to play for free. This
+is preferred, since I don't charge you anything for using the Creator.
+Under the new swapware license, you may distribute your games and even *sell*
+them as long as you send me a copy of your game.
+6.2.1 Which files do I need?
+For the game to run properly, when distributing your game you must include:
+CWSDPMI.EXE, ADVEN.EXE, AC.CLB, AC.BAT, ROOM*.CRM (your screens), xxx.PRG,
+MUSIC*.MID, LOSE*.PCX and WIN.PCX. You may also include SETUP.BAT to enable
+the user to run the Setup program.
+Or, if you have built a data file, you just need CWSDPMI.EXE, ADVEN.EXE,
+AC.CLB, AC.BAT and your data file (and SETUP.BAT if you want).
+You MUST NOT include the following files: ROOMMAKE.EXE, ROOMMAKE.HLP,
+ROOMMAKE.CLB and AC.DOC (this file). These files are not necessary for the
+game to run and should NOT be included.
+
+6.3 NOTE FROM THE AUTHOR
+The Adventure Creator has been around for a while now, and although I've
+recieved lots of e-mails with problems and compliments (in about equal
+number!), I haven't recieved many suggestions. These would be really
+appreciated, as I can't improve the Creator if I don't know what people want.
+Also, I can't wait to see what you can come up with! As I'm not much of an
+artist, the demo game is NOT very impressive. So, to promote interest in the
+Adventure Creator, send your games to me and the best will be distributed
+with the program.
+WANTED: Translators needed! If you speak a foreign language which does not
+have a set of system message translations available, why not write them
+yourself? If you'd like to contribute, e-mail me and we'll sort it out. (See
+section 3.7 for a list of currently supported languages).
+6.3.1 THANKS
+Special thanks must go out to Nuno Costa who did the Portugese translation,
+Martin Seterstoen who did the Norwegian translation and Teemu Eramaa who drew
+the new top bar icons and the Finnish translation.
+These people did it out of the kindness of their hearts and their help is
+appreciated. See section 6.6 for a full credits list.
+
+6.4 CONTACTING THE AUTHOR
+If you have any comments/suggestions, mail me at  dosuser@hotmail.com
+If you think you've found a bug, if you need help or can't get it to work,
+please check the following:
+ * That your question is not already answered in this file. The Creator has
+   been painstakingly documented, so PLEASE read this file through before
+   asking me a question.
+ * That you are using the most recent version of the Creator. You can
+   find out the most recent version by checking the website (address below).
+   You can find out your version by typing  AC /?  and noting the line that
+   reads "Adventure Creator vx.xx" (x.xx = version number), and the line which
+   reads "Revision DD.MM.YY.R" (date/month/year/sub-version).
+ * If you are receiving an error message, please write down the EXACT message
+   and any other information which you think is appropriate. PLEASE WRITE THE
+   EXACT ERROR MESSAGE TEXT, don't just say "I get a message about it not being
+   able to find a file".
+ * If you are getting lock-ups or techno-garbage printouts, please try to
+   give a situation which causes the problem. For instance, if you notice that
+   it only happens on certain screens, or only if there is an object, etc then
+   please state that - it makes replying a lot easier and faster.
+Please note: I usually check my e-mail two or three times a week, so give me
+about a week to reply before assuming your message didn't get through.
+The AC website:  http://members.xoom.com/dosuser/ac.htm
+
+6.5 TIPS FOR DESIGNING GAMES
+Here are a few points which seem to make a better game:
+ - Try not to make it too linear. If the player has to go through room 1,
+   then room 2, and so on, it can get boring and the player will easily give
+   up if they get stuck.
+   The best games, such as Quest for Glory by Sierra, have one main game
+   area, made up of several screens, in which the whole game takes place,
+   with the occasional extra screen for when the player completes part of
+   the quest. You'll notice that most of Sierra's games were made with this
+   in mind. For example, all the King's Quest series use the same idea, as
+   does Space Quest III (remember how you could go between the three planets).
+ - Put in alternative ways of acheiving certain goals. For example, to get
+   past the dragon in King's Quest I you can either throw water at it OR use
+   your invisibility ring. You can then give the player more points for the
+   harder option.
+ - Try to put in optional extra quests, like the Quest for Glory series has,
+   which don't have to be done to complete the game but will give the player
+   more points if they do them. This can mean that the player will come back
+   and play a second time - the problem with adventure games is that if they
+   score maximum points the first time they complete it, chances are they
+   will never play it again.
+ - Try to get the proper 3D perspective when drawing the background scenes.
+   The whole game can look strange otherwise. You'll notice this in the demo
+   game, how all the lines on the pavements slope left (which is wrong - take
+   a look at the corridors in Space Quest I to see how it should be done).
+
+6.6 CREDITS
+The Adventure Creator was designed, programmed and documented by Chris Jones.
+The new icon bar graphics and Finnish translation were done by Teemu Eramaa
+  (teemue@nic.fi)
+The Portugese translation was done by Nuno Costa (ncosta@mail.telepac.pt).
+The Norwegian translation was done by Martin Seterstoen (martin-s@online.no).
+The Creator was compiled with DJGPP v2.01, a free C/C++ compiler for DOS
+  by DJ Delorie. You can find it at www.delorie.com/djgpp
+Version 1.1 and above of the Creator use the Allegro library for graphics and
+  sound. You can find it at www.talula.demon.co.uk/allegro
+Includes CWSDPMI DPMI host (c) 1994-1997 Charles Sandmann
+Executables compressed with DJP v1.07 (c) 1996-1998 Laszlo Molnar
+The new room compression algorithm is based on code by M. Winterhoff.
+
+7. Technical Info
+-----------------
+
+This section might be of interest to the technically-minded amongst you, or
+maybe it isn't. But I'll include it anyway:
+
+7.1 SYSTEM REQUIREMENTS: WHY?
+Below I list the sys reqs and explain why they are required:
+ - An 80386 or above processor
+     This is required because the run-time engine uses DPMI (DOS Protected-
+     Mode Interface), which will only run on a 386 processor. DPMI is what
+     allows it to use extended memory and thus not requiring you to have
+     lots of conventional memory free (see section 7.2).
+ - Pentium-133 or better for SVGA
+     I have found that this speed of CPU is approximately at the level where
+     running in SVGA runs at the same speed as normal VGA. If you have this
+     speed CPU, then you'd may as well always use SVGA with the run-time
+     engine.
+ - A mouse with driver loaded
+     A mouse is required because it is by far the easiest way to play the
+     game, and I couldn't be bothered to write a substitute keyboard interface
+     for if you don't have a mouse.
+     A driver is required because that's how DOS applications interface with
+     the mouse. If running in a shell from Windows (3.x or 95), a driver is
+     not required (because Windows provides one).
+ - A VGA card & monitor
+     These days everyone has a VGA monitor, so it's hardly a big deal. The
+     game uses VGA 320x200 in 256 colours because it's the fastest graphics
+     mode available.
+ - 4 Mb RAM
+     All I can say about this is: that's how much memory the programs use.
+
+7.2 WHAT IS ALL THIS ABOUT DPMI?
+In the beginning, PCs were designed to cope with a maximum of 640k of memory.
+At the time, that amount sounded massive, and PCs weren't expected to last
+more than a few years, so there was no problem.
+But PCs became more and more popular, and advanced, so that soon 640k was
+a constraint. Different systems were thought up: first EMS, then XMS, which
+could both access more than 640k of memory. However, these techniques
+required copying data between them and conventional memory, thus causing
+the program to run slower.
+With the invention of the 80286 came it's ability to run in Protected-Mode,
+which allowed programs to access up to 16 Mb of RAM. However, the CPU normally
+remained in Real Mode for compatibility with older programs. Only special
+programs, called DOS extenders, could switch the processor to protected mode.
+The first major DOS extender was Microsoft Windows 3.0, which could access
+up to 16 Mb of RAM.
+The invention of the 80386 brought 32-bit Protected-Mode, which meant programs
+could access up to 4 Gb of RAM, however this mode required a different type
+of DOS extender. The 80386 also enhanced the 16-bit (286) Protected-Mode, by
+adding the feature of enabling it to use virtual memory: using free disk
+space to simulate memory. This was introduced in Windows 3.1 when running
+in "386 enhanced mode".
+By this time there were other DOS extenders coming on the market, mainly
+designed at programmers writing DOS games, since most other programs had
+switched to Windows. The 16-bit extenders included Phar Lap 286 and Borland's
+RTM (which is what the Adventure Creator used to use).
+Recently 32-bit extenders have become more popular. Examples of these include
+Windows 95, CWSDPMI (used by the Adventure Creator), DOS/4GW, and 32RTM.
+
+8. Disclaimer
+-------------
+THIS SOFTWARE IS PROVIDED WITHOUT ABSOLUTELY NO WARRANTY, NOT EVEN THE IMPLIED
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+USE THIS SOFTWARE AT YOUR OWN RISK. CHRIS JONES IS NOT RESPONSIBLE IF YOUR
+COMPUTER STARTS BURPING, CATCHES FIRE, GETS A SENSE OF HUMOUR OR ANYTHING
+ELSE WHICH HAPPENS DUE TO THE USE OF THIS SOFTWARE.
+
+GAMES CREATED BY THE USER ARE SUBJECT TO THE USER'S DISTRIBUTION POLICY AND
+MAY BE FREELY DISTRIBUTED; HOWEVER IF THE GAME WILL BE SOLD FOR PROFIT THEN
+A COPY OF THE GAME MUST BE SENT TO CHRIS JONES.

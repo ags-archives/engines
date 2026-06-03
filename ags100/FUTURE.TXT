@@ -1,0 +1,21 @@
+The following features are planned for future versions of the Creator; I'll
+only continue making improvements if I receive feedback that people are using
+it, so please, if you like this program, e-mail me  (dosuser@hotmail.com).
+
+ - support for importing BMP/PCX files as sprites
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - sound and music
+ - support for animations for intro and endgame
+ - attaching more than one response to an event, without having to use misc
+   conditions
+ - intelligent movement AI - click somewhere and he will walk there, instead
+   of using arrow keys
+ - customizable z-dimension for each screen, so the man could shrink as he
+   walked to the back of the screen
+ - support for changing backgrounds - for example, when you open a door, the
+   door should actually have an opening animation
+ - customizable icons on the top icon bar
+ - port to DJGPP (a 32-bit platform) and SVGA support
+ - Windows port of the main engine
+

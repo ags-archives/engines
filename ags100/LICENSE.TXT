@@ -1,0 +1,23 @@
+As a user of the Adventure Creator you are bound by this license:
+
+GAME DISTRIBUTION
+-----------------
+If you wish to distribute games created with the Adventure Creator then you
+may do so freely UNLESS you are asking for money for your game; if you ARE
+selling your game for profit then you may do so as long as you send a copy
+of the game to Chris Jones.
+You may ONLY distribute the specified Adventure Creator run-time engine files
+with your game (as stated in the documentation, section 6.1.1 "Which files
+do I need?").
+You may NOT distribute any other Adventure Creator files with your game.
+
+
+DISTRIBUTING THE CREATOR
+------------------------
+If you wish to distribute the Adventure Creator itsself, for uploading to FTP
+sites, on your web page, giving to a friend, etc, then:
+
+You may distribute the Adventure Creator ONLY in its original form in the ZIP
+file (ac_100.zip). You may NOT modify ANY of the Creator files in ANY way
+and then redistribute it.
+

@@ -1,0 +1,36 @@
+CHANGES SINCE v1.00
+===================
+SERVICE RELEASE 1, December 1998
+NOTE: Save games created by this release are not readable with previous
+versions; and this version cannot load old save games. Sorry. If you try to
+load an old game, you'll get Oops error 600. This is the price of progress :-)
+You CAN, however, still use old rooms (so you haven't lost anything - phew!)
+ - Added graphical script editor to RoomMake. This allows easy advanced
+   scripting without using the .SCR file. See the AC.DOC file for more info.
+ - RoomMake has been ported to DPMI. No more memory problems running RoomMake!
+ - RoomMake now has an improved user interface:
+    * a new file selector which allows changing directory and is easier to use
+    * improved other dialogs, such as the "Are you sure you want to Quit"
+      dialog and the "enter password" dialog.
+    * supports long filenames if run under Windows 95, 98, or LFNDOS.
+    * better palette remapping when reading in a PCX file.
+    * supports importing BMP files as a background scene
+ - The old screen now fades out and the new one in when changing screens.
+ - Corrected the bug which caused a crash if you used an object with certain
+   graphics.
+ - Corrected the crash which occured if the script file was newer than the
+   compiled file (thanks Luke!)
+ - One extra screen has been added to the demo game, and it now ends
+   gracefully instead of with a Load_Room error.
+
+REVISION 10.07.97
+NOTE: You will need to re-compile any games you made with any versions
+before revision 10.07.97.A.
+This includes the demo game. If you do not, you will not be able to run the
+games. See the AC.DOC file for information on compiling.
+ - added StartPos option to INI file, to define where the man starts on
+   the first screen. Also fixed the jump which happened when he first moved
+   from the beginning.
+ - removed the 'please register' nag screen, since I've decided that the
+   Adventure Creator is now swap-ware (see LICENSE.TXT for info).
+
