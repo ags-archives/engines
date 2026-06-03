@@ -1,0 +1,18 @@
+The following features are planned for future versions of the Creator; I'll
+only continue making improvements if I receive feedback that people are using
+it, so please, if you like this program, e-mail me  (dosuser@hotmail.com).
+
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - support for animations for intro and endgame
+ - better SQ4-like inventory window
+ - customizable z-dimension for each screen, so the man could shrink as he
+   walked to the back of the screen
+ - support for game-controlled sprite movement of all the objects, not just
+   the main character
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - customizable icons on the top icon bar
+ - conversion of documentation to more readable format, like WinHelp or Word.
+ - mouse support in project manager
+ - Windows port of the main engine
+

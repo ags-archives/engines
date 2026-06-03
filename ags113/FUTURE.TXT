@@ -1,0 +1,29 @@
+The following features are planned for future versions of the Creator; I'll
+only continue making improvements if I receive feedback that people are using
+it, so please, if you like this program, e-mail me  (dosuser@hotmail.com).
+Also, features that people ask for will be implemented faster than things I
+think people want - so if you like the look of a suggestion below, mail me and
+tell me!
+
+ - customizable install program which you can use to install your games
+   on the user's computer
+ - support for animations for intro and endgame
+ - customizable z-dimension for each screen, so the man could shrink as he
+   walked to the back of the screen
+ - improve the route finder
+ - MOD music support
+ - changing walking speed of main character
+ - custom frames for text windows
+ - option to move man as close as possible to destination, instead of
+   displaying the red X
+ - attach speech to object, to easily tell who's talking
+ - animate man's mouth when talking
+ - speech bubble pictures for speech text
+ - import custom fonts
+ - stop the objects "updating" when load a saved game in the same room
+ - per-room disabling of look, use and talk modes (not just walk as at present)
+ - shadowing of the character in certain areas of the screen
+ - customizable icons on the top icon bar
+ - conversion of documentation to more readable format, like WinHelp or Word.
+ - Windows port of the main engine
+
